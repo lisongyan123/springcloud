@@ -1,0 +1,40 @@
+zuul:
+  routes:
+    client-1:
+      path: /confit/**
+      url: http://localhost:18082/config-server/hello
+      sensitiveHeaders: ""
+      customSensitiveHeaders: true
+    client-2:
+      path: /client-2/**
+      serviceId: cloud-eureka-client
+    # zuul.routes.<serviceid> = <path>
+    cloud-eureka-client: /client-3/**
+    client-4:
+      path: /client-4/**
+      url: forward:/local
+server:
+  port: 18082
+spring:
+  application:
+    name: cloud-zuul
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+    com.windmt.filter: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+  health:
+    consul:
+      enabled: false

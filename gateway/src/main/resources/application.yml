@@ -1,0 +1,97 @@
+server:
+  port: 18081
+spring:
+  application:
+    name: cloud-gateway
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        enabled: true
+        register: true    #是否将自身服务注册到consul中
+        hostname: 127.0.0.1
+        serviceName: ${spring.application.name}
+        tags: test
+        instanceId: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}  # 服务id
+        health-check-path: /actuator/health
+        healthCheckInterval: 15s
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: test_route
+          uri: lb://service-provider
+          predicates:
+            - Path=/service-provider/{segment}
+          filters:
+            - SetPath=/{segment}
+            - name: Hystrix
+              args:
+                name: service-provider-fallback
+                fallbackUri: forward:/service-provider-error
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY,BAD_REQUEST
+      default-filters:
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/default-error
+#      routes:
+#        - id: service_customer
+#          uri: lb://CONSUMER
+#          order: 0
+#          predicates:
+#            - Path=/customer/**
+#          filters:
+#            - StripPrefix=1
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: "#{@remoteAddrKeyResolver}"
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 5
+#            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+#            #            - Retry=5
+#            - name: Hystrix
+#              args:
+#                name: fallbackcmd
+#                fallbackUri: forward:/fallback
+#      default-filters:
+#        - Elapsed=true
+#        # fail with "java.lang.IllegalArgumentException: No Configuration found for route service_customer"
+#      #        - name: RequestRateLimiter
+#      #          args:
+#      #            key-resolver: "#{@remoteAddrKeyResolver}"
+#      #            redis-rate-limiter.replenishRate: 1
+#      #            redis-rate-limiter.burstCapacity: 5
+#      httpclient:
+#        pool:
+#          acquire-timeout: 10000
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 0
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+    com.windmt.filter: debug
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    consul:
+      enabled: false
+
+
+
