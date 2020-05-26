@@ -3,12 +3,9 @@ package com.example.lsy.streamkafka.service;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
-/**
- * 发射器
- */
 public interface Source {
-    String str = "myOutput";
+    String OUTPUT = "output";
 
-    @Output("myOutput")
+    @Output("output")
     MessageChannel output();
 }

@@ -1,8 +1,8 @@
 server:
-  port: 8100
+  port: 8102
 spring:
   application:
-    name: producer
+    name: consumer-2
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
@@ -16,6 +16,7 @@ spring:
           zk-nodes: localhost:2182,localhost:2183,localhost:2184        #Zookeeper的节点，如果集群，后面加,号分隔
           auto-create-topics: true        #如果设置为false,就不会自动创建Topic 有可能你Topic还没创建就直接调用了。
       bindings:
-        myOutput:      #这里用stream给我们提供的默认output，也可以自定义output
-          destination: stream-demo    #消息发往的目的地
-          content-type: text/plain    #消息发送的格式，接收端不用指定格式，但是发送端要
+        input:                   #input是接收，注意这里不能再像前面一样写output了
+#          destination: stream-demo-trans
+          destination: stream-demo
+#          group: group    #一组的只能有一个接收到消息，避免了重复消费

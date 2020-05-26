@@ -8,13 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zuul" />
-        <module name="stream-kafka" />
-        <module name="zipkin" />
-        <module name="gateway" />
+        <module name="stream-kafka1" />
         <module name="config-server" />
-        <module name="config-client" />
-        <module name="spring-cloud-gateway" />
+        <module name="stream-kafka2" />
+        <module name="gateway" />
+        <module name="stream-kafka" />
         <module name="service" />
+        <module name="spring-cloud-gateway" />
+        <module name="zipkin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +27,8 @@
       <module name="spring-cloud-gateway" target="1.8" />
       <module name="springcloud" target="1.8" />
       <module name="stream-kafka" target="1.8" />
+      <module name="stream-kafka1" target="1.8" />
+      <module name="stream-kafka2" target="1.8" />
       <module name="zipkin" target="1.8" />
       <module name="zuul" target="1.8" />
     </bytecodeTargetLevel>
@@ -40,6 +43,8 @@
       <module name="spring-cloud-gateway" options="-parameters" />
       <module name="springcloud" options="" />
       <module name="stream-kafka" options="-parameters" />
+      <module name="stream-kafka1" options="-parameters" />
+      <module name="stream-kafka2" options="-parameters" />
       <module name="zipkin" options="-parameters" />
       <module name="zuul" options="-parameters" />
     </option>
