@@ -1,33 +1,30 @@
 server:
   port: 18500
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
-    username: root
-    password: 123456
   application:
     name: cloud-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
   cloud:
     consul:
       host: localhost
       port: 8500
       discovery:
+        prefer-ip-address: true
         enabled: true
-        register: false    #是否将自身服务注册到consul中
+        register: true
         hostname: 127.0.0.1
         serviceName: ${spring.application.name}
         tags: test
-        instanceId: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}  # 服务id
-        healthCheckPath: ${management.server.servlet.context-path}/health
+        instanceId: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+        health-check-path: /actuator/health
         healthCheckInterval: 15s
 
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
-  health:
-    show—details: always
-    consul:
-      enabled: false
+        include: '*'

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springcloud.lsy.dao.GatewayTableDao">
-  <resultMap id="BaseResultMap" type="com.springcloud.lsy.bean.GatewayTable">
+  <resultMap id="BaseResultMap" type="com.springcloud.GatewayTable">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="predicate" jdbcType="VARCHAR" property="predicate" />
     <result column="filter" jdbcType="VARCHAR" property="filter" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     id, predicate, `filter`, uri, `order`, create_time, update_time, `status`
   </sql>
-  <select id="selectByExample" parameterType="com.springcloud.lsy.bean.GatewayTableExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.springcloud.GatewayTableExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,13 +96,13 @@
     delete from GATEWAY_TABLE
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.springcloud.lsy.bean.GatewayTableExample">
+  <delete id="deleteByExample" parameterType="com.springcloud.GatewayTableExample">
     delete from GATEWAY_TABLE
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.springcloud.lsy.bean.GatewayTable" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.springcloud.GatewayTable" useGeneratedKeys="true">
     insert into GATEWAY_TABLE (predicate, `filter`, uri, 
       `order`, create_time, update_time, 
       `status`)
@@ -110,7 +110,7 @@
       #{order,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.springcloud.lsy.bean.GatewayTable" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.springcloud.GatewayTable" useGeneratedKeys="true">
     insert into GATEWAY_TABLE
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="predicate != null">
@@ -159,7 +159,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.springcloud.lsy.bean.GatewayTableExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.springcloud.GatewayTableExample" resultType="java.lang.Long">
     select count(*) from GATEWAY_TABLE
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -211,7 +211,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.springcloud.lsy.bean.GatewayTable">
+  <update id="updateByPrimaryKeySelective" parameterType="com.springcloud.GatewayTable">
     update GATEWAY_TABLE
     <set>
       <if test="predicate != null">
@@ -238,7 +238,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.springcloud.lsy.bean.GatewayTable">
+  <update id="updateByPrimaryKey" parameterType="com.springcloud.GatewayTable">
     update GATEWAY_TABLE
     set predicate = #{predicate,jdbcType=VARCHAR},
       `filter` = #{filter,jdbcType=VARCHAR},

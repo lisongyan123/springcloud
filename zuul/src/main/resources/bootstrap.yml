@@ -1,6 +1,4 @@
 spring:
-#  kafka:
-#    bootstrap-servers: localhost:9002,localhost:9003,localhost:9004
   cloud:
     bus:
       trace:
@@ -11,32 +9,11 @@ spring:
       profile: dev                       #\u6307\u5B9A\u7684\u73AF\u5883
       label: master                      #\u6307\u5B9A\u5206\u652F
         #http://127.0.0.1:7002/actuator/refresh
-#    consul:
-#      host: localhost
-#      port: 8500
-#      discovery:
-#        prefer-ip-address: true
-#        enabled: true
-#        register: true
-#        hostname: 127.0.0.1
-#        serviceName: ${spring.application.name}
-#        tags: test
-#        instanceId: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
-#        health-check-path: /actuator/health
-#        healthCheckInterval: 15s
 #
-#      # 配默认熔断超时策略
-#      # zuul配置了熔断fallback的话，熔断超时也要配置，
-#      # 不然如果你配置的ribbon超时时间大于熔断的超时，那么会先走熔断，相当于你配的ribbon超时就不生效了。
-#    hystrix:
-#      command:
-#        default:
-#          execution:
-#            isolation:
-#              thread:
-#                timeoutInMilliseconds: 60000
-#
-#      # ribbon超时时间设置
-#    ribbon:
-#      ReadTimeout: 60000
-#      ConnectTimeout: 60000
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: bus-refresh
+
+#当有这个的时候会出现consul失败

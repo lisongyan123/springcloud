@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
     <artifactId>springcloud</artifactId>
-    <version>1.0-SNAPSHOT</version>          *
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Simple-main</name>
+    <name>spring-cloud-parent</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -34,7 +34,19 @@
     </properties>
 
     <dependencies>
-        <!--ziokin和sleuth服务链路监控-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-bus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
@@ -43,18 +55,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
-        <!--util-->
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.7</version>
         </dependency>
-        <!--web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--sql-->
+
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -99,15 +106,11 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
     </dependencies>
     <profiles>
         <profile>

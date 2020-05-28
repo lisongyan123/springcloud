@@ -22,76 +22,29 @@ spring:
         instanceId: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}  # 服务id
         health-check-path: /actuator/health
         healthCheckInterval: 15s
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: test_route
-          uri: lb://service-provider
-          predicates:
-            - Path=/service-provider/{segment}
-          filters:
-            - SetPath=/{segment}
-            - name: Hystrix
-              args:
-                name: service-provider-fallback
-                fallbackUri: forward:/service-provider-error
-            - name: Retry
-              args:
-                retries: 3
-                statuses: BAD_GATEWAY,BAD_REQUEST
-      default-filters:
-        - name: Hystrix
-          args:
-            name: fallbackcmd
-            fallbackUri: forward:/default-error
+#    gateway:
 #      routes:
-#        - id: service_customer
-#          uri: lb://CONSUMER
-#          order: 0
+#        - id: test_route
+#          uri: lb://service-provider
 #          predicates:
-#            - Path=/customer/**
+#            - Path=/service-provider/{segment}
 #          filters:
-#            - StripPrefix=1
-#            - name: RequestRateLimiter
-#              args:
-#                key-resolver: "#{@remoteAddrKeyResolver}"
-#                redis-rate-limiter.replenishRate: 1
-#                redis-rate-limiter.burstCapacity: 5
-#            - AddResponseHeader=X-Response-Default-Foo, Default-Bar
-#            #            - Retry=5
+#            - SetPath=/{segment}
 #            - name: Hystrix
 #              args:
-#                name: fallbackcmd
-#                fallbackUri: forward:/fallback
+#                name: service-provider-fallback
+#                fallbackUri: forward:/service-provider-error
+#            - name: Retry
+#              args:
+#                retries: 3
+#                statuses: BAD_GATEWAY,BAD_REQUEST
 #      default-filters:
-#        - Elapsed=true
-#        # fail with "java.lang.IllegalArgumentException: No Configuration found for route service_customer"
-#      #        - name: RequestRateLimiter
-#      #          args:
-#      #            key-resolver: "#{@remoteAddrKeyResolver}"
-#      #            redis-rate-limiter.replenishRate: 1
-#      #            redis-rate-limiter.burstCapacity: 5
-#      httpclient:
-#        pool:
-#          acquire-timeout: 10000
-#  redis:
-#    host: localhost
-#    port: 6379
-#    database: 0
-logging:
-  level:
-    org.springframework.cloud.gateway: debug
-    com.windmt.filter: debug
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  health:
-    consul:
-      enabled: false
+#        - name: Hystrix
+#          args:
+#            name: fallbackcmd
+#            fallbackUri: forward:/default-error
+
+
 
 
 
