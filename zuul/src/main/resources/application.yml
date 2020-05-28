@@ -35,6 +35,3 @@ management:
     web:
       exposure:
         include: bus-refresh
-  health:
-    consul:
-      enabled: false

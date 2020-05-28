@@ -1,12 +1,42 @@
+server:
+  port: 7001
+
+spring:
+  application:
+    name: config-server
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+  kafka:
+    bootstrap-servers: localhost:9092   #配置 kafka 服务器的地址和端口
+    consumer:
+      group-id: SpringCloud-bus
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/lisongyan123/config.git
+          search-paths: config
+          username: 842166100@qq.com #账号密码写真实的快一些我觉得，不使用也能访问有点慢
+          password: lisongyan1996
+
+    bus:
+      refresh:
+        enabled: true
+
 management:
-  endpoint:
-    health:
-      show-details: always
-  security:
-    enabled: false
   endpoints:
     web:
       exposure:
-        include: '*'
-    refresh:
-      enabled: true
+        include: '*'    #refresh

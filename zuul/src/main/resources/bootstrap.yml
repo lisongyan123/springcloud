@@ -1,6 +1,6 @@
 spring:
-  kafka:
-    bootstrap-servers: localhost:9002,localhost:9003,localhost:9004
+#  kafka:
+#    bootstrap-servers: localhost:9002,localhost:9003,localhost:9004
   cloud:
     bus:
       trace:
