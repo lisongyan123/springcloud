@@ -12,10 +12,10 @@ public class Controller {
     @Autowired
     TestFeignService testFeignService;
 
-    @Resource
-    FeignClient personFeignClient;
-
-    PersonTest personTest;
+//    @Resource
+//    FeignClient personFeignClient;
+//
+//    PersonTest personTest;
 
     @RequestMapping("/hello")
     public String hello(){
@@ -26,12 +26,12 @@ public class Controller {
     public String sayHi(@RequestParam String name) {
         return testFeignService.feign(name);
     }
-
-    @RequestMapping(value = "/serviceId",method = RequestMethod.GET)
-    @ResponseBody
-    public void test(@RequestParam String serviceId){
-        String url = "http://cyn-admin";
-        personTest.build(url);
-    }
+//
+//    @RequestMapping(value = "/serviceId",method = RequestMethod.GET)
+//    @ResponseBody
+//    public void test(@RequestParam String serviceId){
+//        String url = "http://cyn-admin";
+//        personTest.build(url);
+//    }
 
 }
