@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cloudservice.dao.AuthOperationLogDao">
+  <resultMap id="BaseResultMap" type="com.example.cloudservice.domain.AuthOperationLog">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="LOG_NAME" jdbcType="VARCHAR" property="logName" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="API" jdbcType="VARCHAR" property="api" />
+    <result column="METHOD" jdbcType="VARCHAR" property="method" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="SUCCEED" jdbcType="TINYINT" property="succeed" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="message" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, LOG_NAME, USER_ID, API, `METHOD`, CREATE_TIME, SUCCEED, MESSAGE
+  </sql>
+  <select id="selectByExample" parameterType="com.example.cloudservice.domain.AuthOperationLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from auth_operation_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from auth_operation_log
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from auth_operation_log
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.cloudservice.domain.AuthOperationLogExample">
+    delete from auth_operation_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.example.cloudservice.domain.AuthOperationLog" useGeneratedKeys="true">
+    insert into auth_operation_log (LOG_NAME, USER_ID, API, 
+      `METHOD`, CREATE_TIME, SUCCEED, 
+      MESSAGE)
+    values (#{logName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{api,jdbcType=VARCHAR}, 
+      #{method,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{succeed,jdbcType=TINYINT}, 
+      #{message,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.example.cloudservice.domain.AuthOperationLog" useGeneratedKeys="true">
+    insert into auth_operation_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logName != null">
+        LOG_NAME,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="api != null">
+        API,
+      </if>
+      <if test="method != null">
+        `METHOD`,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="succeed != null">
+        SUCCEED,
+      </if>
+      <if test="message != null">
+        MESSAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logName != null">
+        #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null">
+        #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="succeed != null">
+        #{succeed,jdbcType=TINYINT},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.cloudservice.domain.AuthOperationLogExample" resultType="java.lang.Long">
+    select count(*) from auth_operation_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update auth_operation_log
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.logName != null">
+        LOG_NAME = #{record.logName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.api != null">
+        API = #{record.api,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null">
+        `METHOD` = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.succeed != null">
+        SUCCEED = #{record.succeed,jdbcType=TINYINT},
+      </if>
+      <if test="record.message != null">
+        MESSAGE = #{record.message,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update auth_operation_log
+    set ID = #{record.id,jdbcType=INTEGER},
+      LOG_NAME = #{record.logName,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      API = #{record.api,jdbcType=VARCHAR},
+      `METHOD` = #{record.method,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      SUCCEED = #{record.succeed,jdbcType=TINYINT},
+      MESSAGE = #{record.message,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.cloudservice.domain.AuthOperationLog">
+    update auth_operation_log
+    <set>
+      <if test="logName != null">
+        LOG_NAME = #{logName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null">
+        API = #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        `METHOD` = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="succeed != null">
+        SUCCEED = #{succeed,jdbcType=TINYINT},
+      </if>
+      <if test="message != null">
+        MESSAGE = #{message,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.cloudservice.domain.AuthOperationLog">
+    update auth_operation_log
+    set LOG_NAME = #{logName,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      API = #{api,jdbcType=VARCHAR},
+      `METHOD` = #{method,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      SUCCEED = #{succeed,jdbcType=TINYINT},
+      MESSAGE = #{message,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

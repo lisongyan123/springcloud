@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PersistentConfig">
+    <option name="historyConfigList">
+      <map>
+        <entry key="auth_account_log">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AuthAccountLogDao" />
+              <option name="daoPackage" value="com.example.cloudservice.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="AuthAccountLog" />
+              <option name="modelPackage" value="com.example.cloudservice.domain" />
+              <option name="name" value="auth_account_log" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="ID" />
+              <option name="projectFolder" value="$PROJECT_DIR$/cloud-service" />
+              <option name="tableName" value="auth_account_log" />
+              <option name="useExample" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="auth_operation_log">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AuthOperationLogDao" />
+              <option name="daoPackage" value="com.example.cloudservice.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="AuthOperationLog" />
+              <option name="modelPackage" value="com.example.cloudservice.domain" />
+              <option name="name" value="auth_operation_log" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="ID" />
+              <option name="projectFolder" value="$PROJECT_DIR$/cloud-service" />
+              <option name="tableName" value="auth_operation_log" />
+              <option name="useExample" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="auth_resource">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AuthResourceDao" />
+              <option name="daoPackage" value="com.example.cloudservice.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="AuthResource" />
+              <option name="modelPackage" value="com.example.cloudservice.domain" />
+              <option name="name" value="auth_resource" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="ID" />
+              <option name="projectFolder" value="$PROJECT_DIR$/cloud-service" />
+              <option name="tableName" value="auth_resource" />
+              <option name="useExample" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="auth_role">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AuthRoleDao" />
+              <option name="daoPackage" value="com.example.cloudservice.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="AuthRole" />
+              <option name="modelPackage" value="com.example.cloudservice.domain" />
+              <option name="name" value="auth_role" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="ID" />
+              <option name="projectFolder" value="$PROJECT_DIR$/cloud-service" />
+              <option name="tableName" value="auth_role" />
+              <option name="useExample" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="auth_role_resource">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AuthRoleResourceDao" />
+              <option name="daoPackage" value="com.example.cloudservice.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="AuthRoleResource" />
+              <option name="modelPackage" value="com.example.cloudservice.domain" />
+              <option name="name" value="auth_role_resource" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="ID" />
+              <option name="projectFolder" value="$PROJECT_DIR$/cloud-service" />
+              <option name="tableName" value="auth_role_resource" />
+              <option name="useExample" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="auth_user">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AuthUserDao" />
+              <option name="daoPackage" value="com.example.cloudservice.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="AuthUser" />
+              <option name="modelPackage" value="com.example.cloudservice.domain" />
+              <option name="name" value="auth_user" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="uid" />
+              <option name="projectFolder" value="$PROJECT_DIR$/cloud-service" />
+              <option name="tableName" value="auth_user" />
+              <option name="useExample" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="auth_user_role">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="AuthUserRoleDao" />
+              <option name="daoPackage" value="com.example.cloudservice.dao" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="AuthUserRole" />
+              <option name="modelPackage" value="com.example.cloudservice.domain" />
+              <option name="name" value="auth_user_role" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="ID" />
+              <option name="projectFolder" value="$PROJECT_DIR$/cloud-service" />
+              <option name="tableName" value="auth_user_role" />
+              <option name="useExample" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="generator" />
+            </Config>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

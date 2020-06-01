@@ -9,17 +9,18 @@
         <module name="zuul" />
         <module name="alibaba" />
         <module name="stream-kafka" />
-        <module name="config-server" />
         <module name="stream-kafka2" />
-        <module name="stream-kafka1" />
-        <module name="service" />
         <module name="gateway" />
         <module name="spring-cloud-gateway" />
+        <module name="config-server" />
+        <module name="cloud-service" />
         <module name="zipkin" />
+        <module name="stream-kafka1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="alibaba" target="1.8" />
+      <module name="cloud-service" target="1.8" />
       <module name="config-server" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="service" target="1.8" />
@@ -35,6 +36,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="alibaba" options="-parameters" />
+      <module name="cloud-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="service" options="-parameters" />

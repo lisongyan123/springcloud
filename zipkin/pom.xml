@@ -3,24 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.14.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>org.example</groupId>
+        <artifactId>springcloud</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
+
     <groupId>com.example.lsy</groupId>
     <artifactId>zipkin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>zipkin</name>
     <description>Demo project for Spring Boot</description>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8
-        </project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.SR5</spring-cloud.version>
-    </properties>
     <dependencies>
 
     </dependencies>

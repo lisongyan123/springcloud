@@ -11,6 +11,8 @@
         <option value="$PROJECT_DIR$/stream-kafka2/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/alibaba/pom.xml" />
+        <option value="$PROJECT_DIR$/service/pom.xml" />
+        <option value="$PROJECT_DIR$/cloud-service/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,89 @@
+server:
+  port: 18082
+
+spring:
+
+  # 设置使用哪个环境的配置
+  # 默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：
+  #   测试环境：java -jar bootshiro.jar --spring.profiles.active=test
+  #   生产环境：java -jar bootshiro.jar --spring.profiles.active=prod
+  profiles:
+    active: dev
+
+  application:
+    name: cloud-service
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    platform: mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+        enabled: true
+        register: true
+        hostname: 127.0.0.1
+        serviceName: ${spring.application.name}
+        tags: test
+        instanceId: ${spring.application.name}-${spring.cloud.client.ip-address}-${server.port}
+        health-check-path: /actuator/health
+        healthCheckInterval: 15s
+
+jasypt:
+  encryptor:
+    password: e!swhdg&d763jo
+
+bootshiro:
+  enableEncryptPassword: true
+
+---
+# 开发环境配置(配置项只包括环境不同项)
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lsy?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    platform: mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+---
+# 测试环境配置(配置项只包括不同项)
+
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/usthe?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: ENC(X118nhUgaLMJ7niJyBao5E35QYgQaq3o)
+  redis:
+    # 服务器IP地址
+    host: 127.0.0.1
+    # 连接端口
+    port: 6368
+    # Redis服务器连接密码（默认为空）
+    password:
+
+---
+# 生产环境配置(配置项只包括不同项)
+
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://172.16.215.193:3306/usthe?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: ENC(vp7cbF0sE/lRsThrcwdiA/WoeG1mIXzy)
+  redis:
+    # 服务器IP地址
+    host: 172.16.215.193
+    # 连接端口
+    port: 6368
+    # Redis服务器连接密码（默认为空）
+    password:
