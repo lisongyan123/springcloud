@@ -1,6 +1,6 @@
 package com.example.cloudservice.config.shiro.support;
 
-import com.usthe.bootshiro.util.XssUtil;
+import com.example.cloudservice.common.util.XssUtil;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +10,6 @@ import java.util.Map;
 
 /**
  * request请求安全过滤包装类
- * @author tomsun28
- * @date 20:41 2018/4/15
  */
 public class XssSqlHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
@@ -23,9 +21,6 @@ public class XssSqlHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     /**
      * description 重写  数组参数过滤
-     *
-     * @param parameter 1
-     * @return java.lang.String[]
      */
     @Override
     public String[] getParameterValues(String parameter) {
@@ -75,9 +70,6 @@ public class XssSqlHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     /**
      * description 过滤字符串数组不安全内容
-     *
-     * @param value 1
-     * @return java.lang.String[]
      */
     private String[] filterEntryString(String[] value) {
         for (int i = 0; i < value.length; i++) {
@@ -88,9 +80,6 @@ public class XssSqlHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     /**
      * description 过滤字符串不安全内容
-     *
-     * @param value 1
-     * @return java.lang.String
      */
     private String filterParamString(String value) {
         if (null == value) {

@@ -1,10 +1,8 @@
 package com.example.cloudservice.config.shiro.support.factory;
 
-import com.usthe.bootshiro.dao.AuthAccountLogMapper;
-import com.usthe.bootshiro.dao.AuthOperationLogMapper;
-import com.usthe.bootshiro.domain.bo.AuthAccountLog;
-import com.usthe.bootshiro.domain.bo.AuthOperationLog;
-import com.usthe.bootshiro.support.SpringContextHolder;
+import com.example.cloudservice.config.shiro.support.SpringContextHolder;
+import com.example.cloudservice.domain.AuthAccountLog;
+import com.example.cloudservice.domain.AuthOperationLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

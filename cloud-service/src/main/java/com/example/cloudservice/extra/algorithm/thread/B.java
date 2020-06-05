@@ -1,4 +1,4 @@
-package com.example.cloudservice.thread;
+package com.example.cloudservice.extra.algorithm.thread;
 
 
 import java.util.concurrent.ArrayBlockingQueue;

@@ -1,11 +1,40 @@
-package com.example.cloudservice.common.util;
+package com.example.cloudservice.common.helper;
 
 import com.example.cloudservice.common.bean.TreeBean;
+import com.example.cloudservice.domain.vo.BaseTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TreeHepler {
+
+    /**
+     * 用双重循环建树
+     *
+     * @param treeNodes
+     * @param root
+     * @param <T>
+     * @return
+     */
+    public static <T extends BaseTreeNode> List<T> buildTreeBy2Loop(List<T> treeNodes, Object root) {
+        List<T> trees = new ArrayList<>();
+        for (T node : treeNodes) {
+            if (root.equals(node.getParentId())) {
+                trees.add(node);
+            }
+
+            for (T treeNode : treeNodes) {
+                if (node.getId().equals(treeNode.getParentId())) {
+                    if (node.getChildren()==null) {
+                        node.setChildren(new ArrayList<>());
+                    }
+                    node.addChilren(treeNode);
+                }
+            }
+        }
+        return trees;
+    }
+
     /**
      * 将具有父子关系的list集合转换为树形结构
      *

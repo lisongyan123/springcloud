@@ -56,8 +56,6 @@ public class SysHepler {
      * 操作系统类型
      */
     public static String SUN_DESKTOP = PropertiesUtil.key(Opslab.SYS_SUN_DESKTOP);
-
-
     public static String FILE_SEPARATOR = PropertiesUtil.key(Opslab.SYS_FILE_SEPARATOR);
     public static String PATH_SEPARATOR = PropertiesUtil.key(Opslab.SYS_PATH_SEPARATOR);
     public static String LINE_SEPARATOR = PropertiesUtil.key(Opslab.SYS_LINE_SEPARATOR);

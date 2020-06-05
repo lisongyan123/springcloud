@@ -1,11 +1,11 @@
-package com.example.cloudservice.thread;
+package com.example.cloudservice.extra.algorithm.thread;
 
 import org.springframework.stereotype.Component;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 自定义现场名称
+ * 自定义线程名称
  */
 @Component
 public class TheadFactoryName implements ThreadFactory {

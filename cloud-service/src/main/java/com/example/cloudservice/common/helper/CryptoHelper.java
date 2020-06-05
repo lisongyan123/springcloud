@@ -79,7 +79,7 @@ public class CryptoHelper {
      * @param str       解密的字符串
      * @return decode str or null
      */
-    public static String aseDecode(String secretKey, String str) {
+    public static String aesDecode(String secretKey, String str) {
         return ASEUtil.AESDncode(secretKey, Decode.hexStr2Str(str));
     }
 

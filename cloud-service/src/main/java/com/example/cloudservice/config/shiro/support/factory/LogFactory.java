@@ -1,7 +1,7 @@
 package com.example.cloudservice.config.shiro.support.factory;
 
-import com.usthe.bootshiro.domain.bo.AuthAccountLog;
-import com.usthe.bootshiro.domain.bo.AuthOperationLog;
+import com.example.cloudservice.domain.AuthAccountLog;
+import com.example.cloudservice.domain.AuthOperationLog;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class LogFactory {
 
     }
 
-    public static AuthAccountLog createAccountLog(String userId,String logName, String ip, Short succeed, String message) {
+    public static AuthAccountLog createAccountLog(String userId, String logName, String ip, Short succeed, String message) {
         AuthAccountLog accountLog = new AuthAccountLog();
         accountLog.setUserId(userId);
         accountLog.setLogName(logName);
@@ -27,7 +27,7 @@ public class LogFactory {
         return accountLog;
     }
 
-    public static AuthOperationLog createOperationLog(String userId,String logName,String api, String method, Short succeed, String message) {
+    public static AuthOperationLog createOperationLog(String userId, String logName, String api, String method, Short succeed, String message) {
         AuthOperationLog operationLog = new AuthOperationLog();
         operationLog.setUserId(userId);
         operationLog.setLogName(logName);

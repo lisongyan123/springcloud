@@ -1,7 +1,8 @@
-package com.example.cloudservice.common.log;
+package com.example.cloudservice.controller;
 
-
-import org.apache.kafka.common.utils.SecurityUtils;
+import com.example.cloudservice.common.log.Log;
+import com.example.cloudservice.domain.dto.LogQueryCriteria;
+import com.example.cloudservice.service.LogService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,12 +60,15 @@ public class LogController {
     public ResponseEntity<Object> getErrorLogs(@PathVariable Long id){
         return new ResponseEntity<>(logService.findByErrDetail(id), HttpStatus.OK);
     }
+
+    @Log("删除所有ERROR日志")
     @DeleteMapping(value = "/del/error")
     public ResponseEntity<Object> delAllByError(){
-        logService.delAllByError();
+        logService.delAllByType();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Log("删除所有INFO日志")
     @DeleteMapping(value = "/del/info")
     public ResponseEntity<Object> delAllByInfo(){
         logService.delAllByInfo();

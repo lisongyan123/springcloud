@@ -33,7 +33,7 @@ public class AuthAccountLog implements Serializable {
     /**
      * 是否执行成功(0失败1成功)
      */
-    private Byte succeed;
+    private Short succeed;
 
     /**
      * 具体消息

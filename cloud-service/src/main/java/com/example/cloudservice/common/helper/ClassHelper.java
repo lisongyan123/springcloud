@@ -37,8 +37,6 @@ public final class ClassHelper {
                 overridenClassLoader : Thread.currentThread().getContextClassLoader();
     }
 
-
-
     /**
      * 获取指定类的全部属性字段
      *

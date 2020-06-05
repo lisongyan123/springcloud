@@ -1,17 +1,26 @@
 package com.example.cloudservice.common.helper;
 
+import com.alibaba.fastjson.JSON;
 import com.example.cloudservice.common.bean.ClientInfo;
+import com.example.cloudservice.config.shiro.support.XssSqlHttpServletRequestWrapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.web.util.WebUtils;
 import sun.misc.BASE64Encoder;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * 封装常见的Request方法
  */
+@Slf4j
 public class RequestHelper {
 
 
@@ -77,6 +86,31 @@ public class RequestHelper {
     public static boolean isAjax(HttpServletRequest request) {
         String header = request.getHeader("X-Requested-With");
         return "XMLHttpRequest".equalsIgnoreCase(header);
+    }
+
+    private static String longToIpV4(long longIp) {
+        int octet3 = (int) ((longIp >> 24) % 256);
+        int octet2 = (int) ((longIp >> 16) % 256);
+        int octet1 = (int) ((longIp >> 8) % 256);
+        int octet0 = (int) ((longIp) % 256);
+        return octet3 + "." + octet2 + "." + octet1 + "." + octet0;
+    }
+
+    private static long ipV4ToLong(String ip) {
+        String[] octets = ip.split("\\.");
+        return (Long.parseLong(octets[0]) << 24) + (Integer.parseInt(octets[1]) << 16)
+                + (Integer.parseInt(octets[2]) << 8) + Integer.parseInt(octets[3]);
+    }
+
+    private static boolean isIPv4Private(String ip) {
+        long longIp = ipV4ToLong(ip);
+        return (longIp >= ipV4ToLong("10.0.0.0") && longIp <= ipV4ToLong("10.255.255.255"))
+                || (longIp >= ipV4ToLong("172.16.0.0") && longIp <= ipV4ToLong("172.31.255.255"))
+                || longIp >= ipV4ToLong("192.168.0.0") && longIp <= ipV4ToLong("192.168.255.255");
+    }
+
+    private static boolean isIPv4Valid(String ip) {
+        return Pattern.compile("^(?:" + "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" + "\\.){3}" + "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" + "$").matcher(ip).matches();
     }
 
     /**
@@ -276,5 +310,113 @@ public class RequestHelper {
             //}
             return info;
         }
+
+    /**
+     * description 取request中的已经被防止XSS，SQL注入过滤过的key value数据封装到map 返回
+     *
+     * @param request 1
+     * @return java.util.Map<java.lang.String,java.lang.String>
+     */
+    public static Map<String,String> getRequestParameters(ServletRequest request) {
+        Map<String,String> dataMap = new HashMap<>(16);
+        Enumeration enums = request.getParameterNames();
+        while (enums.hasMoreElements()) {
+            String paraName = (String)enums.nextElement();
+            String paraValue = RequestHelper.getRequest(request).getParameter(paraName);
+            if(null!=paraValue && !"".equals(paraValue)) {
+                dataMap.put(paraName,paraValue);
+            }
+        }
+        return dataMap;
+    }
+
+    /**
+     * description 获取request中的body json 数据转化为map
+     *
+     * @param request 1
+     * @return java.util.Map<java.lang.String,java.lang.String>
+     */
+    @SuppressWarnings("unchecked")
+    public static Map<String, String> getRequestBodyMap(ServletRequest request) {
+        Map<String ,String > dataMap = new HashMap<>(16);
+        // 判断是否已经将 inputStream 流中的 body 数据读出放入 attribute
+        if (request.getAttribute("body") != null) {
+            // 已经读出则返回attribute中的body
+            return (Map<String,String>)request.getAttribute("body");
+        } else {
+            try {
+                Map<String, Object> maps = JSON.parseObject(String.valueOf(request.getInputStream()),Map.class);
+                maps.forEach((key, value) -> dataMap.put(key, String.valueOf(value)));
+                request.setAttribute("body",dataMap);
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+            return dataMap;
+        }
+    }
+
+    /**
+     * description 读取request 已经被防止XSS，SQL注入过滤过的 请求参数key 对应的value
+     *
+     * @param request 1
+     * @param key 2
+     * @return java.lang.String
+     */
+    public static String getParameter(ServletRequest request, String key) {
+        return RequestHelper.getRequest(request).getParameter(key);
+    }
+
+    /**
+     * description 读取request 已经被防止XSS，SQL注入过滤过的 请求头key 对应的value
+     *
+     * @param request 1
+     * @param key 2
+     * @return java.lang.String
+     */
+    public static String getHeader(ServletRequest request, String key) {
+        return RequestHelper.getRequest(request).getHeader(key);
+    }
+
+    /**
+     * description 取request头中的已经被防止XSS，SQL注入过滤过的 key value数据封装到map 返回
+     *
+     * @param request 1
+     * @return java.util.Map<java.lang.String,java.lang.String>
+     */
+    public static Map<String,String> getRequestHeaders(ServletRequest request) {
+        Map<String,String> headerMap = new HashMap<>(16);
+        Enumeration enums = RequestHelper.getRequest(request).getHeaderNames();
+        while (enums.hasMoreElements()) {
+            String name = (String) enums.nextElement();
+            String value = RequestHelper.getRequest(request).getHeader(name);
+            if (null != value && !"".equals(value)) {
+                headerMap.put(name,value);
+            }
+        }
+        return headerMap;
+    }
+
+    public static HttpServletRequest getRequest(ServletRequest request) {
+        return new XssSqlHttpServletRequestWrapper((HttpServletRequest) request);
+    }
+
+    /**
+     * description 封装response  统一json返回
+     *
+     * @param outStr 1
+     * @param response 2
+     */
+    public static void responseWrite(String outStr, ServletResponse response) {
+
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter printWriter;
+        try {
+            printWriter = WebUtils.toHttp(response).getWriter();
+            printWriter.write(outStr);
+        }catch (Exception e) {
+            log.error(e.getMessage(),e);
+        }
+    }
 
     }

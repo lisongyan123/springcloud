@@ -1,10 +1,9 @@
 package com.example.cloudservice.config.shiro.support;
 
+import com.example.cloudservice.common.util.XssUtil;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.usthe.bootshiro.util.XssUtil;
-
 import java.io.IOException;
 
 /**

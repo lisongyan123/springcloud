@@ -14,6 +14,7 @@ public final class RandomHelper {
             = "abcdefghijkllmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String NUMBERCHAR
             = "0123456789";
+    public static final String LOWERNUMCHAR = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 
     /**
@@ -39,6 +40,21 @@ public final class RandomHelper {
         Random random = new Random();
         for (int i = 0; i < length; i++) {
             sb.append(NUMBERCHAR.charAt(random.nextInt(NUMBERCHAR.length())));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 返回小写字母 + 数字的随机数
+     *
+     * @param length
+     * @return
+     */
+    public static String getRandomString(int length) {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(LOWERNUMCHAR.charAt(random.nextInt(LOWERNUMCHAR.length())));
         }
         return sb.toString();
     }

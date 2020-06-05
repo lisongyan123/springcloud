@@ -1,7 +1,6 @@
 package com.example.cloudservice.config.shiro.support;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import com.usthe.bootshiro.domain.vo.Message;
+import com.example.cloudservice.domain.vo.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局的的异常拦截器（拦截所有的控制器）（带有@RequestMapping注解的方法上都会拦截）
- * @author tomsun28
- * @date 22:40 2018/4/16
  */
 @RestControllerAdvice
 @Order(-1)
@@ -22,12 +19,8 @@ public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-
     /**
      * description 拦截操作数据库异常
-     *
-     * @param e 1
-     * @return com.usthe.bootshiro.domain.vo.Message
      */
     @ExceptionHandler(DataAccessException.class)
     @ResponseStatus(HttpStatus.OK)

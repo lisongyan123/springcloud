@@ -1,12 +1,9 @@
 package com.example.cloudservice.common.helper;
 
-
-
+import com.example.cloudservice.common.PropertyFilter;
 import com.example.cloudservice.common.bean.BeanStruct;
 import com.example.cloudservice.common.util.CheckUtil;
 import com.example.cloudservice.common.util.algorithmImpl.BeanFactory;
-import com.example.cloudservice.filterInterface.PropertyFilter;
-
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

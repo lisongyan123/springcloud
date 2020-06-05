@@ -1,4 +1,4 @@
-package com.example.cloudservice.thread;
+package com.example.cloudservice.extra.algorithm.thread;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

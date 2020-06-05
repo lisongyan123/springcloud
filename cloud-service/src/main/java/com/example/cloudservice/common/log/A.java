@@ -1,5 +1,6 @@
 package com.example.cloudservice.common.log;
 
+import com.example.cloudservice.service.LogService;
 import io.netty.util.internal.ThrowableUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -11,9 +12,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-
 import javax.servlet.http.HttpServletRequest;
-
+import com.example.cloudservice.domain.vo.Log;
 @Component
 @Aspect
 @Slf4j
@@ -45,12 +45,13 @@ public class LogAspect {
         Object result;
         currentTime.set(System.currentTimeMillis());
         result = joinPoint.proceed();
-        Logs logs = new Logs("INFO",System.currentTimeMillis() - currentTime.get());
+        Log log = new Log("INFO",System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
         logService.save(getUsername(), StringUtils.getBrowser(request), StringUtils.getIp(request),joinPoint, log);
         return result;
     }
+
 
     /**
      * 配置异常通知
@@ -60,7 +61,7 @@ public class LogAspect {
      */
     @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        Logs logs = new Logs("ERROR",System.currentTimeMillis() - currentTime.get());
+        Log log = new Log("ERROR",System.currentTimeMillis() - currentTime.get());
         currentTime.remove();
         log.setExceptionDetail(ThrowableUtil.getStackTrace(e).getBytes());
         HttpServletRequest request = RequestHolder.getHttpServletRequest();
@@ -75,3 +76,4 @@ public class LogAspect {
         }
     }
 }
+

@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.boot:spring-boot-starter-tomcat:2.2.8.BUILD-SNAPSHOT">
     <CLASSES>
-      <root url="jar://D:/lsy/maven/repository/org/springframework/boot/spring-boot-starter-tomcat/2.2.8.BUILD-SNAPSHOT/spring-boot-starter-tomcat-2.2.8.BUILD-20200528.030840-18.jar!/" />
+      <root url="jar://D:/lsy/maven/repository/org/springframework/boot/spring-boot-starter-tomcat/2.2.8.BUILD-SNAPSHOT/spring-boot-starter-tomcat-2.2.8.BUILD-20200603.091609-24.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://D:/lsy/maven/repository/org/springframework/boot/spring-boot-starter-tomcat/2.2.8.BUILD-SNAPSHOT/spring-boot-starter-tomcat-2.2.8.BUILD-20200528.030840-18-javadoc.jar!/" />
+      <root url="jar://D:/lsy/maven/repository/org/springframework/boot/spring-boot-starter-tomcat/2.2.8.BUILD-SNAPSHOT/spring-boot-starter-tomcat-2.2.8.BUILD-20200603.091609-24-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://D:/lsy/maven/repository/org/springframework/boot/spring-boot-starter-tomcat/2.2.8.BUILD-SNAPSHOT/spring-boot-starter-tomcat-2.2.8.BUILD-20200528.030840-18-sources.jar!/" />
+      <root url="jar://D:/lsy/maven/repository/org/springframework/boot/spring-boot-starter-tomcat/2.2.8.BUILD-SNAPSHOT/spring-boot-starter-tomcat-2.2.8.BUILD-20200603.091609-24-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -4,6 +4,7 @@ import com.example.cloudservice.domain.AuthUser;
 import com.example.cloudservice.domain.AuthUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.shiro.dao.DataAccessException;
 
 public interface AuthUserDao {
     long countByExample(AuthUserExample example);
@@ -27,4 +28,6 @@ public interface AuthUserDao {
     int updateByPrimaryKeySelective(AuthUser record);
 
     int updateByPrimaryKey(AuthUser record);
+
+    String selectUserRoles(String appId) throws DataAccessException;
 }

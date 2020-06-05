@@ -1,14 +1,14 @@
 package com.example.cloudservice.common.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
+import java.util.zip.*;
 
 /**
  * 压缩文档相关的工具类
  */
+@Slf4j
 public final class ZIPUtil {
 
     /**
@@ -181,4 +181,69 @@ public final class ZIPUtil {
             throw e;
         }
     }
+
+    /**
+     * GZIP解压缩
+     *
+     * @param bytes
+     * @return
+     */
+    public static byte[] uncompress(byte[] bytes) {
+        if (bytes == null || bytes.length == 0) {
+            return null;
+        }
+        byte[] byteArr = null;
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+            GZIPInputStream ungzip = new GZIPInputStream(in);
+            try {
+                byte[] buffer = new byte[256];
+                int n;
+                while ((n = ungzip.read(buffer)) >= 0) {
+                    out.write(buffer, 0, n);
+                }
+                in.close();
+
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }finally {
+                ungzip.close();
+            }
+            byteArr = out.toByteArray();
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return byteArr;
+    }
+
+    public static String uncompress2Str(byte[] bytes) {
+        return uncompress2Str(bytes, "UTF-8");
+    }
+
+    public static String uncompress2Str(byte[] bytes, String encoding) {
+        if (bytes == null || bytes.length == 0) {
+            return null;
+        }
+        String str = null;
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+            try {
+                GZIPInputStream ungzip = new GZIPInputStream(in);
+                byte[] buffer = new byte[256];
+                int n;
+                while ((n = ungzip.read(buffer)) >= 0) {
+                    out.write(buffer, 0, n);
+                }
+                in.close();
+                ungzip.close();
+                str = out.toString(encoding);
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return str;
+    }
+
 }

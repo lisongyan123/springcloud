@@ -329,4 +329,12 @@
       CREATE_WHERE = #{createWhere,jdbcType=TINYINT}
     where `uid` = #{uid,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectUserRoles" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT GROUP_CONCAT(rol.CODE) AS Roles
+    FROM auth_user usr
+    JOIN auth_user_role uro ON usr.uid = uro.USER_ID
+    JOIN auth_role rol ON uro.ROLE_ID = rol.ID
+    WHERE usr.uid = #{uid,jdbcType=VARCHAR}
+  </select>
 </mapper>
