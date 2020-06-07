@@ -10,113 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c788be7-a40b-4277-8884-0f4adc0bc654" name="Default Changelist" comment="shiro">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_5_0_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_api_1_0_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_collectionschema_1_0_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_core_1_0_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_runtime_1_0_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_lettuce_lettuce_core_5_1_8_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_1_8_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_1_10_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_1_10_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/annotion/Query.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/functions/ObjectFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/functions/ObjectHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/functions/ObjectProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/functions/PropertyFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/functions/UiResultFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/BigDecimalHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/CoordinateHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/DeepCopyHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/FastJsonHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/GenericsUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/NetworkUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/ProtobufUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/RegexHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/TokenHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/XssUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/AccountController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/BaseAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/LogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/ResourceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/RoleController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/dao/LogDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/dto/LogErrorDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/dto/LogQueryCriteria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/dto/LogSmallDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/vo/Log.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/vo/LogExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/A.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/pattern/Singleton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/AccountLogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/AccountService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/LogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/OperationLogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/ResourceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/RoleService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/AccountLogServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/AccountServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/OperationLogServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/ResourceServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/RoleServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/a.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/LogDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7065a8c6-8ec9-4ee9-ae79-f791bfd8a93f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7065a8c6-8ec9-4ee9-ae79-f791bfd8a93f.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/free-mybatis-generator-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/free-mybatis-generator-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/algorithm/AlgorithmEasy.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/AlgorithmEasy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/algorithm/AlgorithmHard.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/AlgorithmHard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/algorithm/AlgorithmMedium.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/AlgorithmMedium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/BeanHepler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/BeanHepler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/ClassHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/ClassHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/CollectionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/CollectionHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/CryptoHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/CryptoHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/DateHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/DateHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/FileHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/FileHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/RandomHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/RandomHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/RequestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/RequestHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/SysHepler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/SysHepler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/log/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/log/A.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/log/B.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/log/C.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/Log2Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/TreeHepler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/TreeHepler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/ZIPUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/ZIPUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/SpringContextHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/SpringContextHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/XssSqlHttpServletRequestWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/XssSqlHttpServletRequestWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/XssSqlStringJsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/XssSqlStringJsonSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogTaskFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogTaskFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/manager/LogExeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/manager/LogExeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/dao/AuthUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/dao/AuthUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/AuthAccountLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/AuthAccountLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/AuthOperationLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/AuthOperationLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/LoginService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/LoginServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/thread/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/AsyncTaskExecutePool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/thread/AsyncTaskProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/AsyncTaskProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/thread/B.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/B.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/thread/C.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/C.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/thread/TheadFactoryName.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/TheadFactoryName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthUserDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthUserDao.xml" afterDir="false" />
-    </list>
+    <list default="true" id="8c788be7-a40b-4277-8884-0f4adc0bc654" name="Default Changelist" comment="新项目提交" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -393,6 +287,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.Singleton" />
       <item itemvalue="Docker.docker-compose" />
       <item itemvalue="Spring Boot.ConfigApplication" />
       <item itemvalue="Spring Boot.ConfigClientApplication" />
@@ -414,7 +309,6 @@
       <item itemvalue="Spring Boot.StreamKafkaApplication (2)" />
       <item itemvalue="Spring Boot.SpringCloudGatewayApplication (1)" />
       <item itemvalue="Spring Boot.LsyApplication (1)" />
-      <item itemvalue="Application.Singleton" />
     </list>
     <recent_temporary>
       <list>
@@ -480,7 +374,7 @@
       <workItem from="1591113613329" duration="5494000" />
       <workItem from="1591194815186" duration="5064000" />
       <workItem from="1591275169390" duration="11340000" />
-      <workItem from="1591369762126" duration="3549000" />
+      <workItem from="1591369762126" duration="3997000" />
     </task>
     <task id="LOCAL-00001" summary="代码初次提交">
       <created>1590482271204</created>
@@ -531,7 +425,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591035616793</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="新项目提交">
+      <created>1591374050826</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1591374050826</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +458,8 @@
     <MESSAGE value="feign" />
     <MESSAGE value="nacos-alibaba" />
     <MESSAGE value="shiro" />
-    <option name="LAST_COMMIT_MESSAGE" value="shiro" />
+    <MESSAGE value="新项目提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="新项目提交" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1214" y="417" key="#Path_mapping" timestamp="1590401977305">
@@ -612,10 +514,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="936" y="391" key="DockerComposeFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590402614082" />
-    <state x="1282" y="255" key="FileChooserDialogImpl" timestamp="1591372247130">
+    <state x="1282" y="255" key="FileChooserDialogImpl" timestamp="1591374059247">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1282" y="255" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591372247130" />
+    <state x="1282" y="255" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591374059247" />
     <state width="1293" height="624" key="GridCell.Tab.0.bottom" timestamp="1591286447464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -688,10 +590,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1591285358629" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1591035679909">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1591374122244">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591035679909" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591374122244" />
     <state x="803" y="272" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1590135254733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -700,10 +602,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="504" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1590913992875" />
-    <state x="334" y="180" key="new project wizard" timestamp="1590938777496">
+    <state x="334" y="180" key="new project wizard" timestamp="1591374086094">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="334" y="180" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1590938777496" />
+    <state x="334" y="180" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1591374086094" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1591275921634">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

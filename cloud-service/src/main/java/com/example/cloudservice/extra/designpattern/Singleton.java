@@ -1,4 +1,4 @@
-package com.example.cloudservice.extra.pattern;
+package com.example.cloudservice.extra.designpattern;
 
 /**
  * 在应用场景中，某类只要求生成一个对象的时候，如一个班中的班长、每个人的身份证号等。
@@ -39,7 +39,8 @@ public class Singleton {
     }
 
     public static void main(String[] args){
-        President president1 = President.getPresident();
+        President president1 ;
+        president1 = President.getPresident();
         President president2 = President.getPresident();
     }
 }
