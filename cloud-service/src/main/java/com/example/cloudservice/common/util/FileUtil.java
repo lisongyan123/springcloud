@@ -1,8 +1,8 @@
 package com.example.cloudservice.common.util;
 
-import com.opslab.helper.RegHepler;
-import com.opslab.helper.SysHepler;
-import com.opslab.util.algorithmImpl.FileTypeImpl;
+import com.example.cloudservice.common.helper.RegHepler;
+import com.example.cloudservice.common.helper.SysHepler;
+import com.example.cloudservice.common.util.algorithmImpl.FileTypeImpl;
 
 import java.io.*;
 import java.math.BigInteger;

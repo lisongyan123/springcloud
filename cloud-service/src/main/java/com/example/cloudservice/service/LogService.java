@@ -1,7 +1,7 @@
 package com.example.cloudservice.service;
 
-import com.example.cloudservice.common.log.Log;
 import com.example.cloudservice.domain.dto.LogQueryCriteria;
+import com.example.cloudservice.domain.vo.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.scheduling.annotation.Async;
 
@@ -14,26 +14,22 @@ public interface LogService {
 
     /**
      * 分页查询
-     * @param criteria 查询条件
-     * @param pageable 分页参数
      * @return /
      */
-    Object queryAll(LogQueryCriteria criteria, Pageable pageable);
+    Object queryAll(int pageNum, int size);
 
     /**
      * 查询全部数据
-     * @param criteria 查询条件
-     * @return /
      */
-    List<Log> queryAll(LogQueryCriteria criteria);
+    List<com.example.cloudservice.domain.vo.Log> queryAll();
 
-    /**
-     * 查询用户日志
-     * @param criteria 查询条件
-     * @param pageable 分页参数
-     * @return -
-     */
-    Object queryAllByUser(LogQueryCriteria criteria, Pageable pageable);
+//    /**
+//     * 查询用户日志
+//     * @param criteria 查询条件
+//     * @param pageable 分页参数
+//     * @return -
+//     */
+//    Object queryAllByUser(LogQueryCriteria criteria, Pageable pageable);
 
     /**
      * 保存日志数据
@@ -44,7 +40,7 @@ public interface LogService {
      * @param log 日志实体
      */
     @Async
-    void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, Log log);
+    void save(String username, String browser, String ip, ProceedingJoinPoint joinPoint, Log log) throws Exception ;
 
     /**
      * 查询异常详情

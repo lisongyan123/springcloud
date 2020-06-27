@@ -1,6 +1,5 @@
 package com.example.cloudservice.controller;
 
-
 import com.example.cloudservice.domain.AuthAccountLog;
 import com.example.cloudservice.domain.AuthOperationLog;
 import com.example.cloudservice.domain.vo.Message;
@@ -24,7 +23,6 @@ public class LogController extends BaseAction {
 
     @Autowired
     OperationLogService operationLogService;
-
 
     @RequestMapping("/accountLog/{currentPage}/{pageSize}")
     public Message getAccountLogList(@PathVariable Integer currentPage, @PathVariable Integer pageSize ) {

@@ -2,13 +2,10 @@ package com.example.cloudservice.config.shiro.support.factory;
 
 import com.example.cloudservice.domain.AuthAccountLog;
 import com.example.cloudservice.domain.AuthOperationLog;
-
 import java.util.Date;
 
 /**
  *   日志对象工厂
- * @author tomsun28
- * @date 9:50 2018/4/22
  */
 public class LogFactory {
 

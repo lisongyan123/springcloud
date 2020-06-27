@@ -9,10 +9,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * @author tomsun28
- * @date 21:24 2018/4/16
- */
 @Order(1)
 @WebFilter(filterName = "xssFilter", urlPatterns = "/*", asyncSupported = true)
 public class XssSqlFilter implements Filter {

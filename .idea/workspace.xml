@@ -10,7 +10,120 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c788be7-a40b-4277-8884-0f4adc0bc654" name="Default Changelist" comment="新项目提交" />
+    <list default="true" id="8c788be7-a40b-4277-8884-0f4adc0bc654" name="Default Changelist" comment="新提交">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__eu_bitwalker_UserAgentUtils_1_20.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_lionsoul_ip2region_1_7_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/config/Listener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/filter/ShiroLoginFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/provider/AccountProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/provider/AccountProviderImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/provider/ShiroFilterRulesProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/provider/ShiroFilterRulesProviderImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/Something.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/LogServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/free-mybatis-generator-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/free-mybatis-generator-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_1_49_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_1_50_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_1_49_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_1_50_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_1_49_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_1_50_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_1_49_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_1_50_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_4_1_49_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_4_1_50_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_1_49_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_1_50_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_36.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_36.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_34.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_36.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_19_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_20_Final.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_8_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_8_BUILD_SNAPSHOT.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_crypto_5_2_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_crypto_5_2_5_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_6_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/CloudServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/CloudServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/ObjectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/ObjectHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/functions/UiResultFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/functions/UiResultFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/FileHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/FileHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/RequestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/helper/RequestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/log/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/log/LogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/useful/XssHttpServletRequestWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/useful/XssHttpServletRequestWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/useful/XssStringJsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/useful/XssStringJsonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/FileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/StringUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/encrypt/Base64.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/encrypt/Base64.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/encrypt/Blowfish.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/encrypt/Blowfish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/encrypt/RsaUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common/util/encrypt/RsaUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/config/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/config/ShiroConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/config/RestShiroFilterFactoryBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/config/RestShiroFilterFactoryBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/config/ShiroConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/filter/B.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/filter/BonJwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/filter/a.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/filter/PasswordFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/filter/c.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/filter/ShiroFilterChainManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/matcher/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/matcher/JwtMatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/realm/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/realm/PasswordRealm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/realm/B.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/realm/JwtRealm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/realm/C.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/realm/RealmManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/realm/CustomRealm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/rule/A.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/rule/RolePermRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/XssSqlFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/XssSqlFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogTaskFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/config/shiro/support/factory/LogTaskFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/Log2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/Log2Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/LogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/controller/LogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/dao/AuthResourceDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/dao/AuthResourceDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/dao/AuthUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/dao/AuthUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/AuthRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/domain/AuthRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/AsyncTaskExecutePool.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/AsyncTaskProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/B.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/C.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/algorithm/thread/TheadFactoryName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/Singleton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/adapter/AdapterIncludeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/adapter/Mobile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/adapter/TwoWayAdapterTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/facade/Facade.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/factory/Factory1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/factory/Factory2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/observer/ObserverTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/observer/ObserverTest2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/order/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/proxy/BuyHouse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/proxy/BuyHouseImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/proxy/DynamicProxy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/proxy/ProxyHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/role/Strategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/state/StateTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/extra/designpattern/template/Template.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/LogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/LogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/ResourceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/ResourceServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/RoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/service/impl/a.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthAccountLogDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/AuthAccountLogDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthOperationLogDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/AuthOperationLogDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthResourceDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/AuthResourceDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthRoleDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/AuthRoleDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthRoleResourceDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/AuthRoleResourceDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthUserDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/AuthUserDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/AuthUserRoleDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/AuthUserRoleDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-service/src/main/resources/generator/LogDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-service/src/main/resources/com/example/cloudservice/dao/LogDao.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,12 +173,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cloud-service/src/main/java/com/example/cloudservice/common" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="Docker" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="show.inlinked.gradle.project.popup" value="false" />
     <property name="show.run.dashboard.notification" value="false" />
     <property name="show.unlinked.gradle.project.popup" value="false" />
@@ -74,27 +187,28 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.springcloud.lsy.service" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.lsy" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service\src\main\java\com\example\cloudservice\extra\designpattern" />
       <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service\src\main\java\com\example\cloudservice\common" />
       <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service\src\main\java\com\example\cloudservice" />
       <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service\src\main\java\com\example\cloudservice\domain" />
       <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service\src\main\java\com\example\cloudservice\controller" />
-      <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service\src\main\java\com\example\cloudservice\config\shiro" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.cloudservice.domain" />
       <recent name="com.example.cloudservice.config.shiro" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\lisongyan\Desktop\cloud-study\springcloud\cloud-service" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.springcloud.lsy.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Singleton">
+  <component name="RunManager" selected="Spring Boot.CloudServiceApplication">
     <configuration name="Singleton" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.cloudservice.extra.pattern.Singleton" />
       <module name="cloud-service" />
@@ -375,6 +489,23 @@
       <workItem from="1591194815186" duration="5064000" />
       <workItem from="1591275169390" duration="11340000" />
       <workItem from="1591369762126" duration="3997000" />
+      <workItem from="1591520904772" duration="187000" />
+      <workItem from="1591521139338" duration="393000" />
+      <workItem from="1591531885262" duration="615000" />
+      <workItem from="1591863812452" duration="14000" />
+      <workItem from="1592598223444" duration="2794000" />
+      <workItem from="1592632803705" duration="7630000" />
+      <workItem from="1592666966051" duration="1367000" />
+      <workItem from="1592749579567" duration="3167000" />
+      <workItem from="1592834937504" duration="666000" />
+      <workItem from="1592835658730" duration="4595000" />
+      <workItem from="1592919725524" duration="4726000" />
+      <workItem from="1592982942106" duration="7088000" />
+      <workItem from="1593011132604" duration="299000" />
+      <workItem from="1593096626378" duration="1490000" />
+      <workItem from="1593159756567" duration="4413000" />
+      <workItem from="1593200721884" duration="3913000" />
+      <workItem from="1593271592681" duration="1759000" />
     </task>
     <task id="LOCAL-00001" summary="代码初次提交">
       <created>1590482271204</created>
@@ -432,7 +563,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591374050826</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="设计模式">
+      <created>1591521073333</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1591521073333</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -459,7 +597,9 @@
     <MESSAGE value="nacos-alibaba" />
     <MESSAGE value="shiro" />
     <MESSAGE value="新项目提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="新项目提交" />
+    <MESSAGE value="设计模式" />
+    <MESSAGE value="新提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="新提交" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1214" y="417" key="#Path_mapping" timestamp="1590401977305">
@@ -478,30 +618,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="710" y="320" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1589986650950" />
-    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1591285214636">
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1592992764380">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591285214636" />
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592992764380" />
     <state x="520" y="255" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1591286401888">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="520" y="255" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591286401888" />
-    <state x="496" y="442" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1591372128760">
+    <state x="496" y="442" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1592600017969">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="496" y="442" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591372128760" />
-    <state x="736" y="386" width="447" height="274" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1590312342592">
+    <state x="496" y="442" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592600017969" />
+    <state x="736" y="386" width="510" height="274" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592667864848">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="736" y="386" width="447" height="274" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1590312342592" />
+    <state x="736" y="386" width="510" height="274" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1592667864848" />
     <state x="595" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1590140173065">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="595" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590140173065" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590668519157">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592987650723">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590668519157" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592987650723" />
     <state x="1377" y="266" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1591197191658">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -514,62 +654,62 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="936" y="391" key="DockerComposeFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590402614082" />
-    <state x="1282" y="255" key="FileChooserDialogImpl" timestamp="1591374059247">
+    <state x="1282" y="255" key="FileChooserDialogImpl" timestamp="1592985929818">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1282" y="255" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591374059247" />
-    <state width="1293" height="624" key="GridCell.Tab.0.bottom" timestamp="1591286447464">
+    <state x="1282" y="255" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1592985929818" />
+    <state width="1877" height="882" key="GridCell.Tab.0.bottom" timestamp="1592993327928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="624" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591286447464" />
-    <state width="1293" height="624" key="GridCell.Tab.0.center" timestamp="1591286447464">
+    <state width="1877" height="882" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327928" />
+    <state width="1877" height="882" key="GridCell.Tab.0.center" timestamp="1592993327928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="624" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591286447464" />
-    <state width="1293" height="624" key="GridCell.Tab.0.left" timestamp="1591286447464">
+    <state width="1877" height="882" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327928" />
+    <state width="1877" height="882" key="GridCell.Tab.0.left" timestamp="1592993327928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="624" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591286447464" />
-    <state width="1293" height="624" key="GridCell.Tab.0.right" timestamp="1591286447464">
+    <state width="1877" height="882" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327928" />
+    <state width="1877" height="882" key="GridCell.Tab.0.right" timestamp="1592993327928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="624" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591286447464" />
-    <state width="1877" height="332" key="GridCell.Tab.1.bottom" timestamp="1590940754670">
+    <state width="1877" height="882" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327928" />
+    <state width="1877" height="882" key="GridCell.Tab.1.bottom" timestamp="1592993327929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590940754670" />
-    <state width="1877" height="332" key="GridCell.Tab.1.center" timestamp="1590940754669">
+    <state width="1877" height="882" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327929" />
+    <state width="1877" height="882" key="GridCell.Tab.1.center" timestamp="1592993327929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590940754669" />
-    <state width="1877" height="332" key="GridCell.Tab.1.left" timestamp="1590940754669">
+    <state width="1877" height="882" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327929" />
+    <state width="1877" height="882" key="GridCell.Tab.1.left" timestamp="1592993327928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590940754669" />
-    <state width="1877" height="332" key="GridCell.Tab.1.right" timestamp="1590940754669">
+    <state width="1877" height="882" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327928" />
+    <state width="1877" height="882" key="GridCell.Tab.1.right" timestamp="1592993327929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="332" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590940754669" />
-    <state width="1877" height="513" key="GridCell.Tab.2.bottom" timestamp="1590917017439">
+    <state width="1877" height="882" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327929" />
+    <state width="1877" height="513" key="GridCell.Tab.2.bottom" timestamp="1592993327918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="513" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590917017439" />
-    <state width="1877" height="513" key="GridCell.Tab.2.center" timestamp="1590917017439">
+    <state width="1877" height="513" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327918" />
+    <state width="1877" height="513" key="GridCell.Tab.2.center" timestamp="1592993327918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="513" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590917017439" />
-    <state width="1877" height="513" key="GridCell.Tab.2.left" timestamp="1590917017439">
+    <state width="1877" height="513" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327918" />
+    <state width="1877" height="513" key="GridCell.Tab.2.left" timestamp="1592993327918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="513" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590917017439" />
-    <state width="1877" height="513" key="GridCell.Tab.2.right" timestamp="1590917017439">
+    <state width="1877" height="513" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327918" />
+    <state width="1877" height="513" key="GridCell.Tab.2.right" timestamp="1592993327918">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="513" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590917017439" />
-    <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1591030858939">
+    <state width="1877" height="513" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592993327918" />
+    <state width="220" height="477" key="HiddenNamespacesPopup" timestamp="1592599077764">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1040@0.0.1920.1040" timestamp="1591030858939" />
+    <state width="220" height="477" key="HiddenNamespacesPopup/0.0.1920.1040@0.0.1920.1040" timestamp="1592599077764" />
     <state x="540" y="254" key="IDE.errors.dialog" timestamp="1590077901623">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -582,18 +722,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1040" y="278" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1590935691498" />
-    <state x="417" y="136" key="SettingsEditor" timestamp="1590938840392">
+    <state x="417" y="136" key="SettingsEditor" timestamp="1593272194717">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="417" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590938840392" />
+    <state x="417" y="136" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593272194717" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1591285358629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1591285358629" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1591374122244">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1591521087473">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591374122244" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591521087473" />
     <state x="803" y="272" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1590135254733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -602,6 +742,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="504" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1590913992875" />
+    <state x="661" y="254" width="598" height="532" key="find.popup" timestamp="1592668223191">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="661" y="254" width="598" height="532" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592668223191" />
     <state x="334" y="180" key="new project wizard" timestamp="1591374086094">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -610,10 +754,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591275921634" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1591288583031">
+    <state x="1082" y="220" width="672" height="678" key="search.everywhere.popup" timestamp="1593202154419">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591288583031" />
+    <state x="1082" y="220" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593202154419" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

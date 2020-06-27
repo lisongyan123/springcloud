@@ -9,26 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author tomsun28
- * @date 21:15 2018/3/17
- */
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private AuthUserDao userMapper;
 
-    @Autowired
+    @Resource
     private AuthUserRoleDao authUserRoleMapper;
 
     @Override
     public String loadAccountRole(String appId) throws DataAccessException {
-
         return userMapper.selectUserRoles(appId);
     }
 

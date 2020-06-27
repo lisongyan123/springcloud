@@ -1,6 +1,6 @@
 package com.example.cloudservice.common.functions;
 
-import com.opslab.bean.UiResult;
+import com.example.cloudservice.common.bean.UiResult;
 
 public class UiResultFactory {
 

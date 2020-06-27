@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-/**
- * @author tomsun28
- * @date 22:04 2018/3/7
- */
-@Service("AccountService")
+import javax.annotation.Resource;
+
+@Service
 public class AccountServiceImpl implements AccountService {
 
-    @Autowired
+    @Resource
     private AuthUserDao userMapper;
 
     @Autowired

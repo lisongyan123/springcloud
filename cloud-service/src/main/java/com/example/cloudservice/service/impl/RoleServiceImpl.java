@@ -2,27 +2,21 @@ package com.example.cloudservice.service.impl;
 
 import com.example.cloudservice.dao.AuthRoleDao;
 import com.example.cloudservice.dao.AuthRoleResourceDao;
-import com.example.cloudservice.dao.AuthUserRoleDao;
 import com.example.cloudservice.domain.*;
 import com.example.cloudservice.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author tomsun28
- * @date 12:28 2018/3/26
- */
-@Service("RoleService")
+@Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
+    @Resource
     private AuthRoleResourceDao authRoleResourceMapper;
 
-    @Autowired
+    @Resource
     private AuthRoleDao authRoleMapper;
 
     @Override

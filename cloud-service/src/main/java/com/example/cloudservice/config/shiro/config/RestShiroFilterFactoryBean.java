@@ -1,5 +1,6 @@
 package com.example.cloudservice.config.shiro.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.FilterChainManager;
@@ -13,12 +14,9 @@ import org.springframework.beans.factory.BeanInitializationException;
 
 /**
  *  rest支持的shiroFilterFactoryBean
- * @author tomsun28
- * @date 21:35 2018/4/20
  */
+@Slf4j
 public class RestShiroFilterFactoryBean extends ShiroFilterFactoryBean {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RestShiroFilterFactoryBean.class);
 
     public RestShiroFilterFactoryBean() {
         super();
@@ -26,7 +24,8 @@ public class RestShiroFilterFactoryBean extends ShiroFilterFactoryBean {
 
     @Override
     protected AbstractShiroFilter createInstance() throws Exception {
-        LOGGER.debug("Creating Shiro Filter instance.");
+        log.debug("Creating Shiro Filter instance.");
+        /**安全管理器 关联Realm*/
         SecurityManager securityManager = this.getSecurityManager();
         String msg;
         if (securityManager == null) {
@@ -55,5 +54,4 @@ public class RestShiroFilterFactoryBean extends ShiroFilterFactoryBean {
             }
         }
     }
-
 }

@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
         LOGGER.error("数据操作异常:",e);
         final Throwable cause = e.getCause();
         // 之后判断cause类型进一步记录日志处理
-        if (cause instanceof MySQLIntegrityConstraintViolationException ) {
+        if (cause instanceof Exception ) {
             return new Message().error(1111, "数据冲突操作失败");
         }
         return new Message().error(1111, "服务器开小差");

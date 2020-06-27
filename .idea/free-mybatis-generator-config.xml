@@ -24,7 +24,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>
@@ -49,7 +49,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>
@@ -74,7 +74,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>
@@ -99,7 +99,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>
@@ -124,7 +124,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>
@@ -149,7 +149,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>
@@ -174,7 +174,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>
@@ -199,7 +199,7 @@
               <option name="useLombokPlugin" value="true" />
               <option name="useSchemaPrefix" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
-              <option name="xmlPackage" value="generator" />
+              <option name="xmlPackage" value="com.example.cloudservice.dao" />
             </Config>
           </value>
         </entry>

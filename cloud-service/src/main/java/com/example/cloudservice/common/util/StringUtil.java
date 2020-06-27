@@ -1,8 +1,7 @@
 package com.example.cloudservice.common.util;
 
-import com.opslab.util.algorithmImpl.BCConvert;
-import com.opslab.util.algorithmImpl.StringImpl;
-
+import com.example.cloudservice.common.util.algorithmImpl.BCConvert;
+import com.example.cloudservice.common.util.algorithmImpl.StringImpl;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
-/**
- * auth_role
- * @author 
- */
 @Data
 public class AuthRole implements Serializable {
     /**

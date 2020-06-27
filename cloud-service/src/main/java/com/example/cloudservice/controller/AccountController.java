@@ -66,7 +66,7 @@ public class AccountController extends BaseAction {
      */
     @Log("导出数据")
     @PostMapping("/login")
-    public Message accountLogin(HttpServletRequest request) {
+    public Message accountLogin(HttpServletRequest request) throws Exception {
         Map<String, String> params = getRequestBodyMap(request);
         String appId = params.get("appId");
         // 根据appId获取其对应所拥有的角色(这里设计为角色对应资源，没有权限对应资源)

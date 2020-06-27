@@ -146,7 +146,6 @@ public class RequestHelper {
 
     /**
      * 获取请求参数
-     *
      * @param request
      * @return
      */
@@ -179,7 +178,6 @@ public class RequestHelper {
 
     /**
      * 获取请求参数
-     *
      * @param request
      * @return
      */
@@ -201,7 +199,6 @@ public class RequestHelper {
 
     /**
      * 获取请求参数
-     *
      * @param request
      * @return
      */
@@ -234,7 +231,6 @@ public class RequestHelper {
 
     /**
      * 获取整型参数
-     *
      * @param request
      * @param paramName
      * @return

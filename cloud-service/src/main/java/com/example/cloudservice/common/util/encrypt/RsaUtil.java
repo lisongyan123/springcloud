@@ -1,6 +1,6 @@
 package com.example.cloudservice.common.util.encrypt;
 
-import com.opslab.Opslab;
+import com.example.cloudservice.common.Opslab;
 
 import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;

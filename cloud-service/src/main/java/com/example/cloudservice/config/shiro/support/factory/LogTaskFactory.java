@@ -1,6 +1,8 @@
 package com.example.cloudservice.config.shiro.support.factory;
 
 import com.example.cloudservice.config.shiro.support.SpringContextHolder;
+import com.example.cloudservice.dao.AuthAccountLogDao;
+import com.example.cloudservice.dao.AuthOperationLogDao;
 import com.example.cloudservice.domain.AuthAccountLog;
 import com.example.cloudservice.domain.AuthOperationLog;
 import org.slf4j.Logger;
@@ -10,14 +12,12 @@ import java.util.TimerTask;
 
 /**
  *  日志操作任务工厂
- * @author tomsun28
- * @date 9:44 2018/4/22
  */
 public class LogTaskFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogTaskFactory.class);
-    private static AuthOperationLogMapper operationLogMapper = SpringContextHolder.getBean(AuthOperationLogMapper.class);
-    private static AuthAccountLogMapper accountLogMapper = SpringContextHolder.getBean(AuthAccountLogMapper.class);
+    private static AuthOperationLogDao operationLogMapper = SpringContextHolder.getBean(AuthOperationLogDao.class);
+    private static AuthAccountLogDao accountLogMapper = SpringContextHolder.getBean(AuthAccountLogDao.class);
 
     private LogTaskFactory() {
 

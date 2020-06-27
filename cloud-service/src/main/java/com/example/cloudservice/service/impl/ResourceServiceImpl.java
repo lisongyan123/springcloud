@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class ResourceServiceImpl implements ResourceService {
     private static final short TYPE2 = 2;
     private static final short TYPE3 = 3;
 
-    @Autowired
+    @Resource
     private AuthResourceDao authResourceMapper;
 
     @Autowired
@@ -32,7 +33,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Autowired
     private RoleServiceImpl roleServiceImpl;
 
-    @Autowired
+    @Resource
     private AuthRoleResourceDao authRoleResourceMapper;
 
     @Override
@@ -81,7 +82,6 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<AuthResource> getApiListByTeamId(Integer teamId) throws DataAccessException {
-        short s = 1000;
         AuthResourceExample authResourceExample = new AuthResourceExample();
         authResourceExample.createCriteria().andTypeBetween(TYPE2,TYPE3).andParentIdEqualTo(teamId);
         return authResourceMapper.selectByExample(authResourceExample);

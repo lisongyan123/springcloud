@@ -1,7 +1,6 @@
 package com.example.cloudservice.common.util.encrypt;
 
-import com.opslab.Opslab;
-
+import com.example.cloudservice.common.Opslab;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
