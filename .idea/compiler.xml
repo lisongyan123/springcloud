@@ -6,22 +6,30 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zuul" />
-        <module name="alibaba" />
         <module name="stream-kafka" />
-        <module name="stream-kafka2" />
-        <module name="gateway" />
-        <module name="spring-cloud-gateway" />
         <module name="config-server" />
-        <module name="cloud-service" />
+        <module name="admin" />
+        <module name="gateway" />
         <module name="zipkin" />
+        <module name="stream-kafka2" />
         <module name="stream-kafka1" />
+        <module name="zuul" />
+        <module name="admin-server" />
+        <module name="alibaba" />
+        <module name="spring-cloud-gateway" />
+        <module name="elastic-search" />
+        <module name="cloud-service" />
+        <module name="admin-client" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="admin" target="1.8" />
+      <module name="admin-client" target="1.8" />
+      <module name="admin-server" target="1.8" />
       <module name="alibaba" target="1.8" />
       <module name="cloud-service" target="1.8" />
       <module name="config-server" target="1.8" />
+      <module name="elastic-search" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="service" target="1.8" />
       <module name="spring-cloud-gateway" target="1.8" />
@@ -35,9 +43,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="admin" options="-parameters" />
+      <module name="admin-client" options="-parameters" />
+      <module name="admin-server" options="-parameters" />
       <module name="alibaba" options="-parameters" />
       <module name="cloud-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="elastic-search" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="service" options="-parameters" />
       <module name="spring-cloud-gateway" options="-parameters" />

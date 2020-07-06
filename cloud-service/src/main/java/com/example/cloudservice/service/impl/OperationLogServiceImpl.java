@@ -9,10 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author tomsun28
- * @date 9:34 2018/4/22
- */
 @Service
 public class OperationLogServiceImpl implements OperationLogService {
 

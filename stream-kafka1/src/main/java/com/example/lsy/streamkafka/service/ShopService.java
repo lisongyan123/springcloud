@@ -17,8 +17,7 @@ public class ShopService {
 
     @GetMapping("/sendMsg")
     public String sendShopMessage(String content) {
-        boolean isSendSuccess = sendShopMessageChannel.
-                send(MessageBuilder.withPayload(content).build());
+        boolean isSendSuccess = sendShopMessageChannel.send(MessageBuilder.withPayload(content).build());
         return isSendSuccess ? "发送成功" : "发送失败";
     }
 

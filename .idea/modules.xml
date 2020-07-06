@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/admin-client/admin-client.iml" filepath="$PROJECT_DIR$/admin-client/admin-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/admin-server/admin-server.iml" filepath="$PROJECT_DIR$/admin-server/admin-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/alibaba/alibaba.iml" filepath="$PROJECT_DIR$/alibaba/alibaba.iml" />
       <module fileurl="file://$PROJECT_DIR$/cloud-service/cloud-service.iml" filepath="$PROJECT_DIR$/cloud-service/cloud-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/config-server/config-server.iml" filepath="$PROJECT_DIR$/config-server/config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/elastic-search/elastic-search.iml" filepath="$PROJECT_DIR$/elastic-search/elastic-search.iml" />
       <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/springcloud.iml" filepath="$PROJECT_DIR$/.idea/springcloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/stream-kafka/stream-kafka.iml" filepath="$PROJECT_DIR$/stream-kafka/stream-kafka.iml" />

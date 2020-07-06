@@ -1,0 +1,9 @@
+server:
+  port: 8181
+
+# 9200端口是用来让HTTP REST API来访问ElasticSearch，而9300端口是传输层监听的默认端口
+#注意cluster.name需要与config/elasticsearch.yml中的cluster.name一致，cat一下docker的yml文件
+esconfig:
+  host: 127.0.0.1
+  port: 9300
+  cluster: docker-cluster

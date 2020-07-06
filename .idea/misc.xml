@@ -13,6 +13,9 @@
         <option value="$PROJECT_DIR$/alibaba/pom.xml" />
         <option value="$PROJECT_DIR$/service/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-service/pom.xml" />
+        <option value="$PROJECT_DIR$/admin-server/pom.xml" />
+        <option value="$PROJECT_DIR$/admin-client/pom.xml" />
+        <option value="$PROJECT_DIR$/elastic-search/pom.xml" />
       </list>
     </option>
   </component>

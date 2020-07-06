@@ -79,7 +79,6 @@ public class LogServiceImpl implements LogService {
         }
         assert log != null;
         log.setRequestIp(ip);
-
         String loginPath = "login";
         if(loginPath.equals(signature.getName())){
             try {
@@ -168,7 +167,7 @@ public class LogServiceImpl implements LogService {
     @Override
     public void download(List<Log> logs, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
-        for (Log log : logs) {
+        logs.stream().forEach(log->{
             Map<String,Object> map = new LinkedHashMap<>();
             map.put("用户名", log.getUsername());
             map.put("IP", log.getRequestIp());
@@ -179,7 +178,7 @@ public class LogServiceImpl implements LogService {
             map.put("异常详情", new String(StringUtil.isEmpty(log.getExceptionDetail()) ? log.getExceptionDetail() : ""));
             map.put("创建日期", log.getCreateTime());
             list.add(map);
-        }
+        });
         downloadExcel(list, response);
     }
 
@@ -211,8 +210,6 @@ public class LogServiceImpl implements LogService {
 
     /**
      * 常用静态常量
-     * @author Zheng Jie
-     * @date 2018-12-26
      */
     public static class ElAdminConstant {
 

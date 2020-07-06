@@ -43,14 +43,8 @@ public class LogAspect {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }
 
-    public static HttpServletRequest getHttpServletRequest() {
-        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-    }
-
     /**
      * 配置环绕通知,使用在方法logPointcut()上注册的切入点
-     *
-     * @param joinPoint join point for advice
      */
     @Around("logPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -65,6 +59,23 @@ public class LogAspect {
     }
 
     /**
+     * 配置异常通知`  1
+     */
+    @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
+    public void logAfterThrowing(JoinPoint joinPoint, Throwable e) throws Exception {
+        Log log = new Log("ERROR",System.currentTimeMillis() - currentTime.get());
+        currentTime.remove();
+        log.setExceptionDetail(String.valueOf(getStackTrace(e).getBytes()));
+        HttpServletRequest request = getHttpServletRequest();
+        logService.save(getUserName(), getBrowser(request), getIpAddr(request), (ProceedingJoinPoint)joinPoint, log);
+    }
+
+
+    public static HttpServletRequest getHttpServletRequest() {
+        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+    }
+
+    /**
      * 获取堆栈信息
      */
     public static String getStackTrace(Throwable throwable){
@@ -75,20 +86,6 @@ public class LogAspect {
         }
     }
 
-    /**
-     * 配置异常通知
-     *
-     * @param joinPoint join point for advice
-     * @param e exception
-     */
-    @AfterThrowing(pointcut = "logPointcut()", throwing = "e")
-    public void logAfterThrowing(JoinPoint joinPoint, Throwable e) throws Exception {
-        Log log = new Log("ERROR",System.currentTimeMillis() - currentTime.get());
-        currentTime.remove();
-        log.setExceptionDetail(String.valueOf(getStackTrace(e).getBytes()));
-        HttpServletRequest request = getHttpServletRequest();
-        logService.save(getUserName(), getBrowser(request), getIpAddr(request), (ProceedingJoinPoint)joinPoint, log);
-    }
 
     public String getUserName() {
         try {
