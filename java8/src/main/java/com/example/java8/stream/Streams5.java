@@ -1,138 +1,61 @@
 package com.example.java8.stream;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 /**
- * Testing the order of execution.
- *
  * @author Benjamin Winterberg
  */
 public class Streams5 {
 
+    static class Foo {
+        String name;
+        List<Bar> bars = new ArrayList<>();
+
+        Foo(String name) {
+            this.name = name;
+        }
+    }
+
+    static class Bar {
+        String name;
+
+        Bar(String name) {
+            this.name = name;
+        }
+    }
+
     public static void main(String[] args) {
-        List<String> strings =
-            Arrays.asList("d2", "a2", "b1", "b3", "c");
-
-//        test1(strings);
-//        test2(strings);
-//        test3(strings);
-//        test4(strings);
-//        test5(strings);
-//        test6(strings);
-//        test7(strings);
-        test8(strings);
+        test1();
+        test2();
     }
 
-    private static void test8(List<String> stringCollection) {
-        Supplier<Stream<String>> streamSupplier =
-            () -> stringCollection
-                .stream()
-                .filter(s -> s.startsWith("a"));
-
-        streamSupplier.get().anyMatch(s -> true);
-        streamSupplier.get().noneMatch(s -> true);
+    static void test2() {
+        IntStream.range(1, 4)
+            .mapToObj(num -> new Foo("Foo" + num))
+            .peek(f -> IntStream.range(1, 4)
+                .mapToObj(num -> new Bar("Bar" + num + " <- " + f.name))
+                .forEach(f.bars::add))
+            .flatMap(f -> f.bars.stream())
+            .forEach(b -> System.out.println(b.name));
     }
 
-    // stream has already been operated upon or closed
-    private static void test7(List<String> stringCollection) {
-        Stream<String> stream = stringCollection
-            .stream()
-            .filter(s -> s.startsWith("a"));
+    static void test1() {
+        List<Foo> foos = new ArrayList<>();
 
-        stream.anyMatch(s -> true);
-        stream.noneMatch(s -> true);
-    }
+        IntStream
+            .range(1, 4)
+            .forEach(num -> foos.add(new Foo("Foo" + num)));
 
-    // short-circuit
-    private static void test6(List<String> stringCollection) {
-        stringCollection
-            .stream()
-            .map(s -> {
-                System.out.println("map:      " + s);
-                return s.toUpperCase();
-            })
-            .anyMatch(s -> {
-                System.out.println("anyMatch: " + s);
-                return s.startsWith("A");
-            });
-    }
+        foos.forEach(f ->
+            IntStream
+                .range(1, 4)
+                .forEach(num -> f.bars.add(new Bar("Bar" + num + " <- " + f.name))));
 
-    private static void test5(List<String> stringCollection) {
-        stringCollection
-            .stream()
-            .filter(s -> {
-                System.out.println("filter:  " + s);
-                return s.toLowerCase().startsWith("a");
-            })
-            .sorted((s1, s2) -> {
-                System.out.printf("sort:    %s; %s\n", s1, s2);
-                return s1.compareTo(s2);
-            })
-            .map(s -> {
-                System.out.println("map:     " + s);
-                return s.toUpperCase();
-            })
-            .forEach(s -> System.out.println("forEach: " + s));
-    }
-
-    // sorted = horizontal
-    private static void test4(List<String> stringCollection) {
-        stringCollection
-            .stream()
-            .sorted((s1, s2) -> {
-                System.out.printf("sort:    %s; %s\n", s1, s2);
-                return s1.compareTo(s2);
-            })
-            .filter(s -> {
-                System.out.println("filter:  " + s);
-                return s.toLowerCase().startsWith("a");
-            })
-            .map(s -> {
-                System.out.println("map:     " + s);
-                return s.toUpperCase();
-            })
-            .forEach(s -> System.out.println("forEach: " + s));
-    }
-
-    private static void test3(List<String> stringCollection) {
-        stringCollection
-            .stream()
-            .filter(s -> {
-                System.out.println("filter:  " + s);
-                return s.startsWith("a");
-            })
-            .map(s -> {
-                System.out.println("map:     " + s);
-                return s.toUpperCase();
-            })
-            .forEach(s -> System.out.println("forEach: " + s));
-    }
-
-    private static void test2(List<String> stringCollection) {
-        stringCollection
-            .stream()
-            .map(s -> {
-                System.out.println("map:     " + s);
-                return s.toUpperCase();
-            })
-            .filter(s -> {
-                System.out.println("filter:  " + s);
-                return s.startsWith("A");
-            })
-            .forEach(s -> System.out.println("forEach: " + s));
-    }
-
-    private static void test1(List<String> stringCollection) {
-        stringCollection
-            .stream()
-            .filter(s -> {
-                System.out.println("filter:  " + s);
-                return true;
-            })
-            .forEach(s -> System.out.println("forEach: " + s));
+        foos.stream()
+            .flatMap(f -> f.bars.stream())
+            .forEach(b -> System.out.println(b.name));
     }
 
 }

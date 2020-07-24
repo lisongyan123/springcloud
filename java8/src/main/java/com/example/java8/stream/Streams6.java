@@ -1,7 +1,5 @@
 package com.example.java8.stream;
 
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -11,47 +9,31 @@ import java.util.stream.Stream;
  */
 public class Streams6 {
 
-    public static void main(String[] args) throws IOException {
-        test1();
-        test2();
-        test3();
-        test4();
-    }
-
-    private static void test4() {
-        Stream
-            .of(new BigDecimal("1.2"), new BigDecimal("3.7"))
-            .mapToDouble(BigDecimal::doubleValue)
-            .average()
+    public static void main(String[] args) {
+        Arrays.asList("a1", "a2", "a3")
+            .stream()
+            .findFirst()
             .ifPresent(System.out::println);
-    }
 
-    private static void test3() {
-        IntStream
-            .range(0, 10)
-            .average()
+        Stream.of("a1", "a2", "a3")
+            .map(s -> s.substring(1))
+            .mapToInt(Integer::parseInt)
+            .max()
             .ifPresent(System.out::println);
-    }
 
-    private static void test2() {
-        IntStream
-            .builder()
-            .add(1)
-            .add(3)
-            .add(5)
-            .add(7)
-            .add(11)
-            .build()
+        IntStream.range(1, 4)
+            .mapToObj(i -> "a" + i)
+            .forEach(System.out::println);
+
+        Arrays.stream(new int[] {1, 2, 3})
+            .map(n -> 2 * n + 1)
             .average()
             .ifPresent(System.out::println);
 
-    }
+        Stream.of(1.0, 2.0, 3.0)
+            .mapToInt(Double::intValue)
+            .mapToObj(i -> "a" + i)
+            .forEach(System.out::println);
 
-    private static void test1() {
-        int[] ints = {1, 3, 5, 7, 11};
-        Arrays
-            .stream(ints)
-            .average()
-            .ifPresent(System.out::println);
     }
 }

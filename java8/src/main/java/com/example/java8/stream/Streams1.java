@@ -37,7 +37,7 @@ public class Streams1 {
         stringCollection
                 .stream()
                 .sorted()
-                .filter((s) -> s.startsWith("a"))
+                .filter((s) -> s.startsWith("b"))
                 .forEach(System.out::println);
 
         // "aaa1", "aaa2"

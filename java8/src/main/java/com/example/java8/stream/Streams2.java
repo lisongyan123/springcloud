@@ -1,7 +1,7 @@
 package com.example.java8.stream;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 
 /**
  * @author Benjamin Winterberg
@@ -9,29 +9,25 @@ import java.util.List;
 public class Streams2 {
 
     public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            if (i % 2 == 1) {
+                System.out.println(i);
+            }
+        }
 
-        List<String> stringCollection = new ArrayList<>();
-        stringCollection.add("ddd2");
-        stringCollection.add("aaa2");
-        stringCollection.add("bbb1");
-        stringCollection.add("aaa1");
-        stringCollection.add("bbb3");
-        stringCollection.add("ccc");
-        stringCollection.add("bbb2");
-        stringCollection.add("ddd1");
+        IntStream.range(0, 10)
+            .filter(i -> i % 2 == 1)
+            .forEach(System.out::println);
 
+        OptionalInt reduced1 =
+            IntStream.range(0, 10)
+                    .peek(System.out::println)
+                .reduce((a, b) -> a + b);
+        System.out.println(reduced1.getAsInt());
 
-        // sorting
-
-        stringCollection
-                .stream()
-                .sorted()
-                .forEach(System.out::println);
-
-        System.out.println(stringCollection);
-
-        
-
+        int reduced2 =
+            IntStream.range(0, 10)
+                .reduce(7, (a, b) -> a + b);        //初始值是7
+        System.out.println(reduced2);
     }
-
 }

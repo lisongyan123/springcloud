@@ -1,61 +1,178 @@
 package com.example.java8.stream;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @author Benjamin Winterberg
  */
 public class Streams7 {
 
-    static class Foo {
+    static class Person {
         String name;
-        List<Bar> bars = new ArrayList<>();
+        int age;
 
-        Foo(String name) {
+        Person(String name, int age) {
             this.name = name;
+            this.age = age;
         }
-    }
 
-    static class Bar {
-        String name;
-
-        Bar(String name) {
-            this.name = name;
+        @Override
+        public String toString() {
+            return name;
         }
     }
 
     public static void main(String[] args) {
-//        test1();
-        test2();
+        List<Person> persons =
+            Arrays.asList(
+                new Person("Max", 18),
+                new Person("Peter", 23),
+                new Person("Pamela", 23),
+                new Person("David", 12));
+
+//        test1(persons);
+//        test2(persons);
+//        test3(persons);
+//        test4(persons);
+//        test5(persons);
+//        test6(persons);
+//        test7(persons);
+//        test8(persons);
+        test9(persons);
     }
 
-    static void test2() {
-        IntStream.range(1, 4)
-            .mapToObj(num -> new Foo("Foo" + num))
-            .peek(f -> IntStream.range(1, 4)
-                .mapToObj(num -> new Bar("Bar" + num + " <- " + f.name))
-                .forEach(f.bars::add))
-            .flatMap(f -> f.bars.stream())
-            .forEach(b -> System.out.println(b.name));
+    private static void test1(List<Person> persons) {
+        List<Person> filtered =
+            persons
+                .stream()
+                .filter(p -> p.name.startsWith("P"))
+                .collect(Collectors.toList());
+
+        System.out.println(filtered);    // [Peter, Pamela]
     }
 
-    static void test1() {
-        List<Foo> foos = new ArrayList<>();
+    private static void test2(List<Person> persons) {
+        Map<Integer, List<Person>> personsByAge = persons
+            .stream()
+            .collect(Collectors.groupingBy(p -> p.age));
 
-        IntStream
-            .range(1, 4)
-            .forEach(num -> foos.add(new Foo("Foo" + num)));
+        personsByAge
+            .forEach((age, p) -> System.out.format("age %s: %s\n", age, p));
 
-        foos.forEach(f ->
-            IntStream
-                .range(1, 4)
-                .forEach(num -> f.bars.add(new Bar("Bar" + num + " <- " + f.name))));
-
-        foos.stream()
-            .flatMap(f -> f.bars.stream())
-            .forEach(b -> System.out.println(b.name));
+        // age 18: [Max]
+        // age 23:[Peter, Pamela]
+        // age 12:[David]
     }
 
+    private static void test3(List<Person> persons) {
+        Double averageAge = persons
+            .stream()
+            .collect(Collectors.averagingInt(p -> p.age));
+
+        System.out.println(averageAge);     // 19.0
+    }
+
+    private static void test4(List<Person> persons) {
+        IntSummaryStatistics ageSummary =
+            persons
+                .stream()
+                .collect(Collectors.summarizingInt(p -> p.age));
+
+        System.out.println(ageSummary);
+        // IntSummaryStatistics{count=4, sum=76, min=12, average=19,000000, max=23}
+    }
+
+    private static void test5(List<Person> persons) {
+        String names = persons
+            .stream()
+            .filter(p -> p.age >= 18)
+            .map(p -> p.name)
+            .collect(Collectors.joining(" and ", "In Germany ", " are of legal age."));
+
+        System.out.println(names);
+        // In Germany Max and Peter and Pamela are of legal age.
+    }
+
+    private static void test6(List<Person> persons) {
+        Map<Integer, String> map = persons
+            .stream()
+            .collect(Collectors.toMap(
+                p -> p.age,
+                p -> p.name,
+                (name1, name2) -> name1 + ";" + name2));
+
+        System.out.println(map);
+        // {18=Max, 23=Peter;Pamela, 12=David}
+    }
+
+    private static void test7(List<Person> persons) {
+        Collector<Person, StringJoiner, String> personNameCollector =
+            Collector.of(
+                () -> new StringJoiner(" | "),          // supplier
+                (j, p) -> j.add(p.name.toUpperCase()),  // accumulator
+                (j1, j2) -> j1.merge(j2),               // combiner
+                StringJoiner::toString);                // finisher
+
+        String names = persons
+            .stream()
+            .collect(personNameCollector);
+
+        System.out.println(names);  // MAX | PETER | PAMELA | DAVID
+    }
+
+    private static void test8(List<Person> persons) {
+        Collector<Person, StringJoiner, String> personNameCollector =
+            Collector.of(
+                () -> {
+                    System.out.println("supplier");
+                    return new StringJoiner(" | ");
+                },
+                (j, p) -> {
+                    System.out.format("accumulator: p=%s; j=%s\n", p, j);
+                    j.add(p.name.toUpperCase());
+                },
+                (j1, j2) -> {
+                    System.out.println("merge");
+                    return j1.merge(j2);
+                },
+                j -> {
+                    System.out.println("finisher");
+                    return j.toString();
+                });
+
+        String names = persons
+            .stream()
+            .collect(personNameCollector);
+
+        System.out.println(names);  // MAX | PETER | PAMELA | DAVID
+    }
+
+    private static void test9(List<Person> persons) {
+        Collector<Person, StringJoiner, String> personNameCollector =
+            Collector.of(
+                () -> {
+                    System.out.println("supplier");
+                    return new StringJoiner(" | ");
+                },
+                (j, p) -> {
+                    System.out.format("accumulator: p=%s; j=%s\n", p, j);
+                    j.add(p.name.toUpperCase());
+                },
+                (j1, j2) -> {
+                    System.out.println("merge");
+                    return j1.merge(j2);
+                },
+                j -> {
+                    System.out.println("finisher");
+                    return j.toString();
+                });
+
+        String names = persons
+            .parallelStream()
+            .collect(personNameCollector);
+
+        System.out.println(names);  // MAX | PETER | PAMELA | DAVID
+    }
 }
