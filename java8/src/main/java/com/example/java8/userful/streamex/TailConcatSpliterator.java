@@ -15,8 +15,7 @@
  */
 package com.example.java8.userful.streamex;
 
-import one.util.streamex.Internals.TailSpliterator;
-
+import com.example.java8.userful.streamex.Internals.TailSpliterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 

@@ -22,9 +22,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collector.Characteristics;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static one.util.streamex.AbstractStreamEx.addToMap;
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.AbstractStreamEx.addToMap;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /**
  * Implementations of several collectors in addition to ones available in JDK.
@@ -136,7 +135,7 @@ public final class MoreCollectors {
      * if more control over the returned {@code Map} is required, use {@link #entriesToCustomMap(Supplier)}
      *
      * <p>
-     * Returned {@code Map} is guaranteed to be modifiable. See {@link one.util.streamex.EntryStream#toMap()}.
+     * Returned {@code Map} is guaranteed to be modifiable. See {@link com.example.java8.userful.streamex.EntryStream#toMap()}.
      *
      * @param <K> the type of the map keys
      * @param <V> the type of the map values
@@ -162,7 +161,7 @@ public final class MoreCollectors {
      * if more control over the returned {@code Map} is required, use {@link #entriesToCustomMap(BinaryOperator, Supplier)}
      *
      * <p>
-     * Returned {@code Map} is guaranteed to be modifiable. See {@link one.util.streamex.EntryStream#toMap()}.
+     * Returned {@code Map} is guaranteed to be modifiable. See {@link com.example.java8.userful.streamex.EntryStream#toMap()}.
      *
      * <p>If the mapped keys contains duplicates (according to {@link Object#equals(Object)}),
      * the value mapping function is applied to each equal element, and the

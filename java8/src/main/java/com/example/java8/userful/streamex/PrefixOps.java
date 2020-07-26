@@ -23,7 +23,7 @@ import java.util.Spliterators.AbstractSpliterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.*;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /**
  * @author Tagir Valeev

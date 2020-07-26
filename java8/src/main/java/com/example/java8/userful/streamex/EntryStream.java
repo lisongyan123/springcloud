@@ -28,8 +28,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import static one.util.streamex.Internals.PairBox;
-import static one.util.streamex.Internals.checkLength;
+import static com.example.java8.userful.streamex.Internals.PairBox;
+import static com.example.java8.userful.streamex.Internals.checkLength;
 
 /**
  * A {@link Stream} of {@link Entry} objects which provides additional specific

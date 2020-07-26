@@ -20,9 +20,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.*;
-
-import static one.util.streamex.Internals.CancelException;
-import static one.util.streamex.Internals.CloneableSpliterator;
+import static com.example.java8.userful.streamex.Internals.CancelException;
+import static com.example.java8.userful.streamex.Internals.CloneableSpliterator;
 
 /**
  * @author Tagir Valeev

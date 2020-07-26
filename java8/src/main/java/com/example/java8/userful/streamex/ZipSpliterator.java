@@ -20,9 +20,9 @@ import java.util.Spliterators;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
-import static one.util.streamex.Internals.Box;
-import static one.util.streamex.Internals.drainTo;
-import static one.util.streamex.UnknownSizeSpliterator.*;
+import static com.example.java8.userful.streamex.Internals.Box;
+import static com.example.java8.userful.streamex.Internals.drainTo;
+import static com.example.java8.userful.streamex.UnknownSizeSpliterator.*;
 
 /**
  * @author Tagir Valeev

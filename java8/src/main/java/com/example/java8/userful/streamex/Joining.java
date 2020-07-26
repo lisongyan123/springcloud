@@ -24,8 +24,8 @@ import java.util.function.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import static one.util.streamex.Internals.alwaysTrue;
-import static one.util.streamex.Internals.checkNonNegative;
+import static com.example.java8.userful.streamex.Internals.alwaysTrue;
+import static com.example.java8.userful.streamex.Internals.checkNonNegative;
 
 /**
  * An advanced implementation of joining {@link Collector}. This collector is

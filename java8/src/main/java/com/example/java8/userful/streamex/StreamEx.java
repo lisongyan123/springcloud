@@ -38,7 +38,7 @@ import java.util.stream.Collector.Characteristics;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /**
  * A {@link Stream} implementation with additional functionality.

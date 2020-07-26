@@ -15,7 +15,7 @@
  */
 package com.example.java8.userful.streamex;
 
-import one.util.streamex.Internals.CloneableSpliterator;
+import com.example.java8.userful.streamex.Internals.CloneableSpliterator;
 
 import java.util.Comparator;
 import java.util.Spliterator;

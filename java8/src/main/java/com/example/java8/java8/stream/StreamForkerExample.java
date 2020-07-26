@@ -1,6 +1,6 @@
 package com.example.java8.java8.stream;
 
-import com.lsy.dubbo.utils.javaBase.collector.Dish;
+import com.example.java8.javaBase.collector.Dish;
 
 import java.util.List;
 import java.util.Map;

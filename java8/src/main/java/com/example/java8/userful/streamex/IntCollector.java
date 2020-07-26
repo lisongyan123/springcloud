@@ -21,7 +21,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /**
  * A {@link Collector} specialized to work with primitive {@code int}.

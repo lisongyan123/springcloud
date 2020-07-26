@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /**
  * @author Tagir Valeev

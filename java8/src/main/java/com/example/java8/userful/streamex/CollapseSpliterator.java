@@ -18,7 +18,7 @@ package com.example.java8.userful.streamex;
 import java.util.Spliterator;
 import java.util.function.*;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /* package */final class CollapseSpliterator<T, R> extends Box<T> implements Spliterator<R> {
     private final Spliterator<T> source;

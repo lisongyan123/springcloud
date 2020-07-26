@@ -23,7 +23,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.function.*;
 import java.util.stream.*;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /**
  * A {@link DoubleStream} implementation with additional functionality

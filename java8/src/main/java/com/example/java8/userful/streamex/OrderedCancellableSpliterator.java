@@ -19,8 +19,8 @@ import java.util.ArrayDeque;
 import java.util.Spliterator;
 import java.util.function.*;
 
-import static one.util.streamex.Internals.CancelException;
-import static one.util.streamex.Internals.CloneableSpliterator;
+import static com.example.java8.userful.streamex.Internals.CancelException;
+import static com.example.java8.userful.streamex.Internals.CloneableSpliterator;
 
 /**
  * @author Tagir Valeev

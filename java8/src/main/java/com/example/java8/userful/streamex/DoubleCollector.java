@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.*;
 
 /**
  * A {@link Collector} specialized to work with primitive {@code double}.

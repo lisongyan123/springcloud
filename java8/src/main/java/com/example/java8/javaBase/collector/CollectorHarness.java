@@ -1,6 +1,7 @@
 package com.example.java8.javaBase.collector;
 
-import com.lsy.dubbo.utils.java8.interfaces.PartitionPrimeNumbers;
+
+import com.example.java8.java8.interfaces.PartitionPrimeNumbers;
 
 import java.util.function.Consumer;
 

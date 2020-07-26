@@ -15,13 +15,53 @@
  */
 package com.example.java8.userful.streamex;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.OptionalLong;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.concurrent.ForkJoinPool;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
+import java.util.stream.Collector;
 import java.util.stream.Collector.Characteristics;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
-import static one.util.streamex.Internals.*;
+import static com.example.java8.userful.streamex.Internals.ArrayCollection;
+import static com.example.java8.userful.streamex.Internals.Box;
+import static com.example.java8.userful.streamex.Internals.CancelException;
+import static com.example.java8.userful.streamex.Internals.CancellableCollectorImpl;
+import static com.example.java8.userful.streamex.Internals.NONE;
+import static com.example.java8.userful.streamex.Internals.NO_CHARACTERISTICS;
+import static com.example.java8.userful.streamex.Internals.ObjDoubleBox;
+import static com.example.java8.userful.streamex.Internals.ObjIntBox;
+import static com.example.java8.userful.streamex.Internals.ObjLongBox;
+import static com.example.java8.userful.streamex.Internals.PairBox;
+import static com.example.java8.userful.streamex.Internals.finished;
+import static com.example.java8.userful.streamex.Internals.none;
 
 /**
  * Base class providing common functionality for {@link StreamEx} and {@link EntryStream}.
@@ -243,7 +283,7 @@ public abstract class AbstractStreamEx<T, S extends AbstractStreamEx<T, S>> exte
      * @since 0.3.8
      */
     public S distinct(Function<? super T, ?> keyExtractor) {
-        return supply(stream().map(t -> new PairBox<>(t, keyExtractor.apply(t))).distinct().map(box -> box.a));
+        return supply(stream().map(t -> new Internals.PairBox<>(t, keyExtractor.apply(t))).distinct().map(box -> box.a));
     }
 
     /**

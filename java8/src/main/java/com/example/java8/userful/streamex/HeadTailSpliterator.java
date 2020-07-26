@@ -23,8 +23,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import static one.util.streamex.Internals.Box;
-import static one.util.streamex.Internals.TailSpliterator;
+import static com.example.java8.userful.streamex.Internals.Box;
+import static com.example.java8.userful.streamex.Internals.TailSpliterator;
 
 /**
  * @author Tagir Valeev
