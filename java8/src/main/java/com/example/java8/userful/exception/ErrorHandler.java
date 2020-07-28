@@ -1,4 +1,4 @@
-package com.example.java8.java8.exception;
+package com.example.java8.userful.exception;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -52,8 +52,8 @@ public class ErrorHandler {
                 .map(Either.liftWithValue(item -> doSomeThing2(item)))     //这里不会抛出异常 二十返回值
                 .forEach(System.out::println);
 
-        Try<Integer> result = Try.of(() -> 1 / 0);
-        int errorSentinel = result.getOrElse(-1);
+//        Try<Integer> result = Try.of(() -> 1 / 0);
+//        int errorSentinel = result.getOrElse(-1);
     }
 
     private static Object doSomeThing1() throws Exception {

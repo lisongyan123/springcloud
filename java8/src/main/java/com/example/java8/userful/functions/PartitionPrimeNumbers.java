@@ -1,4 +1,4 @@
-package com.example.java8.java8.interfaces;
+package com.example.java8.userful.functions;
 
 import java.util.*;
 import java.util.function.*;
@@ -16,7 +16,7 @@ public class PartitionPrimeNumbers<T> {
     }
 
     public static Map<Boolean, List<Integer>> partitionPrimesWithInlineCollector(int n) {
-        return Stream.iterate(2, i -> i + 1).limit(n)
+        return Stream.iterate(3, i -> i + 1).limit(n)
                 .collect(
                         () -> new HashMap<Boolean, List<Integer>>() {{
                             put(true, new ArrayList<Integer>());
@@ -41,7 +41,7 @@ public class PartitionPrimeNumbers<T> {
 
     public static Map<Boolean, List<Integer>> partitionPrimesWithCustomCollector(int n) {
         return IntStream
-                .rangeClosed(2, n)
+                .rangeClosed(3, n)
                 .boxed()
                 .collect(new PrimeNumbersCollector());
     }

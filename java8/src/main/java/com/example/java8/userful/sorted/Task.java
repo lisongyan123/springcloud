@@ -1,4 +1,4 @@
-package com.example.java8.userful;
+package com.example.java8.userful.sorted;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -7,7 +7,7 @@ enum TaskType {
     READING, CODING, BLOGGING
 }
 
-public class Task {
+class Task {
 
     private final String id;
     private final String title;

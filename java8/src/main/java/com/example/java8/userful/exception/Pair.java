@@ -1,4 +1,4 @@
-package com.example.java8.java8.exception;
+package com.example.java8.userful.exception;
 
 public class Pair<F,S> {
     public final F fst;

@@ -1,4 +1,4 @@
-package com.example.java8.java8.interfaces;
+package com.example.java8.userful.functions;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

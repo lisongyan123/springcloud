@@ -1,4 +1,4 @@
-package com.example.java8.java8.exception;
+package com.example.java8.userful.exception;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;

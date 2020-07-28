@@ -1,4 +1,4 @@
-package com.example.java8.java8.interfaces.functions;
+package com.example.java8.userful.functions;
 
 import java.util.function.Consumer;
 import java.util.function.Function;

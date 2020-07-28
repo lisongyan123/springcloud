@@ -1,4 +1,4 @@
-package com.example.java8.userful;
+package com.example.java8.userful.functions;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -6,7 +6,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class Transform {
+
+public class ListTransform {
     public static void main(String[] args) {
         Predicate<String> nameStartWithS = name -> name.startsWith("s");
 

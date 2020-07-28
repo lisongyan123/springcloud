@@ -1,7 +1,7 @@
 package com.example.java8.javaBase.collector;
 
 
-import com.example.java8.java8.interfaces.PartitionPrimeNumbers;
+import com.example.java8.userful.functions.PartitionPrimeNumbers;
 
 import java.util.function.Consumer;
 

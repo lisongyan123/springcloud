@@ -1,4 +1,4 @@
-package com.example.java8.java8.exception;
+package com.example.java8.userful.exception;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.java8.java8.interfaces;
+package com.example.java8.userful.functions;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -44,7 +44,7 @@ public class JavaFunctions<T> implements Collector<T, List<T>, List<T>> {
 
     /**
      * BinaryOperator返回一个T类型的数据
-     * @return
+     * min和max
      */
     @Override
     public BinaryOperator<List<T>> combiner() {

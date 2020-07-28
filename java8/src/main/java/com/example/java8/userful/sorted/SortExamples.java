@@ -1,11 +1,10 @@
-package com.example.java8.userful;
+package com.example.java8.userful.sorted;
 
 import java.util.List;
-
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
-public class Examples {
+public class SortExamples {
 
     public List<String> allReadingTasks(List<Task> tasks) {
         return tasks.stream().
