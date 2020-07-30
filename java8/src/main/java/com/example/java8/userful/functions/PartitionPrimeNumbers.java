@@ -1,5 +1,7 @@
 package com.example.java8.userful.functions;
 
+import com.example.java8.java8.stream.Streams3;
+
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
@@ -9,12 +11,106 @@ import java.util.stream.Stream;
 import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
 
 public class PartitionPrimeNumbers<T> {
-
+    
     public static void main(String... args) {
         System.out.println("Numbers partitioned in prime and non-prime: " + partitionPrimesWithCustomCollector(100));
         System.out.println("Numbers partitioned in prime and non-prime: " + partitionPrimesWithInlineCollector(100));
+
+        List<Person> persons =
+                Arrays.asList(
+                        new Person("Max", 18),
+                        new Person("Peter", 23),
+                        new Person("Pamela", 23),
+                        new Person("David", 12));
+        test1(persons);
+        test2(persons);
+        test3(persons);
+    }
+    
+    static class Person {
+        String name;
+        int age;
+
+        Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
+    private static void test1(List<Person> persons) {
+        Collector<Person, StringJoiner, String> personNameCollector =
+                Collector.of(
+                        () -> new StringJoiner(" | "),          // supplier
+                        (j, p) -> j.add(p.name.toUpperCase()),  // accumulator
+                        (j1, j2) -> j1.merge(j2),               // combiner
+                        StringJoiner::toString);                // finisher
+
+        String names = persons
+                .stream()
+                .collect(personNameCollector);
+
+        System.out.println(names);  // MAX | PETER | PAMELA | DAVID
+    }
+
+    private static void test2(List<Person> persons) {
+        Collector<Person, StringJoiner, String> personNameCollector =
+                Collector.of(
+                        () -> {
+                            System.out.println("supplier");
+                            return new StringJoiner(" | ");
+                        },
+                        (j, p) -> {
+                            System.out.format("accumulator: p=%s; j=%s\n", p, j);
+                            j.add(p.name.toUpperCase());
+                        },
+                        (j1, j2) -> {
+                            System.out.println("merge");
+                            return j1.merge(j2);
+                        },
+                        j -> {
+                            System.out.println("finisher");
+                            return j.toString();
+                        });
+
+        String names = persons
+                .stream()
+                .collect(personNameCollector);
+
+        System.out.println(names);  // MAX | PETER | PAMELA | DAVID
+    }
+
+    private static void test3(List<Person> persons) {
+        Collector<Person, StringJoiner, String> personNameCollector =
+                Collector.of(
+                        () -> {
+                            System.out.println("supplier");
+                            return new StringJoiner(" | ");
+                        },
+                        (j, p) -> {
+                            System.out.format("accumulator: p=%s; j=%s\n", p, j);
+                            j.add(p.name.toUpperCase());
+                        },
+                        (j1, j2) -> {
+                            System.out.println("merge");
+                            return j1.merge(j2);
+                        },
+                        j -> {
+                            System.out.println("finisher");
+                            return j.toString();
+                        });
+
+        String names = persons
+                .parallelStream()
+                .collect(personNameCollector);
+
+        System.out.println(names);  // MAX | PETER | PAMELA | DAVID
+    }
+    
     public static Map<Boolean, List<Integer>> partitionPrimesWithInlineCollector(int n) {
         return Stream.iterate(3, i -> i + 1).limit(n)
                 .collect(
