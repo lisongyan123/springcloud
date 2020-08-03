@@ -50,6 +50,4 @@ public class TypeOfFood {
             System.out.println(v.randomSelection());
         });
     }
-
-
 }

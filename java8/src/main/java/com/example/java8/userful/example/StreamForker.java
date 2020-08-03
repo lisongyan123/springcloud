@@ -49,7 +49,6 @@ public class StreamForker<T> {
                             m1.putAll(m2);
                             return m1;
                         });
-
         return new ForkingStreamConsumer<>(queues, actions);
     }
 

@@ -1,7 +1,5 @@
 package com.example.java8.userful.functions;
 
-import com.example.java8.java8.stream.Streams3;
-
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
