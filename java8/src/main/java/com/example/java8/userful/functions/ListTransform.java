@@ -34,6 +34,7 @@ public class ListTransform {
 
     private static <T, R> List<R> transform(List<T> list, Function<T, R> fx) {
         List<R> result = new ArrayList<>();
+//        list.stream().forEach(v->result.add(fx.apply(v)));
         for (T element : list) {
             result.add(fx.apply(element));
         }
