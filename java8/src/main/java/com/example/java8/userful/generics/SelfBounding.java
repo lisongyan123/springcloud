@@ -109,7 +109,7 @@ interface A {}
 /*
 这里的B是错误的 因为A 跟 BaseSetterAndGetter 没有继承的关系
 */
-/* interface B extends BaseSetterAndGetter<A> {}*/
+interface B extends BaseSetterAndGetter<B> {}
 
 // ok
 interface C extends BaseSetterAndGetter<ChildSetterAndGetter>{}
