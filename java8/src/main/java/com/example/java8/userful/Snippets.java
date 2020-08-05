@@ -100,7 +100,8 @@ public abstract class Snippets {
     }
 
     /**
-     * Counts the occurrences of a value in an array.
+     * Counts the occurren
+     * ces of a value in an array.
      *
      * @param numbers Array of numbers
      * @param value   the value for which we have to count occurrences

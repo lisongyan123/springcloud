@@ -43,9 +43,7 @@ public class flatMapExample {
                 .flatMap(f -> f.bars.stream())
                 .forEach(b -> System.out.println(b.name));
     }
-
-
-
+    
     static class Outer {
         Nested nested = new Nested();
 

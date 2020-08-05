@@ -27,7 +27,7 @@ import static com.example.java8.streamex.UnknownSizeSpliterator.*;
 /**
  * @author Tagir Valeev
  */
-/* package */class ZipSpliterator<U, V, R> implements Spliterator<R> {
+public class ZipSpliterator<U, V, R> implements Spliterator<R> {
     private Spliterator<U> left;
     private Spliterator<V> right;
     private final BiFunction<? super U, ? super V, ? extends R> mapper;
@@ -43,6 +43,7 @@ import static com.example.java8.streamex.UnknownSizeSpliterator.*;
         this.trySplit = trySplit;
     }
 
+    /**返回true表示还有元素未处理，返回false表示没有剩余元素了*/
     @Override
     public boolean tryAdvance(Consumer<? super R> action) {
         if (left.tryAdvance(l) && right.tryAdvance(r)) {
@@ -52,6 +53,7 @@ import static com.example.java8.streamex.UnknownSizeSpliterator.*;
         return false;
     }
 
+    /**顺序遍历处理剩下的所有元素*/
     @Override
     public void forEachRemaining(Consumer<? super R> action) {
         if (!hasCharacteristics(SIZED)) {
@@ -75,6 +77,7 @@ import static com.example.java8.streamex.UnknownSizeSpliterator.*;
         }
     }
 
+    /**分割list，返回一个新分割的spliterator实例*/
     @Override
     public Spliterator<R> trySplit() {
         if (trySplit && hasCharacteristics(SIZED | SUBSIZED)) {
@@ -138,11 +141,13 @@ import static com.example.java8.streamex.UnknownSizeSpliterator.*;
         return prefix;
     }
 
+    /**还剩下多少个元素需要遍历*/
     @Override
     public long estimateSize() {
         return Math.min(left.estimateSize(), right.estimateSize());
     }
 
+    /**当前对象还有哪些特征值*/
     @Override
     public int characteristics() {
         // Remove SORTED, NONNULL, DISTINCT

@@ -405,8 +405,11 @@ import java.util.stream.Collector.Characteristics;
         }
 
         <T> Collector<T, A, R> asRef(BiConsumer<A, T> accumulator) {
-            return Collector.of(supplier, accumulator, combiner(), finisher, characteristics
-                    .toArray(new Characteristics[0]));
+            return Collector.of(supplier,
+                    accumulator,
+                    combiner(),
+                    finisher,
+                    characteristics.toArray(new Characteristics[0]));
         }
 
         <T> Collector<T, A, R> asCancellable(BiConsumer<A, T> accumulator, Predicate<A> finished) {
@@ -480,8 +483,11 @@ import java.util.stream.Collector.Characteristics;
         private final Predicate<A> finished;
         private final Set<Characteristics> characteristics;
 
-        CancellableCollectorImpl(Supplier<A> supplier, BiConsumer<A, T> accumulator, BinaryOperator<A> combiner,
-                                 Function<A, R> finisher, Predicate<A> finished,
+        CancellableCollectorImpl(Supplier<A> supplier,
+                                 BiConsumer<A, T> accumulator,
+                                 BinaryOperator<A> combiner,
+                                 Function<A, R> finisher,
+                                 Predicate<A> finished,
                                  Set<Characteristics> characteristics) {
             this.supplier = supplier;
             this.accumulator = accumulator;

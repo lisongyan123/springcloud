@@ -135,7 +135,7 @@ import java.util.function.Consumer;
         Spliterator<T> prefix;
         if (lock == null)
             lock = new ReentrantLock();
-        acquire();
+            acquire();
         try {
             if (state != STATE_NONE)
                 return null;

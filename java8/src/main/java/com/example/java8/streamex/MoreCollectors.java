@@ -49,10 +49,16 @@ public final class MoreCollectors {
      *         provided supplier once to return the output.
      */
     private static <T, U> Collector<T, ?, U> empty(Supplier<U> supplier) {
-        return new CancellableCollectorImpl<>(() -> NONE, (acc, t) -> {
-            // empty
-        }, selectFirst(), acc -> supplier.get(), alwaysTrue(), EnumSet.of(Characteristics.UNORDERED,
-            Characteristics.CONCURRENT));
+        return new CancellableCollectorImpl<>(
+                () -> NONE,
+                (acc, t) -> {
+                    // empty
+                },
+                selectFirst(),
+                acc -> supplier.get(),
+                alwaysTrue(),
+                EnumSet.of(Characteristics.UNORDERED, Characteristics.CONCURRENT)
+        );
     }
 
     private static <T> Collector<T, ?, List<T>> empty() {
@@ -120,10 +126,16 @@ public final class MoreCollectors {
      */
     public static <T extends Enum<T>> Collector<T, ?, EnumSet<T>> toEnumSet(Class<T> enumClass) {
         int size = EnumSet.allOf(enumClass).size();
-        return new CancellableCollectorImpl<>(() -> EnumSet.noneOf(enumClass), EnumSet::add, (s1, s2) -> {
-            s1.addAll(s2);
-            return s1;
-        }, Function.identity(), set -> set.size() == size, UNORDERED_ID_CHARACTERISTICS);
+        return new CancellableCollectorImpl<>(
+                () -> EnumSet.noneOf(enumClass),
+                EnumSet::add,
+                (s1, s2) -> {
+                s1.addAll(s2);
+                return s1; },
+                Function.identity(),
+                set -> set.size() == size,
+                UNORDERED_ID_CHARACTERISTICS
+        );
     }
 
     /**
@@ -1235,13 +1247,19 @@ public final class MoreCollectors {
      * @see Collectors#collectingAndThen(Collector, Function)
      * @since 0.4.0
      */
-    public static <T, A, R, RR> Collector<T, A, RR> collectingAndThen(Collector<T, A, R> downstream,
+    public static <T, A, R, RR> Collector<T, A, RR> collectingAndThen(
+            Collector<T, A, R> downstream,
             Function<R, RR> finisher) {
         Predicate<A> finished = finished(downstream);
         if (finished != null) {
-            return new CancellableCollectorImpl<>(downstream.supplier(), downstream.accumulator(), downstream
-                    .combiner(), downstream.finisher().andThen(finisher), finished, downstream.characteristics()
-                            .contains(Characteristics.UNORDERED) ? UNORDERED_CHARACTERISTICS : NO_CHARACTERISTICS);
+            return new CancellableCollectorImpl<>(
+                    downstream.supplier(),
+                    downstream.accumulator(),
+                    downstream.combiner(),
+                    downstream.finisher().andThen(finisher),
+                    finished,
+                    downstream.characteristics().contains(Characteristics.UNORDERED) ?
+                            UNORDERED_CHARACTERISTICS : NO_CHARACTERISTICS);
         }
         return Collectors.collectingAndThen(downstream, finisher);
     }
