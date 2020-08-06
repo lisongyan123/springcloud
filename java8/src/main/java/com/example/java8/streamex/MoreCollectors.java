@@ -1513,11 +1513,11 @@ public final class MoreCollectors {
      * <p>
      * This method behaves like
      * {@code filtering(predicate, Collectors.toList())}.
-     * 
+     *
      * <p>
      * There are no guarantees on the type, mutability, serializability, or
      * thread-safety of the {@code List} returned.
-     * 
+     *
      * @param <T> the type of the input elements
      * @param predicate a filter function to be applied to the input elements
      * @return a collector which applies the predicate to the input elements and
@@ -1540,7 +1540,7 @@ public final class MoreCollectors {
      * This method returns a
      * <a href="package-summary.html#ShortCircuitReduction">short-circuiting
      * collector</a>: it may not process all the elements if the result is zero.
-     * 
+     *
      * @param <T> the type of the input elements
      * @param mapper a function extracting the property to be processed
      * @return a {@code Collector} that produces the bitwise-and operation of a
@@ -1566,6 +1566,7 @@ public final class MoreCollectors {
             return acc1;
         }, PrimitiveBox::asInt, acc -> acc.b && acc.i == 0, UNORDERED_CHARACTERISTICS);
     }
+    /**这里CancellableCollectorImpl的第一个参数是A类型， 所以第二个参数也是A类型*/
 
     /**
      * Returns a {@code Collector} which performs the bitwise-and operation of a

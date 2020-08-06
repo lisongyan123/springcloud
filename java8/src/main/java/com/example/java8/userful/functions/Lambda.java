@@ -4,6 +4,7 @@ import com.example.java8.userful.Person;
 
 import java.util.HashMap;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class Lambda {
     @FunctionalInterface
@@ -22,8 +23,8 @@ public class Lambda {
     }
 
     public static void main(String[] args) {
-        Converter<String, Integer> integerConverter1 = (from) -> Integer.valueOf(from);
-        Integer converted1 = integerConverter1.convert("123");
+        Function<String, Integer> integerConverter1 = (from) -> Integer.valueOf(from);
+        Integer converted1 = integerConverter1.apply("123");
         System.out.println(converted1);   // result: 123
 
         // method reference

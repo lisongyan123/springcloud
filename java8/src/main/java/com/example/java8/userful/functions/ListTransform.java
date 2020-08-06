@@ -28,7 +28,7 @@ public class ListTransform {
         List<String> upperCaseNames = transform(names, String::toUpperCase);
         System.out.println(upperCaseNames);
 
-        List<Integer> numbers = transform(Arrays.asList("1", "2", "3"), Integer::parseInt);
+        List<Double> numbers = transform(Arrays.asList(1.0, 2.0, 3.9), Double::doubleValue);
         System.out.println(numbers);
     }
 
