@@ -69,6 +69,7 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
         return entry -> action.accept(entry.getKey(), entry.getValue());
     }
 
+
     static <K, V, M extends Map<K, V>> Consumer<? super Entry<K, V>> toMapConsumer(M map) {
         return entry -> addToMap(map, entry.getKey(), Objects.requireNonNull(entry.getValue()));
     }
@@ -584,12 +585,6 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * one-to-zero-or-one transformation to the elements of the stream, and then
      * flattening the resulting elements into a new stream.
      *
-     * @param <KK>        The type of new keys
-     * @param keyMapper a <a
-     *                    href="package-summary.html#NonInterference">non-interfering </a>,
-     *                    <a href="package-summary.html#Statelessness">stateless</a>
-     *                    partial function to apply to original keys and values which returns a present optional
-     *                    if it's applicable, or an empty optional otherwise
      * @return the new stream
      * @since 0.6.8
      */
@@ -903,7 +898,6 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * Returns a stream consisting of the elements of this stream which keys are
      * instances of given class.
      *
-     * <p>
      * This is an <a href="package-summary.html#StreamOps">intermediate</a>
      * operation.
      *
@@ -1116,9 +1110,13 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
      * @since 0.5.5
      */
     public EntryStream<K, V> collapseKeys(BinaryOperator<V> merger) {
-        BinaryOperator<Entry<K, V>> entryMerger = (e1, e2) -> new SimpleImmutableEntry<>(e1.getKey(), merger.apply(e1
-                .getValue(), e2.getValue()));
-        return new EntryStream<>(new CollapseSpliterator<>(equalKeys(), Function.identity(), entryMerger, entryMerger,
+        BinaryOperator<Entry<K, V>> entryMerger = (e1, e2) -> new SimpleImmutableEntry<>(e1.getKey(),
+                merger.apply(e1.getValue(), e2.getValue()));
+        return new EntryStream<>(new CollapseSpliterator<>(
+                equalKeys(),
+                Function.identity(),
+                entryMerger,
+                entryMerger,
                 spliterator()), context);
     }
 
@@ -1352,8 +1350,13 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     public <M extends Map<K, V>> M toCustomMap(Supplier<M> mapSupplier) {
         M map = mapSupplier.get();
         if (isParallel() && !(map instanceof ConcurrentMap)) {
-            return collect(mapSupplier, (m, t) -> addToMap(m, t.getKey(), Objects.requireNonNull(t.getValue())), (m1,
-                    m2) -> m2.forEach((k, v) -> addToMap(m1, k, v)));
+            return collect(
+                    mapSupplier,
+                    (m, t) -> addToMap(
+                            m, t.getKey(),
+                            Objects.requireNonNull(t.getValue())
+                    ),
+                    (m1, m2) -> m2.forEach((k, v) -> addToMap(m1, k, v)));
         }
         forEach(toMapConsumer(map));
         return map;
@@ -1443,7 +1446,6 @@ public class EntryStream<K, V> extends AbstractStreamEx<Entry<K, V>, EntryStream
     public SortedMap<K, V> toSortedMap(BinaryOperator<V> mergeFunction) {
         return toNavigableMap(mergeFunction);
     }
-
 
     /**
      * Returns a {@link NavigableMap} containing the elements of this stream.

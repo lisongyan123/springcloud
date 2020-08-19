@@ -82,7 +82,6 @@ public class Joining extends CancellableCollector<CharSequence, Joining.Accumula
     private static final int CUT_WORD = 3;
     private static final int CUT_BEFORE_DELIMITER = 4;
     private static final int CUT_AFTER_DELIMITER = 5;
-
     private static final int LENGTH_CHARS = 0;
     private static final int LENGTH_CODEPOINTS = 1;
     private static final int LENGTH_GRAPHEMES = 2;
