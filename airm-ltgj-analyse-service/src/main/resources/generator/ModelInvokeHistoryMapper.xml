@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.fxgd.mapper.ModelInvokeHistoryMapper">
+  <insert id="batchInsert" parameterType="java.util.List">
+    insert into AIRM_FQL_MODEL_INVOKE_HISTORY(ID, SESSION_ID, MODEL_NAME, MODEL_NO, REQUEST_PARAMS, RESPONSE_PARAMS, MODEL_RESULT,
+    RETAY_TIMES, REQUEST_TIME)
+     select SEQ_AIRM_FQL.NEXTVAL,a.* from (
+    <foreach collection="list" item="item" separator="union all">
+      select #{item.sessionId,jdbcType=VARCHAR},#{item.modelName,jdbcType=VARCHAR},
+      #{item.modelNo,jdbcType=VARCHAR}, #{item.requestParams,jdbcType=CLOB}, #{item.responseParams,jdbcType=CLOB},
+      #{item.modelResult,jdbcType=VARCHAR}, #{item.retayTimes,jdbcType=VARCHAR}, #{item.requestTime,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    )a
+  </insert>
+
+  <insert id="insertManual" parameterType="com.bank.irce.fxgd.bean.entity.ModelInvokeHistory">
+    insert into AIRM_ZY_MODEL_INVOKE_HISTORY(ID, SESSION_ID, MODEL_NAME, MODEL_NO, REQUEST_PARAMS, RESPONSE_PARAMS, MODEL_RESULT,
+    RETAY_TIMES, LAST_REQUEST_TIME) values(SEQ_MODEL_INVOKE_HISTORY.NEXTVAL,#{sessionId,jdbcType=VARCHAR},#{modelName,jdbcType=VARCHAR},
+    #{modelNo,jdbcType=VARCHAR}, #{requestParams,jdbcType=CLOB}, #{responseParams,jdbcType=CLOB},
+    #{modelResult,jdbcType=VARCHAR}, #{retayTimes,jdbcType=VARCHAR}, #{lastRequestTime,jdbcType=VARCHAR})
+  </insert>
+
+
+    <!--根据模型编号sessionId查询百融天御反欺诈模型记录-->
+    <select id="queryModelInvokeHistory" resultType="java.lang.String">
+    select RESPONSE_PARAMS from AIRM_GSD_MODEL_INVOKE_HISTORY
+    where  SESSION_ID = #{sessionId,jdbcType=VARCHAR} and  MODEL_NO = #{modelNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

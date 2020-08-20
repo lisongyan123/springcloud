@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.AirmLtgjResponseBodyDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.AirmLtgjResponseBody">
+    <result column="SESSION_ID" jdbcType="VARCHAR" property="sessionId" />
+    <result column="CREDIT_NO" jdbcType="VARCHAR" property="creditNo" />
+    <result column="CUST_NAME" jdbcType="VARCHAR" property="custName" />
+    <result column="CERT_NO" jdbcType="VARCHAR" property="certNo" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="APP_NO" jdbcType="VARCHAR" property="appNo" />
+    <result column="CUST_ID" jdbcType="VARCHAR" property="custId" />
+    <result column="CREDIT_TIMESTAMP" jdbcType="DECIMAL" property="creditTimestamp" />
+    <result column="STATE_CODE" jdbcType="VARCHAR" property="stateCode" />
+    <result column="CREDIT_CODE" jdbcType="VARCHAR" property="creditCode" />
+    <result column="CREDIT_RESULT" jdbcType="VARCHAR" property="creditResult" />
+    <result column="OTHER_RESULT" jdbcType="VARCHAR" property="otherResult" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SESSION_ID, CREDIT_NO, CUST_NAME, CERT_NO, CERT_TYPE, APP_NO, CUST_ID, CREDIT_TIMESTAMP, 
+    STATE_CODE, CREDIT_CODE, CREDIT_RESULT, OTHER_RESULT
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjResponseBodyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AIRM_LTGJ_RESPONSE_BODY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjResponseBodyExample">
+    delete from AIRM_LTGJ_RESPONSE_BODY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.AirmLtgjResponseBody">
+    insert into AIRM_LTGJ_RESPONSE_BODY (SESSION_ID, CREDIT_NO, CUST_NAME, 
+      CERT_NO, CERT_TYPE, APP_NO, 
+      CUST_ID, CREDIT_TIMESTAMP, STATE_CODE, 
+      CREDIT_CODE, CREDIT_RESULT, OTHER_RESULT
+      )
+    values (#{sessionId,jdbcType=VARCHAR}, #{creditNo,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, 
+      #{certNo,jdbcType=VARCHAR}, #{certType,jdbcType=VARCHAR}, #{appNo,jdbcType=VARCHAR}, 
+      #{custId,jdbcType=VARCHAR}, #{creditTimestamp,jdbcType=DECIMAL}, #{stateCode,jdbcType=VARCHAR}, 
+      #{creditCode,jdbcType=VARCHAR}, #{creditResult,jdbcType=VARCHAR}, #{otherResult,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.AirmLtgjResponseBody">
+    insert into AIRM_LTGJ_RESPONSE_BODY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sessionId != null">
+        SESSION_ID,
+      </if>
+      <if test="creditNo != null">
+        CREDIT_NO,
+      </if>
+      <if test="custName != null">
+        CUST_NAME,
+      </if>
+      <if test="certNo != null">
+        CERT_NO,
+      </if>
+      <if test="certType != null">
+        CERT_TYPE,
+      </if>
+      <if test="appNo != null">
+        APP_NO,
+      </if>
+      <if test="custId != null">
+        CUST_ID,
+      </if>
+      <if test="creditTimestamp != null">
+        CREDIT_TIMESTAMP,
+      </if>
+      <if test="stateCode != null">
+        STATE_CODE,
+      </if>
+      <if test="creditCode != null">
+        CREDIT_CODE,
+      </if>
+      <if test="creditResult != null">
+        CREDIT_RESULT,
+      </if>
+      <if test="otherResult != null">
+        OTHER_RESULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditNo != null">
+        #{creditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null">
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null">
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="appNo != null">
+        #{appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTimestamp != null">
+        #{creditTimestamp,jdbcType=DECIMAL},
+      </if>
+      <if test="stateCode != null">
+        #{stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditResult != null">
+        #{creditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="otherResult != null">
+        #{otherResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjResponseBodyExample" resultType="java.lang.Long">
+    select count(*) from AIRM_LTGJ_RESPONSE_BODY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update AIRM_LTGJ_RESPONSE_BODY
+    <set>
+      <if test="record.sessionId != null">
+        SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditNo != null">
+        CREDIT_NO = #{record.creditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null">
+        CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certNo != null">
+        CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null">
+        CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appNo != null">
+        APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null">
+        CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditTimestamp != null">
+        CREDIT_TIMESTAMP = #{record.creditTimestamp,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stateCode != null">
+        STATE_CODE = #{record.stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditCode != null">
+        CREDIT_CODE = #{record.creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditResult != null">
+        CREDIT_RESULT = #{record.creditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherResult != null">
+        OTHER_RESULT = #{record.otherResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update AIRM_LTGJ_RESPONSE_BODY
+    set SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      CREDIT_NO = #{record.creditNo,jdbcType=VARCHAR},
+      CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      CREDIT_TIMESTAMP = #{record.creditTimestamp,jdbcType=DECIMAL},
+      STATE_CODE = #{record.stateCode,jdbcType=VARCHAR},
+      CREDIT_CODE = #{record.creditCode,jdbcType=VARCHAR},
+      CREDIT_RESULT = #{record.creditResult,jdbcType=VARCHAR},
+      OTHER_RESULT = #{record.otherResult,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

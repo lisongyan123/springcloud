@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.CustBasicInfoDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.CustBasicInfo">
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="CERT_NO" jdbcType="VARCHAR" property="certNo" />
+    <result column="IDEN_VALID_DT" jdbcType="VARCHAR" property="idenValidDt" />
+    <result column="CUST_NAME" jdbcType="VARCHAR" property="custName" />
+    <result column="GENDER_CD" jdbcType="VARCHAR" property="genderCd" />
+    <result column="BIRTH_DT" jdbcType="VARCHAR" property="birthDt" />
+    <result column="AGE" jdbcType="DECIMAL" property="age" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CERT_TYPE, CERT_NO, IDEN_VALID_DT, CUST_NAME, GENDER_CD, BIRTH_DT, AGE
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.CustBasicInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CUST_BASIC_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.CustBasicInfoExample">
+    delete from CUST_BASIC_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.CustBasicInfo">
+    insert into CUST_BASIC_INFO (CERT_TYPE, CERT_NO, IDEN_VALID_DT, 
+      CUST_NAME, GENDER_CD, BIRTH_DT, 
+      AGE)
+    values (#{certType,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, #{idenValidDt,jdbcType=VARCHAR}, 
+      #{custName,jdbcType=VARCHAR}, #{genderCd,jdbcType=VARCHAR}, #{birthDt,jdbcType=VARCHAR}, 
+      #{age,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.CustBasicInfo">
+    insert into CUST_BASIC_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="certType != null">
+        CERT_TYPE,
+      </if>
+      <if test="certNo != null">
+        CERT_NO,
+      </if>
+      <if test="idenValidDt != null">
+        IDEN_VALID_DT,
+      </if>
+      <if test="custName != null">
+        CUST_NAME,
+      </if>
+      <if test="genderCd != null">
+        GENDER_CD,
+      </if>
+      <if test="birthDt != null">
+        BIRTH_DT,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="certType != null">
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null">
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idenValidDt != null">
+        #{idenValidDt,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="genderCd != null">
+        #{genderCd,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDt != null">
+        #{birthDt,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.CustBasicInfoExample" resultType="java.lang.Long">
+    select count(*) from CUST_BASIC_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CUST_BASIC_INFO
+    <set>
+      <if test="record.certType != null">
+        CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certNo != null">
+        CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idenValidDt != null">
+        IDEN_VALID_DT = #{record.idenValidDt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null">
+        CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.genderCd != null">
+        GENDER_CD = #{record.genderCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthDt != null">
+        BIRTH_DT = #{record.birthDt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        AGE = #{record.age,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CUST_BASIC_INFO
+    set CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      IDEN_VALID_DT = #{record.idenValidDt,jdbcType=VARCHAR},
+      CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      GENDER_CD = #{record.genderCd,jdbcType=VARCHAR},
+      BIRTH_DT = #{record.birthDt,jdbcType=VARCHAR},
+      AGE = #{record.age,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

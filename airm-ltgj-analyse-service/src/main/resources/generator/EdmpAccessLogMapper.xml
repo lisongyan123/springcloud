@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.fxgd.mapper.EdmpAccessLogMapper">
+  <insert id="batchInsert" parameterType="java.util.List">
+    <!--批量sql添加(出入参内容为二进制)-->
+    insert into AIRM_FQL_EDMP_ACCESS_LOG(ID,NAME, REQ_TIME,REQ_RESULT,REQ_PARAMS, RES_PARAMS,PRODUCT_NO,PRODUCT_NAME,SESSION_ID,CREDIT_TIME)
+    select SEQ_EDMP_ACCESS_LOG.NEXTVAL,a.* from (
+    <foreach collection="list" item="item" separator="union all">
+      select
+      #{item.name,jdbcType=VARCHAR},#{item.reqTime,jdbcType=VARCHAR},#{item.reqResult,jdbcType=VARCHAR},
+      #{item.reqParams,jdbcType=CLOB}, #{item.resParams,jdbcType=CLOB},#{item.productNo,jdbcType=VARCHAR},
+      #{item.productName,jdbcType=VARCHAR}, #{item.sessionId,jdbcType=VARCHAR},#{item.creditTime,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    )a
+    <!--批量拼接添加-->
+    <!--
+    begin
+    <foreach collection="list" item="item" separator=";">
+      insert into AIRM_ZY_EDMP_ACCESS_LOG(ID,NAME, REQ_TIME,REQ_RESULT,REQ_PARAMS, RES_PARAMS,PRODUCT_NO,PRODUCT_NAME,APP_NO,CREDIT_TIME)
+      values(SEQ_EDMP_ACCESS_LOG.NEXTVAL,#{item.name,jdbcType=VARCHAR},#{item.reqTime,jdbcType=VARCHAR},#{item.reqResult,jdbcType=VARCHAR},
+      #{item.reqParams,jdbcType=CLOB}, #{item.resParams,jdbcType=CLOB},#{item.productNo,jdbcType=VARCHAR},
+      #{item.productName,jdbcType=VARCHAR}, #{item.appNo,jdbcType=VARCHAR},#{item.creditTime,jdbcType=VARCHAR})
+    </foreach>
+    ;end;-->
+
+    <!--单条添加-->
+    <!--insert into AIRM_ZY_EDMP_ACCESS_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        ID,
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="reqTime != null">
+        REQ_TIME,
+      </if>
+      <if test="reqResult != null">
+        REQ_RESULT,
+      </if>
+      <if test="reqParams != null">
+        REQ_PARAMS,
+      </if>
+      <if test="resParams != null">
+        RES_PARAMS,
+      </if>
+      <if test="productNo != null">
+        PRODUCT_NO,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="appNo != null">
+        APP_NO,
+      </if>
+      <if test="creditTime != null">
+        CREDIT_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="reserve1 != null">
+        RESERVE1,
+      </if>
+      <if test="reserve2 != null">
+        RESERVE2,
+      </if>
+      <if test="reserve3 != null">
+        RESERVE3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      SEQ_EDMP_ACCESS_LOG.NEXTVAL,
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="reqTime != null">
+        #{reqTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reqResult != null">
+        #{reqResult,jdbcType=VARCHAR},
+      </if>
+      <if test="reqParams != null">
+        #{reqParams,jdbcType=CLOB},
+      </if>
+      <if test="resParams != null">
+        #{resParams,jdbcType=CLOB},
+      </if>
+      <if test="productNo != null">
+        #{productNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="appNo != null">
+        #{appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTime != null">
+        #{creditTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+    </trim>-->
+  </insert>
+</mapper>

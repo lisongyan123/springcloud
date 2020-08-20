@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.fxgd.mapper.FxgdMasterAduitCreditMapper">
+
+    <select id="queryMasterAuditCreditByCreNo" resultType="com.bank.irce.fxgd.bean.entity.FxgdMasterAduitCredit">
+    select * from AIRM_FXGD_MASTER_ADUIT_CREDIT where  ID_NO = #{idNo,jdbcType=VARCHAR} and rownum=1 ORDER BY APPLY_TIME DESC
+    </select>
+
+</mapper>

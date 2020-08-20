@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.AuthorizationInfoDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.AuthorizationInfo">
+    <result column="AUTH_SIGN" jdbcType="VARCHAR" property="authSign" />
+    <result column="CUST_AUTHED" jdbcType="VARCHAR" property="custAuthed" />
+    <result column="LOGIN_ID" jdbcType="VARCHAR" property="loginId" />
+    <result column="PBCC_ADDR" jdbcType="VARCHAR" property="pbccAddr" />
+    <result column="CUST_SCORE" jdbcType="DECIMAL" property="custScore" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    AUTH_SIGN, CUST_AUTHED, LOGIN_ID, PBCC_ADDR, CUST_SCORE
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.AuthorizationInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AUTHORIZATION_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.AuthorizationInfoExample">
+    delete from AUTHORIZATION_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.AuthorizationInfo">
+    insert into AUTHORIZATION_INFO (AUTH_SIGN, CUST_AUTHED, LOGIN_ID, 
+      PBCC_ADDR, CUST_SCORE)
+    values (#{authSign,jdbcType=VARCHAR}, #{custAuthed,jdbcType=VARCHAR}, #{loginId,jdbcType=VARCHAR}, 
+      #{pbccAddr,jdbcType=VARCHAR}, #{custScore,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.AuthorizationInfo">
+    insert into AUTHORIZATION_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authSign != null">
+        AUTH_SIGN,
+      </if>
+      <if test="custAuthed != null">
+        CUST_AUTHED,
+      </if>
+      <if test="loginId != null">
+        LOGIN_ID,
+      </if>
+      <if test="pbccAddr != null">
+        PBCC_ADDR,
+      </if>
+      <if test="custScore != null">
+        CUST_SCORE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authSign != null">
+        #{authSign,jdbcType=VARCHAR},
+      </if>
+      <if test="custAuthed != null">
+        #{custAuthed,jdbcType=VARCHAR},
+      </if>
+      <if test="loginId != null">
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="pbccAddr != null">
+        #{pbccAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="custScore != null">
+        #{custScore,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.AuthorizationInfoExample" resultType="java.lang.Long">
+    select count(*) from AUTHORIZATION_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update AUTHORIZATION_INFO
+    <set>
+      <if test="record.authSign != null">
+        AUTH_SIGN = #{record.authSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custAuthed != null">
+        CUST_AUTHED = #{record.custAuthed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginId != null">
+        LOGIN_ID = #{record.loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbccAddr != null">
+        PBCC_ADDR = #{record.pbccAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custScore != null">
+        CUST_SCORE = #{record.custScore,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update AUTHORIZATION_INFO
+    set AUTH_SIGN = #{record.authSign,jdbcType=VARCHAR},
+      CUST_AUTHED = #{record.custAuthed,jdbcType=VARCHAR},
+      LOGIN_ID = #{record.loginId,jdbcType=VARCHAR},
+      PBCC_ADDR = #{record.pbccAddr,jdbcType=VARCHAR},
+      CUST_SCORE = #{record.custScore,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

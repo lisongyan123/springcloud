@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.CreditResultDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.CreditResult">
+    <result column="CREDIT_LIMIT" jdbcType="DECIMAL" property="creditLimit" />
+    <result column="REFUSE_REASON" jdbcType="VARCHAR" property="refuseReason" />
+    <result column="QUERY_TYPE" jdbcType="VARCHAR" property="queryType" />
+    <result column="RESERVE" jdbcType="VARCHAR" property="reserve" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CREDIT_LIMIT, REFUSE_REASON, QUERY_TYPE, RESERVE
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.CreditResultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CREDIT_RESULT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.CreditResultExample">
+    delete from CREDIT_RESULT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.CreditResult">
+    insert into CREDIT_RESULT (CREDIT_LIMIT, REFUSE_REASON, QUERY_TYPE, 
+      RESERVE)
+    values (#{creditLimit,jdbcType=DECIMAL}, #{refuseReason,jdbcType=VARCHAR}, #{queryType,jdbcType=VARCHAR}, 
+      #{reserve,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.CreditResult">
+    insert into CREDIT_RESULT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="creditLimit != null">
+        CREDIT_LIMIT,
+      </if>
+      <if test="refuseReason != null">
+        REFUSE_REASON,
+      </if>
+      <if test="queryType != null">
+        QUERY_TYPE,
+      </if>
+      <if test="reserve != null">
+        RESERVE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="creditLimit != null">
+        #{creditLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="refuseReason != null">
+        #{refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="queryType != null">
+        #{queryType,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve != null">
+        #{reserve,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.CreditResultExample" resultType="java.lang.Long">
+    select count(*) from CREDIT_RESULT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CREDIT_RESULT
+    <set>
+      <if test="record.creditLimit != null">
+        CREDIT_LIMIT = #{record.creditLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refuseReason != null">
+        REFUSE_REASON = #{record.refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queryType != null">
+        QUERY_TYPE = #{record.queryType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve != null">
+        RESERVE = #{record.reserve,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CREDIT_RESULT
+    set CREDIT_LIMIT = #{record.creditLimit,jdbcType=DECIMAL},
+      REFUSE_REASON = #{record.refuseReason,jdbcType=VARCHAR},
+      QUERY_TYPE = #{record.queryType,jdbcType=VARCHAR},
+      RESERVE = #{record.reserve,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

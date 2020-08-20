@@ -1,9 +1,7 @@
 package com.example.java8.extra.algorithm;
 
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class AlgorithmMedium {
 
@@ -12,7 +10,6 @@ public class AlgorithmMedium {
     public class ListNode {
         int val;
         ListNode next;   // 下一个链表对象
-
         ListNode(int x) {
             val = x;
         }  //赋值链表的值
@@ -59,7 +56,7 @@ public class AlgorithmMedium {
         return ans;
     }
 
-    //字符串的最长回文数  n个数n-1个间隔一共2n-1个中心
+    //字符串的最长回文数  n个数n-1个间隔一共2n-1个中心，start和end分别记录并定位在最长回文数的起点和终点
     public String longestPalindrome(String s) {
         if (s == null || s.length() < 1) return "";
         int start = 0, end = 0;
@@ -87,10 +84,10 @@ public class AlgorithmMedium {
     //字符串输出成Z字型，从上到下输入，依次输入到s[1],s[2],s[3]到了Z字型的时候反转flag = -flag，
     // 重新从0开始输入
     public String convert(String s, int numRows) {
-        if(numRows < 2) return "";
+        if (numRows < 2) return s;
         List<StringBuilder> rows = new ArrayList<StringBuilder>();
-        IntStream.range(0,numRows).forEach(v->rows.add(new StringBuilder()));
-        int i = 0,flag = -1;
+        for (int i = 0; i < numRows; i++) rows.add(new StringBuilder());
+        int i = 0, flag = -1;
         for (char c : s.toCharArray()) {
             rows.get(i).append(c);
             //在第一个或者第n个，转弯
@@ -98,7 +95,7 @@ public class AlgorithmMedium {
             i += flag;
         }
         StringBuilder res = new StringBuilder();
-        rows.stream().forEach(v->res.append(v));
+        for (StringBuilder row : rows) res.append(row);
         return res.toString();
     }
 
@@ -113,23 +110,6 @@ public class AlgorithmMedium {
             rev = rev * 10 + pop;
         }
         return rev;
-    }
-
-    /**最多雨水问题 双指针方法  由min(x,yt)∗t1<min(x,y)∗t 可知最大值是 y越右边*/
-    public int maxArea(int[] height) {
-        int l = 0, r = height.length - 1;
-        int ans = 0;
-        while (l < r) {
-            int area = Math.min(height[l], height[r]) * (r - l);
-            ans = Math.max(ans, area);
-            if (height[l] <= height[r]) {
-                ++l;
-            }
-            else {
-                --r;
-            }
-        }
-        return ans;
     }
 
     public static List<List<Integer>> threeSum(int[] nums) {

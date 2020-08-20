@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.CustOtherInfoDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.CustOtherInfo">
+    <result column="CUR_MARRIAGE_STATUS_CD" jdbcType="VARCHAR" property="curMarriageStatusCd" />
+    <result column="ADDR_DESC" jdbcType="VARCHAR" property="addrDesc" />
+    <result column="ADDR_USAG_ECD" jdbcType="VARCHAR" property="addrUsagEcd" />
+    <result column="MOBILE_NUM" jdbcType="VARCHAR" property="mobileNum" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="COMP_NAME" jdbcType="VARCHAR" property="compName" />
+    <result column="WORK_STATE" jdbcType="VARCHAR" property="workState" />
+    <result column="DUTY_CD" jdbcType="VARCHAR" property="dutyCd" />
+    <result column="TITLE_CD" jdbcType="VARCHAR" property="titleCd" />
+    <result column="OCCUPATION_CD" jdbcType="VARCHAR" property="occupationCd" />
+    <result column="EDUCATION_LEVEL_cd" jdbcType="VARCHAR" property="educationLevelCd" />
+    <result column="WORK_YEAR_NUM" jdbcType="DECIMAL" property="workYearNum" />
+    <result column="CORP_PROPERTY_CD" jdbcType="VARCHAR" property="corpPropertyCd" />
+    <result column="COMP_INDUSTRY_CLASS_CD" jdbcType="VARCHAR" property="compIndustryClassCd" />
+    <result column="CURR_OVRD_DAYS" jdbcType="VARCHAR" property="currOvrdDays" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CUR_MARRIAGE_STATUS_CD, ADDR_DESC, ADDR_USAG_ECD, MOBILE_NUM, EMAIL, COMP_NAME, WORK_STATE, 
+    DUTY_CD, TITLE_CD, OCCUPATION_CD, EDUCATION_LEVEL_cd, WORK_YEAR_NUM, CORP_PROPERTY_CD, 
+    COMP_INDUSTRY_CLASS_CD, CURR_OVRD_DAYS
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.CustOtherInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CUST_OTHER_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.CustOtherInfoExample">
+    delete from CUST_OTHER_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.CustOtherInfo">
+    insert into CUST_OTHER_INFO (CUR_MARRIAGE_STATUS_CD, ADDR_DESC, ADDR_USAG_ECD, 
+      MOBILE_NUM, EMAIL, COMP_NAME, 
+      WORK_STATE, DUTY_CD, TITLE_CD, 
+      OCCUPATION_CD, EDUCATION_LEVEL_cd, WORK_YEAR_NUM, 
+      CORP_PROPERTY_CD, COMP_INDUSTRY_CLASS_CD, CURR_OVRD_DAYS
+      )
+    values (#{curMarriageStatusCd,jdbcType=VARCHAR}, #{addrDesc,jdbcType=VARCHAR}, #{addrUsagEcd,jdbcType=VARCHAR}, 
+      #{mobileNum,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{compName,jdbcType=VARCHAR}, 
+      #{workState,jdbcType=VARCHAR}, #{dutyCd,jdbcType=VARCHAR}, #{titleCd,jdbcType=VARCHAR}, 
+      #{occupationCd,jdbcType=VARCHAR}, #{educationLevelCd,jdbcType=VARCHAR}, #{workYearNum,jdbcType=DECIMAL}, 
+      #{corpPropertyCd,jdbcType=VARCHAR}, #{compIndustryClassCd,jdbcType=VARCHAR}, #{currOvrdDays,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.CustOtherInfo">
+    insert into CUST_OTHER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="curMarriageStatusCd != null">
+        CUR_MARRIAGE_STATUS_CD,
+      </if>
+      <if test="addrDesc != null">
+        ADDR_DESC,
+      </if>
+      <if test="addrUsagEcd != null">
+        ADDR_USAG_ECD,
+      </if>
+      <if test="mobileNum != null">
+        MOBILE_NUM,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="compName != null">
+        COMP_NAME,
+      </if>
+      <if test="workState != null">
+        WORK_STATE,
+      </if>
+      <if test="dutyCd != null">
+        DUTY_CD,
+      </if>
+      <if test="titleCd != null">
+        TITLE_CD,
+      </if>
+      <if test="occupationCd != null">
+        OCCUPATION_CD,
+      </if>
+      <if test="educationLevelCd != null">
+        EDUCATION_LEVEL_cd,
+      </if>
+      <if test="workYearNum != null">
+        WORK_YEAR_NUM,
+      </if>
+      <if test="corpPropertyCd != null">
+        CORP_PROPERTY_CD,
+      </if>
+      <if test="compIndustryClassCd != null">
+        COMP_INDUSTRY_CLASS_CD,
+      </if>
+      <if test="currOvrdDays != null">
+        CURR_OVRD_DAYS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="curMarriageStatusCd != null">
+        #{curMarriageStatusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="addrDesc != null">
+        #{addrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="addrUsagEcd != null">
+        #{addrUsagEcd,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNum != null">
+        #{mobileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="compName != null">
+        #{compName,jdbcType=VARCHAR},
+      </if>
+      <if test="workState != null">
+        #{workState,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyCd != null">
+        #{dutyCd,jdbcType=VARCHAR},
+      </if>
+      <if test="titleCd != null">
+        #{titleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="occupationCd != null">
+        #{occupationCd,jdbcType=VARCHAR},
+      </if>
+      <if test="educationLevelCd != null">
+        #{educationLevelCd,jdbcType=VARCHAR},
+      </if>
+      <if test="workYearNum != null">
+        #{workYearNum,jdbcType=DECIMAL},
+      </if>
+      <if test="corpPropertyCd != null">
+        #{corpPropertyCd,jdbcType=VARCHAR},
+      </if>
+      <if test="compIndustryClassCd != null">
+        #{compIndustryClassCd,jdbcType=VARCHAR},
+      </if>
+      <if test="currOvrdDays != null">
+        #{currOvrdDays,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.CustOtherInfoExample" resultType="java.lang.Long">
+    select count(*) from CUST_OTHER_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CUST_OTHER_INFO
+    <set>
+      <if test="record.curMarriageStatusCd != null">
+        CUR_MARRIAGE_STATUS_CD = #{record.curMarriageStatusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addrDesc != null">
+        ADDR_DESC = #{record.addrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addrUsagEcd != null">
+        ADDR_USAG_ECD = #{record.addrUsagEcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileNum != null">
+        MOBILE_NUM = #{record.mobileNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compName != null">
+        COMP_NAME = #{record.compName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workState != null">
+        WORK_STATE = #{record.workState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyCd != null">
+        DUTY_CD = #{record.dutyCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleCd != null">
+        TITLE_CD = #{record.titleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.occupationCd != null">
+        OCCUPATION_CD = #{record.occupationCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationLevelCd != null">
+        EDUCATION_LEVEL_cd = #{record.educationLevelCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workYearNum != null">
+        WORK_YEAR_NUM = #{record.workYearNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.corpPropertyCd != null">
+        CORP_PROPERTY_CD = #{record.corpPropertyCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compIndustryClassCd != null">
+        COMP_INDUSTRY_CLASS_CD = #{record.compIndustryClassCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currOvrdDays != null">
+        CURR_OVRD_DAYS = #{record.currOvrdDays,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CUST_OTHER_INFO
+    set CUR_MARRIAGE_STATUS_CD = #{record.curMarriageStatusCd,jdbcType=VARCHAR},
+      ADDR_DESC = #{record.addrDesc,jdbcType=VARCHAR},
+      ADDR_USAG_ECD = #{record.addrUsagEcd,jdbcType=VARCHAR},
+      MOBILE_NUM = #{record.mobileNum,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      COMP_NAME = #{record.compName,jdbcType=VARCHAR},
+      WORK_STATE = #{record.workState,jdbcType=VARCHAR},
+      DUTY_CD = #{record.dutyCd,jdbcType=VARCHAR},
+      TITLE_CD = #{record.titleCd,jdbcType=VARCHAR},
+      OCCUPATION_CD = #{record.occupationCd,jdbcType=VARCHAR},
+      EDUCATION_LEVEL_cd = #{record.educationLevelCd,jdbcType=VARCHAR},
+      WORK_YEAR_NUM = #{record.workYearNum,jdbcType=DECIMAL},
+      CORP_PROPERTY_CD = #{record.corpPropertyCd,jdbcType=VARCHAR},
+      COMP_INDUSTRY_CLASS_CD = #{record.compIndustryClassCd,jdbcType=VARCHAR},
+      CURR_OVRD_DAYS = #{record.currOvrdDays,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

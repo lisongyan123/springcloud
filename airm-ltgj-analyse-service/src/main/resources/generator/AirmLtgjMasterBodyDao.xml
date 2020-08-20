@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.AirmLtgjMasterBodyDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.AirmLtgjMasterBody">
+    <result column="SESSION_ID" jdbcType="VARCHAR" property="sessionId" />
+    <result column="APP_NO" jdbcType="VARCHAR" property="appNo" />
+    <result column="BUSINESS_TYPE_CD" jdbcType="VARCHAR" property="businessTypeCd" />
+    <result column="BUSINESS_TYPE_NAME" jdbcType="VARCHAR" property="businessTypeName" />
+    <result column="APPLY_TIME" jdbcType="DECIMAL" property="applyTime" />
+    <result column="CUST_SOURCE" jdbcType="VARCHAR" property="custSource" />
+    <result column="CHANNEL_SOURCE" jdbcType="VARCHAR" property="channelSource" />
+    <result column="CUST_ID" jdbcType="VARCHAR" property="custId" />
+    <result column="CUST_BASIC_INFO" jdbcType="VARCHAR" property="custBasicInfo" />
+    <result column="CUST_OTHER_INFO" jdbcType="VARCHAR" property="custOtherInfo" />
+    <result column="DEVICE_STATUS_INFO" jdbcType="VARCHAR" property="deviceStatusInfo" />
+    <result column="ONLINE_CHECK_INFO" jdbcType="VARCHAR" property="onlineCheckInfo" />
+    <result column="AUTHORIZATION_INFO" jdbcType="VARCHAR" property="authorizationInfo" />
+    <result column="BAIRONG_SCORE_INFO" jdbcType="VARCHAR" property="bairongScoreInfo" />
+    <result column="OTHER_INFO" jdbcType="VARCHAR" property="otherInfo" />
+    <result column="CREDIT_NO" jdbcType="VARCHAR" property="creditNo" />
+    <result column="CUST_NAME" jdbcType="VARCHAR" property="custName" />
+    <result column="CERT_NO" jdbcType="VARCHAR" property="certNo" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="CREDIT_TIMESTAMP" jdbcType="DECIMAL" property="creditTimestamp" />
+    <result column="STATE_CODE" jdbcType="VARCHAR" property="stateCode" />
+    <result column="CREDIT_CODE" jdbcType="VARCHAR" property="creditCode" />
+    <result column="CREDIT_RESULT" jdbcType="VARCHAR" property="creditResult" />
+    <result column="OTHER_RESULT" jdbcType="VARCHAR" property="otherResult" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyWithBLOBs">
+    <result column="LTZF_INFO" jdbcType="CLOB" property="ltzfInfo" />
+    <result column="LTDSJ_INFO" jdbcType="CLOB" property="ltdsjInfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SESSION_ID, APP_NO, BUSINESS_TYPE_CD, BUSINESS_TYPE_NAME, APPLY_TIME, CUST_SOURCE, 
+    CHANNEL_SOURCE, CUST_ID, CUST_BASIC_INFO, CUST_OTHER_INFO, DEVICE_STATUS_INFO, ONLINE_CHECK_INFO, 
+    AUTHORIZATION_INFO, BAIRONG_SCORE_INFO, OTHER_INFO, CREDIT_NO, CUST_NAME, CERT_NO, 
+    CERT_TYPE, CREDIT_TIMESTAMP, STATE_CODE, CREDIT_CODE, CREDIT_RESULT, OTHER_RESULT
+  </sql>
+  <sql id="Blob_Column_List">
+    LTZF_INFO, LTDSJ_INFO
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from AIRM_LTGJ_MASTER_BODY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AIRM_LTGJ_MASTER_BODY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyExample">
+    delete from AIRM_LTGJ_MASTER_BODY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyWithBLOBs">
+    insert into AIRM_LTGJ_MASTER_BODY (SESSION_ID, APP_NO, BUSINESS_TYPE_CD, 
+      BUSINESS_TYPE_NAME, APPLY_TIME, CUST_SOURCE, 
+      CHANNEL_SOURCE, CUST_ID, CUST_BASIC_INFO, 
+      CUST_OTHER_INFO, DEVICE_STATUS_INFO, ONLINE_CHECK_INFO, 
+      AUTHORIZATION_INFO, BAIRONG_SCORE_INFO, OTHER_INFO, 
+      CREDIT_NO, CUST_NAME, CERT_NO, 
+      CERT_TYPE, CREDIT_TIMESTAMP, STATE_CODE, 
+      CREDIT_CODE, CREDIT_RESULT, OTHER_RESULT, 
+      LTZF_INFO, LTDSJ_INFO)
+    values (#{sessionId,jdbcType=VARCHAR}, #{appNo,jdbcType=VARCHAR}, #{businessTypeCd,jdbcType=VARCHAR}, 
+      #{businessTypeName,jdbcType=VARCHAR}, #{applyTime,jdbcType=DECIMAL}, #{custSource,jdbcType=VARCHAR}, 
+      #{channelSource,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, #{custBasicInfo,jdbcType=VARCHAR}, 
+      #{custOtherInfo,jdbcType=VARCHAR}, #{deviceStatusInfo,jdbcType=VARCHAR}, #{onlineCheckInfo,jdbcType=VARCHAR}, 
+      #{authorizationInfo,jdbcType=VARCHAR}, #{bairongScoreInfo,jdbcType=VARCHAR}, #{otherInfo,jdbcType=VARCHAR}, 
+      #{creditNo,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, #{certNo,jdbcType=VARCHAR}, 
+      #{certType,jdbcType=VARCHAR}, #{creditTimestamp,jdbcType=DECIMAL}, #{stateCode,jdbcType=VARCHAR}, 
+      #{creditCode,jdbcType=VARCHAR}, #{creditResult,jdbcType=VARCHAR}, #{otherResult,jdbcType=VARCHAR}, 
+      #{ltzfInfo,jdbcType=CLOB}, #{ltdsjInfo,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyWithBLOBs">
+    insert into AIRM_LTGJ_MASTER_BODY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sessionId != null">
+        SESSION_ID,
+      </if>
+      <if test="appNo != null">
+        APP_NO,
+      </if>
+      <if test="businessTypeCd != null">
+        BUSINESS_TYPE_CD,
+      </if>
+      <if test="businessTypeName != null">
+        BUSINESS_TYPE_NAME,
+      </if>
+      <if test="applyTime != null">
+        APPLY_TIME,
+      </if>
+      <if test="custSource != null">
+        CUST_SOURCE,
+      </if>
+      <if test="channelSource != null">
+        CHANNEL_SOURCE,
+      </if>
+      <if test="custId != null">
+        CUST_ID,
+      </if>
+      <if test="custBasicInfo != null">
+        CUST_BASIC_INFO,
+      </if>
+      <if test="custOtherInfo != null">
+        CUST_OTHER_INFO,
+      </if>
+      <if test="deviceStatusInfo != null">
+        DEVICE_STATUS_INFO,
+      </if>
+      <if test="onlineCheckInfo != null">
+        ONLINE_CHECK_INFO,
+      </if>
+      <if test="authorizationInfo != null">
+        AUTHORIZATION_INFO,
+      </if>
+      <if test="bairongScoreInfo != null">
+        BAIRONG_SCORE_INFO,
+      </if>
+      <if test="otherInfo != null">
+        OTHER_INFO,
+      </if>
+      <if test="creditNo != null">
+        CREDIT_NO,
+      </if>
+      <if test="custName != null">
+        CUST_NAME,
+      </if>
+      <if test="certNo != null">
+        CERT_NO,
+      </if>
+      <if test="certType != null">
+        CERT_TYPE,
+      </if>
+      <if test="creditTimestamp != null">
+        CREDIT_TIMESTAMP,
+      </if>
+      <if test="stateCode != null">
+        STATE_CODE,
+      </if>
+      <if test="creditCode != null">
+        CREDIT_CODE,
+      </if>
+      <if test="creditResult != null">
+        CREDIT_RESULT,
+      </if>
+      <if test="otherResult != null">
+        OTHER_RESULT,
+      </if>
+      <if test="ltzfInfo != null">
+        LTZF_INFO,
+      </if>
+      <if test="ltdsjInfo != null">
+        LTDSJ_INFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="appNo != null">
+        #{appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTypeCd != null">
+        #{businessTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTypeName != null">
+        #{businessTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=DECIMAL},
+      </if>
+      <if test="custSource != null">
+        #{custSource,jdbcType=VARCHAR},
+      </if>
+      <if test="channelSource != null">
+        #{channelSource,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="custBasicInfo != null">
+        #{custBasicInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="custOtherInfo != null">
+        #{custOtherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatusInfo != null">
+        #{deviceStatusInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineCheckInfo != null">
+        #{onlineCheckInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizationInfo != null">
+        #{authorizationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="bairongScoreInfo != null">
+        #{bairongScoreInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="otherInfo != null">
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="creditNo != null">
+        #{creditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="certNo != null">
+        #{certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null">
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTimestamp != null">
+        #{creditTimestamp,jdbcType=DECIMAL},
+      </if>
+      <if test="stateCode != null">
+        #{stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditResult != null">
+        #{creditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="otherResult != null">
+        #{otherResult,jdbcType=VARCHAR},
+      </if>
+      <if test="ltzfInfo != null">
+        #{ltzfInfo,jdbcType=CLOB},
+      </if>
+      <if test="ltdsjInfo != null">
+        #{ltdsjInfo,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyExample" resultType="java.lang.Long">
+    select count(*) from AIRM_LTGJ_MASTER_BODY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update AIRM_LTGJ_MASTER_BODY
+    <set>
+      <if test="record.sessionId != null">
+        SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appNo != null">
+        APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTypeCd != null">
+        BUSINESS_TYPE_CD = #{record.businessTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessTypeName != null">
+        BUSINESS_TYPE_NAME = #{record.businessTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyTime != null">
+        APPLY_TIME = #{record.applyTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.custSource != null">
+        CUST_SOURCE = #{record.custSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelSource != null">
+        CHANNEL_SOURCE = #{record.channelSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null">
+        CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custBasicInfo != null">
+        CUST_BASIC_INFO = #{record.custBasicInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custOtherInfo != null">
+        CUST_OTHER_INFO = #{record.custOtherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceStatusInfo != null">
+        DEVICE_STATUS_INFO = #{record.deviceStatusInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onlineCheckInfo != null">
+        ONLINE_CHECK_INFO = #{record.onlineCheckInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorizationInfo != null">
+        AUTHORIZATION_INFO = #{record.authorizationInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bairongScoreInfo != null">
+        BAIRONG_SCORE_INFO = #{record.bairongScoreInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherInfo != null">
+        OTHER_INFO = #{record.otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditNo != null">
+        CREDIT_NO = #{record.creditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null">
+        CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certNo != null">
+        CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null">
+        CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditTimestamp != null">
+        CREDIT_TIMESTAMP = #{record.creditTimestamp,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stateCode != null">
+        STATE_CODE = #{record.stateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditCode != null">
+        CREDIT_CODE = #{record.creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditResult != null">
+        CREDIT_RESULT = #{record.creditResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherResult != null">
+        OTHER_RESULT = #{record.otherResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ltzfInfo != null">
+        LTZF_INFO = #{record.ltzfInfo,jdbcType=CLOB},
+      </if>
+      <if test="record.ltdsjInfo != null">
+        LTDSJ_INFO = #{record.ltdsjInfo,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update AIRM_LTGJ_MASTER_BODY
+    set SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      BUSINESS_TYPE_CD = #{record.businessTypeCd,jdbcType=VARCHAR},
+      BUSINESS_TYPE_NAME = #{record.businessTypeName,jdbcType=VARCHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=DECIMAL},
+      CUST_SOURCE = #{record.custSource,jdbcType=VARCHAR},
+      CHANNEL_SOURCE = #{record.channelSource,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      CUST_BASIC_INFO = #{record.custBasicInfo,jdbcType=VARCHAR},
+      CUST_OTHER_INFO = #{record.custOtherInfo,jdbcType=VARCHAR},
+      DEVICE_STATUS_INFO = #{record.deviceStatusInfo,jdbcType=VARCHAR},
+      ONLINE_CHECK_INFO = #{record.onlineCheckInfo,jdbcType=VARCHAR},
+      AUTHORIZATION_INFO = #{record.authorizationInfo,jdbcType=VARCHAR},
+      BAIRONG_SCORE_INFO = #{record.bairongScoreInfo,jdbcType=VARCHAR},
+      OTHER_INFO = #{record.otherInfo,jdbcType=VARCHAR},
+      CREDIT_NO = #{record.creditNo,jdbcType=VARCHAR},
+      CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      CREDIT_TIMESTAMP = #{record.creditTimestamp,jdbcType=DECIMAL},
+      STATE_CODE = #{record.stateCode,jdbcType=VARCHAR},
+      CREDIT_CODE = #{record.creditCode,jdbcType=VARCHAR},
+      CREDIT_RESULT = #{record.creditResult,jdbcType=VARCHAR},
+      OTHER_RESULT = #{record.otherResult,jdbcType=VARCHAR},
+      LTZF_INFO = #{record.ltzfInfo,jdbcType=CLOB},
+      LTDSJ_INFO = #{record.ltdsjInfo,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update AIRM_LTGJ_MASTER_BODY
+    set SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      BUSINESS_TYPE_CD = #{record.businessTypeCd,jdbcType=VARCHAR},
+      BUSINESS_TYPE_NAME = #{record.businessTypeName,jdbcType=VARCHAR},
+      APPLY_TIME = #{record.applyTime,jdbcType=DECIMAL},
+      CUST_SOURCE = #{record.custSource,jdbcType=VARCHAR},
+      CHANNEL_SOURCE = #{record.channelSource,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      CUST_BASIC_INFO = #{record.custBasicInfo,jdbcType=VARCHAR},
+      CUST_OTHER_INFO = #{record.custOtherInfo,jdbcType=VARCHAR},
+      DEVICE_STATUS_INFO = #{record.deviceStatusInfo,jdbcType=VARCHAR},
+      ONLINE_CHECK_INFO = #{record.onlineCheckInfo,jdbcType=VARCHAR},
+      AUTHORIZATION_INFO = #{record.authorizationInfo,jdbcType=VARCHAR},
+      BAIRONG_SCORE_INFO = #{record.bairongScoreInfo,jdbcType=VARCHAR},
+      OTHER_INFO = #{record.otherInfo,jdbcType=VARCHAR},
+      CREDIT_NO = #{record.creditNo,jdbcType=VARCHAR},
+      CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      CERT_NO = #{record.certNo,jdbcType=VARCHAR},
+      CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      CREDIT_TIMESTAMP = #{record.creditTimestamp,jdbcType=DECIMAL},
+      STATE_CODE = #{record.stateCode,jdbcType=VARCHAR},
+      CREDIT_CODE = #{record.creditCode,jdbcType=VARCHAR},
+      CREDIT_RESULT = #{record.creditResult,jdbcType=VARCHAR},
+      OTHER_RESULT = #{record.otherResult,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

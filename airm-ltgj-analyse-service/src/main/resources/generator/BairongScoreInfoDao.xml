@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.BairongScoreInfoDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.BairongScoreInfo">
+    <result column="OUT_CODE" jdbcType="VARCHAR" property="outCode" />
+    <result column="OUT_DESC" jdbcType="VARCHAR" property="outDesc" />
+    <result column="SID" jdbcType="VARCHAR" property="sid" />
+    <result column="SEND_TYPE" jdbcType="VARCHAR" property="sendType" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bank.irce.ltgj.entity.BairongScoreInfo">
+    <result column="RETURN_BODY" jdbcType="CLOB" property="returnBody" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OUT_CODE, OUT_DESC, SID, SEND_TYPE, FILE_NAME
+  </sql>
+  <sql id="Blob_Column_List">
+    RETURN_BODY
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.bank.irce.ltgj.entity.BairongScoreInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BAIRONG_SCORE_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.BairongScoreInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BAIRONG_SCORE_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.BairongScoreInfoExample">
+    delete from BAIRONG_SCORE_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.BairongScoreInfo">
+    insert into BAIRONG_SCORE_INFO (OUT_CODE, OUT_DESC, SID, 
+      SEND_TYPE, FILE_NAME, RETURN_BODY
+      )
+    values (#{outCode,jdbcType=VARCHAR}, #{outDesc,jdbcType=VARCHAR}, #{sid,jdbcType=VARCHAR}, 
+      #{sendType,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{returnBody,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.BairongScoreInfo">
+    insert into BAIRONG_SCORE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="outCode != null">
+        OUT_CODE,
+      </if>
+      <if test="outDesc != null">
+        OUT_DESC,
+      </if>
+      <if test="sid != null">
+        SID,
+      </if>
+      <if test="sendType != null">
+        SEND_TYPE,
+      </if>
+      <if test="fileName != null">
+        FILE_NAME,
+      </if>
+      <if test="returnBody != null">
+        RETURN_BODY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="outCode != null">
+        #{outCode,jdbcType=VARCHAR},
+      </if>
+      <if test="outDesc != null">
+        #{outDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="sendType != null">
+        #{sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="returnBody != null">
+        #{returnBody,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.BairongScoreInfoExample" resultType="java.lang.Long">
+    select count(*) from BAIRONG_SCORE_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BAIRONG_SCORE_INFO
+    <set>
+      <if test="record.outCode != null">
+        OUT_CODE = #{record.outCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outDesc != null">
+        OUT_DESC = #{record.outDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null">
+        SID = #{record.sid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendType != null">
+        SEND_TYPE = #{record.sendType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileName != null">
+        FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnBody != null">
+        RETURN_BODY = #{record.returnBody,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update BAIRONG_SCORE_INFO
+    set OUT_CODE = #{record.outCode,jdbcType=VARCHAR},
+      OUT_DESC = #{record.outDesc,jdbcType=VARCHAR},
+      SID = #{record.sid,jdbcType=VARCHAR},
+      SEND_TYPE = #{record.sendType,jdbcType=VARCHAR},
+      FILE_NAME = #{record.fileName,jdbcType=VARCHAR},
+      RETURN_BODY = #{record.returnBody,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BAIRONG_SCORE_INFO
+    set OUT_CODE = #{record.outCode,jdbcType=VARCHAR},
+      OUT_DESC = #{record.outDesc,jdbcType=VARCHAR},
+      SID = #{record.sid,jdbcType=VARCHAR},
+      SEND_TYPE = #{record.sendType,jdbcType=VARCHAR},
+      FILE_NAME = #{record.fileName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
