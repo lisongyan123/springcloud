@@ -3,6 +3,7 @@ package com.bank.irce.ltgj.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
+import com.bank.irce.ltgj.entity.AuthorizationInfo;
 import com.bank.irce.ltgj.entity.dto.*;
 import com.bank.irce.ltgj.feign.IrceDataService;
 import com.bank.irce.ltgj.service.ArimFxgdService;
@@ -10,9 +11,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.math.BigDecimal;
+import java.util.function.Function;
 
 @Slf4j
 @Api(tags = "联通购机")
@@ -29,10 +34,9 @@ public class AirmLtgjController {
     @PostMapping("/user/evaluateCredit")
     public AirmLtgjMasterBody evaluateCredit(@RequestBody AirmLtgjMasterBody airmLtgjMasterBody) throws Exception {
         Double scoreconson = 0.0;
-        JSONObject scoreJson = new JSONObject();
         try{
             scoreconson = getScoreJson(airmLtgjMasterBody);
-        }catch (Exception e){
+        } catch (Exception e){
             scoreconson = 0.0;
         }
         if(scoreconson >= 755) {
@@ -41,6 +45,15 @@ public class AirmLtgjController {
         }
         String baironginfo = airmLtgjMasterBody.getBairongScoreInfo();
         String sessionId = airmLtgjMasterBody.getSessionId();
+        try {
+            String addr = getPbccAddr(airmLtgjMasterBody);
+            if(addr == null) throw new Exception("addr为空");
+        } catch (Exception e) {
+            airmLtgjMasterBody.setCreditCode("-999");
+            airmLtgjMasterBody.setCreditNo("-999");
+            airmLtgjMasterBody.setCreditResult("-999");
+            airmLtgjMasterBody.setCreditTimestamp(new BigDecimal(-999));
+        }
         // 获取文件名称
         String fileName = getFileName(JSON.parseObject(baironginfo).get("FILE_NAME").toString());
         // 调用科技部接口
@@ -65,7 +78,7 @@ public class AirmLtgjController {
         try {
             scoreconson = getScoreJson(airmLtgjMaster);
         } catch (Exception e) {
-            throw new Exception("取不到这scoreconson字段");
+            throw new Exception("取不到scoreconson字段");
         }
         if(scoreconson >= 755) {
             airmLtgjMaster.setCreditCode("0");
@@ -103,5 +116,13 @@ public class AirmLtgjController {
             fileName = pbccAddr.substring(i + 1, pbccAddr.length());
         }
         return fileName;
+    }
+
+    public String getPbccAddr(AirmLtgjMasterBody airmLtgjMasterBody) {
+        Function<String, AuthorizationInfo> jsonParse = (param) -> JSONObject.parseObject(param,AuthorizationInfo.class);
+        // 获取证件号码
+        AuthorizationInfo authorizationInfo = jsonParse.apply(airmLtgjMasterBody.getAuthorizationInfo());
+        String addr = authorizationInfo.getPbccAddr();
+        return addr;
     }
 }

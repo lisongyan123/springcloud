@@ -1,7 +1,5 @@
 package com.bank.irce.ltgj.mapper;
 
-import com.bank.irce.ltgj.entity.AirmLtgjResponseBody;
-import com.bank.irce.ltgj.entity.AirmLtgjResponseBodyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -9,19 +9,7 @@ import com.bank.irce.ltgj.entity.dto.*;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * @Author: XiongGaoXiang
- * @Date: 2020/7/14
- */
 public interface ArimFxgdService {
-
-    /**
-     * 获取路径
-     *
-     * @param pbccAddr 报文路径（原始报文+解析报文）
-     * @return 报文路径
-     */
-    String getFileName(String pbccAddr);
 
     /**
      * 获取模型信息对象
@@ -123,26 +111,6 @@ public interface ArimFxgdService {
      * @throws TradeException
      */
     int getAirmAccessCust2(ModelNoInfo modelNo, CustCard2ResVo custCard2ResVo, AirmLtgjMasterBody creditApprovalVo, OperTable operTable) throws TradeException;
-
-    /**
-     * 调用科技部接口获取报文
-     * @param sessionId
-     * @param confirmReadDto
-     * @param operTable
-     * @return
-     * @throws TradeException
-     */
-    String getContext(String sessionId, ConfirmReadDto confirmReadDto, OperTable operTable) throws TradeException;
-
-    /**
-     * 拉取征信报文
-     * @param pbccAddr
-     * @param sessionId
-     * @param operTable
-     * @return
-     * @throws TradeException
-     */
-    String getPbccResult(String pbccAddr, String sessionId, OperTable operTable) throws TradeException;
 
     AirmLtgjMasterBody productCard(int val1, int val2, AirmLtgjMasterBody airmLtgjMasterBody);
 }

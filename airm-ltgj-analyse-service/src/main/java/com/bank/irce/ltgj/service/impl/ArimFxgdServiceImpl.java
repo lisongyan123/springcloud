@@ -51,7 +51,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
 
     @Resource
     private Custcard2ModelInvokeMapper custcard2ModelInvokeMapper;
-    
+
     @Resource
     private AirmLogInfoMapper airmLogInfoMapper;
 
@@ -61,7 +61,6 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @param
      * @return
      */
-    @Override
     public String getFileName(String pbccAddr) {
         String fileName = "";
         int i = pbccAddr.indexOf("|");
@@ -94,7 +93,6 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @param
      * @return
      */
-    @Override
     public String getContext(String sessionId, ConfirmReadDto confirmReadDto, OperTable operTable) throws TradeException {
         LoggerUtil.logBusinessFile("下载报文请求参数 " + confirmReadDto);
         Map map = irceDataService.confirmRead(confirmReadDto);
@@ -138,36 +136,6 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
             return false;
         }
         return true;
-    }
-
-    /**
-     * 拉取征信报文
-     *
-     * @param pbccAddr
-     * @param sessionId
-     * @param operTable
-     * @return
-     * @throws TradeException
-     */
-    @Override
-    public String getPbccResult(String pbccAddr, String sessionId, OperTable operTable) throws TradeException {
-
-        if (Objects.isNull(pbccAddr) || "".equals(pbccAddr)) {
-            return Constant.DEFAULT_PARAMS;
-        } else {
-            // 获取文件名称
-            String fileName = getFileName(pbccAddr);
-//            // 调用科技部接口
-//            ConfirmReadDto confirmReadDto = new ConfirmReadDto(sessionId, fileName);
-//            String context = getContext(sessionId, confirmReadDto, operTable);
-//            // 添加征信报文
-//            operTable.setContext(context);
-//            return context;
-
-            // 外网不调用科技部接口
-            operTable.setContext(Constant.DEFAULT_PARAMS);
-            return Constant.DEFAULT_PARAMS;
-        }
     }
 
     @Override

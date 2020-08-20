@@ -1,7 +1,6 @@
 package com.bank.irce.ltgj.entity.dto;
 
 import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
-import com.bank.irce.ltgj.entity.AirmLtgjRequestBody;
 import lombok.Data;
 
 import java.io.Serializable;

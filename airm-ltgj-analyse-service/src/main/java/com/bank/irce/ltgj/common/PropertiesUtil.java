@@ -24,7 +24,7 @@ public class PropertiesUtil {
         max = getValue("max");
         min = getValue("min");
         mean = getValue("mean");
-        modelInfo = getValue("application.properties");
+        modelInfo = getValue("application.yml");
     }
 
     public static Properties getValue(String fileName) {
