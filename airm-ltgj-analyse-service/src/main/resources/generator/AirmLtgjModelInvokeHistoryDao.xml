@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.AirmLtgjModelInvokeHistoryDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="SESSION_ID" jdbcType="VARCHAR" property="sessionId" />
+    <result column="MODEL_NAME" jdbcType="VARCHAR" property="modelName" />
+    <result column="MODEL_NO" jdbcType="VARCHAR" property="modelNo" />
+    <result column="MODEL_RESULT" jdbcType="VARCHAR" property="modelResult" />
+    <result column="REQUEST_TIME" jdbcType="VARCHAR" property="requestTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    <result column="REQUEST_PARAMS" jdbcType="CLOB" property="requestParams" />
+    <result column="RESPONSE_PARAMS" jdbcType="CLOB" property="responseParams" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SESSION_ID, MODEL_NAME, MODEL_NO, MODEL_RESULT, REQUEST_TIME
+  </sql>
+  <sql id="Blob_Column_List">
+    REQUEST_PARAMS, RESPONSE_PARAMS
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistoryExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistoryExample">
+    delete from AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    insert into AIRM_LTGJ_MODEL_INVOKE_HISTORY (ID, SESSION_ID, MODEL_NAME, 
+      MODEL_NO, MODEL_RESULT, REQUEST_TIME, 
+      REQUEST_PARAMS, RESPONSE_PARAMS)
+    values (#{id,jdbcType=DECIMAL}, #{sessionId,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
+      #{modelNo,jdbcType=VARCHAR}, #{modelResult,jdbcType=VARCHAR}, #{requestTime,jdbcType=VARCHAR}, 
+      #{requestParams,jdbcType=CLOB}, #{responseParams,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    insert into AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sessionId != null">
+        SESSION_ID,
+      </if>
+      <if test="modelName != null">
+        MODEL_NAME,
+      </if>
+      <if test="modelNo != null">
+        MODEL_NO,
+      </if>
+      <if test="modelResult != null">
+        MODEL_RESULT,
+      </if>
+      <if test="requestTime != null">
+        REQUEST_TIME,
+      </if>
+      <if test="requestParams != null">
+        REQUEST_PARAMS,
+      </if>
+      <if test="responseParams != null">
+        RESPONSE_PARAMS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNo != null">
+        #{modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modelResult != null">
+        #{modelResult,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null">
+        #{requestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParams != null">
+        #{requestParams,jdbcType=CLOB},
+      </if>
+      <if test="responseParams != null">
+        #{responseParams,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistoryExample" resultType="java.lang.Long">
+    select count(*) from AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sessionId != null">
+        SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelName != null">
+        MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelNo != null">
+        MODEL_NO = #{record.modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelResult != null">
+        MODEL_RESULT = #{record.modelResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestTime != null">
+        REQUEST_TIME = #{record.requestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestParams != null">
+        REQUEST_PARAMS = #{record.requestParams,jdbcType=CLOB},
+      </if>
+      <if test="record.responseParams != null">
+        RESPONSE_PARAMS = #{record.responseParams,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    set ID = #{record.id,jdbcType=DECIMAL},
+      SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      MODEL_NO = #{record.modelNo,jdbcType=VARCHAR},
+      MODEL_RESULT = #{record.modelResult,jdbcType=VARCHAR},
+      REQUEST_TIME = #{record.requestTime,jdbcType=VARCHAR},
+      REQUEST_PARAMS = #{record.requestParams,jdbcType=CLOB},
+      RESPONSE_PARAMS = #{record.responseParams,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    set ID = #{record.id,jdbcType=DECIMAL},
+      SESSION_ID = #{record.sessionId,jdbcType=VARCHAR},
+      MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      MODEL_NO = #{record.modelNo,jdbcType=VARCHAR},
+      MODEL_RESULT = #{record.modelResult,jdbcType=VARCHAR},
+      REQUEST_TIME = #{record.requestTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

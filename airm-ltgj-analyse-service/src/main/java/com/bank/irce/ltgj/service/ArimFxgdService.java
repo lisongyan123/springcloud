@@ -1,9 +1,8 @@
 package com.bank.irce.ltgj.service;
 
+import com.bank.irce.ltgj.common.ResponseData;
 import com.bank.irce.ltgj.common.TradeException;
 import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
-import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
-import com.bank.irce.ltgj.entity.CreditResult;
 import com.bank.irce.ltgj.entity.dto.*;
 
 import java.io.IOException;
@@ -112,5 +111,14 @@ public interface ArimFxgdService {
      */
     int getAirmAccessCust2(ModelNoInfo modelNo, CustCard2ResVo custCard2ResVo, AirmLtgjMasterBody creditApprovalVo, OperTable operTable) throws TradeException;
 
-    AirmLtgjMasterBody productCard(int val1, int val2, AirmLtgjMasterBody airmLtgjMasterBody);
+    CustScore2Dto preprocessing(Map param, AirmLtgjMasterBody creditApprovalVo);
+
+    AirmLtgjMasterBody productCard(ResponseData<Map> val1, ResponseData<Map> val2, AirmLtgjMasterBody airmLtgjMasterBody);
+
+    Double getScoreJson(String bairongInfo);
+
+    String getPbccAddr(AirmLtgjMasterBody airmLtgjMasterBody);
+
+    String getFileName(String pbccAddr);
 }
+

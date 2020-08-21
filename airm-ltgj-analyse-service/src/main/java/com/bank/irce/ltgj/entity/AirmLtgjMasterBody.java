@@ -135,4 +135,14 @@ public class AirmLtgjMasterBody implements Serializable {
     private String otherResult;
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 联通支付信息
+     */
+    private String ltzfInfo;
+
+    /**
+     * 联通大数据信息
+     */
+    private String ltdsjInfo;
 }

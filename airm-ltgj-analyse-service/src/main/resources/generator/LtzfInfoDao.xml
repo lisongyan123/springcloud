@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.LtzfInfoDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.LtzfInfo">
+    <result column="STORE_ID" jdbcType="VARCHAR" property="storeId" />
+    <result column="STORE_NAME" jdbcType="VARCHAR" property="storeName" />
+    <result column="STORE_PROVINCE_CODE" jdbcType="VARCHAR" property="storeProvinceCode" />
+    <result column="STORE_CITY_CIDE" jdbcType="VARCHAR" property="storeCityCide" />
+    <result column="STORE_ZONE_CODE" jdbcType="VARCHAR" property="storeZoneCode" />
+    <result column="STORE_ADDRESS_DETAIL" jdbcType="VARCHAR" property="storeAddressDetail" />
+    <result column="SALES_NAME" jdbcType="VARCHAR" property="salesName" />
+    <result column="SALES_PHONE" jdbcType="VARCHAR" property="salesPhone" />
+    <result column="SALES_ID" jdbcType="VARCHAR" property="salesId" />
+    <result column="CMDTY_NAME" jdbcType="VARCHAR" property="cmdtyName" />
+    <result column="CMDTY_PRICE" jdbcType="VARCHAR" property="cmdtyPrice" />
+    <result column="LOAN_AMT" jdbcType="VARCHAR" property="loanAmt" />
+    <result column="LOAN_TERM" jdbcType="VARCHAR" property="loanTerm" />
+    <result column="CATEGORY" jdbcType="VARCHAR" property="category" />
+    <result column="CLIENT_ID" jdbcType="VARCHAR" property="clientId" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+    <result column="ACCURACY" jdbcType="DECIMAL" property="accuracy" />
+    <result column="BRAND_NAME" jdbcType="VARCHAR" property="brandName" />
+    <result column="MODEL_NAME" jdbcType="VARCHAR" property="modelName" />
+    <result column="DOWN_PMT_AMT" jdbcType="VARCHAR" property="downPmtAmt" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="ID_CARD_NO" jdbcType="VARCHAR" property="idCardNo" />
+    <result column="ID_CARD_BEGIN_DATE" jdbcType="VARCHAR" property="idCardBeginDate" />
+    <result column="ID_CARD_END_DATE" jdbcType="VARCHAR" property="idCardEndDate" />
+    <result column="ABODE_DETAIL" jdbcType="VARCHAR" property="abodeDetail" />
+    <result column="NAME_FLAG" jdbcType="VARCHAR" property="nameFlag" />
+    <result column="ID_CARD_NO_FLAG" jdbcType="VARCHAR" property="idCardNoFlag" />
+    <result column="ID_CARD_IN_DATE_FLAG" jdbcType="VARCHAR" property="idCardInDateFlag" />
+    <result column="NAME_MODIFY" jdbcType="VARCHAR" property="nameModify" />
+    <result column="ID_CARD_NO_MODIFY" jdbcType="VARCHAR" property="idCardNoModify" />
+    <result column="ID_CARD_BEGIN_DATE_MODIFY" jdbcType="VARCHAR" property="idCardBeginDateModify" />
+    <result column="ID_CARD_END_DATE_MODIFY" jdbcType="VARCHAR" property="idCardEndDateModify" />
+    <result column="BANK_CARD_NO" jdbcType="VARCHAR" property="bankCardNo" />
+    <result column="BANK_PHONE" jdbcType="VARCHAR" property="bankPhone" />
+    <result column="BANK_ACCOUNT_NAME" jdbcType="VARCHAR" property="bankAccountName" />
+    <result column="ABODE_STATE_CODE" jdbcType="VARCHAR" property="abodeStateCode" />
+    <result column="ABODE_CITY_CODE" jdbcType="VARCHAR" property="abodeCityCode" />
+    <result column="ABODE_ZONE_CODE" jdbcType="VARCHAR" property="abodeZoneCode" />
+    <result column="ABODE_DETAIL_ADDRESS" jdbcType="VARCHAR" property="abodeDetailAddress" />
+    <result column="MARITAL_STATUS" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="MOUTH_INCOME" jdbcType="VARCHAR" property="mouthIncome" />
+    <result column="SOCIAL_IDENTITY" jdbcType="VARCHAR" property="socialIdentity" />
+    <result column="STUDENT_FLAG" jdbcType="VARCHAR" property="studentFlag" />
+    <result column="APPLY_PHONE_NO" jdbcType="VARCHAR" property="applyPhoneNo" />
+    <result column="APPLY_PHONE_OS" jdbcType="VARCHAR" property="applyPhoneOs" />
+    <result column="APPLY_WZF_TIME" jdbcType="VARCHAR" property="applyWzfTime" />
+    <result column="UNIT_NAME" jdbcType="VARCHAR" property="unitName" />
+    <result column="EMP_PHONE" jdbcType="VARCHAR" property="empPhone" />
+    <result column="EMP_PROVINCE_CODE" jdbcType="VARCHAR" property="empProvinceCode" />
+    <result column="EMP_CITY_CODE" jdbcType="VARCHAR" property="empCityCode" />
+    <result column="EMP_ZONE_CODE" jdbcType="VARCHAR" property="empZoneCode" />
+    <result column="EMP_ADDR" jdbcType="VARCHAR" property="empAddr" />
+    <result column="AUTH_NUMBER" jdbcType="VARCHAR" property="authNumber" />
+    <result column="OUT_ORDER_ID" jdbcType="VARCHAR" property="outOrderId" />
+    <result column="APP_NO" jdbcType="VARCHAR" property="appNo" />
+    <result column="TOTAL_AMT" jdbcType="VARCHAR" property="totalAmt" />
+    <result column="USER_NO" jdbcType="VARCHAR" property="userNo" />
+    <result column="NOTYFY_URL" jdbcType="VARCHAR" property="notyfyUrl" />
+    <result column="MER_NAME" jdbcType="VARCHAR" property="merName" />
+    <result column="CURRENT_STORE_FLAG" jdbcType="VARCHAR" property="currentStoreFlag" />
+    <result column="SALE_ADDRESS" jdbcType="VARCHAR" property="saleAddress" />
+    <result column="BIZ_LICENCE_NO" jdbcType="VARCHAR" property="bizLicenceNo" />
+    <result column="BIZ_LICENCE_NAME" jdbcType="VARCHAR" property="bizLicenceName" />
+    <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1" />
+    <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2" />
+    <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bank.irce.ltgj.entity.LtzfInfo">
+    <result column="CONTACT_LIST" jdbcType="CLOB" property="contactList" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    STORE_ID, STORE_NAME, STORE_PROVINCE_CODE, STORE_CITY_CIDE, STORE_ZONE_CODE, STORE_ADDRESS_DETAIL, 
+    SALES_NAME, SALES_PHONE, SALES_ID, CMDTY_NAME, CMDTY_PRICE, LOAN_AMT, LOAN_TERM, 
+    CATEGORY, CLIENT_ID, "TYPE", LONGITUDE, LATITUDE, ACCURACY, BRAND_NAME, MODEL_NAME, 
+    DOWN_PMT_AMT, "NAME", ID_CARD_NO, ID_CARD_BEGIN_DATE, ID_CARD_END_DATE, ABODE_DETAIL, 
+    NAME_FLAG, ID_CARD_NO_FLAG, ID_CARD_IN_DATE_FLAG, NAME_MODIFY, ID_CARD_NO_MODIFY, 
+    ID_CARD_BEGIN_DATE_MODIFY, ID_CARD_END_DATE_MODIFY, BANK_CARD_NO, BANK_PHONE, BANK_ACCOUNT_NAME, 
+    ABODE_STATE_CODE, ABODE_CITY_CODE, ABODE_ZONE_CODE, ABODE_DETAIL_ADDRESS, MARITAL_STATUS, 
+    MOUTH_INCOME, SOCIAL_IDENTITY, STUDENT_FLAG, APPLY_PHONE_NO, APPLY_PHONE_OS, APPLY_WZF_TIME, 
+    UNIT_NAME, EMP_PHONE, EMP_PROVINCE_CODE, EMP_CITY_CODE, EMP_ZONE_CODE, EMP_ADDR, 
+    AUTH_NUMBER, OUT_ORDER_ID, APP_NO, TOTAL_AMT, USER_NO, NOTYFY_URL, MER_NAME, CURRENT_STORE_FLAG, 
+    SALE_ADDRESS, BIZ_LICENCE_NO, BIZ_LICENCE_NAME, RESERVE1, RESERVE2, RESERVE3
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTACT_LIST
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.bank.irce.ltgj.entity.LtzfInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from LTZF_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.LtzfInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from LTZF_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.LtzfInfoExample">
+    delete from LTZF_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.LtzfInfo">
+    insert into LTZF_INFO (STORE_ID, STORE_NAME, STORE_PROVINCE_CODE, 
+      STORE_CITY_CIDE, STORE_ZONE_CODE, STORE_ADDRESS_DETAIL, 
+      SALES_NAME, SALES_PHONE, SALES_ID, 
+      CMDTY_NAME, CMDTY_PRICE, LOAN_AMT, 
+      LOAN_TERM, CATEGORY, CLIENT_ID, 
+      "TYPE", LONGITUDE, LATITUDE, 
+      ACCURACY, BRAND_NAME, MODEL_NAME, 
+      DOWN_PMT_AMT, "NAME", ID_CARD_NO, 
+      ID_CARD_BEGIN_DATE, ID_CARD_END_DATE, ABODE_DETAIL, 
+      NAME_FLAG, ID_CARD_NO_FLAG, ID_CARD_IN_DATE_FLAG, 
+      NAME_MODIFY, ID_CARD_NO_MODIFY, ID_CARD_BEGIN_DATE_MODIFY, 
+      ID_CARD_END_DATE_MODIFY, BANK_CARD_NO, BANK_PHONE, 
+      BANK_ACCOUNT_NAME, ABODE_STATE_CODE, ABODE_CITY_CODE, 
+      ABODE_ZONE_CODE, ABODE_DETAIL_ADDRESS, MARITAL_STATUS, 
+      MOUTH_INCOME, SOCIAL_IDENTITY, STUDENT_FLAG, 
+      APPLY_PHONE_NO, APPLY_PHONE_OS, APPLY_WZF_TIME, 
+      UNIT_NAME, EMP_PHONE, EMP_PROVINCE_CODE, 
+      EMP_CITY_CODE, EMP_ZONE_CODE, EMP_ADDR, 
+      AUTH_NUMBER, OUT_ORDER_ID, APP_NO, 
+      TOTAL_AMT, USER_NO, NOTYFY_URL, 
+      MER_NAME, CURRENT_STORE_FLAG, SALE_ADDRESS, 
+      BIZ_LICENCE_NO, BIZ_LICENCE_NAME, RESERVE1, 
+      RESERVE2, RESERVE3, CONTACT_LIST
+      )
+    values (#{storeId,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, #{storeProvinceCode,jdbcType=VARCHAR}, 
+      #{storeCityCide,jdbcType=VARCHAR}, #{storeZoneCode,jdbcType=VARCHAR}, #{storeAddressDetail,jdbcType=VARCHAR}, 
+      #{salesName,jdbcType=VARCHAR}, #{salesPhone,jdbcType=VARCHAR}, #{salesId,jdbcType=VARCHAR}, 
+      #{cmdtyName,jdbcType=VARCHAR}, #{cmdtyPrice,jdbcType=VARCHAR}, #{loanAmt,jdbcType=VARCHAR}, 
+      #{loanTerm,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{clientId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{accuracy,jdbcType=DECIMAL}, #{brandName,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
+      #{downPmtAmt,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{idCardNo,jdbcType=VARCHAR}, 
+      #{idCardBeginDate,jdbcType=VARCHAR}, #{idCardEndDate,jdbcType=VARCHAR}, #{abodeDetail,jdbcType=VARCHAR}, 
+      #{nameFlag,jdbcType=VARCHAR}, #{idCardNoFlag,jdbcType=VARCHAR}, #{idCardInDateFlag,jdbcType=VARCHAR}, 
+      #{nameModify,jdbcType=VARCHAR}, #{idCardNoModify,jdbcType=VARCHAR}, #{idCardBeginDateModify,jdbcType=VARCHAR}, 
+      #{idCardEndDateModify,jdbcType=VARCHAR}, #{bankCardNo,jdbcType=VARCHAR}, #{bankPhone,jdbcType=VARCHAR}, 
+      #{bankAccountName,jdbcType=VARCHAR}, #{abodeStateCode,jdbcType=VARCHAR}, #{abodeCityCode,jdbcType=VARCHAR}, 
+      #{abodeZoneCode,jdbcType=VARCHAR}, #{abodeDetailAddress,jdbcType=VARCHAR}, #{maritalStatus,jdbcType=VARCHAR}, 
+      #{mouthIncome,jdbcType=VARCHAR}, #{socialIdentity,jdbcType=VARCHAR}, #{studentFlag,jdbcType=VARCHAR}, 
+      #{applyPhoneNo,jdbcType=VARCHAR}, #{applyPhoneOs,jdbcType=VARCHAR}, #{applyWzfTime,jdbcType=VARCHAR}, 
+      #{unitName,jdbcType=VARCHAR}, #{empPhone,jdbcType=VARCHAR}, #{empProvinceCode,jdbcType=VARCHAR}, 
+      #{empCityCode,jdbcType=VARCHAR}, #{empZoneCode,jdbcType=VARCHAR}, #{empAddr,jdbcType=VARCHAR}, 
+      #{authNumber,jdbcType=VARCHAR}, #{outOrderId,jdbcType=VARCHAR}, #{appNo,jdbcType=VARCHAR}, 
+      #{totalAmt,jdbcType=VARCHAR}, #{userNo,jdbcType=VARCHAR}, #{notyfyUrl,jdbcType=VARCHAR}, 
+      #{merName,jdbcType=VARCHAR}, #{currentStoreFlag,jdbcType=VARCHAR}, #{saleAddress,jdbcType=VARCHAR}, 
+      #{bizLicenceNo,jdbcType=VARCHAR}, #{bizLicenceName,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}, 
+      #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}, #{contactList,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.LtzfInfo">
+    insert into LTZF_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="storeId != null">
+        STORE_ID,
+      </if>
+      <if test="storeName != null">
+        STORE_NAME,
+      </if>
+      <if test="storeProvinceCode != null">
+        STORE_PROVINCE_CODE,
+      </if>
+      <if test="storeCityCide != null">
+        STORE_CITY_CIDE,
+      </if>
+      <if test="storeZoneCode != null">
+        STORE_ZONE_CODE,
+      </if>
+      <if test="storeAddressDetail != null">
+        STORE_ADDRESS_DETAIL,
+      </if>
+      <if test="salesName != null">
+        SALES_NAME,
+      </if>
+      <if test="salesPhone != null">
+        SALES_PHONE,
+      </if>
+      <if test="salesId != null">
+        SALES_ID,
+      </if>
+      <if test="cmdtyName != null">
+        CMDTY_NAME,
+      </if>
+      <if test="cmdtyPrice != null">
+        CMDTY_PRICE,
+      </if>
+      <if test="loanAmt != null">
+        LOAN_AMT,
+      </if>
+      <if test="loanTerm != null">
+        LOAN_TERM,
+      </if>
+      <if test="category != null">
+        CATEGORY,
+      </if>
+      <if test="clientId != null">
+        CLIENT_ID,
+      </if>
+      <if test="type != null">
+        "TYPE",
+      </if>
+      <if test="longitude != null">
+        LONGITUDE,
+      </if>
+      <if test="latitude != null">
+        LATITUDE,
+      </if>
+      <if test="accuracy != null">
+        ACCURACY,
+      </if>
+      <if test="brandName != null">
+        BRAND_NAME,
+      </if>
+      <if test="modelName != null">
+        MODEL_NAME,
+      </if>
+      <if test="downPmtAmt != null">
+        DOWN_PMT_AMT,
+      </if>
+      <if test="name != null">
+        "NAME",
+      </if>
+      <if test="idCardNo != null">
+        ID_CARD_NO,
+      </if>
+      <if test="idCardBeginDate != null">
+        ID_CARD_BEGIN_DATE,
+      </if>
+      <if test="idCardEndDate != null">
+        ID_CARD_END_DATE,
+      </if>
+      <if test="abodeDetail != null">
+        ABODE_DETAIL,
+      </if>
+      <if test="nameFlag != null">
+        NAME_FLAG,
+      </if>
+      <if test="idCardNoFlag != null">
+        ID_CARD_NO_FLAG,
+      </if>
+      <if test="idCardInDateFlag != null">
+        ID_CARD_IN_DATE_FLAG,
+      </if>
+      <if test="nameModify != null">
+        NAME_MODIFY,
+      </if>
+      <if test="idCardNoModify != null">
+        ID_CARD_NO_MODIFY,
+      </if>
+      <if test="idCardBeginDateModify != null">
+        ID_CARD_BEGIN_DATE_MODIFY,
+      </if>
+      <if test="idCardEndDateModify != null">
+        ID_CARD_END_DATE_MODIFY,
+      </if>
+      <if test="bankCardNo != null">
+        BANK_CARD_NO,
+      </if>
+      <if test="bankPhone != null">
+        BANK_PHONE,
+      </if>
+      <if test="bankAccountName != null">
+        BANK_ACCOUNT_NAME,
+      </if>
+      <if test="abodeStateCode != null">
+        ABODE_STATE_CODE,
+      </if>
+      <if test="abodeCityCode != null">
+        ABODE_CITY_CODE,
+      </if>
+      <if test="abodeZoneCode != null">
+        ABODE_ZONE_CODE,
+      </if>
+      <if test="abodeDetailAddress != null">
+        ABODE_DETAIL_ADDRESS,
+      </if>
+      <if test="maritalStatus != null">
+        MARITAL_STATUS,
+      </if>
+      <if test="mouthIncome != null">
+        MOUTH_INCOME,
+      </if>
+      <if test="socialIdentity != null">
+        SOCIAL_IDENTITY,
+      </if>
+      <if test="studentFlag != null">
+        STUDENT_FLAG,
+      </if>
+      <if test="applyPhoneNo != null">
+        APPLY_PHONE_NO,
+      </if>
+      <if test="applyPhoneOs != null">
+        APPLY_PHONE_OS,
+      </if>
+      <if test="applyWzfTime != null">
+        APPLY_WZF_TIME,
+      </if>
+      <if test="unitName != null">
+        UNIT_NAME,
+      </if>
+      <if test="empPhone != null">
+        EMP_PHONE,
+      </if>
+      <if test="empProvinceCode != null">
+        EMP_PROVINCE_CODE,
+      </if>
+      <if test="empCityCode != null">
+        EMP_CITY_CODE,
+      </if>
+      <if test="empZoneCode != null">
+        EMP_ZONE_CODE,
+      </if>
+      <if test="empAddr != null">
+        EMP_ADDR,
+      </if>
+      <if test="authNumber != null">
+        AUTH_NUMBER,
+      </if>
+      <if test="outOrderId != null">
+        OUT_ORDER_ID,
+      </if>
+      <if test="appNo != null">
+        APP_NO,
+      </if>
+      <if test="totalAmt != null">
+        TOTAL_AMT,
+      </if>
+      <if test="userNo != null">
+        USER_NO,
+      </if>
+      <if test="notyfyUrl != null">
+        NOTYFY_URL,
+      </if>
+      <if test="merName != null">
+        MER_NAME,
+      </if>
+      <if test="currentStoreFlag != null">
+        CURRENT_STORE_FLAG,
+      </if>
+      <if test="saleAddress != null">
+        SALE_ADDRESS,
+      </if>
+      <if test="bizLicenceNo != null">
+        BIZ_LICENCE_NO,
+      </if>
+      <if test="bizLicenceName != null">
+        BIZ_LICENCE_NAME,
+      </if>
+      <if test="reserve1 != null">
+        RESERVE1,
+      </if>
+      <if test="reserve2 != null">
+        RESERVE2,
+      </if>
+      <if test="reserve3 != null">
+        RESERVE3,
+      </if>
+      <if test="contactList != null">
+        CONTACT_LIST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="storeId != null">
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeProvinceCode != null">
+        #{storeProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeCityCide != null">
+        #{storeCityCide,jdbcType=VARCHAR},
+      </if>
+      <if test="storeZoneCode != null">
+        #{storeZoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storeAddressDetail != null">
+        #{storeAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="salesName != null">
+        #{salesName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesPhone != null">
+        #{salesPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="salesId != null">
+        #{salesId,jdbcType=VARCHAR},
+      </if>
+      <if test="cmdtyName != null">
+        #{cmdtyName,jdbcType=VARCHAR},
+      </if>
+      <if test="cmdtyPrice != null">
+        #{cmdtyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="loanAmt != null">
+        #{loanAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="loanTerm != null">
+        #{loanTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="accuracy != null">
+        #{accuracy,jdbcType=DECIMAL},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="downPmtAmt != null">
+        #{downPmtAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNo != null">
+        #{idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardBeginDate != null">
+        #{idCardBeginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardEndDate != null">
+        #{idCardEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="abodeDetail != null">
+        #{abodeDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="nameFlag != null">
+        #{nameFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNoFlag != null">
+        #{idCardNoFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardInDateFlag != null">
+        #{idCardInDateFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="nameModify != null">
+        #{nameModify,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardNoModify != null">
+        #{idCardNoModify,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardBeginDateModify != null">
+        #{idCardBeginDateModify,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardEndDateModify != null">
+        #{idCardEndDateModify,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null">
+        #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPhone != null">
+        #{bankPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountName != null">
+        #{bankAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="abodeStateCode != null">
+        #{abodeStateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="abodeCityCode != null">
+        #{abodeCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="abodeZoneCode != null">
+        #{abodeZoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="abodeDetailAddress != null">
+        #{abodeDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mouthIncome != null">
+        #{mouthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="socialIdentity != null">
+        #{socialIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="studentFlag != null">
+        #{studentFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPhoneNo != null">
+        #{applyPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="applyPhoneOs != null">
+        #{applyPhoneOs,jdbcType=VARCHAR},
+      </if>
+      <if test="applyWzfTime != null">
+        #{applyWzfTime,jdbcType=VARCHAR},
+      </if>
+      <if test="unitName != null">
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="empPhone != null">
+        #{empPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="empProvinceCode != null">
+        #{empProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="empCityCode != null">
+        #{empCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="empZoneCode != null">
+        #{empZoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="empAddr != null">
+        #{empAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="authNumber != null">
+        #{authNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="outOrderId != null">
+        #{outOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="appNo != null">
+        #{appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmt != null">
+        #{totalAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null">
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="notyfyUrl != null">
+        #{notyfyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null">
+        #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="currentStoreFlag != null">
+        #{currentStoreFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="saleAddress != null">
+        #{saleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bizLicenceNo != null">
+        #{bizLicenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bizLicenceName != null">
+        #{bizLicenceName,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="contactList != null">
+        #{contactList,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.LtzfInfoExample" resultType="java.lang.Long">
+    select count(*) from LTZF_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update LTZF_INFO
+    <set>
+      <if test="record.storeId != null">
+        STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeName != null">
+        STORE_NAME = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeProvinceCode != null">
+        STORE_PROVINCE_CODE = #{record.storeProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeCityCide != null">
+        STORE_CITY_CIDE = #{record.storeCityCide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeZoneCode != null">
+        STORE_ZONE_CODE = #{record.storeZoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeAddressDetail != null">
+        STORE_ADDRESS_DETAIL = #{record.storeAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesName != null">
+        SALES_NAME = #{record.salesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesPhone != null">
+        SALES_PHONE = #{record.salesPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesId != null">
+        SALES_ID = #{record.salesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmdtyName != null">
+        CMDTY_NAME = #{record.cmdtyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmdtyPrice != null">
+        CMDTY_PRICE = #{record.cmdtyPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanAmt != null">
+        LOAN_AMT = #{record.loanAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanTerm != null">
+        LOAN_TERM = #{record.loanTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null">
+        CATEGORY = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientId != null">
+        CLIENT_ID = #{record.clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        "TYPE" = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null">
+        LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accuracy != null">
+        ACCURACY = #{record.accuracy,jdbcType=DECIMAL},
+      </if>
+      <if test="record.brandName != null">
+        BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelName != null">
+        MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downPmtAmt != null">
+        DOWN_PMT_AMT = #{record.downPmtAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        "NAME" = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardNo != null">
+        ID_CARD_NO = #{record.idCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardBeginDate != null">
+        ID_CARD_BEGIN_DATE = #{record.idCardBeginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardEndDate != null">
+        ID_CARD_END_DATE = #{record.idCardEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abodeDetail != null">
+        ABODE_DETAIL = #{record.abodeDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameFlag != null">
+        NAME_FLAG = #{record.nameFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardNoFlag != null">
+        ID_CARD_NO_FLAG = #{record.idCardNoFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardInDateFlag != null">
+        ID_CARD_IN_DATE_FLAG = #{record.idCardInDateFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameModify != null">
+        NAME_MODIFY = #{record.nameModify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardNoModify != null">
+        ID_CARD_NO_MODIFY = #{record.idCardNoModify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardBeginDateModify != null">
+        ID_CARD_BEGIN_DATE_MODIFY = #{record.idCardBeginDateModify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardEndDateModify != null">
+        ID_CARD_END_DATE_MODIFY = #{record.idCardEndDateModify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCardNo != null">
+        BANK_CARD_NO = #{record.bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankPhone != null">
+        BANK_PHONE = #{record.bankPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccountName != null">
+        BANK_ACCOUNT_NAME = #{record.bankAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abodeStateCode != null">
+        ABODE_STATE_CODE = #{record.abodeStateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abodeCityCode != null">
+        ABODE_CITY_CODE = #{record.abodeCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abodeZoneCode != null">
+        ABODE_ZONE_CODE = #{record.abodeZoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abodeDetailAddress != null">
+        ABODE_DETAIL_ADDRESS = #{record.abodeDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maritalStatus != null">
+        MARITAL_STATUS = #{record.maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mouthIncome != null">
+        MOUTH_INCOME = #{record.mouthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.socialIdentity != null">
+        SOCIAL_IDENTITY = #{record.socialIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentFlag != null">
+        STUDENT_FLAG = #{record.studentFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyPhoneNo != null">
+        APPLY_PHONE_NO = #{record.applyPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyPhoneOs != null">
+        APPLY_PHONE_OS = #{record.applyPhoneOs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyWzfTime != null">
+        APPLY_WZF_TIME = #{record.applyWzfTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitName != null">
+        UNIT_NAME = #{record.unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empPhone != null">
+        EMP_PHONE = #{record.empPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empProvinceCode != null">
+        EMP_PROVINCE_CODE = #{record.empProvinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empCityCode != null">
+        EMP_CITY_CODE = #{record.empCityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empZoneCode != null">
+        EMP_ZONE_CODE = #{record.empZoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empAddr != null">
+        EMP_ADDR = #{record.empAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authNumber != null">
+        AUTH_NUMBER = #{record.authNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOrderId != null">
+        OUT_ORDER_ID = #{record.outOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appNo != null">
+        APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalAmt != null">
+        TOTAL_AMT = #{record.totalAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNo != null">
+        USER_NO = #{record.userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notyfyUrl != null">
+        NOTYFY_URL = #{record.notyfyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merName != null">
+        MER_NAME = #{record.merName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentStoreFlag != null">
+        CURRENT_STORE_FLAG = #{record.currentStoreFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleAddress != null">
+        SALE_ADDRESS = #{record.saleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizLicenceNo != null">
+        BIZ_LICENCE_NO = #{record.bizLicenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizLicenceName != null">
+        BIZ_LICENCE_NAME = #{record.bizLicenceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve1 != null">
+        RESERVE1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        RESERVE2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        RESERVE3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactList != null">
+        CONTACT_LIST = #{record.contactList,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update LTZF_INFO
+    set STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      STORE_NAME = #{record.storeName,jdbcType=VARCHAR},
+      STORE_PROVINCE_CODE = #{record.storeProvinceCode,jdbcType=VARCHAR},
+      STORE_CITY_CIDE = #{record.storeCityCide,jdbcType=VARCHAR},
+      STORE_ZONE_CODE = #{record.storeZoneCode,jdbcType=VARCHAR},
+      STORE_ADDRESS_DETAIL = #{record.storeAddressDetail,jdbcType=VARCHAR},
+      SALES_NAME = #{record.salesName,jdbcType=VARCHAR},
+      SALES_PHONE = #{record.salesPhone,jdbcType=VARCHAR},
+      SALES_ID = #{record.salesId,jdbcType=VARCHAR},
+      CMDTY_NAME = #{record.cmdtyName,jdbcType=VARCHAR},
+      CMDTY_PRICE = #{record.cmdtyPrice,jdbcType=VARCHAR},
+      LOAN_AMT = #{record.loanAmt,jdbcType=VARCHAR},
+      LOAN_TERM = #{record.loanTerm,jdbcType=VARCHAR},
+      CATEGORY = #{record.category,jdbcType=VARCHAR},
+      CLIENT_ID = #{record.clientId,jdbcType=VARCHAR},
+      "TYPE" = #{record.type,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      ACCURACY = #{record.accuracy,jdbcType=DECIMAL},
+      BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      DOWN_PMT_AMT = #{record.downPmtAmt,jdbcType=VARCHAR},
+      "NAME" = #{record.name,jdbcType=VARCHAR},
+      ID_CARD_NO = #{record.idCardNo,jdbcType=VARCHAR},
+      ID_CARD_BEGIN_DATE = #{record.idCardBeginDate,jdbcType=VARCHAR},
+      ID_CARD_END_DATE = #{record.idCardEndDate,jdbcType=VARCHAR},
+      ABODE_DETAIL = #{record.abodeDetail,jdbcType=VARCHAR},
+      NAME_FLAG = #{record.nameFlag,jdbcType=VARCHAR},
+      ID_CARD_NO_FLAG = #{record.idCardNoFlag,jdbcType=VARCHAR},
+      ID_CARD_IN_DATE_FLAG = #{record.idCardInDateFlag,jdbcType=VARCHAR},
+      NAME_MODIFY = #{record.nameModify,jdbcType=VARCHAR},
+      ID_CARD_NO_MODIFY = #{record.idCardNoModify,jdbcType=VARCHAR},
+      ID_CARD_BEGIN_DATE_MODIFY = #{record.idCardBeginDateModify,jdbcType=VARCHAR},
+      ID_CARD_END_DATE_MODIFY = #{record.idCardEndDateModify,jdbcType=VARCHAR},
+      BANK_CARD_NO = #{record.bankCardNo,jdbcType=VARCHAR},
+      BANK_PHONE = #{record.bankPhone,jdbcType=VARCHAR},
+      BANK_ACCOUNT_NAME = #{record.bankAccountName,jdbcType=VARCHAR},
+      ABODE_STATE_CODE = #{record.abodeStateCode,jdbcType=VARCHAR},
+      ABODE_CITY_CODE = #{record.abodeCityCode,jdbcType=VARCHAR},
+      ABODE_ZONE_CODE = #{record.abodeZoneCode,jdbcType=VARCHAR},
+      ABODE_DETAIL_ADDRESS = #{record.abodeDetailAddress,jdbcType=VARCHAR},
+      MARITAL_STATUS = #{record.maritalStatus,jdbcType=VARCHAR},
+      MOUTH_INCOME = #{record.mouthIncome,jdbcType=VARCHAR},
+      SOCIAL_IDENTITY = #{record.socialIdentity,jdbcType=VARCHAR},
+      STUDENT_FLAG = #{record.studentFlag,jdbcType=VARCHAR},
+      APPLY_PHONE_NO = #{record.applyPhoneNo,jdbcType=VARCHAR},
+      APPLY_PHONE_OS = #{record.applyPhoneOs,jdbcType=VARCHAR},
+      APPLY_WZF_TIME = #{record.applyWzfTime,jdbcType=VARCHAR},
+      UNIT_NAME = #{record.unitName,jdbcType=VARCHAR},
+      EMP_PHONE = #{record.empPhone,jdbcType=VARCHAR},
+      EMP_PROVINCE_CODE = #{record.empProvinceCode,jdbcType=VARCHAR},
+      EMP_CITY_CODE = #{record.empCityCode,jdbcType=VARCHAR},
+      EMP_ZONE_CODE = #{record.empZoneCode,jdbcType=VARCHAR},
+      EMP_ADDR = #{record.empAddr,jdbcType=VARCHAR},
+      AUTH_NUMBER = #{record.authNumber,jdbcType=VARCHAR},
+      OUT_ORDER_ID = #{record.outOrderId,jdbcType=VARCHAR},
+      APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      TOTAL_AMT = #{record.totalAmt,jdbcType=VARCHAR},
+      USER_NO = #{record.userNo,jdbcType=VARCHAR},
+      NOTYFY_URL = #{record.notyfyUrl,jdbcType=VARCHAR},
+      MER_NAME = #{record.merName,jdbcType=VARCHAR},
+      CURRENT_STORE_FLAG = #{record.currentStoreFlag,jdbcType=VARCHAR},
+      SALE_ADDRESS = #{record.saleAddress,jdbcType=VARCHAR},
+      BIZ_LICENCE_NO = #{record.bizLicenceNo,jdbcType=VARCHAR},
+      BIZ_LICENCE_NAME = #{record.bizLicenceName,jdbcType=VARCHAR},
+      RESERVE1 = #{record.reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{record.reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{record.reserve3,jdbcType=VARCHAR},
+      CONTACT_LIST = #{record.contactList,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update LTZF_INFO
+    set STORE_ID = #{record.storeId,jdbcType=VARCHAR},
+      STORE_NAME = #{record.storeName,jdbcType=VARCHAR},
+      STORE_PROVINCE_CODE = #{record.storeProvinceCode,jdbcType=VARCHAR},
+      STORE_CITY_CIDE = #{record.storeCityCide,jdbcType=VARCHAR},
+      STORE_ZONE_CODE = #{record.storeZoneCode,jdbcType=VARCHAR},
+      STORE_ADDRESS_DETAIL = #{record.storeAddressDetail,jdbcType=VARCHAR},
+      SALES_NAME = #{record.salesName,jdbcType=VARCHAR},
+      SALES_PHONE = #{record.salesPhone,jdbcType=VARCHAR},
+      SALES_ID = #{record.salesId,jdbcType=VARCHAR},
+      CMDTY_NAME = #{record.cmdtyName,jdbcType=VARCHAR},
+      CMDTY_PRICE = #{record.cmdtyPrice,jdbcType=VARCHAR},
+      LOAN_AMT = #{record.loanAmt,jdbcType=VARCHAR},
+      LOAN_TERM = #{record.loanTerm,jdbcType=VARCHAR},
+      CATEGORY = #{record.category,jdbcType=VARCHAR},
+      CLIENT_ID = #{record.clientId,jdbcType=VARCHAR},
+      "TYPE" = #{record.type,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      ACCURACY = #{record.accuracy,jdbcType=DECIMAL},
+      BRAND_NAME = #{record.brandName,jdbcType=VARCHAR},
+      MODEL_NAME = #{record.modelName,jdbcType=VARCHAR},
+      DOWN_PMT_AMT = #{record.downPmtAmt,jdbcType=VARCHAR},
+      "NAME" = #{record.name,jdbcType=VARCHAR},
+      ID_CARD_NO = #{record.idCardNo,jdbcType=VARCHAR},
+      ID_CARD_BEGIN_DATE = #{record.idCardBeginDate,jdbcType=VARCHAR},
+      ID_CARD_END_DATE = #{record.idCardEndDate,jdbcType=VARCHAR},
+      ABODE_DETAIL = #{record.abodeDetail,jdbcType=VARCHAR},
+      NAME_FLAG = #{record.nameFlag,jdbcType=VARCHAR},
+      ID_CARD_NO_FLAG = #{record.idCardNoFlag,jdbcType=VARCHAR},
+      ID_CARD_IN_DATE_FLAG = #{record.idCardInDateFlag,jdbcType=VARCHAR},
+      NAME_MODIFY = #{record.nameModify,jdbcType=VARCHAR},
+      ID_CARD_NO_MODIFY = #{record.idCardNoModify,jdbcType=VARCHAR},
+      ID_CARD_BEGIN_DATE_MODIFY = #{record.idCardBeginDateModify,jdbcType=VARCHAR},
+      ID_CARD_END_DATE_MODIFY = #{record.idCardEndDateModify,jdbcType=VARCHAR},
+      BANK_CARD_NO = #{record.bankCardNo,jdbcType=VARCHAR},
+      BANK_PHONE = #{record.bankPhone,jdbcType=VARCHAR},
+      BANK_ACCOUNT_NAME = #{record.bankAccountName,jdbcType=VARCHAR},
+      ABODE_STATE_CODE = #{record.abodeStateCode,jdbcType=VARCHAR},
+      ABODE_CITY_CODE = #{record.abodeCityCode,jdbcType=VARCHAR},
+      ABODE_ZONE_CODE = #{record.abodeZoneCode,jdbcType=VARCHAR},
+      ABODE_DETAIL_ADDRESS = #{record.abodeDetailAddress,jdbcType=VARCHAR},
+      MARITAL_STATUS = #{record.maritalStatus,jdbcType=VARCHAR},
+      MOUTH_INCOME = #{record.mouthIncome,jdbcType=VARCHAR},
+      SOCIAL_IDENTITY = #{record.socialIdentity,jdbcType=VARCHAR},
+      STUDENT_FLAG = #{record.studentFlag,jdbcType=VARCHAR},
+      APPLY_PHONE_NO = #{record.applyPhoneNo,jdbcType=VARCHAR},
+      APPLY_PHONE_OS = #{record.applyPhoneOs,jdbcType=VARCHAR},
+      APPLY_WZF_TIME = #{record.applyWzfTime,jdbcType=VARCHAR},
+      UNIT_NAME = #{record.unitName,jdbcType=VARCHAR},
+      EMP_PHONE = #{record.empPhone,jdbcType=VARCHAR},
+      EMP_PROVINCE_CODE = #{record.empProvinceCode,jdbcType=VARCHAR},
+      EMP_CITY_CODE = #{record.empCityCode,jdbcType=VARCHAR},
+      EMP_ZONE_CODE = #{record.empZoneCode,jdbcType=VARCHAR},
+      EMP_ADDR = #{record.empAddr,jdbcType=VARCHAR},
+      AUTH_NUMBER = #{record.authNumber,jdbcType=VARCHAR},
+      OUT_ORDER_ID = #{record.outOrderId,jdbcType=VARCHAR},
+      APP_NO = #{record.appNo,jdbcType=VARCHAR},
+      TOTAL_AMT = #{record.totalAmt,jdbcType=VARCHAR},
+      USER_NO = #{record.userNo,jdbcType=VARCHAR},
+      NOTYFY_URL = #{record.notyfyUrl,jdbcType=VARCHAR},
+      MER_NAME = #{record.merName,jdbcType=VARCHAR},
+      CURRENT_STORE_FLAG = #{record.currentStoreFlag,jdbcType=VARCHAR},
+      SALE_ADDRESS = #{record.saleAddress,jdbcType=VARCHAR},
+      BIZ_LICENCE_NO = #{record.bizLicenceNo,jdbcType=VARCHAR},
+      BIZ_LICENCE_NAME = #{record.bizLicenceName,jdbcType=VARCHAR},
+      RESERVE1 = #{record.reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{record.reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{record.reserve3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

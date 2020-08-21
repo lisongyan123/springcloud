@@ -1,3 +1,33 @@
+server:
+  port: 18089
+  tomcat:
+    accept-count: 500
+    max-threads: 1000
+
 spring:
   application:
     name: airm-ltfq-credit-service
+
+  profiles:
+    active: dev
+
+mybatis-plus:
+  type-aliases-package: com.bank.irce.ltgj.entity
+  mapper-locations: classpath:mapper/*.xml
+  # 日志打印
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# 请求处理的超时时间
+ribbon:
+  ReadTimeout: 15000
+  #请求连接的超时时间
+  ConnectTimeout: 15000
+
+

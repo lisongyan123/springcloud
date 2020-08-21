@@ -25,12 +25,7 @@ public class CustScore1Dto implements Serializable {
 
     private Integer rh_m12_crc_qy_num;
 
-
-
     private Integer rh_m12_ln_qy_num;
-
-    public CustScore1Dto() {
-    }
 
     public CustScore1Dto(CustCard1ResVo custCard1ResVo, AirmLtgjMasterBody airmLtgjMasterBody) {
         this.sessionid = airmLtgjMasterBody.getSessionId();

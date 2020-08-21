@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.LtdsjInfoDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.LtdsjInfo">
+    <result column="MODEL1" jdbcType="VARCHAR" property="model1" />
+    <result column="MODEL2" jdbcType="VARCHAR" property="model2" />
+    <result column="MODEL3" jdbcType="VARCHAR" property="model3" />
+    <result column="MODEL4" jdbcType="VARCHAR" property="model4" />
+    <result column="MODEL5" jdbcType="VARCHAR" property="model5" />
+    <result column="MODEL6" jdbcType="VARCHAR" property="model6" />
+    <result column="MODEL7" jdbcType="VARCHAR" property="model7" />
+    <result column="MODEL8" jdbcType="VARCHAR" property="model8" />
+    <result column="MODEL9" jdbcType="VARCHAR" property="model9" />
+    <result column="MODEL10" jdbcType="VARCHAR" property="model10" />
+    <result column="MODEL11" jdbcType="VARCHAR" property="model11" />
+    <result column="MODEL12" jdbcType="VARCHAR" property="model12" />
+    <result column="MODEL13" jdbcType="VARCHAR" property="model13" />
+    <result column="MODEL14" jdbcType="VARCHAR" property="model14" />
+    <result column="MODEL15" jdbcType="VARCHAR" property="model15" />
+    <result column="MODEL16" jdbcType="VARCHAR" property="model16" />
+    <result column="MODEL17" jdbcType="VARCHAR" property="model17" />
+    <result column="MODEL18" jdbcType="VARCHAR" property="model18" />
+    <result column="MODEL19" jdbcType="VARCHAR" property="model19" />
+    <result column="MODEL20" jdbcType="VARCHAR" property="model20" />
+    <result column="MODEL21" jdbcType="VARCHAR" property="model21" />
+    <result column="MODEL22" jdbcType="VARCHAR" property="model22" />
+    <result column="MODEL23" jdbcType="VARCHAR" property="model23" />
+    <result column="MODEL24" jdbcType="VARCHAR" property="model24" />
+    <result column="MODEL25" jdbcType="VARCHAR" property="model25" />
+    <result column="MODEL26" jdbcType="VARCHAR" property="model26" />
+    <result column="MODEL27" jdbcType="VARCHAR" property="model27" />
+    <result column="MODEL28" jdbcType="VARCHAR" property="model28" />
+    <result column="MODEL29" jdbcType="VARCHAR" property="model29" />
+    <result column="MODEL30" jdbcType="VARCHAR" property="model30" />
+    <result column="RESERVE1" jdbcType="VARCHAR" property="reserve1" />
+    <result column="RESERVE2" jdbcType="VARCHAR" property="reserve2" />
+    <result column="RESERVE3" jdbcType="VARCHAR" property="reserve3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MODEL1, MODEL2, MODEL3, MODEL4, MODEL5, MODEL6, MODEL7, MODEL8, MODEL9, MODEL10, 
+    MODEL11, MODEL12, MODEL13, MODEL14, MODEL15, MODEL16, MODEL17, MODEL18, MODEL19, 
+    MODEL20, MODEL21, MODEL22, MODEL23, MODEL24, MODEL25, MODEL26, MODEL27, MODEL28, 
+    MODEL29, MODEL30, RESERVE1, RESERVE2, RESERVE3
+  </sql>
+  <select id="selectByExample" parameterType="com.bank.irce.ltgj.entity.LtdsjInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from LTDSJ_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bank.irce.ltgj.entity.LtdsjInfoExample">
+    delete from LTDSJ_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.LtdsjInfo">
+    insert into LTDSJ_INFO (MODEL1, MODEL2, MODEL3, 
+      MODEL4, MODEL5, MODEL6, 
+      MODEL7, MODEL8, MODEL9, 
+      MODEL10, MODEL11, MODEL12, 
+      MODEL13, MODEL14, MODEL15, 
+      MODEL16, MODEL17, MODEL18, 
+      MODEL19, MODEL20, MODEL21, 
+      MODEL22, MODEL23, MODEL24, 
+      MODEL25, MODEL26, MODEL27, 
+      MODEL28, MODEL29, MODEL30, 
+      RESERVE1, RESERVE2, RESERVE3
+      )
+    values (#{model1,jdbcType=VARCHAR}, #{model2,jdbcType=VARCHAR}, #{model3,jdbcType=VARCHAR}, 
+      #{model4,jdbcType=VARCHAR}, #{model5,jdbcType=VARCHAR}, #{model6,jdbcType=VARCHAR}, 
+      #{model7,jdbcType=VARCHAR}, #{model8,jdbcType=VARCHAR}, #{model9,jdbcType=VARCHAR}, 
+      #{model10,jdbcType=VARCHAR}, #{model11,jdbcType=VARCHAR}, #{model12,jdbcType=VARCHAR}, 
+      #{model13,jdbcType=VARCHAR}, #{model14,jdbcType=VARCHAR}, #{model15,jdbcType=VARCHAR}, 
+      #{model16,jdbcType=VARCHAR}, #{model17,jdbcType=VARCHAR}, #{model18,jdbcType=VARCHAR}, 
+      #{model19,jdbcType=VARCHAR}, #{model20,jdbcType=VARCHAR}, #{model21,jdbcType=VARCHAR}, 
+      #{model22,jdbcType=VARCHAR}, #{model23,jdbcType=VARCHAR}, #{model24,jdbcType=VARCHAR}, 
+      #{model25,jdbcType=VARCHAR}, #{model26,jdbcType=VARCHAR}, #{model27,jdbcType=VARCHAR}, 
+      #{model28,jdbcType=VARCHAR}, #{model29,jdbcType=VARCHAR}, #{model30,jdbcType=VARCHAR}, 
+      #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.LtdsjInfo">
+    insert into LTDSJ_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="model1 != null">
+        MODEL1,
+      </if>
+      <if test="model2 != null">
+        MODEL2,
+      </if>
+      <if test="model3 != null">
+        MODEL3,
+      </if>
+      <if test="model4 != null">
+        MODEL4,
+      </if>
+      <if test="model5 != null">
+        MODEL5,
+      </if>
+      <if test="model6 != null">
+        MODEL6,
+      </if>
+      <if test="model7 != null">
+        MODEL7,
+      </if>
+      <if test="model8 != null">
+        MODEL8,
+      </if>
+      <if test="model9 != null">
+        MODEL9,
+      </if>
+      <if test="model10 != null">
+        MODEL10,
+      </if>
+      <if test="model11 != null">
+        MODEL11,
+      </if>
+      <if test="model12 != null">
+        MODEL12,
+      </if>
+      <if test="model13 != null">
+        MODEL13,
+      </if>
+      <if test="model14 != null">
+        MODEL14,
+      </if>
+      <if test="model15 != null">
+        MODEL15,
+      </if>
+      <if test="model16 != null">
+        MODEL16,
+      </if>
+      <if test="model17 != null">
+        MODEL17,
+      </if>
+      <if test="model18 != null">
+        MODEL18,
+      </if>
+      <if test="model19 != null">
+        MODEL19,
+      </if>
+      <if test="model20 != null">
+        MODEL20,
+      </if>
+      <if test="model21 != null">
+        MODEL21,
+      </if>
+      <if test="model22 != null">
+        MODEL22,
+      </if>
+      <if test="model23 != null">
+        MODEL23,
+      </if>
+      <if test="model24 != null">
+        MODEL24,
+      </if>
+      <if test="model25 != null">
+        MODEL25,
+      </if>
+      <if test="model26 != null">
+        MODEL26,
+      </if>
+      <if test="model27 != null">
+        MODEL27,
+      </if>
+      <if test="model28 != null">
+        MODEL28,
+      </if>
+      <if test="model29 != null">
+        MODEL29,
+      </if>
+      <if test="model30 != null">
+        MODEL30,
+      </if>
+      <if test="reserve1 != null">
+        RESERVE1,
+      </if>
+      <if test="reserve2 != null">
+        RESERVE2,
+      </if>
+      <if test="reserve3 != null">
+        RESERVE3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="model1 != null">
+        #{model1,jdbcType=VARCHAR},
+      </if>
+      <if test="model2 != null">
+        #{model2,jdbcType=VARCHAR},
+      </if>
+      <if test="model3 != null">
+        #{model3,jdbcType=VARCHAR},
+      </if>
+      <if test="model4 != null">
+        #{model4,jdbcType=VARCHAR},
+      </if>
+      <if test="model5 != null">
+        #{model5,jdbcType=VARCHAR},
+      </if>
+      <if test="model6 != null">
+        #{model6,jdbcType=VARCHAR},
+      </if>
+      <if test="model7 != null">
+        #{model7,jdbcType=VARCHAR},
+      </if>
+      <if test="model8 != null">
+        #{model8,jdbcType=VARCHAR},
+      </if>
+      <if test="model9 != null">
+        #{model9,jdbcType=VARCHAR},
+      </if>
+      <if test="model10 != null">
+        #{model10,jdbcType=VARCHAR},
+      </if>
+      <if test="model11 != null">
+        #{model11,jdbcType=VARCHAR},
+      </if>
+      <if test="model12 != null">
+        #{model12,jdbcType=VARCHAR},
+      </if>
+      <if test="model13 != null">
+        #{model13,jdbcType=VARCHAR},
+      </if>
+      <if test="model14 != null">
+        #{model14,jdbcType=VARCHAR},
+      </if>
+      <if test="model15 != null">
+        #{model15,jdbcType=VARCHAR},
+      </if>
+      <if test="model16 != null">
+        #{model16,jdbcType=VARCHAR},
+      </if>
+      <if test="model17 != null">
+        #{model17,jdbcType=VARCHAR},
+      </if>
+      <if test="model18 != null">
+        #{model18,jdbcType=VARCHAR},
+      </if>
+      <if test="model19 != null">
+        #{model19,jdbcType=VARCHAR},
+      </if>
+      <if test="model20 != null">
+        #{model20,jdbcType=VARCHAR},
+      </if>
+      <if test="model21 != null">
+        #{model21,jdbcType=VARCHAR},
+      </if>
+      <if test="model22 != null">
+        #{model22,jdbcType=VARCHAR},
+      </if>
+      <if test="model23 != null">
+        #{model23,jdbcType=VARCHAR},
+      </if>
+      <if test="model24 != null">
+        #{model24,jdbcType=VARCHAR},
+      </if>
+      <if test="model25 != null">
+        #{model25,jdbcType=VARCHAR},
+      </if>
+      <if test="model26 != null">
+        #{model26,jdbcType=VARCHAR},
+      </if>
+      <if test="model27 != null">
+        #{model27,jdbcType=VARCHAR},
+      </if>
+      <if test="model28 != null">
+        #{model28,jdbcType=VARCHAR},
+      </if>
+      <if test="model29 != null">
+        #{model29,jdbcType=VARCHAR},
+      </if>
+      <if test="model30 != null">
+        #{model30,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bank.irce.ltgj.entity.LtdsjInfoExample" resultType="java.lang.Long">
+    select count(*) from LTDSJ_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update LTDSJ_INFO
+    <set>
+      <if test="record.model1 != null">
+        MODEL1 = #{record.model1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model2 != null">
+        MODEL2 = #{record.model2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model3 != null">
+        MODEL3 = #{record.model3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model4 != null">
+        MODEL4 = #{record.model4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model5 != null">
+        MODEL5 = #{record.model5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model6 != null">
+        MODEL6 = #{record.model6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model7 != null">
+        MODEL7 = #{record.model7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model8 != null">
+        MODEL8 = #{record.model8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model9 != null">
+        MODEL9 = #{record.model9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model10 != null">
+        MODEL10 = #{record.model10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model11 != null">
+        MODEL11 = #{record.model11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model12 != null">
+        MODEL12 = #{record.model12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model13 != null">
+        MODEL13 = #{record.model13,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model14 != null">
+        MODEL14 = #{record.model14,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model15 != null">
+        MODEL15 = #{record.model15,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model16 != null">
+        MODEL16 = #{record.model16,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model17 != null">
+        MODEL17 = #{record.model17,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model18 != null">
+        MODEL18 = #{record.model18,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model19 != null">
+        MODEL19 = #{record.model19,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model20 != null">
+        MODEL20 = #{record.model20,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model21 != null">
+        MODEL21 = #{record.model21,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model22 != null">
+        MODEL22 = #{record.model22,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model23 != null">
+        MODEL23 = #{record.model23,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model24 != null">
+        MODEL24 = #{record.model24,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model25 != null">
+        MODEL25 = #{record.model25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model26 != null">
+        MODEL26 = #{record.model26,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model27 != null">
+        MODEL27 = #{record.model27,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model28 != null">
+        MODEL28 = #{record.model28,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model29 != null">
+        MODEL29 = #{record.model29,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model30 != null">
+        MODEL30 = #{record.model30,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve1 != null">
+        RESERVE1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        RESERVE2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        RESERVE3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update LTDSJ_INFO
+    set MODEL1 = #{record.model1,jdbcType=VARCHAR},
+      MODEL2 = #{record.model2,jdbcType=VARCHAR},
+      MODEL3 = #{record.model3,jdbcType=VARCHAR},
+      MODEL4 = #{record.model4,jdbcType=VARCHAR},
+      MODEL5 = #{record.model5,jdbcType=VARCHAR},
+      MODEL6 = #{record.model6,jdbcType=VARCHAR},
+      MODEL7 = #{record.model7,jdbcType=VARCHAR},
+      MODEL8 = #{record.model8,jdbcType=VARCHAR},
+      MODEL9 = #{record.model9,jdbcType=VARCHAR},
+      MODEL10 = #{record.model10,jdbcType=VARCHAR},
+      MODEL11 = #{record.model11,jdbcType=VARCHAR},
+      MODEL12 = #{record.model12,jdbcType=VARCHAR},
+      MODEL13 = #{record.model13,jdbcType=VARCHAR},
+      MODEL14 = #{record.model14,jdbcType=VARCHAR},
+      MODEL15 = #{record.model15,jdbcType=VARCHAR},
+      MODEL16 = #{record.model16,jdbcType=VARCHAR},
+      MODEL17 = #{record.model17,jdbcType=VARCHAR},
+      MODEL18 = #{record.model18,jdbcType=VARCHAR},
+      MODEL19 = #{record.model19,jdbcType=VARCHAR},
+      MODEL20 = #{record.model20,jdbcType=VARCHAR},
+      MODEL21 = #{record.model21,jdbcType=VARCHAR},
+      MODEL22 = #{record.model22,jdbcType=VARCHAR},
+      MODEL23 = #{record.model23,jdbcType=VARCHAR},
+      MODEL24 = #{record.model24,jdbcType=VARCHAR},
+      MODEL25 = #{record.model25,jdbcType=VARCHAR},
+      MODEL26 = #{record.model26,jdbcType=VARCHAR},
+      MODEL27 = #{record.model27,jdbcType=VARCHAR},
+      MODEL28 = #{record.model28,jdbcType=VARCHAR},
+      MODEL29 = #{record.model29,jdbcType=VARCHAR},
+      MODEL30 = #{record.model30,jdbcType=VARCHAR},
+      RESERVE1 = #{record.reserve1,jdbcType=VARCHAR},
+      RESERVE2 = #{record.reserve2,jdbcType=VARCHAR},
+      RESERVE3 = #{record.reserve3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

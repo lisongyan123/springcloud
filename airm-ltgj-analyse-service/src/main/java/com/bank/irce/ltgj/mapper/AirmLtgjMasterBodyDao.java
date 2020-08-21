@@ -2,7 +2,7 @@ package com.bank.irce.ltgj.mapper;
 
 import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
 import com.bank.irce.ltgj.entity.AirmLtgjMasterBodyExample;
-import com.bank.irce.ltgj.entity.AirmLtgjMasterBodyWithBLOBs;
+import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,17 +11,17 @@ public interface AirmLtgjMasterBodyDao {
 
     int deleteByExample(AirmLtgjMasterBodyExample example);
 
-    int insert(AirmLtgjMasterBodyWithBLOBs record);
+    int insert(AirmLtgjMasterBody record);
 
-    int insertSelective(AirmLtgjMasterBodyWithBLOBs record);
+    int insertSelective(AirmLtgjMasterBody record);
 
-    List<AirmLtgjMasterBodyWithBLOBs> selectByExampleWithBLOBs(AirmLtgjMasterBodyExample example);
+    List<AirmLtgjMasterBody> selectByExampleWithBLOBs(AirmLtgjMasterBodyExample example);
 
     List<AirmLtgjMasterBody> selectByExample(AirmLtgjMasterBodyExample example);
 
-    int updateByExampleSelective(@Param("record") AirmLtgjMasterBodyWithBLOBs record, @Param("example") AirmLtgjMasterBodyExample example);
+    int updateByExampleSelective(@Param("record") AirmLtgjMasterBody record, @Param("example") AirmLtgjMasterBodyExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") AirmLtgjMasterBodyWithBLOBs record, @Param("example") AirmLtgjMasterBodyExample example);
+    int updateByExampleWithBLOBs(@Param("record") AirmLtgjMasterBody record, @Param("example") AirmLtgjMasterBodyExample example);
 
     int updateByExample(@Param("record") AirmLtgjMasterBody record, @Param("example") AirmLtgjMasterBodyExample example);
 }

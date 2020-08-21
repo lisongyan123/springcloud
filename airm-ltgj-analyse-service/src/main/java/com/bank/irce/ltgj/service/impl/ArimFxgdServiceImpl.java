@@ -56,6 +56,25 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
     private AirmLogInfoMapper airmLogInfoMapper;
 
     /**
+     * 获取模型信息对象
+     *
+     * @return 模型信息对象
+     */
+    @Override
+    public ModelNoInfo getModelNo() {
+        ModelNoInfo modelNoInfo = new ModelNoInfo(PropertiesUtil.modelInfo);
+        return modelNoInfo;
+    }
+
+    public Double getScoreJson(String bairongInfo) {
+        BairongInfo bairong = JSONObject.parseObject(bairongInfo,BairongInfo.class);
+        JSONObject returnBody = (JSONObject) JSONObject.toJSON(JSONObject.toJSONString(bairong.getReturnBody()));
+        JSONObject scoreJson = (JSONObject) returnBody.get("Score");
+        Double scoreconson = (Double) scoreJson.get("scoreconson");
+        return scoreconson;
+    }
+
+    /**
      * 获取征信报文拉取路径
      *
      * @param
@@ -77,17 +96,6 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
     }
 
     /**
-     * 获取模型信息对象
-     *
-     * @return 模型信息对象
-     */
-    @Override
-    public ModelNoInfo getModelNo() {
-        ModelNoInfo modelNoInfo = new ModelNoInfo(PropertiesUtil.modelInfo);
-        return modelNoInfo;
-    }
-
-    /**
      * 调用科技部接口获取报文
      *
      * @param
@@ -106,7 +114,6 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
                 throw new TradeException(StateCode.ER_VERIFY_ERROR.getCode(), ModelConstant.ER_IRCE_DATA);
             }
         }
-
         operTable.getEdmpAccessLog().add(new EdmpAccessLog("科技部接口", Constant.RESP_SUSECC, JSON.toJSONString(confirmReadDto), JSON.toJSONString(map), "P0003", "平安无抵押风险共担", sessionId));
         String context = Optional.ofNullable(JSONPath.eval(JSONObject.parseObject(JSON.toJSONString(map)), "$data.context")).orElse(Constant.DEFAULT_PARAMS).toString();
         return context;
@@ -119,7 +126,6 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @return
      * @throws
      */
-    @Override
     public Boolean callIrceDataService(Map map) throws TradeException {
 
         if ("WB006".equals(map.getOrDefault("errorCode", "").toString())) {
@@ -138,8 +144,13 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
         return true;
     }
 
-    @Override
-    public AirmLtgjMasterBody productCard(int val1, int val2, AirmLtgjMasterBody airmLtgjMasterBody) {
+    public String getPbccAddr(AirmLtgjMasterBody airmLtgjMasterBody) {
+        AuthorizationInfo authorizationInfo = JSONObject.parseObject(airmLtgjMasterBody.getAuthorizationInfo(),AuthorizationInfo.class);
+        String addr = authorizationInfo.getPbccAddr();
+        return addr;
+    }
+
+    public AirmLtgjMasterBody productCard(ResponseData<Map> val1,ResponseData<Map> val2, AirmLtgjMasterBody airmLtgjMasterBody) {
         String result = airmLtgjMasterBody.getCreditResult();
         Function<String,CreditResult> jsonParse = (param) -> JSONObject.parseObject(param,CreditResult.class);
         CreditResult creditResult = jsonParse.apply(result);
@@ -233,14 +244,6 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
         CustBasicInfo custBasicInfo = jsonParse.apply(fxgdApplyInfo.getCustBasicInfo());
         String idNo = custBasicInfo.getCertNo();
         return idNo;
-    }
-
-    public String getPbccAddr(AirmLtgjMasterBody airmLtgjMasterBody) {
-        Function<String,AuthorizationInfo> jsonParse = (param) -> JSONObject.parseObject(param,AuthorizationInfo.class);
-        // 获取证件号码
-        AuthorizationInfo authorizationInfo = jsonParse.apply(airmLtgjMasterBody.getAuthorizationInfo());
-        String addr = authorizationInfo.getPbccAddr();
-        return addr;
     }
 
     /**
@@ -459,7 +462,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
     }
 
     // 客户卡2.0预处理逻辑
-    private CustScore2Dto preprocessing(Map param, AirmLtgjMasterBody creditApprovalVo) {
+    public CustScore2Dto preprocessing(Map param, AirmLtgjMasterBody creditApprovalVo) {
         //时间差特征衍生
         if ("-99988".equals(param.get("rh_lncd_op_max_dt_year").toString()) || "-99988".equals(param.get("rh_lncd_op_old_dt_year").toString()) || "-99988".equals(param.get("rh_lncd_op_max_dt_month").toString()) || "-99988".equals(param.get("rh_lncd_op_old_dt_month").toString())) {
             param.put("sub_time_feature_1", "NaN");

@@ -26,8 +26,6 @@
     <result column="CREDIT_CODE" jdbcType="VARCHAR" property="creditCode" />
     <result column="CREDIT_RESULT" jdbcType="VARCHAR" property="creditResult" />
     <result column="OTHER_RESULT" jdbcType="VARCHAR" property="otherResult" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyWithBLOBs">
     <result column="LTZF_INFO" jdbcType="CLOB" property="ltzfInfo" />
     <result column="LTDSJ_INFO" jdbcType="CLOB" property="ltdsjInfo" />
   </resultMap>
@@ -98,7 +96,7 @@
   <sql id="Blob_Column_List">
     LTZF_INFO, LTDSJ_INFO
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -134,7 +132,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyWithBLOBs">
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBody">
     insert into AIRM_LTGJ_MASTER_BODY (SESSION_ID, APP_NO, BUSINESS_TYPE_CD, 
       BUSINESS_TYPE_NAME, APPLY_TIME, CUST_SOURCE, 
       CHANNEL_SOURCE, CUST_ID, CUST_BASIC_INFO, 
@@ -154,7 +152,7 @@
       #{creditCode,jdbcType=VARCHAR}, #{creditResult,jdbcType=VARCHAR}, #{otherResult,jdbcType=VARCHAR}, 
       #{ltzfInfo,jdbcType=CLOB}, #{ltdsjInfo,jdbcType=CLOB})
   </insert>
-  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBodyWithBLOBs">
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.AirmLtgjMasterBody">
     insert into AIRM_LTGJ_MASTER_BODY
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sessionId != null">
