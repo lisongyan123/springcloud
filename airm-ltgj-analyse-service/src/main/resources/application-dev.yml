@@ -20,8 +20,8 @@ spring:
 #    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:helowin
-    username: test
-    password: test
+    username: Airm
+    password: Airm
     druid:
       initial-size: 5  # 初始化大小
       min-idle: 5  # 最小

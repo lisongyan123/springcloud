@@ -19,13 +19,4 @@ public class BigDecimalUtil {
         }
         return dividend.divide(divisor,2,4);
     }
-
-    /**
-     * BigDecimal除法 四舍五入保留 2 位小数
-     */
-    public static BigDecimal figureOut(Object smsIncome,Object smsIncomeChina) {
-        return new BigDecimal(String.valueOf(smsIncome))
-                .divide(new BigDecimal(String.valueOf(smsIncomeChina)), 2, BigDecimal.ROUND_DOWN);
-    }
-
 }

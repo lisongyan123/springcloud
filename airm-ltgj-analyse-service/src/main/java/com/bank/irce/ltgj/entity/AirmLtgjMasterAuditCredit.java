@@ -13,7 +13,7 @@ import lombok.Data;
  * @author 
  */
 @Data
-public class AirmLtgjMasterBody implements Serializable {
+public class AirmLtgjMasterAuditCredit implements Serializable {
     /**
      * 唯一流水号
      */
@@ -134,8 +134,6 @@ public class AirmLtgjMasterBody implements Serializable {
      */
     private String otherResult;
 
-    private static final long serialVersionUID = 1L;
-
     /**
      * 联通支付信息
      */
@@ -145,4 +143,6 @@ public class AirmLtgjMasterBody implements Serializable {
      * 联通大数据信息
      */
     private String ltdsjInfo;
+
+    private static final long serialVersionUID = 1L;
 }

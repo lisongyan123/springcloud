@@ -1,6 +1,6 @@
 package com.bank.irce.ltgj.entity.dto;
 
-import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
+import com.bank.irce.ltgj.entity.AirmLtgjMasterAuditCredit;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -27,7 +27,7 @@ public class CustScore1Dto implements Serializable {
 
     private Integer rh_m12_ln_qy_num;
 
-    public CustScore1Dto(CustCard1ResVo custCard1ResVo, AirmLtgjMasterBody airmLtgjMasterBody) {
+    public CustScore1Dto(CustCard1ResVo custCard1ResVo, AirmLtgjMasterAuditCredit airmLtgjMasterBody) {
         this.sessionid = airmLtgjMasterBody.getSessionId();
         this.rh_m24_crc_ovd_max_perd = custCard1ResVo.getRh_m24_crc_ovd_max_perd();
         this.rh_crc_uc_max_age = Long.parseLong(custCard1ResVo.getRh_crc_uc_max_age().toString());

@@ -27,9 +27,9 @@ public class AirmLtgjModelInvokeHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public AirmLtgjModelInvokeHistory(String sessionId, String requestTime,String responseParams) {
+    public AirmLtgjModelInvokeHistory(String sessionId, String requestTime ,String responseParams) {
         this.sessionId = sessionId;
-        this.requestTime = requestTime;
         this.responseParams = responseParams;
+        this.requestTime = requestTime;
     }
 }

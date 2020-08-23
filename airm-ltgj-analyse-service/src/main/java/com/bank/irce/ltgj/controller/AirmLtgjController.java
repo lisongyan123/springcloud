@@ -5,17 +5,17 @@ import com.bank.irce.ltgj.common.DateUtil;
 import com.bank.irce.ltgj.common.LoggerUtil;
 import com.bank.irce.ltgj.common.MapUtil;
 import com.bank.irce.ltgj.common.ResponseData;
-import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
+import com.bank.irce.ltgj.entity.AirmLtgjMasterAuditCredit;
 import com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory;
-import com.bank.irce.ltgj.entity.LtdsjInfo;
-import com.bank.irce.ltgj.entity.LtzfInfo;
+import com.bank.irce.ltgj.entity.AirmLtgjModelLtdsjInfo;
+import com.bank.irce.ltgj.entity.AirmLtgjModelLtzfInfo;
 import com.bank.irce.ltgj.entity.dto.*;
 import com.bank.irce.ltgj.feign.AirmGsdAccessModel;
 import com.bank.irce.ltgj.feign.IrceDataService;
-import com.bank.irce.ltgj.mapper.AirmLtgjMasterBodyDao;
+import com.bank.irce.ltgj.mapper.AirmLtgjMasterAduitCreditDao;
 import com.bank.irce.ltgj.mapper.AirmLtgjModelInvokeHistoryDao;
-import com.bank.irce.ltgj.mapper.LtdsjInfoDao;
-import com.bank.irce.ltgj.mapper.LtzfInfoDao;
+import com.bank.irce.ltgj.mapper.AirmLtgjModelLtdsjInfoDao;
+import com.bank.irce.ltgj.mapper.AirmLtgjModelLtzfInfoDao;
 import com.bank.irce.ltgj.service.ArimFxgdService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -41,28 +41,25 @@ public class AirmLtgjController {
     ArimFxgdService arimFxgdService;
 
     @Resource
-    AirmLtgjMasterBodyDao airmLtgjMasterBodyDao;
+    AirmLtgjMasterAduitCreditDao airmLtgjMasterBodyDao;
 
     @Resource
     AirmLtgjModelInvokeHistoryDao airmLtgjModelInvokeHistoryDao;
 
     @Resource
-    LtzfInfoDao ltzfInfoDao;
+    AirmLtgjModelLtzfInfoDao ltzfInfoDao;
 
     @Autowired
     AirmGsdAccessModel accessModel;
 
     @Resource
-    LtdsjInfoDao ltdsjInfoDao;
-
-    @Resource
-    AirmGsdAccessModel airmGsdAccessModel;
+    AirmLtgjModelLtdsjInfoDao ltdsjInfoDao;
 
     @Transactional(rollbackFor = Exception.class)
     @ApiOperation("联通购机授信业务接口")
     @PostMapping("/user/evaluateCredit")
-    public <T> AirmLtgjMasterBody evaluateCredit(@RequestBody AirmLtgjMasterBody airmLtgjMasterBody) throws Exception {
-        Double scoreconson = -1.0;
+    public  AirmLtgjMasterAuditCredit evaluateCredit(@RequestBody AirmLtgjMasterAuditCredit airmLtgjMasterBody) throws Exception {
+        Integer scoreconson = -1;
         try{
             //获取百融信用分的scoreconson字段
             String bairongInfo = airmLtgjMasterBody.getBairongScoreInfo();
@@ -115,9 +112,9 @@ public class AirmLtgjController {
         LoggerUtil.logBusinessFile("调用客户卡2.0请求参数" + custScore2Dto);
         //调用客户卡2.0
         ResponseData<Map> score2 = accessModel.getScore2(custScore2Dto);
-        AirmLtgjMasterBody airmLtgjMaster = new AirmLtgjMasterBody();
+        AirmLtgjMasterAuditCredit airmLtgjMaster = new AirmLtgjMasterAuditCredit();
         try{
-            airmLtgjMaster = arimFxgdService.productCard(score1,score2,airmLtgjMasterBody);
+            airmLtgjMaster = arimFxgdService.productCard(null,null,airmLtgjMasterBody);
             //产品流水落表
             airmLtgjModelInvokeHistoryDao.insert(new AirmLtgjModelInvokeHistory(airmLtgjMasterBody.getSessionId(),
                     DateUtil.getCurTimeStamp(),
@@ -137,15 +134,14 @@ public class AirmLtgjController {
         }
         String ltzf = airmLtgjMaster.getLtzfInfo();
         String ltdsj = airmLtgjMaster.getLtdsjInfo();
-        LtzfInfo ltzfInfo = JSONObject.parseObject(JSONObject.toJSONString(ltzf),LtzfInfo.class);
-        LtdsjInfo ltdsjInfo = JSONObject.parseObject(JSONObject.toJSONString(ltdsj),LtdsjInfo.class);
+        AirmLtgjModelLtzfInfo ltzfInfo = JSONObject.parseObject(ltzf,AirmLtgjModelLtzfInfo.class);
+        AirmLtgjModelLtdsjInfo ltdsjInfo = JSONObject.parseObject(ltdsj,AirmLtgjModelLtdsjInfo.class);
         try{
-            Assert.isTrue(ltzfInfoDao.insert(ltzfInfo) == 0,"联通支付落表失败");
-            Assert.isTrue(ltdsjInfoDao.insert(ltdsjInfo) == 0,"联通大数据落表失败");
-            Assert.isTrue(airmLtgjMasterBodyDao.insert(airmLtgjMaster) == 0,"请求响应落表失败");
+            Assert.isTrue(ltzfInfoDao.insert(ltzfInfo) != 0,"联通支付落表失败");
+            Assert.isTrue(ltdsjInfoDao.insert(ltdsjInfo) != 0,"联通大数据落表失败");
+            Assert.isTrue(airmLtgjMasterBodyDao.insert(airmLtgjMaster) != 0,"请求响应落表失败");
         } catch (Exception e) {
-            LoggerUtil.logBusinessFile("落表失败"
-            );
+            LoggerUtil.logBusinessFile("落表失败");
         }
         return airmLtgjMaster;
     }

@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LtzfInfoExample {
+public class AirmLtgjModelLtzfInfoExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public LtzfInfoExample() {
+    public AirmLtgjModelLtzfInfoExample() {
         oredCriteria = new ArrayList<>();
     }
 

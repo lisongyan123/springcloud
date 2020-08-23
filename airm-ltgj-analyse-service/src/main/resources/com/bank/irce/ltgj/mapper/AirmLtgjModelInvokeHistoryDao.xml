@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bank.irce.ltgj.mapper.AirmLtgjModelInvokeHistoryDao">
+  <resultMap id="BaseResultMap" type="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="SESSION_ID" jdbcType="VARCHAR" property="sessionId" />
+    <result column="MODEL_NAME" jdbcType="VARCHAR" property="modelName" />
+    <result column="MODEL_NO" jdbcType="VARCHAR" property="modelNo" />
+    <result column="MODEL_RESULT" jdbcType="VARCHAR" property="modelResult" />
+    <result column="REQUEST_TIME" jdbcType="VARCHAR" property="requestTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    <result column="REQUEST_PARAMS" jdbcType="CLOB" property="requestParams" />
+    <result column="RESPONSE_PARAMS" jdbcType="CLOB" property="responseParams" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    REQUEST_PARAMS, RESPONSE_PARAMS
+  </sql>
+  <insert id="insert" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    insert into AIRM_LTGJ_MODEL_INVOKE_HISTORY (ID, SESSION_ID, MODEL_NAME, 
+      MODEL_NO, MODEL_RESULT, REQUEST_TIME, 
+      REQUEST_PARAMS, RESPONSE_PARAMS)
+    values (#{id,jdbcType=DECIMAL}, #{sessionId,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
+      #{modelNo,jdbcType=VARCHAR}, #{modelResult,jdbcType=VARCHAR}, #{requestTime,jdbcType=VARCHAR}, 
+      #{requestParams,jdbcType=CLOB}, #{responseParams,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory">
+    insert into AIRM_LTGJ_MODEL_INVOKE_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sessionId != null">
+        SESSION_ID,
+      </if>
+      <if test="modelName != null">
+        MODEL_NAME,
+      </if>
+      <if test="modelNo != null">
+        MODEL_NO,
+      </if>
+      <if test="modelResult != null">
+        MODEL_RESULT,
+      </if>
+      <if test="requestTime != null">
+        REQUEST_TIME,
+      </if>
+      <if test="requestParams != null">
+        REQUEST_PARAMS,
+      </if>
+      <if test="responseParams != null">
+        RESPONSE_PARAMS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelName != null">
+        #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNo != null">
+        #{modelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modelResult != null">
+        #{modelResult,jdbcType=VARCHAR},
+      </if>
+      <if test="requestTime != null">
+        #{requestTime,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParams != null">
+        #{requestParams,jdbcType=CLOB},
+      </if>
+      <if test="responseParams != null">
+        #{responseParams,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+</mapper>

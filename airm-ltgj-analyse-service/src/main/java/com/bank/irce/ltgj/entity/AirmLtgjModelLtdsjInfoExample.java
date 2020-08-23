@@ -3,14 +3,14 @@ package com.bank.irce.ltgj.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LtdsjInfoExample {
+public class AirmLtgjModelLtdsjInfoExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public LtdsjInfoExample() {
+    public AirmLtgjModelLtdsjInfoExample() {
         oredCriteria = new ArrayList<>();
     }
 

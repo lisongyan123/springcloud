@@ -4,11 +4,11 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * LTDSJ_INFO
+ * AIRM_LTGJ_MODEL_LTDSJ_INFO
  * @author 
  */
 @Data
-public class LtdsjInfo implements Serializable {
+public class AirmLtgjModelLtdsjInfo implements Serializable {
     private String model1;
 
     private String model2;

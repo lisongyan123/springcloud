@@ -2,7 +2,7 @@ package com.bank.irce.ltgj.service;
 
 import com.bank.irce.ltgj.common.ResponseData;
 import com.bank.irce.ltgj.common.TradeException;
-import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
+import com.bank.irce.ltgj.entity.AirmLtgjMasterAuditCredit;
 import com.bank.irce.ltgj.entity.dto.*;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public interface ArimFxgdService {
      * @param operTable
      * @return
      */
-    int getAirmAccessCust1Response(ModelNoInfo modelNoInfo, AirmLtgjMasterBody fxgdApplyInfo, OperTable operTable) throws IOException, TradeException;
+    int getAirmAccessCust1Response(ModelNoInfo modelNoInfo, AirmLtgjMasterAuditCredit fxgdApplyInfo, OperTable operTable) throws IOException, TradeException;
 
     /**
      * 从数据库中获取响应的客户卡1.0模型
@@ -66,7 +66,7 @@ public interface ArimFxgdService {
      * @param effectiveTime
      * @return
      */
-    Custcard1ModelInvoke getCusctcard1CreditResult(AirmLtgjMasterBody fxgdApplyInfo, String modelNo, long effectiveTime);
+    Custcard1ModelInvoke getCusctcard1CreditResult(AirmLtgjMasterAuditCredit fxgdApplyInfo, String modelNo, long effectiveTime);
 
     /**
      * 获取客户卡2.0模型响应信息
@@ -76,7 +76,7 @@ public interface ArimFxgdService {
      * @param operTable
      * @return
      */
-    int getAirmAccessCust2Response(ModelNoInfo modelNoInfo, AirmLtgjMasterBody fxgdApplyInfo, OperTable operTable) throws IOException, TradeException;
+    int getAirmAccessCust2Response(ModelNoInfo modelNoInfo, AirmLtgjMasterAuditCredit fxgdApplyInfo, OperTable operTable) throws IOException, TradeException;
 
     /**
      * 从数据库中获取响应的客户卡2.0模型
@@ -85,7 +85,7 @@ public interface ArimFxgdService {
      * @param effectiveTime
      * @return
      */
-    Custcard2ModelInvoke getCustcard2CreditResult(AirmLtgjMasterBody fxgdApplyInfo, String modelNo, long effectiveTime);
+    Custcard2ModelInvoke getCustcard2CreditResult(AirmLtgjMasterAuditCredit fxgdApplyInfo, String modelNo, long effectiveTime);
 
     /**
      * 调客户卡1.0
@@ -97,7 +97,7 @@ public interface ArimFxgdService {
      * @return
      * @throws TradeException
      */
-    int getAirmAccessCust1(ModelNoInfo modelNo, CustCard1ResVo custCard1ResVo, AirmLtgjMasterBody creditApprovalVo, OperTable operTable) throws TradeException;
+    int getAirmAccessCust1(ModelNoInfo modelNo, CustCard1ResVo custCard1ResVo, AirmLtgjMasterAuditCredit creditApprovalVo, OperTable operTable) throws TradeException;
 
     /**
      * 调客户卡2.0
@@ -109,15 +109,15 @@ public interface ArimFxgdService {
      * @return
      * @throws TradeException
      */
-    int getAirmAccessCust2(ModelNoInfo modelNo, CustCard2ResVo custCard2ResVo, AirmLtgjMasterBody creditApprovalVo, OperTable operTable) throws TradeException;
+    int getAirmAccessCust2(ModelNoInfo modelNo, CustCard2ResVo custCard2ResVo, AirmLtgjMasterAuditCredit creditApprovalVo, OperTable operTable) throws TradeException;
 
-    CustScore2Dto preprocessing(Map param, AirmLtgjMasterBody creditApprovalVo);
+    CustScore2Dto preprocessing(Map param, AirmLtgjMasterAuditCredit creditApprovalVo);
 
-    AirmLtgjMasterBody productCard(ResponseData<Map> val1, ResponseData<Map> val2, AirmLtgjMasterBody airmLtgjMasterBody);
+    AirmLtgjMasterAuditCredit productCard(ResponseData<Map> val1, ResponseData<Map> val2, AirmLtgjMasterAuditCredit airmLtgjMasterBody);
 
-    Double getScoreJson(String bairongInfo);
+    Integer getScoreJson(String bairongInfo);
 
-    String getPbccAddr(AirmLtgjMasterBody airmLtgjMasterBody);
+    String getPbccAddr(AirmLtgjMasterAuditCredit airmLtgjMasterBody);
 
     String getFileName(String pbccAddr);
 }

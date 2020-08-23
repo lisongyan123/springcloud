@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 import com.bank.irce.ltgj.common.*;
 import com.bank.irce.ltgj.entity.*;
-import com.bank.irce.ltgj.entity.AirmLtgjMasterBody;
+import com.bank.irce.ltgj.entity.AirmLtgjMasterAuditCredit;
 import com.bank.irce.ltgj.entity.dto.*;
 import com.bank.irce.ltgj.feign.AirmGsdAccessModel;
 import com.bank.irce.ltgj.feign.IrceDataService;
@@ -18,6 +18,8 @@ import com.bank.irce.ltgj.method.CustScoreFeat1;
 import com.bank.irce.ltgj.method.CustScoreFeat2;
 import com.bank.irce.ltgj.service.ArimFxgdService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,11 +68,13 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
         return modelNoInfo;
     }
 
-    public Double getScoreJson(String bairongInfo) {
-        BairongInfo bairong = JSONObject.parseObject(bairongInfo,BairongInfo.class);
-        JSONObject returnBody = (JSONObject) JSONObject.toJSON(JSONObject.toJSONString(bairong.getReturnBody()));
+    public Integer getScoreJson(String bairongInfo) {
+        BairongScoreInfo bairong = JSONObject.parseObject(bairongInfo,BairongScoreInfo.class);
+        String returnValue = bairong.getReturnBody();
+        log.info(returnValue);
+        JSONObject returnBody = JSONObject.parseObject(returnValue);;
         JSONObject scoreJson = (JSONObject) returnBody.get("Score");
-        Double scoreconson = (Double) scoreJson.get("scoreconson");
+        Integer scoreconson = (Integer) scoreJson.get("scoreconson");
         return scoreconson;
     }
 
@@ -144,16 +148,15 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
         return true;
     }
 
-    public String getPbccAddr(AirmLtgjMasterBody airmLtgjMasterBody) {
+    public String getPbccAddr(AirmLtgjMasterAuditCredit airmLtgjMasterBody) {
         AuthorizationInfo authorizationInfo = JSONObject.parseObject(airmLtgjMasterBody.getAuthorizationInfo(),AuthorizationInfo.class);
         String addr = authorizationInfo.getPbccAddr();
         return addr;
     }
 
-    public AirmLtgjMasterBody productCard(ResponseData<Map> val1,ResponseData<Map> val2, AirmLtgjMasterBody airmLtgjMasterBody) {
+    public AirmLtgjMasterAuditCredit productCard(ResponseData<Map> val1, ResponseData<Map> val2, AirmLtgjMasterAuditCredit airmLtgjMasterBody) {
         String result = airmLtgjMasterBody.getCreditResult();
-        Function<String,CreditResult> jsonParse = (param) -> JSONObject.parseObject(param,CreditResult.class);
-        CreditResult creditResult = jsonParse.apply(result);
+        CreditResult creditResult = JSONObject.parseObject(result,CreditResult.class);
         if(airmLtgjMasterBody.getCreditCode().equals("2")) {
             creditResult.setQueryType("00000000111");
         }
@@ -202,7 +205,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @return
      */
     @Override
-    public int getAirmAccessCust1Response(ModelNoInfo modelNoInfo, AirmLtgjMasterBody fxgdApplyInfo, OperTable operTable) throws IOException, TradeException {
+    public int getAirmAccessCust1Response(ModelNoInfo modelNoInfo, AirmLtgjMasterAuditCredit fxgdApplyInfo, OperTable operTable) throws IOException, TradeException {
         String addr = getPbccAddr(fxgdApplyInfo);
         if (Objects.nonNull(fxgdApplyInfo.getAuthorizationInfo())) {
             // 为""默认值处理
@@ -227,7 +230,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
         return defaultHandlerCusctcard1(fxgdApplyInfo, modelNoInfo, operTable);
     }
 
-    private int defaultHandlerCusctcard1(AirmLtgjMasterBody fxgdApplyInfo, ModelNoInfo modelNoInfo, OperTable operTable) throws IOException, TradeException {
+    private int defaultHandlerCusctcard1(AirmLtgjMasterAuditCredit fxgdApplyInfo, ModelNoInfo modelNoInfo, OperTable operTable) throws IOException, TradeException {
         // 从数据库中数据近期模型的调用记录
         Custcard1ModelInvoke creditResult = getCusctcard1CreditResult(fxgdApplyInfo, modelNoInfo.getCustScore1No(), Constant.THIRTY_DAYS_MILLIS);
         // 判断是否在有效期内，不在需要重新调用模型，参数全部设为默认值
@@ -238,7 +241,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
         return creditResult.getCustScore1();
     }
 
-    public String getIdNo(AirmLtgjMasterBody fxgdApplyInfo) {
+    public String getIdNo(AirmLtgjMasterAuditCredit fxgdApplyInfo) {
         Function<String,CustBasicInfo> jsonParse = (param) -> JSONObject.parseObject(param,CustBasicInfo.class);
         // 获取证件号码
         CustBasicInfo custBasicInfo = jsonParse.apply(fxgdApplyInfo.getCustBasicInfo());
@@ -252,7 +255,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @param fxgdApplyInfo
      * @return
      */
-    public Custcard1ModelInvoke getCusctcard1CreditResult(AirmLtgjMasterBody fxgdApplyInfo, String modelNo, long effectiveTime){
+    public Custcard1ModelInvoke getCusctcard1CreditResult(AirmLtgjMasterAuditCredit fxgdApplyInfo, String modelNo, long effectiveTime){
         try {
             String idNo = getIdNo(fxgdApplyInfo);
             // 获取最近一次申请的sessionId
@@ -283,7 +286,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @return
      */
     @Override
-    public int getAirmAccessCust2Response(ModelNoInfo modelNoInfo, AirmLtgjMasterBody fxgdApplyInfo, OperTable operTable) throws IOException, TradeException {
+    public int getAirmAccessCust2Response(ModelNoInfo modelNoInfo, AirmLtgjMasterAuditCredit fxgdApplyInfo, OperTable operTable) throws IOException, TradeException {
         String addr = getPbccAddr(fxgdApplyInfo);
         if (Objects.nonNull(fxgdApplyInfo.getAuthorizationInfo())) {
             // 为""默认值处理
@@ -317,7 +320,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @throws IOException
      * @throws TradeException
      */
-    private int defaultHandlerCusctcard2(AirmLtgjMasterBody fxgdApplyInfo, ModelNoInfo modelNoInfo, OperTable operTable) throws IOException, TradeException {
+    private int defaultHandlerCusctcard2(AirmLtgjMasterAuditCredit fxgdApplyInfo, ModelNoInfo modelNoInfo, OperTable operTable) throws IOException, TradeException {
         // 从数据库中数据近期模型的调用记录
         Custcard2ModelInvoke creditResult = getCustcard2CreditResult(fxgdApplyInfo, modelNoInfo.getCustScore2No(), Constant.THIRTY_DAYS_MILLIS);
         // 判断是否在有效期内，不在需要重新调用模型，参数全部设为默认值
@@ -335,7 +338,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @return
      */
     @Override
-    public Custcard2ModelInvoke getCustcard2CreditResult(AirmLtgjMasterBody fxgdApplyInfo, String modelNo, long effectiveTime){
+    public Custcard2ModelInvoke getCustcard2CreditResult(AirmLtgjMasterAuditCredit fxgdApplyInfo, String modelNo, long effectiveTime){
         try {
             // 获取证件号码
             String idNo = getIdNo(fxgdApplyInfo);
@@ -404,7 +407,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @throws TradeException
      */
     @Override
-    public int getAirmAccessCust1(ModelNoInfo modelNo, CustCard1ResVo custCard1ResVo, AirmLtgjMasterBody creditApprovalVo, OperTable operTable) throws TradeException {
+    public int getAirmAccessCust1(ModelNoInfo modelNo, CustCard1ResVo custCard1ResVo, AirmLtgjMasterAuditCredit creditApprovalVo, OperTable operTable) throws TradeException {
         try {
             if (custCard1ResVo == null) {
                 Map score = new HashMap();
@@ -436,7 +439,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
      * @throws TradeException
      */
     @Override
-    public int getAirmAccessCust2(ModelNoInfo modelNo, CustCard2ResVo custCard2ResVo, AirmLtgjMasterBody creditApprovalVo, OperTable operTable) throws TradeException {
+    public int getAirmAccessCust2(ModelNoInfo modelNo, CustCard2ResVo custCard2ResVo, AirmLtgjMasterAuditCredit creditApprovalVo, OperTable operTable) throws TradeException {
         try {
             if (custCard2ResVo == null) {
                 return -1;
@@ -462,7 +465,7 @@ public class ArimFxgdServiceImpl implements ArimFxgdService {
     }
 
     // 客户卡2.0预处理逻辑
-    public CustScore2Dto preprocessing(Map param, AirmLtgjMasterBody creditApprovalVo) {
+    public CustScore2Dto preprocessing(Map param, AirmLtgjMasterAuditCredit creditApprovalVo) {
         //时间差特征衍生
         if ("-99988".equals(param.get("rh_lncd_op_max_dt_year").toString()) || "-99988".equals(param.get("rh_lncd_op_old_dt_year").toString()) || "-99988".equals(param.get("rh_lncd_op_max_dt_month").toString()) || "-99988".equals(param.get("rh_lncd_op_old_dt_month").toString())) {
             param.put("sub_time_feature_1", "NaN");

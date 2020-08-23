@@ -7,10 +7,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
 @SpringBootApplication
-@MapperScan({ "com.bank.irce.ltgj.mapper"})
+@MapperScan({"com.bank.irce.ltgj.mapper"})
 public class LtgjAnalyseApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LtgjAnalyseApplication.class, args);
     }
 }
+
+
