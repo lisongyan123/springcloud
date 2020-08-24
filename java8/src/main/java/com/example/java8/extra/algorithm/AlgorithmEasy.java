@@ -3,10 +3,7 @@ package com.example.java8.extra.algorithm;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -64,4 +61,19 @@ public class AlgorithmEasy {
         }
         return ans;
     }
+
+    /**括号放进去*/
+    private static final Map<Character,Character> map = new HashMap<Character,Character>(){{
+        put('{','}'); put('[',']'); put('(',')'); put('?','?');
+    }};
+    public boolean isValid(String s) {
+        if(s.length() > 0 && !map.containsKey(s.charAt(0))) return false;
+        LinkedList<Character> stack = new LinkedList<Character>() {{ add('?'); }};
+        for(Character c : s.toCharArray()){
+            if(map.containsKey(c)) stack.addLast(c);
+            else if(map.get(stack.removeLast()) != c) return false;
+        }
+        return stack.size() == 1;
+    }
+
 }
