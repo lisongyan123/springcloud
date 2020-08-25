@@ -12,10 +12,7 @@ import com.bank.irce.ltgj.entity.AirmLtgjModelLtzfInfo;
 import com.bank.irce.ltgj.entity.dto.*;
 import com.bank.irce.ltgj.feign.AirmGsdAccessModel;
 import com.bank.irce.ltgj.feign.IrceDataService;
-import com.bank.irce.ltgj.mapper.AirmLtgjMasterAduitCreditDao;
-import com.bank.irce.ltgj.mapper.AirmLtgjModelInvokeHistoryDao;
-import com.bank.irce.ltgj.mapper.AirmLtgjModelLtdsjInfoDao;
-import com.bank.irce.ltgj.mapper.AirmLtgjModelLtzfInfoDao;
+import com.bank.irce.ltgj.mapper.*;
 import com.bank.irce.ltgj.service.ArimFxgdService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +30,12 @@ import java.util.Map;
 @Api(tags = "联通购机")
 @RestController
 public class AirmLtgjController {
+
+    @Resource
+    private Custcard1ModelInvokeMapper custcard1ModelInvokeMapper;
+
+    @Resource
+    private Custcard2ModelInvokeMapper custcard2ModelInvokeMapper;
 
     @Autowired
     IrceDataService irceDataService;
@@ -96,6 +99,9 @@ public class AirmLtgjController {
             // 调用科技部接口
             ConfirmReadDto confirmReadDto = new ConfirmReadDto(sessionId, fileName, Constant.BAIRONG_CHANNELCODE, Constant.BAIRONG_CHANNELDESC);
         }
+
+        AirmLtgjMasterAuditCredit airmLtgjMaster = new AirmLtgjMasterAuditCredit();
+
         // 客户卡1.0特征加工
         CustCard1ResVo custCard1ResVo = arimFxgdService.getExternalDataCustCard1(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
         //调用客户卡1
@@ -103,6 +109,10 @@ public class AirmLtgjController {
         LoggerUtil.logBusinessFile("调用客户卡1.0请求参数" + custScore1Dto);
         //调用客户卡1.0
         ResponseData<Map> score1 = accessModel.getScore1(custScore1Dto);
+        LoggerUtil.logBusinessFile("调用客户卡1.0响应参数 >>>>>" + score1);
+        Custcard1ModelInvoke anti1FraudModel = new Custcard1ModelInvoke(airmLtgjMasterBody.getCustId(),airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC,airmLtgjMasterBody.getAppNo(), custScore1Dto, score1);
+        //添加模型调用流水表
+        custcard1ModelInvokeMapper.insert(anti1FraudModel);
 
         // 客户卡2.0特征加工
         CustCard2ResVo custCard2ResVo = arimFxgdService.getExternalDataCustCard2(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
@@ -111,8 +121,11 @@ public class AirmLtgjController {
         CustScore2Dto custScore2Dto = arimFxgdService.preprocessing(map, airmLtgjMasterBody);
         LoggerUtil.logBusinessFile("调用客户卡2.0请求参数" + custScore2Dto);
         //调用客户卡2.0
-        ResponseData<Map> score2 = accessModel.getScore2(custScore2Dto);
-        AirmLtgjMasterAuditCredit airmLtgjMaster = new AirmLtgjMasterAuditCredit();
+        ResponseData<Integer> score2 = accessModel.getScore2(custScore2Dto);
+        LoggerUtil.logBusinessFile("调用客户卡2.0响应参数 >>>>>" + score2);
+        Custcard2ModelInvoke anti2FraudModel = new Custcard2ModelInvoke(airmLtgjMasterBody.getCustId(), airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC, airmLtgjMasterBody.getAppNo(), custScore2Dto, score2);
+        //添加模型调用流水表
+        custcard2ModelInvokeMapper.insert(anti2FraudModel);
         try{
             airmLtgjMaster = arimFxgdService.productCard(null,null,airmLtgjMasterBody);
             //产品流水落表
