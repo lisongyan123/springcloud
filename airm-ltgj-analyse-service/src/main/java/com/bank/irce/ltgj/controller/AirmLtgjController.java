@@ -102,30 +102,30 @@ public class AirmLtgjController {
 
         AirmLtgjMasterAuditCredit airmLtgjMaster = new AirmLtgjMasterAuditCredit();
 
-        // 客户卡1.0特征加工
-        CustCard1ResVo custCard1ResVo = arimFxgdService.getExternalDataCustCard1(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
-        //调用客户卡1
-        CustScore1Dto custScore1Dto = new CustScore1Dto(custCard1ResVo, airmLtgjMasterBody);
-        LoggerUtil.logBusinessFile("调用客户卡1.0请求参数" + custScore1Dto);
-        //调用客户卡1.0
-        ResponseData<Map> score1 = accessModel.getScore1(custScore1Dto);
-        LoggerUtil.logBusinessFile("调用客户卡1.0响应参数 >>>>>" + score1);
-        Custcard1ModelInvoke anti1FraudModel = new Custcard1ModelInvoke(airmLtgjMasterBody.getCustId(),airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC,airmLtgjMasterBody.getAppNo(), custScore1Dto, score1);
-        //添加模型调用流水表
-        custcard1ModelInvokeMapper.insert(anti1FraudModel);
-
-        // 客户卡2.0特征加工
-        CustCard2ResVo custCard2ResVo = arimFxgdService.getExternalDataCustCard2(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
-        //预处理逻辑
-        Map map = MapUtil.objectToMap(custCard2ResVo);
-        CustScore2Dto custScore2Dto = arimFxgdService.preprocessing(map, airmLtgjMasterBody);
-        LoggerUtil.logBusinessFile("调用客户卡2.0请求参数" + custScore2Dto);
-        //调用客户卡2.0
-        ResponseData<Integer> score2 = accessModel.getScore2(custScore2Dto);
-        LoggerUtil.logBusinessFile("调用客户卡2.0响应参数 >>>>>" + score2);
-        Custcard2ModelInvoke anti2FraudModel = new Custcard2ModelInvoke(airmLtgjMasterBody.getCustId(), airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC, airmLtgjMasterBody.getAppNo(), custScore2Dto, score2);
-        //添加模型调用流水表
-        custcard2ModelInvokeMapper.insert(anti2FraudModel);
+//        // 客户卡1.0特征加工
+//        CustCard1ResVo custCard1ResVo = arimFxgdService.getExternalDataCustCard1(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
+//        //调用客户卡1
+//        CustScore1Dto custScore1Dto = new CustScore1Dto(custCard1ResVo, airmLtgjMasterBody);
+//        LoggerUtil.logBusinessFile("调用客户卡1.0请求参数" + custScore1Dto);
+//        //调用客户卡1.0
+//        ResponseData<Map> score1 = accessModel.getScore1(custScore1Dto);
+//        LoggerUtil.logBusinessFile("调用客户卡1.0响应参数 >>>>>" + score1);
+//        Custcard1ModelInvoke anti1FraudModel = new Custcard1ModelInvoke(airmLtgjMasterBody.getCustId(),airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC,airmLtgjMasterBody.getAppNo(), custScore1Dto, score1);
+//        //添加模型调用流水表
+//        custcard1ModelInvokeMapper.insert(anti1FraudModel);
+//
+//        // 客户卡2.0特征加工
+//        CustCard2ResVo custCard2ResVo = arimFxgdService.getExternalDataCustCard2(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
+//        //预处理逻辑
+//        Map map = MapUtil.objectToMap(custCard2ResVo);
+//        CustScore2Dto custScore2Dto = arimFxgdService.preprocessing(map, airmLtgjMasterBody);
+//        LoggerUtil.logBusinessFile("调用客户卡2.0请求参数" + custScore2Dto);
+//        //调用客户卡2.0
+//        ResponseData<Integer> score2 = accessModel.getScore2(custScore2Dto);
+//        LoggerUtil.logBusinessFile("调用客户卡2.0响应参数 >>>>>" + score2);
+//        Custcard2ModelInvoke anti2FraudModel = new Custcard2ModelInvoke(airmLtgjMasterBody.getCustId(), airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC, airmLtgjMasterBody.getAppNo(), custScore2Dto, score2);
+//        //添加模型调用流水表
+//        custcard2ModelInvokeMapper.insert(anti2FraudModel);
         try{
             airmLtgjMaster = arimFxgdService.productCard(null,null,airmLtgjMasterBody);
             //产品流水落表

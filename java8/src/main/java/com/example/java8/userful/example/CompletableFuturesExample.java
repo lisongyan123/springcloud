@@ -1,18 +1,88 @@
 package com.example.java8.userful.example;
 
+import javax.swing.plaf.FontUIResource;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 public class CompletableFuturesExample {
 
     public static void main(String[] args) throws InterruptedException {
-        thenApply();
+//        thenApply();
 //        thenAccept();
 //        thenRun();
 //        thenCombine();
 //        thenAcceptBoth();
 //        runAfterBoth();
 //        applyToEither();
-        anyOf();
+//        anyOf();
+//        runAfterEither();
+//        doBoth2();
+    }
+
+    public static void doBoth2() {
+        ExecutorService executor = Executors.newFixedThreadPool(10);
+        //任务1
+        CompletableFuture.supplyAsync(new Supplier<String>() {
+            @Override
+            public String get() {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println("任务1");
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println("任务2");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return "返回数据async";
+            }
+        }, executor);
+        //任务2
+        CompletableFuture.supplyAsync(new Supplier<String>() {
+            @Override
+            public String get() {
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                    System.out.println("任务3");
+                    TimeUnit.SECONDS.sleep(2);
+                    System.out.println("任务4");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return "返回数据async2";
+            }
+        }, executor);
+        System.out.println("任务执行完成");
+        executor.shutdown();
+    }
+
+
+    /**在两个任务运行完执行*/
+    public static void runAfterBoth(){
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("第一个任务执行完成");
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "s1";
+        }).runAfterBothAsync(CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("第二个任务执行完成");
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "s2";
+        }), () -> System.out.println("hello world"));
+        while (true){}
     }
 
 //    public static <T> void testCompletableFuture(List<T> list) {
@@ -116,6 +186,7 @@ public class CompletableFuturesExample {
 //
 //    }
 
+
     /** hello world */
     public static void thenApply() {
         String result = CompletableFuture.supplyAsync(() -> "hello").thenApply(s -> s + " world").join();
@@ -162,7 +233,7 @@ public class CompletableFuturesExample {
     public static void thenAcceptBoth() {
         CompletableFuture.supplyAsync(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -175,26 +246,6 @@ public class CompletableFuturesExample {
             }
             return "world";
         }), (s1, s2) -> System.out.println(s1 + " " + s2));
-        while (true){}
-    }
-
-    /**在两个任务运行完执行*/
-    public static void runAfterBoth(){
-        CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return "s1";
-        }).runAfterBothAsync(CompletableFuture.supplyAsync(() -> {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return "s2";
-        }), () -> System.out.println("hello world"));
         while (true){}
     }
 
@@ -239,9 +290,10 @@ public class CompletableFuturesExample {
     }
 
     /**两个任务 任何一个完成了在执行下一步操作*/
-    public void runAfterEither() {
+    public static void runAfterEither() {
         CompletableFuture.supplyAsync(() -> {
             try {
+                System.out.println("第一个任务");
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -249,7 +301,8 @@ public class CompletableFuturesExample {
             return "s1";
         }).runAfterEither(CompletableFuture.supplyAsync(() -> {
             try {
-                Thread.sleep(2000);
+                System.out.println("第二个任务");
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
