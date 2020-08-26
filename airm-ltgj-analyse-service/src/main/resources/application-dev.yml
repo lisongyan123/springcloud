@@ -62,3 +62,11 @@ logging:
     com.bank.irce.fxgd.feign: debug
 
 reserveTotalApplyAmt: 1000000000
+
+ribbon:
+  eager-load.enabled: true
+#  eager-load.clients: airm-ltfq-credit-service
+
+feign:
+  hystrix:
+    enabled: false
