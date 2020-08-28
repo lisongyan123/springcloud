@@ -1,10 +1,7 @@
 package com.bank.irce.ltgj.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bank.irce.ltgj.common.DateUtil;
-import com.bank.irce.ltgj.common.LoggerUtil;
-import com.bank.irce.ltgj.common.MapUtil;
-import com.bank.irce.ltgj.common.ResponseData;
+import com.bank.irce.ltgj.common.*;
 import com.bank.irce.ltgj.entity.AirmLtgjMasterAuditCredit;
 import com.bank.irce.ltgj.entity.AirmLtgjModelInvokeHistory;
 import com.bank.irce.ltgj.entity.AirmLtgjModelLtdsjInfo;
@@ -25,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Api(tags = "联通购机")
@@ -62,6 +60,7 @@ public class AirmLtgjController {
     @ApiOperation("联通购机授信业务接口")
     @PostMapping("/user/evaluateCredit")
     public  AirmLtgjMasterAuditCredit evaluateCredit(@RequestBody AirmLtgjMasterAuditCredit airmLtgjMasterBody) throws Exception {
+        Long startTime = System.currentTimeMillis();
         Integer scoreconson = -1;
         try{
             //获取百融信用分的scoreconson字段
@@ -101,30 +100,46 @@ public class AirmLtgjController {
         }
 
         AirmLtgjMasterAuditCredit airmLtgjMaster = new AirmLtgjMasterAuditCredit();
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                CustCard1ResVo custCard1ResVo = arimFxgdService.getExternalDataCustCard1(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
+                return custCard1ResVo;
+            } catch (TradeException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }).thenCompose(CompletableFuture.supplyAsync(() -> {
+            try {
+                CustCard2ResVo custCard2ResVo = arimFxgdService.getExternalDataCustCard2(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
+            } catch (TradeException e) {
+                e.printStackTrace();
+            }
+        }));
+        String get = future.get();
+        System.out.println(get);
 
-//        // 客户卡1.0特征加工
-//        CustCard1ResVo custCard1ResVo = arimFxgdService.getExternalDataCustCard1(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
-//        //调用客户卡1
-//        CustScore1Dto custScore1Dto = new CustScore1Dto(custCard1ResVo, airmLtgjMasterBody);
-//        LoggerUtil.logBusinessFile("调用客户卡1.0请求参数" + custScore1Dto);
-//        //调用客户卡1.0
+        System.out.println(future.get()); // Hello World
+        // 客户卡1.0特征加工
+        //调用客户卡1
+        CustScore1Dto custScore1Dto = new CustScore1Dto(custCard1ResVo, airmLtgjMasterBody);
+        LoggerUtil.logBusinessFile("调用客户卡1.0请求参数" + custScore1Dto);
+        //调用客户卡1.0
 //        ResponseData<Map> score1 = accessModel.getScore1(custScore1Dto);
 //        LoggerUtil.logBusinessFile("调用客户卡1.0响应参数 >>>>>" + score1);
 //        Custcard1ModelInvoke anti1FraudModel = new Custcard1ModelInvoke(airmLtgjMasterBody.getCustId(),airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC,airmLtgjMasterBody.getAppNo(), custScore1Dto, score1);
-//        //添加模型调用流水表
+        //添加模型调用流水表
 //        custcard1ModelInvokeMapper.insert(anti1FraudModel);
-//
-//        // 客户卡2.0特征加工
-//        CustCard2ResVo custCard2ResVo = arimFxgdService.getExternalDataCustCard2(airmLtgjMasterBody.getSessionId(), Constant.DEFAULT_PARAMS, operTable);
-//        //预处理逻辑
-//        Map map = MapUtil.objectToMap(custCard2ResVo);
+
+        // 客户卡2.0特征加工
+        //预处理逻辑
+        Map map = MapUtil.objectToMap(custCard2ResVo);
 //        CustScore2Dto custScore2Dto = arimFxgdService.preprocessing(map, airmLtgjMasterBody);
 //        LoggerUtil.logBusinessFile("调用客户卡2.0请求参数" + custScore2Dto);
-//        //调用客户卡2.0
+        //调用客户卡2.0
 //        ResponseData<Integer> score2 = accessModel.getScore2(custScore2Dto);
 //        LoggerUtil.logBusinessFile("调用客户卡2.0响应参数 >>>>>" + score2);
 //        Custcard2ModelInvoke anti2FraudModel = new Custcard2ModelInvoke(airmLtgjMasterBody.getCustId(), airmLtgjMasterBody.getSessionId(), Constant.RESP_SUSECC, airmLtgjMasterBody.getAppNo(), custScore2Dto, score2);
-//        //添加模型调用流水表
+        //添加模型调用流水表
 //        custcard2ModelInvokeMapper.insert(anti2FraudModel);
         try{
             airmLtgjMaster = arimFxgdService.productCard(null,null,airmLtgjMasterBody);
@@ -156,6 +171,14 @@ public class AirmLtgjController {
         } catch (Exception e) {
             LoggerUtil.logBusinessFile("落表失败");
         }
+        Long endTime = System.currentTimeMillis();
+        Long tempTime = (endTime - startTime);
+        System.out.println("花费时间："+
+                (((tempTime/86400000)>0)?((tempTime/86400000)+"d"):"")+
+                ((((tempTime/86400000)>0)||((tempTime%86400000/3600000)>0))?((tempTime%86400000/3600000)+"h"):(""))+
+                ((((tempTime/3600000)>0)||((tempTime%3600000/60000)>0))?((tempTime%3600000/60000)+"m"):(""))+
+                ((((tempTime/60000)>0)||((tempTime%60000/1000)>0))?((tempTime%60000/1000)+"s"):(""))+
+                ((tempTime%1000)+"ms"));
         return airmLtgjMaster;
     }
 }
