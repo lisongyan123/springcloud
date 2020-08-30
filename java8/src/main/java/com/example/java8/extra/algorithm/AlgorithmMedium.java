@@ -293,4 +293,97 @@ public class AlgorithmMedium {
 
         return dummy.next;
     }
+
+    /**每k个一组反转  返回反转后的链表*/
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode tail = dummy;
+        while (true) {
+            int count = 0;
+            while (tail != null && count != k) {
+                count++;
+                tail = tail.next;
+            }
+            if (tail == null) break;
+            ListNode head1 = pre.next;
+            while (pre.next != tail) {
+                ListNode cur = pre.next;
+                pre.next = cur.next;
+                cur.next = tail.next;
+                tail.next = cur;
+            }
+            pre = head1;
+            tail = head1;
+        }
+        return dummy.next;
+    }
+
+    /**找出和为target的数组 可重复*/
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        int len = candidates.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if (len == 0) {
+            return res;
+        }
+        // 排序是剪枝的前提
+        Arrays.sort(candidates);
+        Deque<Integer> path = new ArrayDeque<>();
+        dfs(candidates, 0, len, target, path, res);
+        return res;
+    }
+
+    /**从数组中找出所有使数字之和为target的组合*/
+    private void dfs(int[] candidates, int begin, int len, int target, Deque<Integer> path, List<List<Integer>> res) {
+        // 由于进入更深层的时候，小于 0 的部分被剪枝，因此递归终止条件值只判断等于 0 的情况
+        if (target == 0) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = begin; i < len; i++) {
+            // 重点理解这里剪枝，前提是候选数组已经有序，
+            if (target - candidates[i] < 0) {
+                break;
+            }
+            path.addLast(candidates[i]);
+            dfs(candidates, i, len, target - candidates[i], path, res);
+            path.removeLast();
+        }
+    }
+
+    /**找出和为target的数组 不可重复*/
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        int len = candidates.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if (len == 0) {
+            return res;
+        }
+        // 排序是剪枝的前提
+        Arrays.sort(candidates);
+        Deque<Integer> path = new ArrayDeque<>();
+        dfs2(candidates, 0, len, target, path, res);
+        return res;
+    }
+
+    private void dfs2(int[] candidates, int begin, int len, int target, Deque<Integer> path, List<List<Integer>> res) {
+        // 由于进入更深层的时候，小于 0 的部分被剪枝，因此递归终止条件值只判断等于 0 的情况
+        if (target == 0) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = begin; i < len; i++) {
+            // 重点理解这里剪枝，前提是候选数组已经有序，
+            if (target - candidates[i] < 0) {
+                break;
+            }
+            //比上一个题目多了此行判断 去重
+            if(i > begin && candidates[i] == candidates[i-1]) {
+                continue;
+            }
+            path.addLast(candidates[i]);
+            dfs2(candidates, i + 1, len, target - candidates[i], path, res);
+            path.removeLast();
+        }
+    }
 }

@@ -76,4 +76,123 @@ public class AlgorithmEasy {
         return stack.size() == 1;
     }
 
+    /**删除重复项*/
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0) return 0;
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != nums[i]) {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i + 1;
+    }
+
+    /**移除元素*/
+    public int removeElement(int[] nums, int val) {
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != val) {
+                nums[i] = nums[j];
+                i++;
+            }
+        }
+        return i;
+    }
+
+    /**求a在b中第一次出现的位置*/
+    public int strStr(String haystack, String needle) {
+        int L = needle.length(), n = haystack.length();
+        
+        for (int start = 0; start < n - L + 1; ++start) {
+            if (haystack.substring(start, start + L).equals(needle)) {
+                return start;
+            }
+        }
+        return -1;
+    }
+
+    /**返回目标值在数组的索引*/
+    public int search(int[] nums, int target) {
+        if(nums == null || nums.length == 0){
+            return -1;
+        }
+        int start = 0;
+        int end = nums.length - 1;
+
+        while (start <= end){
+            int mid = start + (end -start)/2;
+            if (nums[mid] == target){
+                return mid;
+            }
+
+            //后半部分有序
+            if(nums[mid] < nums[end]){
+                if(nums[mid] < target && target <= nums[end]){
+                    start = mid + 1;
+                } else {
+                    end = mid - 1;
+                }
+
+            } else {
+                if(nums[mid] > target && target >= nums[start]){
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**求目标值target的数组下标起点和终点位置*/
+    private int extremeInsertionIndex(int[] nums, int target, boolean left) {
+        int lo = 0;
+        int hi = nums.length;
+
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (nums[mid] > target || (left && target == nums[mid])) {
+                hi = mid;
+            }
+            else {
+                //left为false就是跳过第一个再次往下判断最后一个
+                lo = mid+1;
+            }
+        }
+
+        return lo;
+    }
+
+    public int[] searchRange(int[] nums, int target) {
+        int[] targetRange = {-1, -1};
+
+        int leftIdx = extremeInsertionIndex(nums, target, true);
+
+        if (leftIdx == nums.length || nums[leftIdx] != target) {
+            return targetRange;
+        }
+
+        targetRange[0] = leftIdx;
+        targetRange[1] = extremeInsertionIndex(nums, target, false)-1;
+
+        return targetRange;
+    }
+
+    /**数独，在索引下插入*/
+    public int searchInsert(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0, right = n - 1, ans = n;
+        while (left <= right) {
+            int mid = ((right - left) >> 1) + left;
+            if (target <= nums[mid]) {
+                ans = mid;
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
 }
