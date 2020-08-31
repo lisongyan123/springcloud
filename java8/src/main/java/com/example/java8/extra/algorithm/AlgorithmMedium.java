@@ -386,4 +386,40 @@ public class AlgorithmMedium {
             path.removeLast();
         }
     }
+
+    /**接雨水*/
+    public int trap(int[] height) {
+        int sum = 0;
+        int max_left = 0;
+        int[] max_right = new int[height.length];
+        for (int i = height.length - 2; i >= 0; i--) {
+            //记录了从右到左的最大值
+            max_right[i] = Math.max(max_right[i + 1], height[i + 1]);
+        }
+        for (int i = 1; i < height.length - 1; i++) {
+            max_left = Math.max(max_left, height[i - 1]);
+            int min = Math.min(max_left, max_right[i]);
+            if (min > height[i]) {
+                //min-height[i] 就是高度差
+                sum = sum + (min - height[i]);
+            }
+        }
+        return sum;
+    }
+
+    /**跳跃数组*/
+    public int jump(int[] nums) {
+        int length = nums.length;
+        int end = 0;
+        int maxPosition = 0;
+        int steps = 0;
+        for (int i = 0; i < length - 1; i++) {
+            maxPosition = Math.max(maxPosition, i + nums[i]);
+            if (i == end) {
+                end = maxPosition;
+                steps++;
+            }
+        }
+        return steps;
+    }
 }

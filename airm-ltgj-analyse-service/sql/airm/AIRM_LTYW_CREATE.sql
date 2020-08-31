@@ -73,11 +73,12 @@ CREATE TABLE "AIRM"."AIRM_LTGJ_MODEL_INVOKE_HISTORY" (
                                                          "REQUEST_TIME" VARCHAR2(255)
 );
 
-create sequence AIRM_LTGJ_MODEL_INVOKE_HISTORY_SEQ
-　　increment by 1
-　　start with 1
-　　nomaxvalue
-　　nocycle
-　　cache 20 ;
-create trigger AIRM_LTGJ_MODEL_INVOKE_HISTORY_UID before insert on AIRM_LTGJ_MODEL_INVOKE_HISTORY for each row when (new.ID is null)begin
-    select AIRM_LTGJ_MODEL_INVOKE_HISTORY_SEQ.nextval into:new.ID  from dual;end;
+create sequence DECISION_INFO_SEQ
+    increment by 1
+    start with 1
+    nomaxvalue
+    nocycle
+    cache 20 ;
+create trigger DECISION_INFO_UID before insert on AIRM_LTGJ_MODEL_INVOKE_HISTORY for each row when (new.ID is null)begin
+    select DECISION_INFO_SEQ.nextval into:new.ID  from dual;end;
+
