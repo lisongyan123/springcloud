@@ -1,7 +1,9 @@
 package com.example.java8.extra.algorithm;
 
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AlgorithmMedium {
 
@@ -414,6 +416,7 @@ public class AlgorithmMedium {
         int maxPosition = 0;
         int steps = 0;
         for (int i = 0; i < length - 1; i++) {
+            // 在到达end前 记录每一个最大值
             maxPosition = Math.max(maxPosition, i + nums[i]);
             if (i == end) {
                 end = maxPosition;
@@ -421,5 +424,118 @@ public class AlgorithmMedium {
             }
         }
         return steps;
+    }
+
+    public void backtrack(int n,
+                          ArrayList<Integer> output,
+                          List<List<Integer>> res,
+                          int first) {
+        // 所有数都填完了
+        if (first == n)
+            res.add(new ArrayList<Integer>(output));
+        for (int i = first; i < n; i++) {
+            // 动态维护数组
+            Collections.swap(output, first, i);
+            // 继续递归填下一个数
+            backtrack(n, output, res, first + 1);
+            // 撤销操作
+            Collections.swap(output, first, i);
+        }
+    }
+
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new LinkedList();
+        ArrayList<Integer> output = new ArrayList<Integer>();
+        for (int num : nums)
+            output.add(num);
+
+        int n = nums.length;
+        backtrack(n, output, res, 0);
+        return res;
+    }
+
+    /**有重复*/
+    List<List<Integer>> lists = new ArrayList<>();
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        if (nums == null || nums.length == 0) return lists;
+        List<Integer> list = new ArrayList<>();
+        backtrack(nums, 0, list);
+        return lists;
+    }
+
+    void backtrack(int[] nums, int start, List<Integer> list){
+        if (list.size() == nums.length){
+            lists.add(new ArrayList<>(list));
+            return;
+        }
+
+        HashSet<Integer> set = new HashSet<>();
+        List<Integer> newLists = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        for (int i = start; i < nums.length; i++){
+
+            // 与无重复数字全排列的唯一不同之处
+            if (set.contains(nums[i])){
+                continue;
+            }
+            set.add(nums[i]);
+
+            Collections.swap(newLists, i, start);
+            list.add(nums[start]);
+            backtrack(nums, start + 1, list);
+            list.remove(newLists.size() - 1);
+            Collections.swap(newLists, i, start);
+        }
+    }
+
+    /**顺时针旋转，先面对称然后左右对称*/
+    public void rotate(int[][] matrix){
+        if(matrix.length == 0 || matrix.length != matrix[0].length) {
+            return;
+        }
+        int nums = matrix.length;
+        for (int i = 0; i < nums; ++i){
+            for (int j = 0; j < nums - i; ++j){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[nums - 1 - j][nums - 1 - i];
+                matrix[nums - 1 - j][nums - 1 - i] = temp;
+            }
+        }
+        for (int i = 0; i < (nums >> 1); ++i){
+            for (int j = 0; j < nums; ++j){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[nums - 1 - i][j];
+                matrix[nums - 1 - i][j] = temp;
+            }
+        }
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs.length == 0) return new ArrayList();
+        Map<String, List> ans = new HashMap<String, List>();
+        for (String s : strs) {
+            char[] ca = s.toCharArray();
+            Arrays.sort(ca);
+            String key = String.valueOf(ca);
+            if (!ans.containsKey(key)) ans.put(key, new ArrayList());
+            ans.get(key).add(s);
+        }
+        return new ArrayList(ans.values());
+    }
+
+    /**pow（x,n）*/
+    public double myPow(double x, int n) {
+        if(x == 0.0f) return 0.0d;
+        long b = n;
+        double res = 1.0;
+        if(b < 0) {
+            x = 1 / x;
+            b = -b;
+        }
+        while(b > 0) {
+            if((b & 1) == 1) res *= x;
+            x *= x;
+            b >>= 1;
+        }
+        return res;
     }
 }
