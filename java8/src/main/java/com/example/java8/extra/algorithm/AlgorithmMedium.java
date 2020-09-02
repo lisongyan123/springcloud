@@ -588,4 +588,26 @@ public class AlgorithmMedium {
         }
         return output.toArray(new int[output.size()][2]);
     }
+
+    /**求第k小的数*/
+    public String getPermutation(int n, int k) {
+        List<Integer> ans = new ArrayList<>();
+        k--;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1;i <= n;i++) {
+            ans.add(i);
+        }
+        int[] func = new int[n];
+        func[0] = 1;
+        for(int i = 1;i < n;i++) {
+            func[i] = func[i-1] * i;
+        }
+        for(int i = n;i > 0;i--) {
+            int index = k / func[i-1];
+            k = k % func[i-1];
+            sb.append(ans.get(index));
+            ans.remove(index);
+        }
+        return sb.toString();
+    }
 }
