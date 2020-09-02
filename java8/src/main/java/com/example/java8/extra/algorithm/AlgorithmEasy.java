@@ -23,14 +23,6 @@ public class AlgorithmEasy {
         return null;
     }
 
-    public static void main(String[] args) {
-        //给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，
-        // 并返回他们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
-        List list = Stream.of(nums).collect(Collectors.toList());
-    }
-
     //回文数
     public boolean isPalindrome(int x) {
         //思考：这里大家可以思考一下，为什么末尾为 0 就可以直接返回 false
@@ -194,5 +186,77 @@ public class AlgorithmEasy {
             }
         }
         return ans;
+    }
+
+    /**和最大的*/
+    public int maxSubArray(int[] nums) {
+        int ans = nums[0];
+        int sum = 0;
+        for(int i = 0; i < nums.length; i++) {
+
+            sum = Math.max(sum+nums[i] , nums[i]);
+            ans = Math.max(ans,sum);
+        }
+        return ans;
+    }
+
+    /**蛇形数组都要加进去*/
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> order = new ArrayList<Integer>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return order;
+        }
+        int rows = matrix.length, columns = matrix[0].length;
+        int left = 0, right = columns - 1, top = 0, bottom = rows - 1;
+        while (left <= right && top <= bottom) {
+            for (int column = left; column <= right; column++) {
+                order.add(matrix[top][column]);
+            }
+            for (int row = top + 1; row <= bottom; row++) {
+                order.add(matrix[row][right]);
+            }
+            if (left < right && top < bottom) {
+                for (int column = right - 1; column > left; column--) {
+                    order.add(matrix[bottom][column]);
+                }
+                for (int row = bottom; row > top; row--) {
+                    order.add(matrix[row][left]);
+                }
+            }
+            left++;
+            right--;
+            top++;
+            bottom--;
+        }
+        return order;
+    }
+
+    /**跳跃数组是否能打到终点*/
+    public boolean canJump(int[] nums) {
+        int n = nums.length;
+        int rightmost = 0;
+        for (int i = 0; i < n; ++i) {
+            if (i <= rightmost) {
+                rightmost = Math.max(rightmost, i + nums[i]);
+                if (rightmost >= n - 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /***/
+    public int lengthOfLastWord(String s) {
+        if(s == null || s.length() == 0) return 0;
+        int count = 0;
+        for(int i = s.length()-1; i >= 0; i--){
+            if(s.charAt(i) == ' '){
+                if(count == 0) continue;
+                break;
+            }
+            count++;
+        }
+        return count;
     }
 }

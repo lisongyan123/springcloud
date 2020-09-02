@@ -538,4 +538,54 @@ public class AlgorithmMedium {
         }
         return res;
     }
+
+    /**区间合并*/
+    public int[][] merge(int[][] intervals) {
+        // 先按照区间起始位置排序
+        Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
+        // 遍历区间
+        int[][] res = new int[intervals.length][2];
+        int idx = -1;
+        for (int[] interval: intervals) {
+            // 如果结果数组是空的，或者当前区间的起始位置 > 结果数组中最后区间的终止位置，
+            // 则不合并，直接将当前区间加入结果数组。
+            if (idx == -1 || interval[0] > res[idx][1]) {
+                res[++idx] = interval;
+            } else {
+                // 反之将当前区间合并至结果数组的最后区间
+                res[idx][1] = Math.max(res[idx][1], interval[1]);
+            }
+        }
+        return Arrays.copyOf(res, idx + 1);
+    }
+
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int newStart = newInterval[0], newEnd = newInterval[1];
+        int idx = 0, n = intervals.length;
+        LinkedList<int[]> output = new LinkedList<int[]>();
+
+        while (idx < n && newStart > intervals[idx][0])
+            output.add(intervals[idx++]);
+
+        int[] interval = new int[2];
+        if (output.isEmpty() || output.getLast()[1] < newStart)
+            output.add(newInterval);
+        else {
+            interval = output.removeLast();
+            interval[1] = Math.max(interval[1], newEnd);
+            output.add(interval);
+        }
+
+        while (idx < n) {
+            interval = intervals[idx++];
+            int start = interval[0], end = interval[1];
+            if (output.getLast()[1] < start) output.add(interval);
+            else {
+                interval = output.removeLast();
+                interval[1] = Math.max(interval[1], end);
+                output.add(interval);
+            }
+        }
+        return output.toArray(new int[output.size()][2]);
+    }
 }
