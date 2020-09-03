@@ -588,4 +588,62 @@ public class AlgorithmMedium {
         }
         return output.toArray(new int[output.size()][2]);
     }
+
+    /**旋转链表*/
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null) return null;
+        ListNode prev = head;
+        int length = 1;
+        //求出链表的长度，先把链表全部反转
+        while (prev.next != null) {
+            prev = prev.next;
+            length++;
+        }
+        //链表成循环
+        prev.next = head;
+        //看看他转几圈 ，3个数转10下跟转一下一样，然后再把反转的链表向前移动3-1=2个
+        int n = length - k % length;
+        //执行了n+1次  因为第一次有head
+        while (--n >= 0) {
+            prev = prev.next;
+        }
+        head = prev.next;
+        prev.next = null;
+        return head;
+    }
+
+    /**机器人走到终点*/
+    public int uniquePaths(int m, int n) {
+        int[] cur = new int[n];
+        //初始化数组
+        Arrays.fill(cur,1);
+        //因为只能向右和只能向下  所以边接的点只有一种走法，而[i][j]的点只能由[i-1][j],[i][j-1]两个点到达 路数等于两者相加
+        //跟杨辉三角一样的道理，再者终点就在右下角 等于所有的M相加了。
+        for (int i = 1; i < m;i++){
+            for (int j = 1; j < n; j++){
+                cur[j] += cur[j-1] ;
+            }
+        }
+        return cur[n-1];
+    }
+
+    /**比上一题多加了个障碍物，思路就是到终点的距离减去到障碍物的距离*/
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int n = obstacleGrid.length, m = obstacleGrid[0].length;
+        int[] f = new int[m];
+        f[0] = obstacleGrid[0][0] == 0 ? 1 : 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                if (obstacleGrid[i][j] == 1) {
+                    f[j] = 0;
+                    continue;
+                }
+                if (j - 1 >= 0 && obstacleGrid[i][j - 1] == 0) {
+                    f[j] += f[j - 1];
+                }
+            }
+        }
+
+        return f[m - 1];
+    }
 }
