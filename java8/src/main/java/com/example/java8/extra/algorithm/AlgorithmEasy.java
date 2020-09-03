@@ -246,7 +246,7 @@ public class AlgorithmEasy {
         return false;
     }
 
-    /***/
+    /**最后一个空格的字符串长度*/
     public int lengthOfLastWord(String s) {
         if(s == null || s.length() == 0) return 0;
         int count = 0;
