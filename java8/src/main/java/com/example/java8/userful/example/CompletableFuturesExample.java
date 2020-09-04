@@ -24,6 +24,7 @@ public class CompletableFuturesExample {
 //        anyOf();
 //        runAfterEither();
 //        doBoth2();
+        handle1();
     }
 
     public static void doBoth2() {
@@ -355,7 +356,7 @@ public class CompletableFuturesExample {
 
     /**运行结束后对结果的处理，一种是正常执行，返回值。另外一种是遇到异常抛出造成程序的中断。*/
     /**出现异常*/
-    public void handle1() {
+    public static void handle1() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(3000);
@@ -377,7 +378,7 @@ public class CompletableFuturesExample {
     }
 
     /**未出现异常*/
-    public void handle2() {
+    public static void handle2() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(3000);
