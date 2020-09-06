@@ -4,6 +4,7 @@ package com.example.java8.extra.algorithm;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class AlgorithmMedium {
 
@@ -643,7 +644,149 @@ public class AlgorithmMedium {
                 }
             }
         }
-
         return f[m - 1];
+    }
+
+    /**编辑距离*/
+    public int minDistance(String word1, String word2) {
+        int n = word1.length();
+        int m = word2.length();
+
+        // 有一个字符串为空串
+        if (n * m == 0)
+            return n + m;
+
+        // DP 数组
+        int [][] D = new int[n + 1][m + 1];
+
+        // 边界状态初始化
+        for (int i = 0; i < n + 1; i++) D[i][0] = i;
+
+        for (int j = 0; j < m + 1; j++) D[0][j] = j;
+
+        // 计算所有 DP 值
+        for (int i = 1; i < n + 1; i++) {
+            for (int j = 1; j < m + 1; j++) {
+                int left = D[i - 1][j] + 1;
+                int down = D[i][j - 1] + 1;
+                int left_down = D[i - 1][j - 1];
+                if (word1.charAt(i - 1) != word2.charAt(j - 1))
+                    left_down += 1;
+                D[i][j] = Math.min(left, Math.min(down, left_down));
+
+            }
+        }
+        return D[n][m];
+    }
+
+    /**设置为0*/
+    public void setZeroes(int[][] matrix) {
+        int R = matrix.length;
+        int C = matrix[0].length;
+        Set<Integer> rows = new HashSet<Integer>();
+        Set<Integer> cols = new HashSet<Integer>();
+
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                if (matrix[i][j] == 0) {
+                    rows.add(i);
+                    cols.add(j);
+                }
+            }
+        }
+
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                if (rows.contains(i) || cols.contains(j)) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    /**查看有序数组是否包含一个数，二分查找算法*/
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int rows = matrix.length, columns = matrix[0].length;
+        int length = rows*columns;
+        int left = 0, right = length - 1 ;
+        while(left <= right) {
+            int mid = (left + right) / 2;
+            if(matrix[mid/columns ][mid%columns ] < target) left++;
+            if(matrix[mid/columns][mid%columns ] > target) right--;
+            if(matrix[mid/columns ][mid%columns ] == target) return true;
+        }
+        return false;
+    }
+
+    public static void sortColors(int[] nums) {
+        int curr = 0, len = nums.length - 1;
+        int i = 0,temp = 0;
+        while(curr <= len) {
+            if(nums[curr] == 0) {
+                temp = nums[curr];
+                nums[curr++] = nums[i];
+                nums[i++] = temp;
+            } ;
+            if(nums[curr] == 2) {
+                temp = nums[curr];
+                nums[curr] = nums[len];
+                nums[len--] = temp;
+            }
+            else curr++;
+        }
+    }
+
+    /**滑动窗口求最小字符串*/
+    Map<Character, Integer> sMap = new HashMap<Character, Integer>();
+    Map<Character, Integer> tMap = new HashMap<Character, Integer>();
+    public String minWindow(String s, String t) {
+        int tLen = t.length() ,sLen = s.length();
+        int l = 0, r = -1, len = Integer.MAX_VALUE, ansL = -1, ansR = -1;
+        //把t的字符串和索引都放进map里面去
+        IntStream.range(0,tLen).forEach(i -> sMap.put(t.charAt(i),sMap.getOrDefault(t.charAt(i),0) + 1));
+        while(r < sLen) {
+            ++r;
+            //右边先遍历完整
+            if(r < sLen && sMap.containsKey(s.charAt(r))) tMap.put(s.charAt(r),tMap.getOrDefault(s.charAt(r),0) + 1);
+            //开始遍历左边，先检查有没有
+            while(check() && l <= r) {
+                if(r - l + 1 < len) {
+                    len = r - l + 1;
+                    ansL = l;
+                    ansR = l + len;
+                }
+                if(sMap.containsKey(s.charAt(l))) tMap.put(s.charAt(l),tMap.getOrDefault(s.charAt(l),0) - 1);
+                ++l;
+            }
+        }
+        return ansL == -1 ? "":s.substring(ansL,ansR);
+    }
+
+    public boolean check() {
+        long count = sMap.entrySet().stream().filter(v->tMap.getOrDefault(v.getKey(),0) < v.getValue()).count();
+        return count > 0 ? false : true;
+    }
+
+    /**n,k位的所有组合*/
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (k <= 0 || n < k) {
+            return res;
+        }
+        Deque<Integer> path = new ArrayDeque<>();
+        findCombinations(n, k, 1, path, res);
+        return res;
+    }
+
+    private void findCombinations(int n, int k, int index, Deque<Integer> path, List<List<Integer>> res) {
+        if (path.size() == k) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = index; i <= n - (k - path.size()) + 1; i++) {
+            path.addLast(i);
+            findCombinations(n, k, i + 1, path, res);
+            path.removeLast();
+        }
     }
 }

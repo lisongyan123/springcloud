@@ -11,7 +11,7 @@ import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
 public class PartitionPrimeNumbers<T> {
     
     public static void main(String... args) {
-        System.out.println("Numbers partitioned in prime and non-prime: " + partitionPrimesWithCustomCollector(100));
+//        System.out.println("Numbers partitioned in prime and non-prime: " + partitionPrimesWithCustomCollector(100));
         System.out.println("Numbers partitioned in prime and non-prime: " + partitionPrimesWithInlineCollector(100));
 
         List<Person> persons =

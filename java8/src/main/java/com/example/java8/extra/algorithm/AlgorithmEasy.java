@@ -11,13 +11,13 @@ import java.util.stream.Stream;
 @Slf4j
 public class AlgorithmEasy {
     public static int[] twoSum(int[] nums, int target) {
-        Map<Integer,Integer> map = new HashMap<>();
-        IntStream.range(0,nums.length)
-                .mapToObj(v->{
-                    if(map.containsKey(target-nums[v])){
-                        return new int[]{map.get(target-nums[v]),v};
+        Map<Integer, Integer> map = new HashMap<>();
+        IntStream.range(0, nums.length)
+                .mapToObj(v -> {
+                    if (map.containsKey(target - nums[v])) {
+                        return new int[]{map.get(target - nums[v]), v};
                     }
-                    map.put(nums[v],v);
+                    map.put(nums[v], v);
                     return null;
                 });
         return null;
@@ -54,21 +54,31 @@ public class AlgorithmEasy {
         return ans;
     }
 
-    /**括号放进去*/
-    private static final Map<Character,Character> map = new HashMap<Character,Character>(){{
-        put('{','}'); put('[',']'); put('(',')'); put('?','?');
+    /**
+     * 括号放进去
+     */
+    private static final Map<Character, Character> map = new HashMap<Character, Character>() {{
+        put('{', '}');
+        put('[', ']');
+        put('(', ')');
+        put('?', '?');
     }};
+
     public boolean isValid(String s) {
-        if(s.length() > 0 && !map.containsKey(s.charAt(0))) return false;
-        LinkedList<Character> stack = new LinkedList<Character>() {{ add('?'); }};
-        for(Character c : s.toCharArray()){
-            if(map.containsKey(c)) stack.addLast(c);
-            else if(map.get(stack.removeLast()) != c) return false;
+        if (s.length() > 0 && !map.containsKey(s.charAt(0))) return false;
+        LinkedList<Character> stack = new LinkedList<Character>() {{
+            add('?');
+        }};
+        for (Character c : s.toCharArray()) {
+            if (map.containsKey(c)) stack.addLast(c);
+            else if (map.get(stack.removeLast()) != c) return false;
         }
         return stack.size() == 1;
     }
 
-    /**删除重复项*/
+    /**
+     * 删除重复项
+     */
     public int removeDuplicates(int[] nums) {
         if (nums.length == 0) return 0;
         int i = 0;
@@ -81,7 +91,9 @@ public class AlgorithmEasy {
         return i + 1;
     }
 
-    /**移除元素*/
+    /**
+     * 移除元素
+     */
     public int removeElement(int[] nums, int val) {
         int i = 0;
         for (int j = 0; j < nums.length; j++) {
@@ -93,10 +105,12 @@ public class AlgorithmEasy {
         return i;
     }
 
-    /**求a在b中第一次出现的位置*/
+    /**
+     * 求a在b中第一次出现的位置
+     */
     public int strStr(String haystack, String needle) {
         int L = needle.length(), n = haystack.length();
-        
+
         for (int start = 0; start < n - L + 1; ++start) {
             if (haystack.substring(start, start + L).equals(needle)) {
                 return start;
@@ -105,30 +119,32 @@ public class AlgorithmEasy {
         return -1;
     }
 
-    /**返回目标值在数组的索引*/
+    /**
+     * 返回目标值在数组的索引
+     */
     public int search(int[] nums, int target) {
-        if(nums == null || nums.length == 0){
+        if (nums == null || nums.length == 0) {
             return -1;
         }
         int start = 0;
         int end = nums.length - 1;
 
-        while (start <= end){
-            int mid = start + (end -start)/2;
-            if (nums[mid] == target){
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (nums[mid] == target) {
                 return mid;
             }
 
             //后半部分有序
-            if(nums[mid] < nums[end]){
-                if(nums[mid] < target && target <= nums[end]){
+            if (nums[mid] < nums[end]) {
+                if (nums[mid] < target && target <= nums[end]) {
                     start = mid + 1;
                 } else {
                     end = mid - 1;
                 }
 
             } else {
-                if(nums[mid] > target && target >= nums[start]){
+                if (nums[mid] > target && target >= nums[start]) {
                     end = mid - 1;
                 } else {
                     start = mid + 1;
@@ -138,7 +154,9 @@ public class AlgorithmEasy {
         return -1;
     }
 
-    /**求目标值target的数组下标起点和终点位置*/
+    /**
+     * 求目标值target的数组下标起点和终点位置
+     */
     private int extremeInsertionIndex(int[] nums, int target, boolean left) {
         int lo = 0;
         int hi = nums.length;
@@ -147,10 +165,9 @@ public class AlgorithmEasy {
             int mid = (lo + hi) / 2;
             if (nums[mid] > target || (left && target == nums[mid])) {
                 hi = mid;
-            }
-            else {
+            } else {
                 //left为false就是跳过第一个再次往下判断最后一个
-                lo = mid+1;
+                lo = mid + 1;
             }
         }
 
@@ -167,12 +184,14 @@ public class AlgorithmEasy {
         }
 
         targetRange[0] = leftIdx;
-        targetRange[1] = extremeInsertionIndex(nums, target, false)-1;
+        targetRange[1] = extremeInsertionIndex(nums, target, false) - 1;
 
         return targetRange;
     }
 
-    /**数独，在索引下插入*/
+    /**
+     * 数独，在索引下插入
+     */
     public int searchInsert(int[] nums, int target) {
         int n = nums.length;
         int left = 0, right = n - 1, ans = n;
@@ -188,19 +207,23 @@ public class AlgorithmEasy {
         return ans;
     }
 
-    /**和最大的*/
+    /**
+     * 和最大的
+     */
     public int maxSubArray(int[] nums) {
         int ans = nums[0];
         int sum = 0;
-        for(int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
 
-            sum = Math.max(sum+nums[i] , nums[i]);
-            ans = Math.max(ans,sum);
+            sum = Math.max(sum + nums[i], nums[i]);
+            ans = Math.max(ans, sum);
         }
         return ans;
     }
 
-    /**蛇形数组都要加进去*/
+    /**
+     * 蛇形数组都要加进去
+     */
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> order = new ArrayList<Integer>();
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
@@ -231,7 +254,9 @@ public class AlgorithmEasy {
         return order;
     }
 
-    /**跳跃数组是否能打到终点*/
+    /**
+     * 跳跃数组是否能打到终点
+     */
     public boolean canJump(int[] nums) {
         int n = nums.length;
         int rightmost = 0;
@@ -246,13 +271,15 @@ public class AlgorithmEasy {
         return false;
     }
 
-    /**最后一个空格的字符串长度*/
+    /**
+     * 最后一个空格的字符串长度
+     */
     public int lengthOfLastWord(String s) {
-        if(s == null || s.length() == 0) return 0;
+        if (s == null || s.length() == 0) return 0;
         int count = 0;
-        for(int i = s.length()-1; i >= 0; i--){
-            if(s.charAt(i) == ' '){
-                if(count == 0) continue;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == ' ') {
+                if (count == 0) continue;
                 break;
             }
             count++;
@@ -260,7 +287,9 @@ public class AlgorithmEasy {
         return count;
     }
 
-    /**加一*/
+    /**
+     * 加一
+     */
     public int[] plusOne(int[] digits) {
         for (int i = digits.length - 1; i >= 0; i--) {
             digits[i]++;
@@ -277,11 +306,10 @@ public class AlgorithmEasy {
         int l = 0, r = x, ans = -1;
         while (l <= r) {
             int mid = l + (r - l) / 2;
-            if ((long)mid * mid <= x) {
+            if ((long) mid * mid <= x) {
                 ans = mid;
                 l = mid + 1;
-            }
-            else {
+            } else {
                 r = mid - 1;
             }
         }
@@ -298,5 +326,5 @@ public class AlgorithmEasy {
         }
         return r;
     }
-
 }
+

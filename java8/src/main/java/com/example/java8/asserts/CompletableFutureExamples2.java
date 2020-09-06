@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
-public class A {
+public class CompletableFutureExamples2 {
 //    public static void main(String[] args) throws Exception {
 //        doSomeThing();
 //    }
