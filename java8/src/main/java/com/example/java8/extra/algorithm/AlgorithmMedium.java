@@ -770,23 +770,54 @@ public class AlgorithmMedium {
     /**n,k位的所有组合*/
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> res = new ArrayList<>();
-        if (k <= 0 || n < k) {
-            return res;
-        }
-        Deque<Integer> path = new ArrayDeque<>();
-        findCombinations(n, k, 1, path, res);
+        if(k > n || k <= 0) return res;
+        LinkedList<Integer> linkedList = new LinkedList();
+        dfs(n,k,1,linkedList,res);
         return res;
     }
-
-    private void findCombinations(int n, int k, int index, Deque<Integer> path, List<List<Integer>> res) {
-        if (path.size() == k) {
-            res.add(new ArrayList<>(path));
+    public void dfs(int n, int k, int begin, LinkedList linkedList, List<List<Integer>> res) {
+        if(begin == k) {
+            res.add(new ArrayList(linkedList));
             return;
         }
-        for (int i = index; i <= n - (k - path.size()) + 1; i++) {
-            path.addLast(i);
-            findCombinations(n, k, i + 1, path, res);
-            path.removeLast();
+        for(int i = begin; i <= n - (k - linkedList.size() - 1); i++) {
+            linkedList.addLast(i);
+            dfs(n,k,i+1,linkedList,res);
+            linkedList.removeLast();
         }
     }
+
+    /**给定整数数组，返回所有子集*/
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(0, nums, res, new ArrayList<Integer>());
+        return res;
+
+    }
+
+    private void backtrack(int i, int[] nums, List<List<Integer>> res, ArrayList<Integer> tmp) {
+        res.add(new ArrayList<>(tmp));
+        for (int j = i; j < nums.length; j++) {
+            tmp.add(nums[j]);
+            backtrack(j + 1, nums, res, tmp);
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+
+    //去掉重复元素最多出现两次 第三个删了 并且返回剩余数组
+    public int removeDuplicates(int[] nums) {
+        int j = 1, count = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                count++;
+            } else {
+                count = 1;
+            }
+            if (count <= 2) {
+                nums[j++] = nums[i];
+            }
+        }
+        return j;
+    }
+
 }
