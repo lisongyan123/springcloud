@@ -26,6 +26,7 @@ public class SpringStopWatch {
         System.out.println("当前任务名称：" + sw.currentTaskName());
         sw.stop();
 
+
         System.out.println(sw.prettyPrint()); // 这个方法打印在我们记录日志时是非常友好的  还有百分比的分析哦
 //        System.out.println(sw.shortSummary());
 //        System.out.println(sw.currentTaskName()); // stop后它的值为null

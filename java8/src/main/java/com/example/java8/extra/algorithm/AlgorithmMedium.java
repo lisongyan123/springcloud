@@ -775,6 +775,8 @@ public class AlgorithmMedium {
         dfs(n,k,1,linkedList,res);
         return res;
     }
+
+
     public void dfs(int n, int k, int begin, LinkedList linkedList, List<List<Integer>> res) {
         if(begin == k) {
             res.add(new ArrayList(linkedList));
@@ -820,4 +822,50 @@ public class AlgorithmMedium {
         return j;
     }
 
+    //判断一个数再数组中是否存在
+    public boolean search(int[] nums, int target) {
+        int end = nums.length - 1;
+        int start = 0;
+        while(start <= end) {
+            int mid = (start + end) / 2;
+            if(nums[mid] <= nums[end]) {
+                if(nums[end] == target) return true;
+                if(nums[end] < target) end = mid - 1 ;
+                else start = mid + 1;
+            }
+            if(nums[mid] >= nums[start]) {
+                if(nums[mid] == target) return true;
+                if(nums[mid] < target) start = mid + 1;
+                else end = mid - 1;
+            }
+        }
+        return false;
+    }
+
+    /**删除链表中重复的元素*/
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null || head.next==null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode a = dummy;
+        ListNode b = head;
+        while(b!=null && b.next!=null) {
+            //初始化的时a指向的是哑结点，所以比较逻辑应该是a的下一个节点和b的下一个节点
+            if(a.next.val!=b.next.val) {
+                a = a.next;
+                b = b.next;
+            }
+            else {
+                //如果a、b指向的节点值相等，就不断移动b，直到a、b指向的值不相等
+                while(b!=null && b.next!=null && a.next.val==b.next.val) {
+                    b = b.next;
+                }
+                a.next = b.next;
+                b = b.next;
+            }
+        }
+        return dummy.next;
+    }
 }

@@ -4,7 +4,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public final class CheckedFunctions {
+public final class
+CheckedFunctions {
 
     @FunctionalInterface
     public interface CheckedConsumer<T> {
