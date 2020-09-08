@@ -868,4 +868,5 @@ public class AlgorithmMedium {
         }
         return dummy.next;
     }
+
 }
