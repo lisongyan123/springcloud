@@ -877,6 +877,7 @@ public class AlgorithmMedium {
         LinkedList<Integer> linkedList = new LinkedList<>();
         int area = 0;
         for (int i = 0; i < tmp.length; i++) {
+
             // 对栈中柱体来说，栈中的下一个柱体就是其「左边第一个小于自身的柱体」；
             // 若当前柱体 i 的高度小于栈顶柱体的高度，说明 i 是栈顶柱体的「右边第一个小于栈顶柱体的柱体」。
             // 因此以栈顶柱体为高的矩形的左右宽度边界就确定了，可以计算面积🌶️ ～
@@ -886,7 +887,74 @@ public class AlgorithmMedium {
             }
             linkedList.push(i);
         }
-
         return area;
+    }
+
+    public int maximalRectangle(char[][] matrix) {
+        if (matrix.length == 0) return 0;
+        int maxarea = 0;
+        int[] dp = new int[matrix[0].length];
+
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[0].length; j++) {
+                dp[j] = matrix[i][j] == '1' ? dp[j] + 1 : 0;
+            }
+            maxarea = Math.max(maxarea, largestRectangleArea(dp));
+        } return maxarea;
+    }
+
+    //所有小于target的节点在前面 大于target的节点在后面
+    public ListNode partition(ListNode head, int x) {
+
+        ListNode before_head = new ListNode(0);
+        ListNode before = before_head;
+        ListNode after_head = new ListNode(0);
+        ListNode after = after_head;
+
+        while (head != null) {
+            if (head.val < x) {
+                before.next = head;
+                before = before.next;
+            } else {
+                after.next = head;
+                after = after.next;
+            }
+            head = head.next;
+        }
+
+        after.next = null;
+        before.next = after_head.next;
+        return before_head.next;
+    }
+
+    //合并两个有序数组
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int p1 = m - 1;
+        int p2 = n - 1;
+        int p = m + n - 1;
+
+        while ((p1 >= 0) && (p2 >= 0))
+            nums1[p--] = (nums1[p1] < nums2[p2]) ? nums2[p2--] : nums1[p1--];
+        System.arraycopy(nums2, 0, nums1, 0, p2 + 1);
+    }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums); //排序
+        getAns(nums, 0, new ArrayList<>(), ans);
+        return ans;
+    }
+
+    private void getAns(int[] nums, int start, ArrayList<Integer> temp, List<List<Integer>> ans) {
+        ans.add(new ArrayList<>(temp));
+        for (int i = start; i < nums.length; i++) {
+            //和上个数字相等就跳过
+            if (i > start && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            temp.add(nums[i]);
+            getAns(nums, i + 1, temp, ans);
+            temp.remove(temp.size() - 1);
+        }
     }
 }
