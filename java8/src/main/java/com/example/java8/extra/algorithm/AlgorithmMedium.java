@@ -984,4 +984,39 @@ public class AlgorithmMedium {
         }
         return res;
     }
+
+    //输出由1-n组成的所有节点的二叉树
+    public List<TreeNode> generateTrees(int n) {
+        if(n < 1)
+            return new ArrayList<>();
+        return helper(1, n);
+    }
+
+    public List<TreeNode> helper(int start, int end){
+        List<TreeNode> list = new ArrayList<>();
+
+        if(start > end){
+            // 如果当前子树为空，不加null行吗？
+            list.add(null);
+            return list;
+        }
+
+        for(int i = start; i <= end; i++){
+            //左孩子上所有的list
+            List<TreeNode> left = helper(start, i-1);
+            //右孩子上所有的list
+            List<TreeNode> right = helper(i+1, end);
+
+            // 固定左孩子，遍历右孩子
+            for(TreeNode l : left){
+                for(TreeNode r : right){
+                    TreeNode root = new TreeNode(i);
+                    root.left = l;
+                    root.right = r;
+                    list.add(root);
+                }
+            }
+        }
+        return list;
+    }
 }
