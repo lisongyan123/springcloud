@@ -13,6 +13,7 @@ public class AlgorithmMedium {
     public class ListNode {
         int val;
         ListNode next;   // 下一个链表对象
+
         ListNode(int x) {
             val = x;
         }  //赋值链表的值
@@ -140,19 +141,21 @@ public class AlgorithmMedium {
         return ans;
     }
 
-    /**最接近的三个数之和*/
+    /**
+     * 最接近的三个数之和
+     */
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
         int ans = nums[0] + nums[1] + nums[2];
-        for(int i=0;i<nums.length;i++) {
-            int start = i+1, end = nums.length - 1;
-            while(start < end) {
+        for (int i = 0; i < nums.length; i++) {
+            int start = i + 1, end = nums.length - 1;
+            while (start < end) {
                 int sum = nums[start] + nums[end] + nums[i];
-                if(Math.abs(target - sum) < Math.abs(target - ans))
+                if (Math.abs(target - sum) < Math.abs(target - ans))
                     ans = sum;
-                if(sum > target)
+                if (sum > target)
                     end--;
-                else if(sum < target)
+                else if (sum < target)
                     start++;
                 else
                     return ans;
@@ -160,6 +163,7 @@ public class AlgorithmMedium {
         }
         return ans;
     }
+
     public List<List<Integer>> fourSum(int[] nums, int target) {
         int len = nums.length;
         List<List<Integer>> ans = new ArrayList<>();
@@ -232,7 +236,9 @@ public class AlgorithmMedium {
         return ans;
     }
 
-    /**删除倒数第k个元素*/
+    /**
+     * 删除倒数第k个元素
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
@@ -251,7 +257,9 @@ public class AlgorithmMedium {
         return dummy.next;
     }
 
-    /**合并k个升序链表*/
+    /**
+     * 合并k个升序链表
+     */
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;
         return merge(lists, 0, lists.length - 1);
@@ -272,7 +280,7 @@ public class AlgorithmMedium {
             l1.next = mergeTwoLists(l1.next, l2);
             return l1;
         } else {
-            l2.next = mergeTwoLists(l1,l2.next);
+            l2.next = mergeTwoLists(l1, l2.next);
             return l2;
         }
     }
@@ -297,7 +305,9 @@ public class AlgorithmMedium {
         return dummy.next;
     }
 
-    /**每k个一组反转  返回反转后的链表*/
+    /**
+     * 每k个一组反转  返回反转后的链表
+     */
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
@@ -323,7 +333,9 @@ public class AlgorithmMedium {
         return dummy.next;
     }
 
-    /**找出和为target的数组 可重复*/
+    /**
+     * 找出和为target的数组 可重复
+     */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         int len = candidates.length;
         List<List<Integer>> res = new ArrayList<>();
@@ -337,7 +349,9 @@ public class AlgorithmMedium {
         return res;
     }
 
-    /**从数组中找出所有使数字之和为target的组合*/
+    /**
+     * 从数组中找出所有使数字之和为target的组合
+     */
     private void dfs(int[] candidates, int begin, int len, int target, Deque<Integer> path, List<List<Integer>> res) {
         // 由于进入更深层的时候，小于 0 的部分被剪枝，因此递归终止条件值只判断等于 0 的情况
         if (target == 0) {
@@ -355,7 +369,9 @@ public class AlgorithmMedium {
         }
     }
 
-    /**找出和为target的数组 不可重复*/
+    /**
+     * 找出和为target的数组 不可重复
+     */
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         int len = candidates.length;
         List<List<Integer>> res = new ArrayList<>();
@@ -381,7 +397,7 @@ public class AlgorithmMedium {
                 break;
             }
             //比上一个题目多了此行判断 去重
-            if(i > begin && candidates[i] == candidates[i-1]) {
+            if (i > begin && candidates[i] == candidates[i - 1]) {
                 continue;
             }
             path.addLast(candidates[i]);
@@ -390,7 +406,9 @@ public class AlgorithmMedium {
         }
     }
 
-    /**接雨水*/
+    /**
+     * 接雨水
+     */
     public int trap(int[] height) {
         int sum = 0;
         int max_left = 0;
@@ -410,7 +428,9 @@ public class AlgorithmMedium {
         return sum;
     }
 
-    /**跳跃数组*/
+    /**
+     * 跳跃数组
+     */
     public int jump(int[] nums) {
         int length = nums.length;
         int end = 0;
@@ -455,8 +475,11 @@ public class AlgorithmMedium {
         return res;
     }
 
-    /**有重复*/
+    /**
+     * 有重复
+     */
     List<List<Integer>> lists = new ArrayList<>();
+
     public List<List<Integer>> permuteUnique(int[] nums) {
         if (nums == null || nums.length == 0) return lists;
         List<Integer> list = new ArrayList<>();
@@ -464,18 +487,18 @@ public class AlgorithmMedium {
         return lists;
     }
 
-    void backtrack(int[] nums, int start, List<Integer> list){
-        if (list.size() == nums.length){
+    void backtrack(int[] nums, int start, List<Integer> list) {
+        if (list.size() == nums.length) {
             lists.add(new ArrayList<>(list));
             return;
         }
 
         HashSet<Integer> set = new HashSet<>();
         List<Integer> newLists = Arrays.stream(nums).boxed().collect(Collectors.toList());
-        for (int i = start; i < nums.length; i++){
+        for (int i = start; i < nums.length; i++) {
 
             // 与无重复数字全排列的唯一不同之处
-            if (set.contains(nums[i])){
+            if (set.contains(nums[i])) {
                 continue;
             }
             set.add(nums[i]);
@@ -488,21 +511,23 @@ public class AlgorithmMedium {
         }
     }
 
-    /**顺时针旋转，先面对称然后左右对称*/
-    public void rotate(int[][] matrix){
-        if(matrix.length == 0 || matrix.length != matrix[0].length) {
+    /**
+     * 顺时针旋转，先面对称然后左右对称
+     */
+    public void rotate(int[][] matrix) {
+        if (matrix.length == 0 || matrix.length != matrix[0].length) {
             return;
         }
         int nums = matrix.length;
-        for (int i = 0; i < nums; ++i){
-            for (int j = 0; j < nums - i; ++j){
+        for (int i = 0; i < nums; ++i) {
+            for (int j = 0; j < nums - i; ++j) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[nums - 1 - j][nums - 1 - i];
                 matrix[nums - 1 - j][nums - 1 - i] = temp;
             }
         }
-        for (int i = 0; i < (nums >> 1); ++i){
-            for (int j = 0; j < nums; ++j){
+        for (int i = 0; i < (nums >> 1); ++i) {
+            for (int j = 0; j < nums; ++j) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[nums - 1 - i][j];
                 matrix[nums - 1 - i][j] = temp;
@@ -523,31 +548,35 @@ public class AlgorithmMedium {
         return new ArrayList(ans.values());
     }
 
-    /**pow（x,n）*/
+    /**
+     * pow（x,n）
+     */
     public double myPow(double x, int n) {
-        if(x == 0.0f) return 0.0d;
+        if (x == 0.0f) return 0.0d;
         long b = n;
         double res = 1.0;
-        if(b < 0) {
+        if (b < 0) {
             x = 1 / x;
             b = -b;
         }
-        while(b > 0) {
-            if((b & 1) == 1) res *= x;
+        while (b > 0) {
+            if ((b & 1) == 1) res *= x;
             x *= x;
             b >>= 1;
         }
         return res;
     }
 
-    /**区间合并*/
+    /**
+     * 区间合并
+     */
     public int[][] merge(int[][] intervals) {
         // 先按照区间起始位置排序
         Arrays.sort(intervals, (v1, v2) -> v1[0] - v2[0]);
         // 遍历区间
         int[][] res = new int[intervals.length][2];
         int idx = -1;
-        for (int[] interval: intervals) {
+        for (int[] interval : intervals) {
             // 如果结果数组是空的，或者当前区间的起始位置 > 结果数组中最后区间的终止位置，
             // 则不合并，直接将当前区间加入结果数组。
             if (idx == -1 || interval[0] > res[idx][1]) {
@@ -590,7 +619,9 @@ public class AlgorithmMedium {
         return output.toArray(new int[output.size()][2]);
     }
 
-    /**旋转链表*/
+    /**
+     * 旋转链表
+     */
     public ListNode rotateRight(ListNode head, int k) {
         if (head == null) return null;
         ListNode prev = head;
@@ -613,22 +644,26 @@ public class AlgorithmMedium {
         return head;
     }
 
-    /**机器人走到终点*/
+    /**
+     * 机器人走到终点
+     */
     public int uniquePaths(int m, int n) {
         int[] cur = new int[n];
         //初始化数组
-        Arrays.fill(cur,1);
+        Arrays.fill(cur, 1);
         //因为只能向右和只能向下  所以边接的点只有一种走法，而[i][j]的点只能由[i-1][j],[i][j-1]两个点到达 路数等于两者相加
         //跟杨辉三角一样的道理，再者终点就在右下角 等于所有的M相加了。
-        for (int i = 1; i < m;i++){
-            for (int j = 1; j < n; j++){
-                cur[j] += cur[j-1] ;
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                cur[j] += cur[j - 1];
             }
         }
-        return cur[n-1];
+        return cur[n - 1];
     }
 
-    /**比上一题多加了个障碍物，思路就是到终点的距离减去到障碍物的距离*/
+    /**
+     * 比上一题多加了个障碍物，思路就是到终点的距离减去到障碍物的距离
+     */
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int n = obstacleGrid.length, m = obstacleGrid[0].length;
         int[] f = new int[m];
@@ -647,7 +682,9 @@ public class AlgorithmMedium {
         return f[m - 1];
     }
 
-    /**编辑距离*/
+    /**
+     * 编辑距离
+     */
     public int minDistance(String word1, String word2) {
         int n = word1.length();
         int m = word2.length();
@@ -657,7 +694,7 @@ public class AlgorithmMedium {
             return n + m;
 
         // DP 数组
-        int [][] D = new int[n + 1][m + 1];
+        int[][] D = new int[n + 1][m + 1];
 
         // 边界状态初始化
         for (int i = 0; i < n + 1; i++) D[i][0] = i;
@@ -679,7 +716,9 @@ public class AlgorithmMedium {
         return D[n][m];
     }
 
-    /**设置为0*/
+    /**
+     * 设置为0
+     */
     public void setZeroes(int[][] matrix) {
         int R = matrix.length;
         int C = matrix[0].length;
@@ -704,92 +743,101 @@ public class AlgorithmMedium {
         }
     }
 
-    /**查看有序数组是否包含一个数，二分查找算法*/
+    /**
+     * 查看有序数组是否包含一个数，二分查找算法
+     */
     public boolean searchMatrix(int[][] matrix, int target) {
         int rows = matrix.length, columns = matrix[0].length;
-        int length = rows*columns;
-        int left = 0, right = length - 1 ;
-        while(left <= right) {
+        int length = rows * columns;
+        int left = 0, right = length - 1;
+        while (left <= right) {
             int mid = (left + right) / 2;
-            if(matrix[mid/columns ][mid%columns ] < target) left++;
-            if(matrix[mid/columns][mid%columns ] > target) right--;
-            if(matrix[mid/columns ][mid%columns ] == target) return true;
+            if (matrix[mid / columns][mid % columns] < target) left++;
+            if (matrix[mid / columns][mid % columns] > target) right--;
+            if (matrix[mid / columns][mid % columns] == target) return true;
         }
         return false;
     }
 
     public static void sortColors(int[] nums) {
         int curr = 0, len = nums.length - 1;
-        int i = 0,temp = 0;
-        while(curr <= len) {
-            if(nums[curr] == 0) {
+        int i = 0, temp = 0;
+        while (curr <= len) {
+            if (nums[curr] == 0) {
                 temp = nums[curr];
                 nums[curr++] = nums[i];
                 nums[i++] = temp;
-            } ;
-            if(nums[curr] == 2) {
+            }
+            ;
+            if (nums[curr] == 2) {
                 temp = nums[curr];
                 nums[curr] = nums[len];
                 nums[len--] = temp;
-            }
-            else curr++;
+            } else curr++;
         }
     }
 
-    /**滑动窗口求最小字符串*/
+    /**
+     * 滑动窗口求最小字符串
+     */
     Map<Character, Integer> sMap = new HashMap<Character, Integer>();
     Map<Character, Integer> tMap = new HashMap<Character, Integer>();
+
     public String minWindow(String s, String t) {
-        int tLen = t.length() ,sLen = s.length();
+        int tLen = t.length(), sLen = s.length();
         int l = 0, r = -1, len = Integer.MAX_VALUE, ansL = -1, ansR = -1;
         //把t的字符串和索引都放进map里面去
-        IntStream.range(0,tLen).forEach(i -> sMap.put(t.charAt(i),sMap.getOrDefault(t.charAt(i),0) + 1));
-        while(r < sLen) {
+        IntStream.range(0, tLen).forEach(i -> sMap.put(t.charAt(i), sMap.getOrDefault(t.charAt(i), 0) + 1));
+        while (r < sLen) {
             ++r;
             //右边先遍历完整
-            if(r < sLen && sMap.containsKey(s.charAt(r))) tMap.put(s.charAt(r),tMap.getOrDefault(s.charAt(r),0) + 1);
+            if (r < sLen && sMap.containsKey(s.charAt(r))) tMap.put(s.charAt(r), tMap.getOrDefault(s.charAt(r), 0) + 1);
             //开始遍历左边，先检查有没有
-            while(check() && l <= r) {
-                if(r - l + 1 < len) {
+            while (check() && l <= r) {
+                if (r - l + 1 < len) {
                     len = r - l + 1;
                     ansL = l;
                     ansR = l + len;
                 }
-                if(sMap.containsKey(s.charAt(l))) tMap.put(s.charAt(l),tMap.getOrDefault(s.charAt(l),0) - 1);
+                if (sMap.containsKey(s.charAt(l))) tMap.put(s.charAt(l), tMap.getOrDefault(s.charAt(l), 0) - 1);
                 ++l;
             }
         }
-        return ansL == -1 ? "":s.substring(ansL,ansR);
+        return ansL == -1 ? "" : s.substring(ansL, ansR);
     }
 
     public boolean check() {
-        long count = sMap.entrySet().stream().filter(v->tMap.getOrDefault(v.getKey(),0) < v.getValue()).count();
+        long count = sMap.entrySet().stream().filter(v -> tMap.getOrDefault(v.getKey(), 0) < v.getValue()).count();
         return count > 0 ? false : true;
     }
 
-    /**n,k位的所有组合*/
+    /**
+     * n,k位的所有组合
+     */
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> res = new ArrayList<>();
-        if(k > n || k <= 0) return res;
+        if (k > n || k <= 0) return res;
         LinkedList<Integer> linkedList = new LinkedList();
-        dfs(n,k,1,linkedList,res);
+        dfs(n, k, 1, linkedList, res);
         return res;
     }
 
 
     public void dfs(int n, int k, int begin, LinkedList linkedList, List<List<Integer>> res) {
-        if(begin == k) {
+        if (begin == k) {
             res.add(new ArrayList(linkedList));
             return;
         }
-        for(int i = begin; i <= n - (k - linkedList.size() - 1); i++) {
+        for (int i = begin; i <= n - (k - linkedList.size() - 1); i++) {
             linkedList.addLast(i);
-            dfs(n,k,i+1,linkedList,res);
+            dfs(n, k, i + 1, linkedList, res);
             linkedList.removeLast();
         }
     }
 
-    /**给定整数数组，返回所有子集*/
+    /**
+     * 给定整数数组，返回所有子集
+     */
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         backtrack(0, nums, res, new ArrayList<Integer>());
@@ -826,40 +874,41 @@ public class AlgorithmMedium {
     public boolean search(int[] nums, int target) {
         int end = nums.length - 1;
         int start = 0;
-        while(start <= end) {
+        while (start <= end) {
             int mid = (start + end) / 2;
-            if(nums[mid] <= nums[end]) {
-                if(nums[end] == target) return true;
-                if(nums[end] < target) end = mid - 1 ;
+            if (nums[mid] <= nums[end]) {
+                if (nums[end] == target) return true;
+                if (nums[end] < target) end = mid - 1;
                 else start = mid + 1;
             }
-            if(nums[mid] >= nums[start]) {
-                if(nums[mid] == target) return true;
-                if(nums[mid] < target) start = mid + 1;
+            if (nums[mid] >= nums[start]) {
+                if (nums[mid] == target) return true;
+                if (nums[mid] < target) start = mid + 1;
                 else end = mid - 1;
             }
         }
         return false;
     }
 
-    /**删除链表中重复的元素*/
+    /**
+     * 删除链表中重复的元素
+     */
     public ListNode deleteDuplicates(ListNode head) {
-        if(head==null || head.next==null) {
+        if (head == null || head.next == null) {
             return head;
         }
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
         ListNode a = dummy;
         ListNode b = head;
-        while(b!=null && b.next!=null) {
+        while (b != null && b.next != null) {
             //初始化的时a指向的是哑结点，所以比较逻辑应该是a的下一个节点和b的下一个节点
-            if(a.next.val!=b.next.val) {
+            if (a.next.val != b.next.val) {
                 a = a.next;
                 b = b.next;
-            }
-            else {
+            } else {
                 //如果a、b指向的节点值相等，就不断移动b，直到a、b指向的值不相等
-                while(b!=null && b.next!=null && a.next.val==b.next.val) {
+                while (b != null && b.next != null && a.next.val == b.next.val) {
                     b = b.next;
                 }
                 a.next = b.next;
@@ -895,12 +944,13 @@ public class AlgorithmMedium {
         int maxarea = 0;
         int[] dp = new int[matrix[0].length];
 
-        for(int i = 0; i < matrix.length; i++) {
-            for(int j = 0; j < matrix[0].length; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 dp[j] = matrix[i][j] == '1' ? dp[j] + 1 : 0;
             }
             maxarea = Math.max(maxarea, largestRectangleArea(dp));
-        } return maxarea;
+        }
+        return maxarea;
     }
 
     //所有小于target的节点在前面 大于target的节点在后面
@@ -987,29 +1037,30 @@ public class AlgorithmMedium {
 
     //输出由1-n组成的所有节点的二叉树
     public List<TreeNode> generateTrees(int n) {
-        if(n < 1)
+        if (n < 1)
             return new ArrayList<>();
         return helper(1, n);
     }
 
-    public List<TreeNode> helper(int start, int end){
+    public List<TreeNode> helper(int start, int end) {
         List<TreeNode> list = new ArrayList<>();
 
-        if(start > end){
+        if (start > end) {
             // 如果当前子树为空，不加null行吗？
             list.add(null);
             return list;
         }
 
-        for(int i = start; i <= end; i++){
+        for (int i = start; i <= end; i++) {
             //左孩子上所有的list
-            List<TreeNode> left = helper(start, i-1);
+            List<TreeNode> left = helper(start, i - 1);
             //右孩子上所有的list
-            List<TreeNode> right = helper(i+1, end);
+            List<TreeNode> right = helper(i + 1, end);
 
             // 固定左孩子，遍历右孩子
-            for(TreeNode l : left){
-                for(TreeNode r : right){
+            for (TreeNode l : left) {
+                for (TreeNode r : right) {
+                    //假如i = 1 ， l 等于2 ，r就等于3-100的所有情况
                     TreeNode root = new TreeNode(i);
                     root.left = l;
                     root.right = r;
@@ -1018,5 +1069,79 @@ public class AlgorithmMedium {
             }
         }
         return list;
+    }
+
+    //s1,s2,s3，验证s3是否由s2，s1交织组成
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int n = s1.length(), m = s2.length(), t = s3.length();
+
+        if (n + m != t) {
+            return false;
+        }
+        boolean[] f = new boolean[m + 1];
+        f[0] = true;
+        for (int i = 0; i <= n; ++i) {
+            for (int j = 0; j <= m; ++j) {
+                int p = i + j - 1;
+                if (i > 0) {
+                    //这个如果为true那么下面的肯定是true
+                    f[j] = f[j] && s1.charAt(i - 1) == s3.charAt(p);
+                }
+                if (j > 0) {
+                    f[j] = f[j] || (f[j - 1] && s2.charAt(j - 1) == s3.charAt(p));
+                }
+            }
+        }
+        return f[m];
+    }
+
+    //判断二叉树是否有效 left小 right大  中序遍历升序队列
+    public boolean isValidBST(TreeNode root) {
+        LinkedList<TreeNode> linkedList = new LinkedList<>();
+        int inOrder = -Integer.MAX_VALUE;
+        while (!linkedList.isEmpty() || root != null) {
+            while (root != null) {
+                linkedList.push(root);
+                root = root.left;
+            }
+            root = linkedList.pop();
+            if (root.val < inOrder) return false;
+            inOrder = root.val;
+            root = root.right;
+        }
+        return true;
+    }
+
+    //二叉树中错误交换两个节点 给他换回来
+    public void recoverTree(TreeNode root) {
+        List<TreeNode> list = new ArrayList<TreeNode>();
+        dfs(root,list);
+        TreeNode x = null;
+        TreeNode y = null;
+        //扫面遍历的结果，找出可能存在错误交换的节点x和y
+        for(int i=0;i<list.size()-1;++i) {
+            if(list.get(i).val>list.get(i+1).val) {
+                y = list.get(i+1);
+                if(x==null) {
+                    x = list.get(i);
+                }
+            }
+        }
+        //如果x和y不为空，则交换这两个节点值，恢复二叉搜索树
+        if(x!=null && y!=null) {
+            int tmp = x.val;
+            x.val = y.val;
+            y.val = tmp;
+        }
+    }
+
+    //中序遍历二叉树，并将遍历的结果保存到list中
+    private void dfs(TreeNode node,List<TreeNode> list) {
+        if(node==null) {
+            return;
+        }
+        dfs(node.left,list);
+        list.add(node);
+        dfs(node.right,list);
     }
 }

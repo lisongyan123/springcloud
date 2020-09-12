@@ -337,5 +337,29 @@ public class AlgorithmEasy {
         return head;
     }
 
+    //不同的二叉搜索树
+    public int numTrees(int n) {
+        int[] G = new int[n + 1];
+        G[0] = 1;
+        G[1] = 1;
+
+        for (int i = 2; i <= n; ++i) {
+            for (int j = 1; j <= i; ++j) {
+                G[i] += G[j - 1] * G[i - j];
+            }
+        }
+        return G[n];
+    }
+
+    //判断两棵树是否相同
+    public boolean isSameTree(AlgorithmMedium.TreeNode p, AlgorithmMedium.TreeNode q) {
+        if(p == null && q == null)
+            return true;
+        if(p == null || q == null)
+            return false;
+        if(p.val != q.val)
+            return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
 }
 
