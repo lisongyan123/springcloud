@@ -1176,4 +1176,56 @@ public class AlgorithmMedium {
         }
         return res;
     }
+
+
+    //中序遍历 然后flag左翻 右翻 add(index.element在index后加上元素
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res;
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        Boolean flag = true;
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> tmp = new ArrayList();
+            for(int i = 0; i<size; i++) {
+                TreeNode curr = queue.remove();
+                if(flag) tmp.add(curr.val);
+                else tmp.add(0,curr.val);
+                if(curr.left != null) queue.add(curr.left);
+                if(curr.right != null) queue.add(curr.right);
+            }
+            res.add(tmp);
+            flag = !flag;
+        }
+        return res;
+    }
+
+    //根据前序遍历和中序遍历勾画出二叉树
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0) {
+            return null;
+        }
+        TreeNode root = new TreeNode(preorder[0]);
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        int inorderIndex = 0;
+        for (int i = 1; i < preorder.length; i++) {
+            int preorderVal = preorder[i];
+            TreeNode node = stack.peek();
+            //先序遍历的节点如果不等于中序遍历的第一个节点 说明他还是左孩子呢
+            if (node.val != inorder[inorderIndex]) {
+                node.left = new TreeNode(preorderVal);
+                stack.push(node.left);
+            } else {
+                while (!stack.isEmpty() && stack.peek().val == inorder[inorderIndex]) {
+                    node = stack.pop();
+                    inorderIndex++;
+                }
+                node.right = new TreeNode(preorderVal);
+                stack.push(node.right);
+            }
+        }
+        return root;
+    }
 }

@@ -382,5 +382,23 @@ public class AlgorithmEasy {
         }
         return p.val == q.val && check(p.left, q.right) && check(p.right, q.left);
     }
+
+    //树的最大深度
+    public int maxDepth(TreeNode root) {
+        int ans = 0;
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        if(root == null) return ans;
+        queue.add(root);
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size ; i++) {
+                TreeNode curr = queue.remove();
+                if(curr.left != null) queue.add(curr.left);
+                if(curr.right != null) queue.add(curr.right);
+            }
+            ans++;
+        }
+        return ans;
+    }
 }
 
