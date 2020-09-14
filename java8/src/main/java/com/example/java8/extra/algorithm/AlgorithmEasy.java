@@ -400,5 +400,51 @@ public class AlgorithmEasy {
         }
         return ans;
     }
+
+    //自底向上的二叉树的层次遍历  就是层次遍历+list.add(0,list)
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> levelOrder = new LinkedList<List<Integer>>();
+        if (root == null) {
+            return levelOrder;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            List<Integer> level = new ArrayList<Integer>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                TreeNode left = node.left, right = node.right;
+                if (left != null) {
+                    queue.offer(left);
+                }
+                if (right != null) {
+                    queue.offer(right);
+                }
+            }
+            levelOrder.add(0, level);
+        }
+        return levelOrder;
+    }
+
+    //有序数组转换为平衡二叉搜索树
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
+    }
+
+    public TreeNode helper(int[] nums, int left, int right) {
+        if (left > right) {
+            return null;
+        }
+
+        // 总是选择中间位置左边的数字作为根节点
+        int mid = (left + right) / 2;
+
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper(nums, left, mid - 1);
+        root.right = helper(nums, mid + 1, right);
+        return root;
+    }
 }
 
