@@ -1115,20 +1115,20 @@ public class AlgorithmMedium {
     //二叉树中错误交换两个节点 给他换回来
     public void recoverTree(TreeNode root) {
         List<TreeNode> list = new ArrayList<TreeNode>();
-        dfs(root,list);
+        dfs(root, list);
         TreeNode x = null;
         TreeNode y = null;
         //扫面遍历的结果，找出可能存在错误交换的节点x和y
-        for(int i=0;i<list.size()-1;++i) {
-            if(list.get(i).val>list.get(i+1).val) {
-                y = list.get(i+1);
-                if(x==null) {
+        for (int i = 0; i < list.size() - 1; ++i) {
+            if (list.get(i).val > list.get(i + 1).val) {
+                y = list.get(i + 1);
+                if (x == null) {
                     x = list.get(i);
                 }
             }
         }
         //如果x和y不为空，则交换这两个节点值，恢复二叉搜索树
-        if(x!=null && y!=null) {
+        if (x != null && y != null) {
             int tmp = x.val;
             x.val = y.val;
             y.val = tmp;
@@ -1136,18 +1136,18 @@ public class AlgorithmMedium {
     }
 
     //中序遍历二叉树，并将遍历的结果保存到list中
-    private void dfs(TreeNode node,List<TreeNode> list) {
-        if(node==null) {
+    private void dfs(TreeNode node, List<TreeNode> list) {
+        if (node == null) {
             return;
         }
-        dfs(node.left,list);
+        dfs(node.left, list);
         list.add(node);
-        dfs(node.right,list);
+        dfs(node.right, list);
     }
 
     //层次遍历
     public List<List<Integer>> levelOrder(TreeNode root) {
-        if(root==null) {
+        if (root == null) {
             return new ArrayList<List<Integer>>();
         }
 
@@ -1155,19 +1155,19 @@ public class AlgorithmMedium {
         LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
         //将根节点放入队列中，然后不断遍历队列
         queue.add(root);
-        while(queue.size()>0) {
+        while (queue.size() > 0) {
             //获取当前队列的长度，这个长度相当于 当前这一层的节点个数
             int size = queue.size();
             ArrayList<Integer> tmp = new ArrayList<Integer>();
             //将队列中的元素都拿出来(也就是获取这一层的节点)，放到临时list中
             //如果节点的左/右子树不为空，也放入队列中
-            for(int i=0;i<size;++i) {
+            for (int i = 0; i < size; ++i) {
                 TreeNode t = queue.remove();
                 tmp.add(t.val);
-                if(t.left!=null) {
+                if (t.left != null) {
                     queue.add(t.left);
                 }
-                if(t.right!=null) {
+                if (t.right != null) {
                     queue.add(t.right);
                 }
             }
@@ -1178,22 +1178,24 @@ public class AlgorithmMedium {
     }
 
 
-    //中序遍历 然后flag左翻 右翻 add(index.element在index后加上元素
+    //Z型中序
+    //
+    // 遍历 然后flag左翻 右翻 add(index.element在index后加上元素
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        if(root == null) return res;
+        if (root == null) return res;
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         Boolean flag = true;
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             int size = queue.size();
             List<Integer> tmp = new ArrayList();
-            for(int i = 0; i<size; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode curr = queue.remove();
-                if(flag) tmp.add(curr.val);
-                else tmp.add(0,curr.val);
-                if(curr.left != null) queue.add(curr.left);
-                if(curr.right != null) queue.add(curr.right);
+                if (flag) tmp.add(curr.val);
+                else tmp.add(0, curr.val);
+                if (curr.left != null) queue.add(curr.left);
+                if (curr.right != null) queue.add(curr.right);
             }
             res.add(tmp);
             flag = !flag;
@@ -1230,18 +1232,18 @@ public class AlgorithmMedium {
     }
 
     //根据后续遍历和中序遍历探索二叉树
-    HashMap<Integer,Integer> map = new HashMap<>();
+    HashMap<Integer, Integer> map = new HashMap<>();
     int[] post;
 
     public TreeNode buildTree2(int[] inorder, int[] postorder) {
-        for(int i = 0;i < inorder.length; i++) map.put(inorder[i], i);
+        for (int i = 0; i < inorder.length; i++) map.put(inorder[i], i);
         post = postorder;
         TreeNode root = buildTree(0, inorder.length - 1, 0, post.length - 1);
         return root;
     }
 
     public TreeNode buildTree(int is, int ie, int ps, int pe) {
-        if(ie < is || pe < ps) return null;
+        if (ie < is || pe < ps) return null;
 
         int root = post[pe];
         int ri = map.get(root);
@@ -1251,4 +1253,115 @@ public class AlgorithmMedium {
         node.right = buildTree(ri + 1, ie, ps + ri - is, pe - 1);
         return node;
     }
+
+    //构造二叉树
+    ListNode headNode;
+
+    public TreeNode sortedListToBST(ListNode head) {
+        headNode = head;
+        int length = 0;
+        while (head != null) {
+            ++length;
+            head = head.next;
+        }
+        return build(0, length - 1);
+    }
+
+    TreeNode build(int left, int right) {
+        if (left > right) return null;
+        int mid = (left + right + 1) / 2;
+        TreeNode root = new TreeNode(mid);
+        root.left = build(left, mid - 1);
+        root.val = headNode.val;
+        headNode = headNode.next;
+        root.right = build(mid + 1, right);
+        return root;
+    }
+
+    //判断平衡二叉树
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        } else {
+            return Math.abs(height(root.left) - height(root.right)) <= 1
+                    && isBalanced(root.left)
+                    && isBalanced(root.right);
+        }
+    }
+
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return Math.max(height(root.left), height(root.right)) + 1;
+        }
+    }
+
+    //二叉树展开为单链表  先序遍历
+    public void flatten(TreeNode root) {
+        List<TreeNode> list = new ArrayList<TreeNode>();
+        preorderTraversal(root, list);
+        int size = list.size();
+        for (int i = 1; i < size; i++) {
+            TreeNode prev = list.get(i - 1), curr = list.get(i);
+            prev.left = null;
+            prev.right = curr;
+        }
+    }
+
+    public void preorderTraversal(TreeNode root, List<TreeNode> list) {
+        if (root != null) {
+            list.add(root);
+            preorderTraversal(root.left, list);
+            preorderTraversal(root.right, list);
+        }
+    }
+
+    public int numDistinct(String s, String t) {
+        int[][] dp = new int[t.length() + 1][s.length() + 1];
+        for (int j = 0; j < s.length() + 1; j++) dp[0][j] = 1;
+        for (int i = 1; i < t.length() + 1; i++) {
+            for (int j = 1; j < s.length() + 1; j++) {
+                if (t.charAt(i - 1) == s.charAt(j - 1)) dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1];
+                else dp[i][j] = dp[i][j - 1];
+            }
+        }
+        return dp[t.length()][s.length()];
+    }
+
+    //完美二叉树 左指右
+    class Node {
+        public int val;
+        public Node left;
+        public Node right;
+        public Node next;
+
+        public Node() {}
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, Node _left, Node _right, Node _next) {
+            val = _val;
+            left = _left;
+            right = _right;
+            next = _next;
+        }
+    };
+
+    //左指向右  右指向下一个左
+    public Node connect(Node root) {
+        dfs(root, null);
+        return root;
+    }
+
+    private void dfs(Node node, Node next) {
+        if(node != null) {
+            node.next = next;
+            dfs(node.left, node.right);
+            dfs(node.right, node.next != null ? node.next.left : null);
+        }
+    }
+
 }

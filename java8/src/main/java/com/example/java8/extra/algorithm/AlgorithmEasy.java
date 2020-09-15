@@ -446,5 +446,55 @@ public class AlgorithmEasy {
         root.right = helper(nums, mid + 1, right);
         return root;
     }
+
+    //二叉树最小深度
+    public int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        int min_depth = Integer.MAX_VALUE;
+        if (root.left != null) {
+            min_depth = Math.min(minDepth(root.left), min_depth);
+        }
+        if (root.right != null) {
+            min_depth = Math.min(minDepth(root.right), min_depth);
+        }
+
+        return min_depth + 1;
+    }
+
+    //二叉树是否有根到叶子总和为sum的
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) {
+            return false;
+        }
+        if (root.left == null && root.right == null) {
+            return sum == root.val;
+        }
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+    }
+
+    //打印出所有节点总和等于sum的数组
+    List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if (root == null) return res;
+        pathSum(root, sum, new ArrayList<Integer>());
+        return res;
+    }
+
+    public void pathSum(TreeNode root, int sum, List<Integer> path) {
+        path.add(root.val);
+        if (root.left == null && root.right == null && root.val == sum) {
+            res.add(path);
+            return ;
+        }
+        if (root.left != null) pathSum(root.left, sum-root.val, new ArrayList<Integer>(path));
+        if (root.right != null) pathSum(root.right, sum-root.val, new ArrayList<Integer>(path));
+    }
 }
 
