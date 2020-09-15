@@ -1364,4 +1364,46 @@ public class AlgorithmMedium {
         }
     }
 
+    //左连接右边节点
+    public Node connect1(Node root) {
+        if(root==null)
+            return root;
+        Node cur=root;
+        while(cur!=null){           //控制cur到下一层的循环
+            Node dumm=new Node();   //创建一个虚拟头结点(每一层都会创建)
+            Node tail=dumm;         //维护一个尾节点指针（初始化是虚拟节点）
+            while(cur!=null){        //控制cur同一层的循环
+                if(cur.left!=null){  //判断cur的左节点是否为空，不为空时就是cur的下一层的第一个节点了
+                    tail.next=cur.left;
+                    tail=tail.next;
+                }
+                if(cur.right!=null){  //判断cur的右节点是否为空，此时不为空时就是cur的下一层的第一个节点了
+                    tail.next=cur.right;
+                    tail=tail.next;
+                }
+                cur=cur.next;         //cur同层移动到下一位置
+            }
+            cur=dumm.next;            //内循环结束，开始cur的下一层
+        }
+        return root;
+    }
+
+    //三角形最小路径和
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int[] f = new int[n];
+        f[0] = triangle.get(0).get(0);
+        for (int i = 1; i < n; ++i) {
+            f[i] = f[i - 1] + triangle.get(i).get(i);
+            for (int j = i - 1; j > 0; --j) {
+                f[j] = Math.min(f[j - 1], f[j]) + triangle.get(i).get(j);
+            }
+            f[0] += triangle.get(i).get(0);
+        }
+        int minTotal = f[0];
+        for (int i = 1; i < n; ++i) {
+            minTotal = Math.min(minTotal, f[i]);
+        }
+        return minTotal;
+    }
 }
