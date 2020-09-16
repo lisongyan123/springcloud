@@ -1406,4 +1406,89 @@ public class AlgorithmMedium {
         }
         return minTotal;
     }
+
+    //买股票  只能买两次
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if (len < 2) {
+            return 0;
+        }
+
+        int[] dp = new int[5];
+        dp[1] = -prices[0];
+        dp[3] = Integer.MIN_VALUE;
+
+        for (int i = 1; i < len; i++) {
+            dp[0] = 0;
+            dp[1] = Math.max(dp[1], dp[0] - prices[i]);
+            dp[2] = Math.max(dp[2], dp[1] + prices[i]);
+            dp[3] = Math.max(dp[3], dp[2] - prices[i]);
+            dp[4] = Math.max(dp[4], dp[3] + prices[i]);
+        }
+        return Math.max(0, Math.max(dp[2], dp[4]));
+    }
+
+    //丛二叉树中绕过根节点找出和为最大值
+    int maxSum = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+        maxGain(root);
+        return maxSum;
+    }
+
+    public int maxGain(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        // 递归计算左右子节点的最大贡献值
+        // 只有在最大贡献值大于 0 时，才会选取对应子节点
+        int leftGain = Math.max(maxGain(node.left), 0);
+        int rightGain = Math.max(maxGain(node.right), 0);
+
+        // 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值
+        int priceNewpath = node.val + leftGain + rightGain;
+
+        // 更新最大值
+        maxSum = Math.max(maxSum, priceNewpath);
+
+        // 返回节点的最大贡献值
+        return node.val + Math.max(leftGain, rightGain);
+    }
+
+    public boolean isPalindrome(String s) {
+        int n = s.length();
+        int left = 0, right = n - 1;
+        while (left < right) {
+            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {  //判断是字母或数字？
+                ++left;
+            }
+            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
+                --right;
+            }
+            if (left < right) {
+                if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {
+                    return false;
+                }
+                ++left;
+                --right;
+            }
+        }
+        return true;
+    }
+
+    public int longestConsecutive(int[] nums) {
+        if (nums.length == 0) return 0;
+        Map<Integer, Integer> map = new HashMap<>(); // 记录区间 [v, r]
+        for (int v : nums) map.put(v, v);
+        int max = 1;
+        for (int v : nums) {
+            int r = v;
+            while (map.containsKey(r + 1))
+                r = map.get(r + 1); // 利用前面已知的右边界，快速找到当前需要的右边界
+            map.put(v, r);
+            max = Math.max(max, r - v + 1);
+        }
+        return max;
+    }
 }
