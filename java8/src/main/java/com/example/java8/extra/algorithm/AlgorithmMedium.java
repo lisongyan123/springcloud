@@ -1491,4 +1491,17 @@ public class AlgorithmMedium {
         }
         return max;
     }
+
+    //求树的根到叶子所有节点之和
+    public int sumNumbers(TreeNode root) {
+        return DFS(root, 0);
+    }
+
+    private int DFS(TreeNode root, int i) {
+        if (root == null) return 0;//1、节点为空
+        int res = i * 10 + root.val;
+        if (root.left == null && root.right == null)//2、节点为叶子节点
+            return res;
+        return DFS(root.left, res) + DFS(root.right, res);//3、节点为非叶子节点
+    }
 }
