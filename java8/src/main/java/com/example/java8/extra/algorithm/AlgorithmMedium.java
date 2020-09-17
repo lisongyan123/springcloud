@@ -2,6 +2,7 @@ package com.example.java8.extra.algorithm;
 
 
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -1503,5 +1504,174 @@ public class AlgorithmMedium {
         if (root.left == null && root.right == null)//2、节点为叶子节点
             return res;
         return DFS(root.left, res) + DFS(root.right, res);//3、节点为非叶子节点
+    }
+
+    //二维矩阵填充X O
+
+
+
+    int n, m;
+
+    public void solve(char[][] board) {
+        n = board.length;
+        if (n == 0) {
+            return;
+        }
+        m = board[0].length;
+        //边缘的O都给他标记为A
+        for (int i = 0; i < n; i++) {
+            dfs(board, i, 0);
+            dfs(board, i, m - 1);
+        }
+        for (int i = 1; i < m - 1; i++) {
+            dfs(board, 0, i);
+            dfs(board, n - 1, i);
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (board[i][j] == 'A') {
+                    board[i][j] = 'O';
+                } else if (board[i][j] == 'O') {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+
+    public void dfs(char[][] board, int x, int y) {
+        if (x < 0 || x >= n || y < 0 || y >= m || board[x][y] != 'O') {
+            return;
+        }
+        board[x][y] = 'A';
+        dfs(board, x + 1, y);
+        dfs(board, x - 1, y);
+        dfs(board, x, y + 1);
+        dfs(board, x, y - 1);
+    }
+
+    //全部回文字符串
+    public List<List<String>> partition(String s) {
+        int len = s.length();
+        List<List<String>> res = new ArrayList<>();
+        if (len == 0) {
+            return res;
+        }
+
+        // 预处理
+        // 状态：dp[i][j] 表示 s[i][j] 是否是回文
+        boolean[][] dp = new boolean[len][len];
+        // 状态转移方程：在 s[i] == s[j] 的时候，dp[i][j] 参考 dp[i + 1][j - 1]
+        for (int right = 0; right < len; right++) {
+            // 注意：left <= right 取等号表示 1 个字符的时候也需要判断
+            for (int left = 0; left <= right; left++) {
+                if (s.charAt(left) == s.charAt(right) && (right - left <= 2 || dp[left + 1][right - 1])) {
+                    dp[left][right] = true;
+                }
+            }
+        }
+
+        Deque<String> stack = new ArrayDeque<>();
+        backtracking(s, 0, len, dp, stack, res);
+        return res;
+    }
+
+    private void backtracking(String s,
+                              int start,
+                              int len,
+                              boolean[][] dp,
+                              Deque<String> path,
+                              List<List<String>> res) {
+        if (start == len) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = start; i < len; i++) {
+            // 剪枝
+            if (!dp[start][i]) {
+                continue;
+            }
+            path.addLast(s.substring(start, i + 1));
+            backtracking(s, i + 1, len, dp, path, res);
+            path.removeLast();
+        }
+    }
+
+    //将一个字符串分割 使每一个子串都是回文
+    public int minCut(String s) {
+        int len = s.length();
+        // 特判
+        if (len < 2) {
+            return 0;
+        }
+
+        // 状态定义：dp[i]：前缀子串 s[0:i] （包括索引 i 处的字符）符合要求的最少分割次数
+        // 状态转移方程：
+        // dp[i] = min(dp[j] + 1 if s[j + 1: i] 是回文 for j in range(i))
+
+        int[] dp = new int[len];
+        // 2 个字符最多分割 1 次；
+        // 3 个字符最多分割 2 次
+        // 初始化的时候，设置成为这个最多分割次数
+
+        for (int i = 0; i < len; i++) {
+            dp[i] = i;
+        }
+
+        boolean[][] checkPalindrome = new boolean[len][len];
+        for (int right = 0; right < len; right++) {
+            // 注意：left <= right 取等号表示 1 个字符的时候也需要判断
+            for (int left = 0; left <= right; left++) {
+                if (s.charAt(left) == s.charAt(right) && (right - left <= 2 || checkPalindrome[left + 1][right - 1])) {
+                    checkPalindrome[left][right] = true;
+                }
+            }
+        }
+
+        // 1 个字符的时候，不用判断，因此 i 从 1 开始
+        for (int i = 1; i < len; i++) {
+            if (checkPalindrome[0][i]){
+                dp[i] = 0;
+                continue;
+            }
+
+            // 注意：这里是严格，要保证 s[j + 1:i] 至少得有一个字符串
+            for (int j = 0; j < i; j++) {
+                if (checkPalindrome[j + 1][i]) {
+                    dp[i] = Math.min(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        return dp[len - 1];
+    }
+
+    //分发糖果
+    public int candy(int[] ratings) {
+        int[] candies = new int[ratings.length];
+        Arrays.fill(candies, 1);
+        for (int i = 1; i < ratings.length; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                candies[i] = candies[i - 1] + 1;
+            }
+        }
+        int sum = candies[ratings.length - 1];
+        for (int i = ratings.length - 2; i >= 0; i--) {
+            if (ratings[i] > ratings[i + 1]) {
+                candies[i] = Math.max(candies[i], candies[i + 1] + 1);
+            }
+            sum += candies[i];
+        }
+        return sum;
+    }
+
+    //只出现一次的数字其余都出现三次  3×(a+b+c)−(a+a+a+b+b+b+c)=2c
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> hashmap = new HashMap<>();
+        for (int num : nums)
+            hashmap.put(num, hashmap.getOrDefault(num, 0) + 1);
+
+        for (int k : hashmap.keySet())
+            if (hashmap.get(k) == 1) return k;
+        return -1;
     }
 }
