@@ -519,5 +519,40 @@ public class AlgorithmEasy {
         }
         return maxprofit;
     }
+
+    //二叉树的前序遍历，根节点压栈 然后取数栈的时候最后取根节点
+    public List<Integer> preorderTraversal(TreeNode root) {
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        LinkedList<Integer> output = new LinkedList<>();
+        stack.add(root);
+        while(!stack.isEmpty()) {
+            TreeNode curr = stack.pollLast();
+            output.add(curr.val);
+            if(curr.right != null) stack.add(curr.right);
+            if(curr.left != null) stack.add(curr.left);
+        }
+        return output;
+    }
+
+    //二叉树的后序遍历
+    public List<Integer> postorderTraversal(TreeNode root) {
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        LinkedList<Integer> output = new LinkedList<>();
+        if (root == null) {
+            return output;
+        }
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pollLast();
+            output.addFirst(node.val);
+            if (node.left != null) {
+                stack.add(node.left);
+            }
+            if (node.right != null) {
+                stack.add(node.right);
+            }
+        }
+        return output;
+    }
 }
 

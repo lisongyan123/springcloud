@@ -1674,4 +1674,108 @@ public class AlgorithmMedium {
             if (hashmap.get(k) == 1) return k;
         return -1;
     }
+
+    //加油站 是否能绕环行路行驶一周
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.length;
+        int total_tank = 0;
+        int curr_tank = 0;
+        int starting_station = 0;
+        for (int i = 0; i < n; ++i) {
+            //看看总和大于还剩小于0
+            total_tank += gas[i] - cost[i];
+            //看看有没有小于0的时候
+            curr_tank += gas[i] - cost[i];
+            if (curr_tank < 0) {
+                starting_station = i + 1;
+                curr_tank = 0;
+            }
+        }
+        return total_tank >= 0 ? starting_station : -1;
+    }
+
+    //判断第二个字符串是否能组合成第一个字符串
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> wordDictSet = new HashSet(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
+    public static Map nums(String s) {
+        int len = s.length();
+        Map<Character,Integer> map = new HashMap<>();
+        for(int i = 0; i < len; i++) {
+            int a =map.getOrDefault(s.charAt(i),0);
+            map.put(s.charAt(i),++a);
+        }
+        return map;
+    }
+
+    //判断一个链表是否有环，双指针一个快一个慢看看能不能追上
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast) {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return true;
+    }
+
+    //返回环形链表的节点
+    public ListNode detectCycle(ListNode head) {
+        Set<ListNode> visited = new HashSet<ListNode>();
+
+        ListNode node = head;
+        while (node != null) {
+            if (visited.contains(node)) {
+                return node;
+            }
+            visited.add(node);
+            node = node.next;
+        }
+
+        return null;
+    }
+
+    //重排链表
+    public void reorderList(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        //存到 list 中去
+        List<ListNode> list = new ArrayList<>();
+        while (head != null) {
+            list.add(head);
+            head = head.next;
+        }
+        //头尾指针依次取元素
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            list.get(i).next = list.get(j);
+            i++;
+            //偶数个节点的情况，会提前相遇
+            if (i == j) {
+                break;
+            }
+            list.get(j).next = list.get(i);
+            j--;
+        }
+        list.get(i).next = null;
+    }
 }
