@@ -2,11 +2,8 @@ package com.example.java8.extra.algorithm;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 @Slf4j
 public class AlgorithmEasy {
@@ -330,8 +327,8 @@ public class AlgorithmEasy {
     //去除重复元素
     public AlgorithmMedium.ListNode deleteDuplicates(AlgorithmMedium.ListNode head) {
         AlgorithmMedium.ListNode current = head;
-        while(current != null && current.next != null) {
-            if(current.next.val == current.val) current.next = current.next.next;
+        while (current != null && current.next != null) {
+            if (current.next.val == current.val) current.next = current.next.next;
             else current = current.next;
         }
         return head;
@@ -353,11 +350,11 @@ public class AlgorithmEasy {
 
     //判断两棵树是否相同
     public boolean isSameTree(AlgorithmMedium.TreeNode p, AlgorithmMedium.TreeNode q) {
-        if(p == null && q == null)
+        if (p == null && q == null)
             return true;
-        if(p == null || q == null)
+        if (p == null || q == null)
             return false;
-        if(p.val != q.val)
+        if (p.val != q.val)
             return false;
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
@@ -366,7 +363,10 @@ public class AlgorithmEasy {
         int val;
         TreeNode left;
         TreeNode right;
-        TreeNode(int x) { val = x; }
+
+        TreeNode(int x) {
+            val = x;
+        }
     }
 
     public boolean isSymmetric(TreeNode root) {
@@ -387,14 +387,14 @@ public class AlgorithmEasy {
     public int maxDepth(TreeNode root) {
         int ans = 0;
         LinkedList<TreeNode> queue = new LinkedList<>();
-        if(root == null) return ans;
+        if (root == null) return ans;
         queue.add(root);
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             int size = queue.size();
-            for(int i = 0; i < size ; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode curr = queue.remove();
-                if(curr.left != null) queue.add(curr.left);
-                if(curr.right != null) queue.add(curr.right);
+                if (curr.left != null) queue.add(curr.left);
+                if (curr.right != null) queue.add(curr.right);
             }
             ans++;
         }
@@ -481,6 +481,7 @@ public class AlgorithmEasy {
 
     //打印出所有节点总和等于sum的数组
     List<List<Integer>> res = new ArrayList<>();
+
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         if (root == null) return res;
         pathSum(root, sum, new ArrayList<Integer>());
@@ -491,10 +492,10 @@ public class AlgorithmEasy {
         path.add(root.val);
         if (root.left == null && root.right == null && root.val == sum) {
             res.add(path);
-            return ;
+            return;
         }
-        if (root.left != null) pathSum(root.left, sum-root.val, new ArrayList<Integer>(path));
-        if (root.right != null) pathSum(root.right, sum-root.val, new ArrayList<Integer>(path));
+        if (root.left != null) pathSum(root.left, sum - root.val, new ArrayList<Integer>(path));
+        if (root.right != null) pathSum(root.right, sum - root.val, new ArrayList<Integer>(path));
     }
 
     //一次购买 买股票的最佳时机
@@ -525,11 +526,11 @@ public class AlgorithmEasy {
         LinkedList<TreeNode> stack = new LinkedList<>();
         LinkedList<Integer> output = new LinkedList<>();
         stack.add(root);
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             TreeNode curr = stack.pollLast();
             output.add(curr.val);
-            if(curr.right != null) stack.add(curr.right);
-            if(curr.left != null) stack.add(curr.left);
+            if (curr.right != null) stack.add(curr.right);
+            if (curr.left != null) stack.add(curr.left);
         }
         return output;
     }
@@ -553,6 +554,103 @@ public class AlgorithmEasy {
             }
         }
         return output;
+    }
+
+    //插入排序
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    public ListNode insertionSortList(ListNode head) {
+        List<Integer> list = new ArrayList<>();
+        ListNode p = head;
+        while (p != null) {
+            list.add(p.val);
+            p = p.next;
+        }
+        Collections.sort(list);
+        p = head;
+        int i = 0;
+        while (p != null) {
+            p.val = list.get(i++);
+            p = p.next;
+        }
+        return head;
+    }
+
+    //链表排序 归并排序
+    public ListNode sortList(ListNode head) {
+        int n = 0;
+        for(ListNode i = head; i != null; i=i.next) n++;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        // 循环一下
+        // 第一层循环，分块，从1个一块，2个一块，4个一块，直到n个一块，
+        for(int i = 1; i < n; i = 2*i){
+            ListNode begin = dummy;
+            // 开始归并
+            // j + i >= n 表示只有一段就不归并了，因为已经是排好序的
+            for(int j = 0; j + i < n; j = j + 2 * i){
+                // 两块，找两块的起始节点
+                // 开始都指向第一块的起点
+                // 然后second走n步指向第二块的起点
+                ListNode first = begin.next, second = first;
+                for(int k = 0; k < i; k++) second = second.next;
+
+                // 遍历第一块和第二块进行归并
+                // 第一块的数量为i
+                // 第二块的数量为i也可能小于i，所以循环条件要加一个second != null
+                int f = 0, s = 0;
+                while(f < i && s < i && second != null){
+                    if(first.val < second.val){
+                        begin.next = first;
+                        begin = begin.next;
+                        first = first.next;
+                        f++;
+                    }else{
+                        begin.next = second;
+                        begin = begin.next;
+                        second = second.next;
+                        s++;
+                    }
+                }
+                // 归并之后可能又多余的没有处理比如基数个
+                while(f < i){
+                    begin.next = first;
+                    begin = begin.next;
+                    first = first.next;
+                    f++;
+                }
+                while(s < i && second != null){
+                    begin.next = second;
+                    begin = begin.next;
+                    // second已经更新到下一块的起点了
+                    second = second.next;
+                    s++;
+                }
+
+                // 更新begin
+                // begin.next 指向下一块的起点
+                begin.next = second;
+            }
+        }
+        return dummy.next;
+    }
+
+    //翻转字符串里的单词
+    public String reverseWords(String s) {
+        // 除去开头和末尾的空白字符
+        s = s.trim();
+        // 正则匹配连续的空白字符作为分隔符分割
+        List<String> wordList = Arrays.asList(s.split("\\s+"));
+        Collections.reverse(wordList);
+        return String.join(" ", wordList);
     }
 }
 
