@@ -1337,7 +1337,8 @@ public class AlgorithmMedium {
         public Node right;
         public Node next;
 
-        public Node() {}
+        public Node() {
+        }
 
         public Node(int _val) {
             val = _val;
@@ -1349,7 +1350,9 @@ public class AlgorithmMedium {
             right = _right;
             next = _next;
         }
-    };
+    }
+
+    ;
 
     //左指向右  右指向下一个左
     public Node connect(Node root) {
@@ -1358,7 +1361,7 @@ public class AlgorithmMedium {
     }
 
     private void dfs(Node node, Node next) {
-        if(node != null) {
+        if (node != null) {
             node.next = next;
             dfs(node.left, node.right);
             dfs(node.right, node.next != null ? node.next.left : null);
@@ -1367,24 +1370,24 @@ public class AlgorithmMedium {
 
     //左连接右边节点
     public Node connect1(Node root) {
-        if(root==null)
+        if (root == null)
             return root;
-        Node cur=root;
-        while(cur!=null){           //控制cur到下一层的循环
-            Node dumm=new Node();   //创建一个虚拟头结点(每一层都会创建)
-            Node tail=dumm;         //维护一个尾节点指针（初始化是虚拟节点）
-            while(cur!=null){        //控制cur同一层的循环
-                if(cur.left!=null){  //判断cur的左节点是否为空，不为空时就是cur的下一层的第一个节点了
-                    tail.next=cur.left;
-                    tail=tail.next;
+        Node cur = root;
+        while (cur != null) {           //控制cur到下一层的循环
+            Node dumm = new Node();   //创建一个虚拟头结点(每一层都会创建)
+            Node tail = dumm;         //维护一个尾节点指针（初始化是虚拟节点）
+            while (cur != null) {        //控制cur同一层的循环
+                if (cur.left != null) {  //判断cur的左节点是否为空，不为空时就是cur的下一层的第一个节点了
+                    tail.next = cur.left;
+                    tail = tail.next;
                 }
-                if(cur.right!=null){  //判断cur的右节点是否为空，此时不为空时就是cur的下一层的第一个节点了
-                    tail.next=cur.right;
-                    tail=tail.next;
+                if (cur.right != null) {  //判断cur的右节点是否为空，此时不为空时就是cur的下一层的第一个节点了
+                    tail.next = cur.right;
+                    tail = tail.next;
                 }
-                cur=cur.next;         //cur同层移动到下一位置
+                cur = cur.next;         //cur同层移动到下一位置
             }
-            cur=dumm.next;            //内循环结束，开始cur的下一层
+            cur = dumm.next;            //内循环结束，开始cur的下一层
         }
         return root;
     }
@@ -1509,7 +1512,6 @@ public class AlgorithmMedium {
     //二维矩阵填充X O
 
 
-
     int n, m;
 
     public void solve(char[][] board) {
@@ -1630,7 +1632,7 @@ public class AlgorithmMedium {
 
         // 1 个字符的时候，不用判断，因此 i 从 1 开始
         for (int i = 1; i < len; i++) {
-            if (checkPalindrome[0][i]){
+            if (checkPalindrome[0][i]) {
                 dp[i] = 0;
                 continue;
             }
@@ -1712,10 +1714,10 @@ public class AlgorithmMedium {
 
     public static Map nums(String s) {
         int len = s.length();
-        Map<Character,Integer> map = new HashMap<>();
-        for(int i = 0; i < len; i++) {
-            int a =map.getOrDefault(s.charAt(i),0);
-            map.put(s.charAt(i),++a);
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < len; i++) {
+            int a = map.getOrDefault(s.charAt(i), 0);
+            map.put(s.charAt(i), ++a);
         }
         return map;
     }
@@ -1777,5 +1779,163 @@ public class AlgorithmMedium {
             j--;
         }
         list.get(i).next = null;
+    }
+
+    //乘积最大子数组
+    public int maxProduct(int[] nums) {
+        int maxF = nums[0], minF = nums[0], ans = nums[0];
+        int length = nums.length;
+        for (int i = 1; i < length; ++i) {
+            int mx = maxF, mn = minF;
+            maxF = Math.max(mx * nums[i], Math.max(nums[i], mn * nums[i]));
+            minF = Math.min(mn * nums[i], Math.min(nums[i], mx * nums[i]));
+            ans = Math.max(maxF, ans);
+        }
+        return ans;
+    }
+
+    //地下城游戏
+    public int calculateMinimumHP(int[][] dungeon) {
+        int n = dungeon.length, m = dungeon[0].length;
+        int[][] dp = new int[n + 1][m + 1];
+        for (int i = 0; i <= n; ++i) {
+            Arrays.fill(dp[i], Integer.MAX_VALUE);
+        }
+        dp[n][m - 1] = dp[n - 1][m] = 1;
+        for (int i = n - 1; i >= 0; --i) {
+            for (int j = m - 1; j >= 0; --j) {
+                int minn = Math.min(dp[i + 1][j], dp[i][j + 1]);
+                dp[i][j] = Math.max(minn - dungeon[i][j], 1);
+            }
+        }
+        return dp[0][0];
+    }
+
+    //基因序列
+    public List<String> findRepeatedDnaSequences(String s) {
+        int L = 10, n = s.length();
+        HashSet<String> seen = new HashSet(), output = new HashSet();
+
+        for (int start = 0; start < n - L + 1; ++start) {
+            String tmp = s.substring(start, start + L);
+            if (seen.contains(tmp)) output.add(tmp);
+            seen.add(tmp);
+        }
+        return new ArrayList<String>(output);
+    }
+
+    //股票买卖
+    public int maxProfit(int k, int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        return dfs(0, 0, 0, k, prices);
+    }
+
+    //计算k次交易，index表示当前是哪天，status是买卖状态，count为交易次数
+    private int dfs(int index, int status, int count, int k, int[] prices) {
+        if (index == prices.length || count == k) {
+            return 0;
+        }
+        int a = 0, b = 0, c = 0;
+        //保持不动
+        a = dfs(index + 1, status, count, k, prices);
+        if (status == 1) {
+            //卖一股，并将交易次数+1
+            b = dfs(index + 1, 0, count + 1, k, prices) + prices[index];
+        } else {
+            //买一股
+            c = dfs(index + 1, 1, count, k, prices) - prices[index];
+        }
+        return Math.max(Math.max(a, b), c);
+    }
+
+    //旋转数组
+    public void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        int count = 0;
+        for (int start = 0; count < nums.length; start++) {
+            int current = start;
+            int prev = nums[start];
+            do {
+                int next = (current + k) % nums.length;
+                int temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            } while (start != current);
+        }
+    }
+
+    //打家劫舍
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
+        int[] dp = new int[length];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0], nums[1]);
+        for (int i = 2; i < length; i++) {
+            dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]);
+        }
+        return dp[length - 1];
+    }
+
+    //二叉树的右视图
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if (root == null) return res;
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+                //把当前层的最后一个节点放入列表钟
+                if (i == size - 1) res.add(node.val);
+            }
+        }
+        return res;
+    }
+
+    //岛屿数量
+    void dfs1(char[][] grid, int r, int c) {
+        int nr = grid.length;
+        int nc = grid[0].length;
+
+        if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0') {
+            return;
+        }
+
+        grid[r][c] = '0';
+        dfs1(grid, r - 1, c);
+        dfs1(grid, r + 1, c);
+        dfs1(grid, r, c - 1);
+        dfs1(grid, r, c + 1);
+    }
+
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+        int nr = grid.length;
+        int nc = grid[0].length;
+        int num_islands = 0;
+        for (int r = 0; r < nr; ++r) {
+            for (int c = 0; c < nc; ++c) {
+                if (grid[r][c] == '1') {
+                    ++num_islands;
+                    dfs1(grid, r, c);
+                }
+            }
+        }
+        return num_islands;
     }
 }

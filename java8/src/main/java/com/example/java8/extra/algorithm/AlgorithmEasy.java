@@ -2,8 +2,11 @@ package com.example.java8.extra.algorithm;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Slf4j
 public class AlgorithmEasy {
@@ -327,8 +330,8 @@ public class AlgorithmEasy {
     //去除重复元素
     public AlgorithmMedium.ListNode deleteDuplicates(AlgorithmMedium.ListNode head) {
         AlgorithmMedium.ListNode current = head;
-        while (current != null && current.next != null) {
-            if (current.next.val == current.val) current.next = current.next.next;
+        while(current != null && current.next != null) {
+            if(current.next.val == current.val) current.next = current.next.next;
             else current = current.next;
         }
         return head;
@@ -350,11 +353,11 @@ public class AlgorithmEasy {
 
     //判断两棵树是否相同
     public boolean isSameTree(AlgorithmMedium.TreeNode p, AlgorithmMedium.TreeNode q) {
-        if (p == null && q == null)
+        if(p == null && q == null)
             return true;
-        if (p == null || q == null)
+        if(p == null || q == null)
             return false;
-        if (p.val != q.val)
+        if(p.val != q.val)
             return false;
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
@@ -363,10 +366,7 @@ public class AlgorithmEasy {
         int val;
         TreeNode left;
         TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
+        TreeNode(int x) { val = x; }
     }
 
     public boolean isSymmetric(TreeNode root) {
@@ -387,14 +387,14 @@ public class AlgorithmEasy {
     public int maxDepth(TreeNode root) {
         int ans = 0;
         LinkedList<TreeNode> queue = new LinkedList<>();
-        if (root == null) return ans;
+        if(root == null) return ans;
         queue.add(root);
-        while (!queue.isEmpty()) {
+        while(!queue.isEmpty()) {
             int size = queue.size();
-            for (int i = 0; i < size; i++) {
+            for(int i = 0; i < size ; i++) {
                 TreeNode curr = queue.remove();
-                if (curr.left != null) queue.add(curr.left);
-                if (curr.right != null) queue.add(curr.right);
+                if(curr.left != null) queue.add(curr.left);
+                if(curr.right != null) queue.add(curr.right);
             }
             ans++;
         }
@@ -481,7 +481,6 @@ public class AlgorithmEasy {
 
     //打印出所有节点总和等于sum的数组
     List<List<Integer>> res = new ArrayList<>();
-
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
         if (root == null) return res;
         pathSum(root, sum, new ArrayList<Integer>());
@@ -492,10 +491,10 @@ public class AlgorithmEasy {
         path.add(root.val);
         if (root.left == null && root.right == null && root.val == sum) {
             res.add(path);
-            return;
+            return ;
         }
-        if (root.left != null) pathSum(root.left, sum - root.val, new ArrayList<Integer>(path));
-        if (root.right != null) pathSum(root.right, sum - root.val, new ArrayList<Integer>(path));
+        if (root.left != null) pathSum(root.left, sum-root.val, new ArrayList<Integer>(path));
+        if (root.right != null) pathSum(root.right, sum-root.val, new ArrayList<Integer>(path));
     }
 
     //一次购买 买股票的最佳时机
@@ -526,11 +525,11 @@ public class AlgorithmEasy {
         LinkedList<TreeNode> stack = new LinkedList<>();
         LinkedList<Integer> output = new LinkedList<>();
         stack.add(root);
-        while (!stack.isEmpty()) {
+        while(!stack.isEmpty()) {
             TreeNode curr = stack.pollLast();
             output.add(curr.val);
-            if (curr.right != null) stack.add(curr.right);
-            if (curr.left != null) stack.add(curr.left);
+            if(curr.right != null) stack.add(curr.right);
+            if(curr.left != null) stack.add(curr.left);
         }
         return output;
     }
@@ -556,101 +555,156 @@ public class AlgorithmEasy {
         return output;
     }
 
-    //插入排序
-    public class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
-    public ListNode insertionSortList(ListNode head) {
-        List<Integer> list = new ArrayList<>();
-        ListNode p = head;
-        while (p != null) {
-            list.add(p.val);
-            p = p.next;
-        }
-        Collections.sort(list);
-        p = head;
-        int i = 0;
-        while (p != null) {
-            p.val = list.get(i++);
-            p = p.next;
-        }
-        return head;
-    }
-
-    //链表排序 归并排序
-    public ListNode sortList(ListNode head) {
-        int n = 0;
-        for(ListNode i = head; i != null; i=i.next) n++;
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-
-        // 循环一下
-        // 第一层循环，分块，从1个一块，2个一块，4个一块，直到n个一块，
-        for(int i = 1; i < n; i = 2*i){
-            ListNode begin = dummy;
-            // 开始归并
-            // j + i >= n 表示只有一段就不归并了，因为已经是排好序的
-            for(int j = 0; j + i < n; j = j + 2 * i){
-                // 两块，找两块的起始节点
-                // 开始都指向第一块的起点
-                // 然后second走n步指向第二块的起点
-                ListNode first = begin.next, second = first;
-                for(int k = 0; k < i; k++) second = second.next;
-
-                // 遍历第一块和第二块进行归并
-                // 第一块的数量为i
-                // 第二块的数量为i也可能小于i，所以循环条件要加一个second != null
-                int f = 0, s = 0;
-                while(f < i && s < i && second != null){
-                    if(first.val < second.val){
-                        begin.next = first;
-                        begin = begin.next;
-                        first = first.next;
-                        f++;
-                    }else{
-                        begin.next = second;
-                        begin = begin.next;
-                        second = second.next;
-                        s++;
-                    }
-                }
-                // 归并之后可能又多余的没有处理比如基数个
-                while(f < i){
-                    begin.next = first;
-                    begin = begin.next;
-                    first = first.next;
-                    f++;
-                }
-                while(s < i && second != null){
-                    begin.next = second;
-                    begin = begin.next;
-                    // second已经更新到下一块的起点了
-                    second = second.next;
-                    s++;
-                }
-
-                // 更新begin
-                // begin.next 指向下一块的起点
-                begin.next = second;
+    //数组旋转后求旋转的最小值
+    public int findMin(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {                         // 循环的条件选为左闭右闭区间left <= right
+            int mid = left + (right - left) / 2;
+            if (nums[mid] >= nums[right]) {             // 注意是当中值大于等于右值时，
+                left = mid + 1;                         // 将左边界移动到中值的右边
+            } else {                                    // 当中值小于右值时
+                right = mid;                            // 将右边界移动到中值处
             }
         }
-        return dummy.next;
+        return nums[right];                             // 最小值返回nums[right]
     }
 
-    //翻转字符串里的单词
-    public String reverseWords(String s) {
-        // 除去开头和末尾的空白字符
-        s = s.trim();
-        // 正则匹配连续的空白字符作为分隔符分割
-        List<String> wordList = Arrays.asList(s.split("\\s+"));
-        Collections.reverse(wordList);
-        return String.join(" ", wordList);
+    //有重复元素的
+    public int findMin1(int[] nums) {
+        int low = 0;
+        int high = nums.length - 1;
+        while (low < high) {
+            int pivot = low + (high - low) / 2;
+            if (nums[pivot] < nums[high]) {
+                high = pivot;
+            } else if (nums[pivot] > nums[high]) {
+                low = pivot + 1;
+            } else {
+                high -= 1;
+            }
+        }
+        return nums[low];
     }
+
+    public AlgorithmMedium.ListNode getIntersectionNode(AlgorithmMedium.ListNode headA, AlgorithmMedium.ListNode headB) {
+        if (headA == null || headB == null) return null;
+        AlgorithmMedium.ListNode pA = headA, pB = headB;
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+        return pA;
+    }
+
+    //二分法查找峰值
+    public int findPeakElement(int[] nums) {
+        int l = 0, r = nums.length - 1;
+        while (l < r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] > nums[mid + 1])
+                r = mid;
+            else
+                l = mid + 1;
+        }
+        return l;
+    }
+
+    //数组在排序后相邻元素间最大差值
+    public int maximumGap(int[] nums) {
+        Arrays.sort(nums);
+        int max = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i + 1] - nums[i] > max) {
+                max = nums[i + 1] - nums[i];
+            }
+        }
+        return max;
+    }
+
+    //升序数组
+    public int[] twoSum1(int[] numbers, int target) {
+        int low = 0, high = numbers.length - 1;
+        while (low < high) {
+            int sum = numbers[low] + numbers[high];
+            if (sum == target) {
+                return new int[]{low + 1, high + 1};
+            } else if (sum < target) {
+                ++low;
+            } else {
+                --high;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
+    //
+    public static String convertToTitle(int n) {
+        StringBuilder stringBuilder = new StringBuilder();
+        while (n != 0) {
+            n--; // 依次获取 26 进制逻辑上的个位、十位、百位…（虽然在 26 进制中不这么叫）
+            stringBuilder.append((char) ('A' + n % 26));
+            n /= 26;
+        }
+        return stringBuilder.reverse().toString();
+    }
+
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length/2];
+//        int count = 0;
+//        Integer candidate = null;
+//
+//        for (int num : nums) {
+//            if (count == 0) {
+//                candidate = num;
+//            }
+//            count += (num == candidate) ? 1 : -1;
+//        }
+//
+//        return candidate;
+    }
+
+    //返回excel的数组对应的下标
+    public int titleToNumber(String s) {
+        int ans = 0;
+        for(int i=0;i<s.length();i++) {
+            int num = s.charAt(i) - 'A' + 1;
+            ans = ans * 26 + num;
+        }
+        return ans;
+    }
+
+    //阶乘后的0
+    public int trailingZeroes(int n) {
+        int zeroCount = 0;
+        long currentMultiple = 5;
+        while (n >= currentMultiple) {
+            zeroCount += (n / currentMultiple);
+            currentMultiple *= 5;
+        }
+        return zeroCount;
+    }
+
+    //几个数组合最大数
+    public String largestNumber(int[] nums) {
+        String[] arr = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            arr[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(arr, new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                return (o2 + o1).compareTo(o1 + o2);
+            }
+        });
+        if (arr[0].equals("0")) return "0";
+        StringBuilder res = new StringBuilder();
+        for (String i : arr) {
+            res.append(i);
+        }
+        return res.toString();
+    }
+
+
 }
 
