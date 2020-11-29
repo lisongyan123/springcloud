@@ -704,7 +704,5 @@ public class AlgorithmEasy {
         }
         return res.toString();
     }
-
-
 }
 

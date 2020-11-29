@@ -1,6 +1,7 @@
 package com.example.java8.extra.algorithm;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class LRUCache {
@@ -55,5 +56,4 @@ public class LRUCache {
         removeHead(dLinkedNode);
         return dLinkedNode;
     }
-
 }

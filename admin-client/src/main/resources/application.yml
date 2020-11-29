@@ -7,6 +7,8 @@ spring:
       client:
         url: http://localhost:8769
 
+
+
 server:
   port: 8768
 
