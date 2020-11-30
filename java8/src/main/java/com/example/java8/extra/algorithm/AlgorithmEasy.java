@@ -704,5 +704,118 @@ public class AlgorithmEasy {
         }
         return res.toString();
     }
+
+    //查出数组中最小的k个数字
+    public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
+        ArrayList<Integer> result=new ArrayList<>();
+        if(input.length>=k&&k>0){
+            Arrays.sort(input);
+            for(int i=0;i<k;i++){
+                result.add(new Integer(input[i]));
+            }
+
+        }
+        return result;
+    }
+
+    //1-n中1出现的次数
+    public int NumberOf1Between1AndN_Solution(int n) {
+        int count=0;
+        for(int i=1;i<=n;i*=10){  //i代表位数
+            int high=n/(i*10); //更高位数字
+            int low=(n%i);  //更低位数字
+            int cur=(n/i)%10;  //当前位数字
+            if(cur==0){
+                count+=high*i;
+            }else if(cur==1){
+                count+=high*i+(low+1);
+            }else{
+                count+=(high+1)*i;
+            }
+        }
+        return count;
+    }
+
+    //质数只包含2，3，5的是丑数  写出从小到大的低N个丑数
+    public int GetUglyNumber_Solution(int index) {
+        if(index <= 0) return 0;
+        int p2 = 0, p3 = 0, p5 = 0;
+        int[] result = new int[index];
+        result[0] = 1;
+        for(int i = 1; i < index; i++) {
+            result[i] = Math.min(result[p2]*2,Math.min(result[p3]*3,result[p5]*5));
+            if(result[i] == result[p2]*2) p2++;
+            if(result[i] == result[p3]*3) p3++;
+            if(result[i] == result[p5]*5) p5++;
+        }
+        return result[index - 1];
+    }
+
+    //求连续几个数和为s的序列
+    public ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        int start = 1 , end = 2;
+        int curSum = 3;
+        while(end < curSum) {
+            if(curSum > sum) {
+                curSum -= start;
+                start++;
+            } else if(curSum < sum){
+                end++;
+                curSum += end;
+            } else {
+                ArrayList<Integer> cur = new ArrayList<>();
+                for(int i = start; i<=end; i++) cur.add(i);
+                res.add(cur);
+                curSum -= start;
+                start++;
+                end++;
+                curSum += end;
+            }
+        }
+        return res;
+    }
+
+    //循环左移
+    public String LeftRotateString(String str,int n) {
+        if(n > str.length()) return str;
+        String s = str.substring(n,str.length()) + str.substring(0,n);
+        return s;
+    }
+
+    //小朋友转圈丢手绢问题
+    public int LastRemaining_Solution(int n, int m) {
+        int s = 0;
+        if(m == 0) return -1;
+        for(int i = 2; i <= n; i++) s = (s + m) % i;
+        return s;
+    }
+
+    // 1+2+3+。。。+n
+    public int Sum_Solution(int n) {
+        int sum = n;
+        boolean stop = (sum != 0) && ((sum += Sum_Solution(n-1))!=0);
+        return sum;
+    }
+
+    //链表的环形头节点 ，这里可以ABD = X
+    public AlgorithmMedium.ListNode EntryNodeOfLoop(AlgorithmMedium.ListNode pHead)
+    {
+        if(pHead == null || pHead.next == null) return null;
+        AlgorithmMedium.ListNode left = pHead;
+        AlgorithmMedium.ListNode right = pHead;
+        while(right != null && right.next != null) {
+            left = left.next;
+            right = right.next.next;
+            if(left == right) break;
+        }
+        right = pHead;
+        while(right != left) {
+            right = right.next;
+            left = left.next;
+        }
+        return right;
+    }
 }
+
 

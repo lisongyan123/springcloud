@@ -1,13 +1,20 @@
 package com.example.webflux.demo;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import static org.springframework.web.reactive.function.BodyInserters.fromMultipartData;
+
 @Slf4j
-public class A {
+public class GoodDemo {
     public static void main(String[] args) {
         //同步执行乘法操作
         //运行8.353s

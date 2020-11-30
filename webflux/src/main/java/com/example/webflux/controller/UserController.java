@@ -1,9 +1,8 @@
 package com.example.webflux.controller;
 
+import com.example.webflux.controller.domain.User;
 import com.example.webflux.controller.service.UserService;
-import org.elasticsearch.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,11 +17,6 @@ public class UserController {
     @Autowired
     public UserController(final UserService userService) {
         this.userService = userService;
-    }
-
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Resource not found")
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public void notFound() {
     }
 
     @GetMapping("")

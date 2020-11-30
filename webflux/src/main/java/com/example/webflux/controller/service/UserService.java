@@ -1,6 +1,6 @@
 package com.example.webflux.controller.service;
 
-import com.example.webflux.controller.User;
+import com.example.webflux.controller.domain.User;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

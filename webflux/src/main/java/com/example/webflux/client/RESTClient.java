@@ -1,6 +1,6 @@
 package com.example.webflux.client;
 
-import com.example.webflux.controller.User;
+import com.example.webflux.controller.domain.User;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;

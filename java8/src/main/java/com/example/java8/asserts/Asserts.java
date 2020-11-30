@@ -3,7 +3,7 @@ import org.springframework.util.Assert;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Asserts {
+public class Asserts<a> {
     public static void main(String[] args) {
         Object object = new Object();
         //对象非空
@@ -19,4 +19,5 @@ public class Asserts {
         //obj必须能被正确造型成为clazz指定的类
         Assert.isInstanceOf(Map.class, object, "clazz must be of type [clazz]");
     }
+
 }
