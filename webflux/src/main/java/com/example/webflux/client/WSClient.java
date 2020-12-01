@@ -16,13 +16,13 @@ import java.util.Map;
 
 public class WSClient {
     public static void main(final String[] args) {
-//        final WebSocketClient client = new ReactorNettyWebSocketClient();
-//        client.execute(URI.create("ws://localhost:8080/echo"), session ->
-//                session.send(Flux.just(session.textMessage("Hello")))
-//                        .thenMany(session.receive().take(1).map(WebSocketMessage::getPayloadAsText))
-//                        .doOnNext(System.out::println)
-//                        .then())
-//                .block(Duration.ofMillis(5000));
+        final WebSocketClient client = new ReactorNettyWebSocketClient();
+        client.execute(URI.create("ws://localhost:8080/echo"), session ->
+                session.send(Flux.just(session.textMessage("Hello")))
+                        .thenMany(session.receive().take(1).map(WebSocketMessage::getPayloadAsText))
+                        .doOnNext(System.out::println)
+                        .then())
+                .block(Duration.ofMillis(5000));
 
         //        WebClient client = WebClient.create("http://www.kailing.pub");
 //        /**Post请求  map也可以这么写*/
