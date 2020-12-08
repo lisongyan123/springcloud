@@ -43,9 +43,8 @@ public class Test3 {
                             if (s.length > 1) {
                                 list.addAll(Arrays.asList(s).subList(1, s.length));
                             }
-
                             return list;
                         }
-                        ).subscribe(map -> map.forEach((key, value) -> System.out.println(key + "  " + value)));
+                ).subscribe(map -> map.forEach((key, value) -> System.out.println(key + "  " + value)));
     }
 }
