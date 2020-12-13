@@ -1,6 +1,8 @@
 package com.example.java8.path;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -32,6 +34,6 @@ public class PathsUtils {
 		//Path的绝对路径下包含的路径数量:2
 		//Path的绝对路径下包含的具体路径路径:tempCSDN
 		//Path的绝对路径下包含的具体路径路径:Paths
- 
+		
 	}
 }
