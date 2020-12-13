@@ -4,15 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 
 import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -60,6 +59,11 @@ public class Demo {
 
         String arg2 = ass1.getArg2();
         System.out.println("arg2:" + arg2);
+
+        A ass3 = new A();
+        System.out.println("before ass2:" + JSON.toJSON(ass2));
+        BeanUtils.copyProperties(ass1,ass3);
+        System.out.println("after  ass2:" + JSON.toJSON(ass2));
     }
 
     public static String[] getFiledName(Object o) {
@@ -117,81 +121,83 @@ public class Demo {
         Map<Object, Boolean> seen = new ConcurrentHashMap<>();
         return t -> seen.putIfAbsent(keyExtractor.get(), Boolean.TRUE) == null;
     }
+
+
+    static class A {
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        String id;
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        String name;
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        String arg1;
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        String arg2;
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        Long num1;
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        Long num2;
+
+        public A() {
+        }
+
+        public A(String id, String name, String arg1, String arg2, Long num1, Long num2) {
+            this.id = id;
+            this.name = name;
+            this.arg1 = arg1;
+            this.arg2 = arg2;
+            this.num1 = num1;
+            this.num2 = num2;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getArg1() {
+            return arg1;
+        }
+
+        public void setArg1(String arg1) {
+            this.arg1 = arg1;
+        }
+
+        public String getArg2() {
+            return arg2;
+        }
+
+        public void setArg2(String arg2) {
+            this.arg2 = arg2;
+        }
+
+        public Long getNum1() {
+            return num1;
+        }
+
+        public void setNum1(Long num1) {
+            this.num1 = num1;
+        }
+
+        public Long getNum2() {
+            return num2;
+        }
+
+        public void setNum2(Long num2) {
+            this.num2 = num2;
+        }
+
+    }
 }
 
-class A {
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    String id;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    String name;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    String arg1;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    String arg2;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    Long num1;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    Long num2;
-
-    public A() {
-    }
-
-    public A(String id, String name, String arg1, String arg2, Long num1, Long num2) {
-        this.id = id;
-        this.name = name;
-        this.arg1 = arg1;
-        this.arg2 = arg2;
-        this.num1 = num1;
-        this.num2 = num2;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getArg1() {
-        return arg1;
-    }
-
-    public void setArg1(String arg1) {
-        this.arg1 = arg1;
-    }
-
-    public String getArg2() {
-        return arg2;
-    }
-
-    public void setArg2(String arg2) {
-        this.arg2 = arg2;
-    }
-
-    public Long getNum1() {
-        return num1;
-    }
-
-    public void setNum1(Long num1) {
-        this.num1 = num1;
-    }
-
-    public Long getNum2() {
-        return num2;
-    }
-
-    public void setNum2(Long num2) {
-        this.num2 = num2;
-    }
-
-}
 
