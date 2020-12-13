@@ -1,6 +1,8 @@
-package com.example.webflux.demo;
+package com.example.java8.userful;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.extern.slf4j.Slf4j;
 
 import java.beans.IntrospectionException;
@@ -44,32 +46,70 @@ public class Demo {
         // {"arg1":"arg1","arg2":"arg2","id":"3","name":"good","num1":1,"num2":1}]
         log.info(JSON.toJSONString(a));
         System.out.println("*****************");
+        //用于比较两个属性是否相等
+        A ass1 = new A("1", "good", "arg1", null, null, null);
+        A ass2 = new A("1", "good", "arg1", "arg2", null, null);
+        Boolean istrue = new ParamCheckUtil<A>(ass1, ass2).contrastObj(A.class);
+        System.out.println("istrue:" + JSON.toJSON(istrue));
+        //true
+        System.out.println("ass1:" + JSON.toJSONString(ass1, SerializerFeature.WriteMapNullValue));
+        //ass1:{"name":"good","arg2":"arg2","id":"1","arg1":"arg1"}
+        //true
+        Boolean s = !false ^ false;
+        System.out.println("s:" + JSON.toJSON(s));
+
+        String arg2 = ass1.getArg2();
+        System.out.println("arg2:" + arg2);
     }
 
-    /**
-     * 获取合同选择下拉框数据
-     *
-     * @param purchaseContractGoods
-     * @return
-     */
-    public List<Map<String, Object>> findGoodsNoSelectInit(A purchaseContractGoods) {
-        //获取根据对象查询到的所有数据
-        List<A> list = new ArrayList<>();
-        //用于存储select2下拉框的map集合
-        List<Map<String, Object>> mapList = new ArrayList<>();
+    public static String[] getFiledName(Object o) {
+        Field[] fields = o.getClass().getDeclaredFields();
+        String[] fieldNames = new String[fields.length];
+        for (int i = 0; i < fields.length; i++) {
+            fieldNames[i] = fields[i].getName();
+        }
+        return fieldNames;
+    }
 
-        //根据list对象中的某个字段进行去重处理
-        List<A> distinctList = list.stream().collect(Collectors.collectingAndThen(
-                Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(A::getId))), ArrayList::new));
-        //去重后的数据循环放入下拉框数据中
-        distinctList.forEach(item -> {
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", item.getArg1());
-            map.put("text", item.getArg2());
-            map.put("name", item.getName());
-            mapList.add(map);
-        });
-        return mapList;
+    public static boolean getTrue(Object obj) throws NoSuchFieldException, IllegalAccessException {
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields) { //根据入参循环取出对应类的属性名及值
+            String fieldName = field.getName();//获取的字段名
+            System.out.println("fieldName:" + JSON.toJSON(fieldName));
+            Field fieldParam = obj.getClass().getDeclaredField(fieldName);
+            fieldParam.setAccessible(true);//设置对象的访问权限，保证private属性的访问权限
+            String value = (String) fieldParam.get(obj);//获取字段名对应的值
+            System.out.println(value);
+        }
+        return true;
+    }
+
+
+    public static void printClassMessage(Object obj) {
+
+        Class c = obj.getClass();
+
+        //获取类名
+        System.out.println("类的名称是：" + c.getName());
+
+        //获取方法
+        Method[] ms = c.getMethods();
+
+        for (int i = 0; i < ms.length; i++) {
+
+            //获取方法返回值类型
+            Class returnType = ms[i].getReturnType();
+            System.out.print(returnType.getName() + " ");
+            //得到方法的名称
+            System.out.print(ms[i].getName() + "(");
+            //获取参数类型
+            Class[] paramTypes = ms[i].getParameterTypes();
+            for (Class class1 : paramTypes) {
+                System.out.print(class1.getName() + ",");
+            }
+            System.out.println(")");
+
+        }
     }
 
 
@@ -80,12 +120,21 @@ public class Demo {
 }
 
 class A {
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     String id;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     String name;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     String arg1;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     String arg2;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     Long num1;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     Long num2;
+
+    public A() {
+    }
 
     public A(String id, String name, String arg1, String arg2, Long num1, Long num2) {
         this.id = id;
