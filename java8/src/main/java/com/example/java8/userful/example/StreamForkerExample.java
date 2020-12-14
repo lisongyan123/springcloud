@@ -1,6 +1,7 @@
 package com.example.java8.userful.example;
 
 import com.example.java8.userful.Dish;
+import org.springframework.beans.factory.config.BeanDefinition;
 
 import java.util.List;
 import java.util.Map;

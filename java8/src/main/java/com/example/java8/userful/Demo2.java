@@ -2,9 +2,7 @@ package com.example.java8.userful;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.apache.naming.factory.FactoryBase;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.FactoryBean;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
