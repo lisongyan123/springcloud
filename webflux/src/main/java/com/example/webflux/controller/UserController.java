@@ -14,6 +14,9 @@ import java.util.Objects;
 public class UserController {
     private final UserService userService;
 
+    @GetMapping("/hello")
+    public String hello() {return "hello";}
+
     @Autowired
     public UserController(final UserService userService) {
         this.userService = userService;
