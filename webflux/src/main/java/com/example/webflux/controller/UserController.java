@@ -1,5 +1,6 @@
 package com.example.webflux.controller;
 
+import com.example.webflux.controller.dao.CityRepository;
 import com.example.webflux.controller.domain.User;
 import com.example.webflux.controller.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.util.Objects;
 public class UserController {
     private final UserService userService;
 
+    @Autowired
+    CityRepository cityRepository;
+
     @GetMapping("/hello")
     public String hello() {return "hello";}
 
@@ -24,17 +28,19 @@ public class UserController {
 
     @GetMapping("")
     public Flux<User> list() {
-        return this.userService.list();
+        return cityRepository.findAll();
     }
 
+    //http://localhost:8080/user?id=1
     @GetMapping("/{id}")
     public Mono<User> getById(@PathVariable("id") final String id) {
         return this.userService.getById(id);
     }
 
+    //http://localhost:8080/user
     @PostMapping("")
     public Mono<User> create(@RequestBody final User user) {
-        return this.userService.createOrUpdate(user);
+        return cityRepository.save(user);
     }
 
     @PutMapping("/{id}")

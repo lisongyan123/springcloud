@@ -40,9 +40,9 @@ public class RESTClient {
                 .uri("")
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(user), User.class)
-                .exchange()
-                .flatMap(response -> response.bodyToMono(User.class));
+                .exchangeToMono(response -> response.bodyToMono(User.class));
         System.out.println(createdUser.block());
+
 
         //form提交
         String baseUrl = "http://localhost:8081";
@@ -50,7 +50,8 @@ public class RESTClient {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("username", "u123");
         map.add("password", "p123");
-        Mono<String> mono = webClient.post().uri("/login").syncBody(map).retrieve().bodyToMono(String.class);
+        Mono<String> mono = webClient.post().uri("/login").bodyValue(map).retrieve().bodyToMono(String.class);
+
 
         WebClient.ResponseSpec retrieve = WebClient.create(baseUrl).post().retrieve();
         Mono<String> mono1 = retrieve
@@ -62,8 +63,7 @@ public class RESTClient {
                 .doOnError(WebClientResponseException.class, err -> {
                     System.out.println(err.getRawStatusCode() + "," + err.getResponseBodyAsString());
                     throw new RuntimeException(err.getMessage());
-                })
-                .onErrorReturn("fallback");
+                }).onErrorReturn("fallback");
         System.out.println("result:" + mono.block());
 
         HttpHeaders headers = new HttpHeaders();

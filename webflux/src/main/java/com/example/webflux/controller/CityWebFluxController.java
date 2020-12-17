@@ -1,7 +1,7 @@
 //package com.example.webflux.controller;
 //
-//import com.example.webflux.domain.City;
-//import com.example.webflux.handler.CityHandler;
+//import com.example.webflux.controller.domain.City;
+//import com.example.webflux.handler.QuoteHandler;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.*;
 //import reactor.core.publisher.Flux;
@@ -12,7 +12,7 @@
 //public class CityWebFluxController {
 //
 //    @Autowired
-//    private CityHandler cityHandler;
+//    private QuoteHandler.CityHandler cityHandler;
 //
 //    @GetMapping(value = "/{id}")
 //    public Mono<City> findCityById(@PathVariable("id") Long id) {
