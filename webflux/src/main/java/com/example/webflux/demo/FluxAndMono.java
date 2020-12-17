@@ -2,6 +2,13 @@ package com.example.webflux.demo;
 
 import reactor.core.publisher.Mono;
 
+import java.beans.PropertyDescriptor;
+import java.io.File;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
 public class FluxAndMono {
     /**
      * Mono.create()：使用 MonoSink 来创建 Mono
@@ -18,5 +25,10 @@ public class FluxAndMono {
      * 包含了基础的操作：
      * map、merge、concat、flatMap、take，这里就不展开介绍了。
      */
+
+
+    public static void main(String[] args) {
+        System.out.println(true^false);
+    }
 }
 
