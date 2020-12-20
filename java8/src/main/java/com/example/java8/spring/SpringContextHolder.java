@@ -5,7 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
- * 实现ApplicationContextAware的setApplicationContext方法 是spring启动会自动注入bean，然后调用容器中其他类的方法
+ * 实现ApplicationContextAware的setApplicationContext方法
+ * 是spring启动会自动注入bean，然后调用容器中其他类的方法
  */
 public class SpringContextHolder implements ApplicationContextAware {
 	private static ApplicationContext applicationContext = null;
@@ -57,5 +58,4 @@ public class SpringContextHolder implements ApplicationContextAware {
 		Validate.isTrue(applicationContext != null,
 				"applicaitonContext属性未注入, 请在applicationContext.xml中定义SpringContextHolder.");
 	}
- 
 }
