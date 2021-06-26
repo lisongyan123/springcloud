@@ -44,11 +44,11 @@ public class WebclientDemoApplicationTests {
 //    }
 
     @Test
-	public void checkImpl() throws Exception{
-		WebTestClient.BodyContentSpec bodyContentSpec= webTestClient.get().uri("/user/hello").exchange().expectStatus().isOk()
-				.expectBody();
+    public void checkImpl() throws Exception {
+        WebTestClient.BodyContentSpec bodyContentSpec = webTestClient.get().uri("/user/hello").exchange().expectStatus().isOk()
+                .expectBody();
 //		bodyContentSpec.jsonPath("$.current").exists();//判断json中路径current是否存在，类似的还有isNumber、isMap、isArray等判断方法。
-		String body=new String(bodyContentSpec.returnResult().getResponseBody(), Charset.forName("utf8"));//获取body进行判断处理
+        String body = new String(bodyContentSpec.returnResult().getResponseBody(), Charset.forName("utf8"));//获取body进行判断处理
         System.out.println("body:" + JSON.toJSON(body));
-	}
+    }
 }

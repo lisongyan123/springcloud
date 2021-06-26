@@ -1,19 +1,23 @@
 package com.example.java8.date;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import lombok.Data;
+
+import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Date {
 
     private final DateTimeFormatter dft = DateTimeFormatter.ofPattern("yyyy-MM");
 
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.now();
-        System.out.println("date=" + date);
-        LocalDate newDate = date.plus(1, ChronoUnit.YEARS);
-        System.out.println("newDate=" + newDate);
+    @Data
+    public static class People {
+        BigDecimal age;
+        BigDecimal money;
+    }
 
+    public static void main(String[] args) {
+        People people = new People();
+        System.out.println(people.getAge());
+        System.out.println(people.getAge().compareTo(new BigDecimal(0)));
     }
 }

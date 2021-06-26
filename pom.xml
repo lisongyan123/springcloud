@@ -16,7 +16,7 @@
     </parent>
 
     <modules>
-<!--        <module>gateway</module>-->
+        <!--        <module>gateway</module>-->
         <module>config-server</module>
         <module>zipkin</module>
         <module>stream-kafka</module>
@@ -164,37 +164,38 @@
         </profile>
     </profiles>
 
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>${spring-cloud.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-<build>
-    <filters>
-        <!--这里定义配置资源的目录，并且根据变量不同来选取不同的目录-->
-        <filter>src/main/config/${env}.properties</filter>
-    </filters>
-    <resources>
-        <resource>
-            <!--这里定义需要处理的配置资源路径-->
-            <directory>src/main/resources</directory>
-            <!--启用过滤-->
-            <filtering>true</filtering>
-        </resource>
-    </resources>
-    <plugins>
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-        </plugin>
-    </plugins>
-</build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <!--                <executions>-->
+                <!--                    <execution>-->
+                <!--                        <goals>-->
+                <!--                            <goal>java</goal>-->
+                <!--                        </goals>-->
+                <!--                    </execution>-->
+                <!--                </executions>-->
+                <configuration>
+                    <classpathScope>test</classpathScope>
+                    <!--                    <mainClass>com.itheima.test.MybatisTest</mainClass>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>

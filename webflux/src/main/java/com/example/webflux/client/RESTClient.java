@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 @Slf4j
 public class RESTClient {
     /**
@@ -29,6 +30,7 @@ public class RESTClient {
      * 的作用是发送请求并得到以 Mono表示的 HTTP 响应。最后对得到的响应进行处理并输出结果。ServerResponse 的 bodyToMono
      * 方法把响应内容转换成类 User 的对象，最终得到的结果是 Mono对象。调用 createdUser.block 方法的作用是等待请求完
      * 成并得到所产生的类 User 的对象。
+     *
      * @param args
      */
     public static void main(final String[] args) throws IOException {
@@ -76,7 +78,7 @@ public class RESTClient {
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(parts))
                 .retrieve().bodyToMono(String.class);
-        log.info("result:{}",resp.block());
+        log.info("result:{}", resp.block());
 
         Mono<Resource> resp2 = WebClient.create().get()
                 .uri("http://www.toolip.gr/captcha?complexity=99&size=60&length=9")

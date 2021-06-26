@@ -41,7 +41,7 @@ public class WSClient {
 //        result.subscribe(System.err::println);
 
         //但是，如果需要进行多个调用，则更高效地方式是避免单独阻塞每个响应，而是等待组合结果
-        WebClient client2 =  WebClient.create("http://www.kailing.pub");
+        WebClient client2 = WebClient.create("http://www.kailing.pub");
         Mono<String> result1Mono = client2.get()
                 .uri("/article/index/arcid/{id}.html", 255)
                 .retrieve()
@@ -50,7 +50,7 @@ public class WSClient {
                 .uri("/article/index/arcid/{id}.html", 254)
                 .retrieve()
                 .bodyToMono(String.class);
-        Map<String,String> map = Mono.zip(result1Mono, result2Mono, (result1, result2) -> {
+        Map<String, String> map = Mono.zip(result1Mono, result2Mono, (result1, result2) -> {
             Map<String, String> arrayList = new HashMap<>();
             arrayList.put("result1", result1);
             arrayList.put("result2", result2);
@@ -71,8 +71,8 @@ public class WSClient {
                             .build();
                     return next.exchange(filtered);
                 })
-                .filters(filters ->{
-                    filters.add(ExchangeFilterFunctions.basicAuthentication("username","password"));
+                .filters(filters -> {
+                    filters.add(ExchangeFilterFunctions.basicAuthentication("username", "password"));
                     filters.add(ExchangeFilterFunctions.limitResponseSize(800));
                 })
                 .build().get()

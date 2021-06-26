@@ -35,13 +35,13 @@ import java.nio.charset.Charset;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Slf4j
 public class SpringCloudProviderApplicationTests {
-	protected WebTestClient rest;
-	@LocalServerPort
-	private int port = 8103;
+    protected WebTestClient rest;
+    @LocalServerPort
+    private int port = 8103;
 
 
-	@Test
-	public void checkImpl() throws Exception{
+    @Test
+    public void checkImpl() throws Exception {
         final User user = new User();
         user.setName("Test");
         user.setEmail("test@example.org");
@@ -86,7 +86,7 @@ public class SpringCloudProviderApplicationTests {
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(parts))
                 .retrieve().bodyToMono(String.class);
-        log.info("result:{}",resp.block());
+        log.info("result:{}", resp.block());
 
         Mono<Resource> resp2 = WebClient.create().get()
                 .uri("http://www.toolip.gr/captcha?complexity=99&size=60&length=9")
@@ -112,6 +112,6 @@ public class SpringCloudProviderApplicationTests {
                 return newResponse;
             });
         }).build();
-	}
+    }
 
 }

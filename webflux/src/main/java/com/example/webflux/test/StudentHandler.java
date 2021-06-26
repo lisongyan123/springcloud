@@ -21,10 +21,11 @@ public class StudentHandler {
         return ok().contentType(APPLICATION_JSON_UTF8).body(fromObject(studentBody));
     }
 
-    public static Mono<ServerResponse> insertStudent(ServerRequest request){
+    public static Mono<ServerResponse> insertStudent(ServerRequest request) {
         return ok().contentType(TEXT_PLAIN).body(fromObject("success"));
 
     }
+
     private static class Student {
         private Integer id;
         private String name;

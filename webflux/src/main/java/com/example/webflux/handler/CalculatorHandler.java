@@ -20,7 +20,7 @@ public class CalculatorHandler {
         return calculate(request, (v1, v2) -> v1 - v2);
     }
 
-    public Mono<ServerResponse>  multiply(final ServerRequest request) {
+    public Mono<ServerResponse> multiply(final ServerRequest request) {
         return calculate(request, (v1, v2) -> v1 * v2);
     }
 

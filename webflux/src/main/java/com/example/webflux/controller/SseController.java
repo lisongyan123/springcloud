@@ -24,6 +24,7 @@ public class SseController {
      * 我们可以使用类 ServerSentEvent.Builder 来创建 ServerSentEvent 对象。
      * 这里我们指定了事件名称 random，以及每个事件的标识符和数据。
      * 事件的标识符是一个递增的整数，而数据则是产生的随机数。
+     *
      * @return
      */
     @GetMapping("/randomNumbers")

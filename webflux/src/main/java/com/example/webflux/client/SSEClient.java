@@ -16,6 +16,7 @@ public class SSEClient {
      * BodyExtractors.toFlux 来完成的，其中的参数 new ParameterizedTypeReference<serversentevent>() {}
      * 表明了响应消息流中的内容是 ServerSentEvent 对象。由于 SSE 服务器会不断地发送消息，
      * 这里我们只是通过 buffer 方法来获取前 10 条消息并输出。
+     *
      * @param args
      */
     public static void main(final String[] args) {

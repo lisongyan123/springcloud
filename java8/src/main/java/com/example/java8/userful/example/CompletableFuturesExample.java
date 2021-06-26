@@ -1,33 +1,455 @@
 package com.example.java8.userful.example;
 
-import javax.swing.plaf.FontUIResource;
+import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.LockSupport;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+import static java.lang.String.format;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+/**
+ * 1.创建异步操作，runAsync（不支持返回值） 和 supplyAsync方法（支持返回值）
+ * 2.计算结果完成时的回调方法
+ *    whenComplete：执行完当前任务的线程，继续执行 whenComplete 的任务。
+ *    whenCompleteAsync： 执行完当前任务的线程，把whenCompleteAsync 的任务继续提交给线程池来执行。
+ *    exceptionally：当前任务出现异常时，执行exceptionally中的回调方法。
+ * 3.thenApply 方法，当一个线程依赖另一个线程时，可以使用 thenApply 方法来把这两个线程串行化。
+ * 4.handle 方法
+ * 5.handle 是执行任务完成时对结果的处理。
+ * 6.handle 方法和 thenApply 方法处理方式基本一样。不同的是 handle 是在任务完成后再执行，还可以处理异常的任务。thenApply 只可以执行正常的任务，任务出现异常则不执行 thenApply 方法。
+ * 7.thenAccept 消费处理结果，接收任务的处理结果，并消费处理，无返回结果。
+ * 8.thenRun 方法，跟 thenAccept 方法不一样的是，不关心任务的处理结果。只要上面的任务执行完成，就开始执行 thenAccept 。
+ * 9.thenCombine 合并任务，thenCombine 会把 两个 CompletionStage 的任务都执行完成后，把两个任务的结果一块交给 thenCombine 来处理。
+ * 10.thenCompose 方法，thenCompose 方法允许你对两个 CompletionStage 进行流水线操作，第一个操作完成时，将其结果作为参数传递给第二个操作。
+ */
 public class CompletableFuturesExample {
 
-    public static void main(String[] args) throws InterruptedException {
-//        thenApply();
-//        thenAccept();
-//        thenRun();
-//        thenCombine();
-//        thenAcceptBoth();
-//        runAfterBoth();
-//        applyToEither();
-//        anyOf();
-//        runAfterEither();
-//        doBoth2();
-        handle1();
+    public static void main(String[] args) throws Exception {
+//        CompletableFuturesExample.thenApply();
+//        CompletableFuturesExample.thenAccept();
+//        CompletableFuturesExample.thenRun();
+//        CompletableFuturesExample.thenCombine();
+//        CompletableFuturesExample.runAfterBoth();
+//        CompletableFuturesExample.applyToEither();
+//        CompletableFuturesExample.anyOf();
+//        CompletableFuturesExample.runAfterEither();
+//        CompletableFuturesExample.doBoth2();
+//        CompletableFuturesExample.handle1();
+//        CompletableFuturesExample.handle2();
+//        CompletableFuturesExample.thenAcceptBoth();
+//        CompletableFuturesExample.whenComplete();
+//        example();
+//        threadSafe();
+//        threadUnSafe();
+//        allExample();
+        CompletableFuturesExample.complete();
     }
 
-    public static void doBoth2() {
+    public static void completableOnTimeOut() throws ExecutionException, InterruptedException {
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 10;
+        });
+
+        CompletableFuture<Integer> within = CompletableFutureHandleTimeout.completeOnTimeout(1, future, 1, TimeUnit.SECONDS);
+        System.out.println(within.get());
+
+        CompletableFuture<String> futureStr = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "正常执行";
+        });
+
+        CompletableFuture<String> withinStr = CompletableFutureHandleTimeout.completeOnTimeout("异常执行", futureStr, 2, TimeUnit.SECONDS);
+        System.out.println(withinStr.get());
+
+    }
+
+    public static void exceptionHandler() {
+        //记录开始时间
+        Long start = System.currentTimeMillis();
+
+        //定长10线程池
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        //任务
+        List<Integer> taskList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        List<String> resultList = new ArrayList<>();
+
+        Map<String, String> errorList = new HashMap<>();
+
+        Stream<CompletableFuture<String>> completableFutureStream = taskList.stream()
+                .map(num -> {
+                            return CompletableFuture
+                                    .supplyAsync(() -> {
+                                                return CompletableFuturesExample.getDouble(num);
+                                            },
+                                            executor)
+                                    .handle(new BiFunction<Integer, Throwable, String>() {
+                                        @Override
+                                        public String apply(Integer s, Throwable throwable) {
+
+                                            if (throwable == null) {
+                                                System.out.println("任务" + num + "完成! result=" + s + ", " + new Date());
+                                                resultList.add(s.toString());
+                                            } else {
+                                                System.out.println("任务" + num + "异常! e=" + throwable + ", " + new Date());
+                                                errorList.put(num.toString(), throwable.getMessage());
+                                            }
+                                            return "";
+                                        }
+                                    });
+                        }
+                );
+
+        CompletableFuture[] completableFutures = completableFutureStream.toArray(CompletableFuture[]::new);
+
+        CompletableFuture.allOf(completableFutures)
+                .whenComplete((v, th) -> {
+                    System.out.println("所有任务执行完成触发\n resultList=" + resultList + "\n errorList=" + errorList + "\n耗时=" + (System.currentTimeMillis() - start));
+                }).join();
+
+        System.out.println("end");
+    }
+
+    private static Integer getDouble(Integer i) {
+        try {
+            //任务1耗时3秒
+            if (i == 1) Thread.sleep(3000);
+            else //其它任务耗时1秒
+                if (i == 2) {
+                    //任务2耗时1秒,还出错
+                    Thread.sleep(1000);
+                    throw new RuntimeException("出异常了");
+                } else Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return 2 * i;
+    }
+
+    /**
+     * join和get都阻塞主线程 线程进入supplyAsync开始执行如果不用complete
+     * complete、completeExceptionally、obtrudeValue（即使已经完成了，这个也会设置它）
+     * 一下线程会返回b而不是a
+     */
+    private static void complete() {
+        CompletableFuture<String> cf = CompletableFuture.supplyAsync(() -> {
+            System.out.println("started work");
+            LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(5));
+            System.out.println("done work");
+            return "a";
+        });
+
+        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(4));
+        cf.obtrudeValue("c");
+        cf.complete("b");
+        System.out.println(cf.join());
+    }
+
+    public static void allOf() throws InterruptedException, ExecutionException, TimeoutException {
+        CompletableFuture.allOf(
+                CompletableFuture.supplyAsync(() -> CompletableFuturesExample.getData())
+                        .whenComplete((v, err) -> System.out.println(Thread.currentThread() + ":::" + v))
+                        .exceptionally(e -> "1错"),
+                CompletableFuture.supplyAsync(() -> CompletableFuturesExample.getData())
+                        .whenComplete((v, err) -> System.out.println(Thread.currentThread() + ":::" + v))
+                        .exceptionally(e -> "1错"),
+                CompletableFuture.supplyAsync(() -> CompletableFuturesExample.getData())
+                        .whenComplete((v, err) -> System.out.println(Thread.currentThread() + ":::" + v))
+                        .exceptionally(e -> "1错"))
+//                .join();
+                .get(3, TimeUnit.MINUTES);
+
+        CompletableFuture[] completableFutures = new CompletableFuture[]{
+                CompletableFuturesExample.createTaskSupplier("1"),
+                CompletableFuturesExample.createTaskSupplier("2"),
+                CompletableFuturesExample.createTaskSupplier("3"),
+                CompletableFuturesExample.createTaskSupplier("4")
+        };
+        Object val = CompletableFuture.allOf(
+                completableFutures
+        ).join();
+    }
+
+    /**
+     * 打印结果
+     * 1624723801324:阻塞
+     * 1624723804333:2执行完成
+     * 1624723804333:1执行完成
+     * 1624723804333:0执行完成
+     * 1624723804334:阻塞结束
+     * 1624723805335:1回调执行完成
+     * 1624723805335:2回调执行完成
+     * 1624723805335:0回调执行完成
+     *
+     * @throws InterruptedException
+     */
+    public static void example1() throws InterruptedException {
+        List<CompletableFuture> comlist = new ArrayList<>();
+        final int size = 3;
+        CountDownLatch countDownLatch = new CountDownLatch(size);
+        for (int i = 0; i < size; i++) {
+            int res = i;
+            CompletableFuture<String> f1 = CompletableFuture.supplyAsync(() -> {
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                    System.out.println(System.currentTimeMillis() + ":" + res + "执行完成");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return res + "";
+            });
+            f1.whenCompleteAsync((x, y) -> {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println(System.currentTimeMillis() + ":" + x + "回调执行完成");
+                    countDownLatch.countDown();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            comlist.add(f1);
+        }
+
+        CompletableFuture<Void> all = CompletableFuture.allOf(comlist.toArray(new CompletableFuture[size]));
+        //阻塞，直到所有任务结束。任务complete就会执行,handler里面不一定会执行..
+        System.out.println(System.currentTimeMillis() + ":阻塞");
+        all.join();
+        System.out.println(System.currentTimeMillis() + ":阻塞结束");
+        countDownLatch.await();
+        System.out.println("回调都结束...");
+    }
+
+    /**
+     * 打印结果
+     * 1624723805339:阻塞
+     * 1624723808344:2执行完成
+     * 1624723808344:1执行完成
+     * 1624723808344:0执行完成
+     * 1624723809345:0回调执行完成
+     * 1624723809345:2回调执行完成
+     * 1624723809345:1回调执行完成
+     * 1624723809364:阻塞结束
+     *
+     * @throws InterruptedException
+     */
+    public static void example2() throws InterruptedException {
+        List<CompletableFuture> comlist = new ArrayList<>();
+        final int size = 3;
+        CountDownLatch countDownLatch = new CountDownLatch(size);
+        for (int i = 0; i < size; i++) {
+            int res = i;
+            CompletableFuture<String> f1 = CompletableFuture.supplyAsync(() -> {
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                    System.out.println(System.currentTimeMillis() + ":" + res + "执行完成");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return res + "";
+            });
+            CompletableFuture<Object> f2 = f1.whenCompleteAsync((x, y) -> {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println(System.currentTimeMillis() + ":" + x + "回调执行完成");
+                    countDownLatch.countDown();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).thenApply(ignore -> Stream.of(1, 2, 3)
+                    .collect(Collectors.toList()));
+            comlist.add(f2);
+        }
+
+        CompletableFuture<Void> all = CompletableFuture.allOf(comlist.toArray(new CompletableFuture[size]));
+        //阻塞，直到所有任务结束。任务complete就会执行,handler里面不一定会执行..
+        System.out.println(System.currentTimeMillis() + ":阻塞");
+        all.join();
+        System.out.println(System.currentTimeMillis() + ":阻塞结束");
+        countDownLatch.await();
+        System.out.println("回调都结束...");
+    }
+
+    private static CompletableFuture<String> createTaskSupplier(String x) {
+        return CompletableFuture.supplyAsync(CompletableFuturesExample.getStringSupplier(x))
+                .exceptionally(xx -> xx.getMessage());
+    }
+
+
+    private static Supplier<String> getStringSupplier(String text) {
+        return () -> {
+            System.out.println("开始 " + text);
+            if ("1".equals(text)) throw new RuntimeException("运行时错误");
+            try {
+                if ("5".equals(text)) CompletableFuturesExample.setSleepTime(4);       //5号超时了
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("停止 " + text);
+            return text + "号";
+        };
+    }
+
+
+    private static void setSleepTime(int SleepTime) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(SleepTime);
+    }
+
+
+    private static String getData() {
+        int anInt = new Random().nextInt(10);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(anInt);
+        return anInt + "";
+    }
+
+    public static void allExample() throws ExecutionException, InterruptedException {
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(new Supplier<Integer>() {
+            @Override
+            public Integer get() {
+                System.out.println(Thread.currentThread().getName() + "\t completableFuture");
+                //int i = 10 / 0;
+                return 1024;
+            }
+        }).thenApply(new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer o) {
+                System.out.println("thenApply方法，上次返回结果：" + o);
+                return o * 2;
+            }
+        }).whenComplete(new BiConsumer<Integer, Throwable>() {
+            @Override
+            public void accept(Integer o, Throwable throwable) {
+                System.out.println("-------o=" + o);
+                System.out.println("-------throwable=" + throwable);
+            }
+        }).exceptionally(new Function<Throwable, Integer>() {
+            @Override
+            public Integer apply(Throwable throwable) {
+                System.out.println("throwable=" + throwable);
+                return 6666;
+            }
+        }).handle(new BiFunction<Integer, Throwable, Integer>() {
+            @Override
+            public Integer apply(Integer integer, Throwable throwable) {
+                System.out.println("handle o=" + integer);
+                System.out.println("handle throwable=" + throwable);
+                return 8888;
+            }
+        });
+//        }).completeExceptionally(new TimeoutException());
+        System.out.println(future.get());
+
+        CompletableFuture.supplyAsync(() -> {
+            return "hello";
+        }).thenApplyAsync(t -> {
+            return t + " world!";
+        }).thenCombineAsync(CompletableFuture.completedFuture(" CompletableFuture"), (t, u) -> {
+            return t + u;
+        }).whenComplete((t, u) -> {
+            System.out.println(t);
+        });
+
+        List<CompletableFuture> futures = Arrays.asList(
+                CompletableFuture.completedFuture("hello"),
+                CompletableFuture.completedFuture(" world!"),
+                CompletableFuture.completedFuture(" hello"),
+                CompletableFuture.completedFuture("java!")
+        );
+        CompletableFuture<Void> allCompleted = CompletableFuture.allOf(futures.toArray(new CompletableFuture[]{}));
+        allCompleted.thenRun(() -> {
+            futures.stream().forEach(future1 -> {
+                try {
+                    System.out.println("get future at:" + System.currentTimeMillis() + ", result:" + future1.get());
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+    }
+
+    public static void threadSafe() {
+        System.out.println("----start----" + LocalDateTime.now());
+        List<Integer> list = new ArrayList<>();
+        List<CompletableFuture<Integer>> futureList = new ArrayList<>();
+        IntStream.range(0, 10000).forEach(i -> {
+            //设置随机返回数字
+            CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+                Random random = new Random();
+                return random.nextInt(Integer.MAX_VALUE);
+            });
+            futureList.add(future);
+        });
+        //主线程阻塞等待所有异步线程完成任务，并在join返回结果再添加到ArrayList，就不会出现线程安全问题
+        futureList.forEach(future -> list.add(future.join()));
+        System.out.println("testCompletableFuture3 - size : " + list.size());
+        System.out.println("----end----" + LocalDateTime.now());
+    }
+
+    public static void threadUnSafe() {
+        System.out.println("----start----" + LocalDateTime.now());
+        //由于方法后面的add操作，这里的变量相当于全局变量，造成了线程安全问题出现
+        List<Integer> list = new ArrayList<>();
+        List<CompletableFuture<Void>> futureList = new ArrayList<>();
+        IntStream.range(0, 10000).forEach(i -> {
+            //设置随机返回数字
+            CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
+                Random random = new Random();
+                return random.nextInt(Integer.MAX_VALUE);
+            }).thenAccept(list::add);       //添加到list，出现线程安全问题
+            futureList.add(future);
+        });
+        //主线程阻塞等待所有异步线程完成任务
+        futureList.forEach(CompletableFuture::join);
+        System.out.println("testCompletableFuture - size :" + list.size());
+        System.out.println("----end----" + LocalDateTime.now());
+        System.out.println();
+    }
+
+    private static void example() {
+        CompletableFuture.supplyAsync(() -> {
+            int ms = new Random().nextInt(100);
+            LockSupport.parkNanos(MILLISECONDS.toNanos(ms));
+            String msg = format("supplyAsync %s ms", ms);
+            System.out.println(format(msg));
+            return msg;
+        }).thenApply(new Function<String, Integer>() {
+            @Override
+            public Integer apply(String s) {
+                System.out.println(format("thenApply apply s.length()"));
+                return s.length();
+            }
+        }).whenComplete(new BiConsumer<Integer, Throwable>() {
+            @Override
+            public void accept(Integer s, Throwable throwable) {
+                System.out.println(format("done " + s));
+            }
+        });
+    }
+
+    private static void doBoth2() {
         ExecutorService executor = Executors.newFixedThreadPool(10);
         //任务1
         CompletableFuture.supplyAsync(new Supplier<String>() {
@@ -64,8 +486,10 @@ public class CompletableFuturesExample {
     }
 
 
-    /**在两个任务运行完执行*/
-    public static void runAfterBoth(){
+    /**
+     * 在两个任务运行完执行
+     */
+    private static void runAfterBoth() {
         CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("第一个任务执行完成");
@@ -83,124 +507,29 @@ public class CompletableFuturesExample {
             }
             return "s2";
         }), () -> System.out.println("hello world"));
-        while (true){}
+        while (true) {
+        }
     }
 
-//    public static <T> void testCompletableFuture(List<T> list) {
-//
-//        //  四、CompletableFuture API
-//        /*
-//         * Returns a new CompletableFuture that is asynchronously completed by a task
-//         * running in the given executor with the value obtained by calling the given Supplier.
-//         */
-//        CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue)::sum, System.out::println);
-//
-//
-//        Optional.of(CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue)::sum)
-//                .complete(55)).ifPresent(System.out::println);
-//
-//        //  thenAccept 无返回值  Consumer<? super T> action
-//        CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue)::sum)
-//                .thenAccept(System.out::println);
-//
-//        //  thenApply  有返回值  Function<? super T,? extends U> fn
-//        CompletableFuture.supplyAsync(() -> list.stream().mapToInt(Integer::intValue))
-//                .thenApply(IntStream::sum).thenAccept(System.out::println);
-//
-//        //  对元素及异常进行处理  BiFunction<? super T, Throwable, ? extends U> fn
-//        CompletableFuture.supplyAsync(() -> list.stream().mapToInt(Integer::intValue))
-//                .handle((i, throwable) -> "handle：\t" + i.sum()).thenAccept(System.out::println);
-//
-//        //  whenCompleteAsync 完成时执行 BiConsumer<? super T, ? super Throwable> action
-//        CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue)::sum)
-//                .whenCompleteAsync((value, throwable) -> System.out.println("whenCompleteAsync：\t" + value));
-//
-//        //   组合CompletableFuture 将前一个结果作为后一个输入参数 （参照 组合设计模式）
-//        CompletableFuture.supplyAsync(() -> list.stream().mapToInt(Integer::intValue))
-//                .thenCompose(i -> CompletableFuture.supplyAsync(i::sum)).thenAccept(System.out::println);
-//
-//        //   合并CompletableFuture
-//        CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue)::sum)
-//                .thenCombine(CompletableFuture.supplyAsync(() -> list.stream()
-//                        .mapToDouble(Double::valueOf).sum()), Double::sum).thenAccept(System.out::println);
-//
-//        //   合并CompletableFuture
-//        CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue)::sum)
-//                .thenAcceptBoth(CompletableFuture.supplyAsync(list.stream()
-//                                .mapToDouble(Double::valueOf)::sum),
-//                        (r1, r2) -> System.out.println("thenAcceptBoth：\t" + r1 + "\t" + r2));
-//
-//        //  2个CompletableFuture运行完毕后运行Runnable
-//        CompletableFuture.supplyAsync(() -> {
-//            System.out.println(Thread.currentThread().getName() + "\tis running");
-//            return list.stream().mapToInt(Integer::intValue).sum();
-//        })
-//                .runAfterBoth(
-//                        CompletableFuture.supplyAsync(() -> {
-//                            System.out.println(Thread.currentThread().getName() + "\tis running");
-//                            return list.stream().mapToDouble(Double::valueOf).sum();
-//                        }),
-//                        () -> System.out.println("The 2 method have done"));
-//
-//
-//        //  2个CompletableFuture 有一个运行完就执行Runnable
-//        CompletableFuture.supplyAsync(() -> {
-//            System.out.println(Thread.currentThread().getName() + "\tis running");
-//            return list.stream().mapToInt(Integer::intValue).sum();
-//        })
-//                .runAfterEither(
-//                        CompletableFuture.supplyAsync(() -> {
-//                            System.out.println(Thread.currentThread().getName() + "\tis running");
-//                            return list.stream().mapToDouble(Double::valueOf).sum();
-//                        }),
-//                        () -> System.out.println("The 2 method have done"));
-//
-//
-//        //  2个CompletableFuture 有一个运行完就执行Function<? super T, U> fn
-//        CompletableFuture.supplyAsync(
-//                list.stream().mapToInt(Integer::intValue).max()::getAsInt)
-//                .applyToEither(
-//                        CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue).min()::getAsInt)
-//                        , v -> v * 10)
-//                .thenAccept(System.out::println);
-//
-//        //  2个CompletableFuture 有一个运行完就执行Consumer<? super T> action
-//        CompletableFuture.supplyAsync(
-//                list.stream().mapToInt(Integer::intValue).max()::getAsInt)
-//                .acceptEither(
-//                        CompletableFuture.supplyAsync(list.stream().mapToInt(Integer::intValue).min()::getAsInt)
-//                        , System.out::println);
-//
-//        //  将集合中每一个元素都映射成为CompletableFuture<Integer>对象
-//        List<CompletableFuture<Integer>> collect =
-//                list.stream().map(i -> CompletableFuture.supplyAsync(i::intValue))
-//                        .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-//        //  集合转数组
-//        CompletableFuture[] completableFutures = collect.toArray(CompletableFuture[]::new);
-//
-//        //  有一个task执行完毕
-//        CompletableFuture.anyOf(completableFutures)
-//                .thenRun(() -> System.out.println("有一个task执行完毕--->first done"));
-//        //  有且仅有所有task执行完毕
-//        CompletableFuture.allOf(completableFutures)
-//                .thenRun(() -> System.out.println("有且仅有所有task执行完毕--->done"));
-//
-//    }
-
-
-    /** hello world */
-    public static void thenApply() {
+    /**
+     * hello world
+     */
+    private static void thenApply() {
         String result = CompletableFuture.supplyAsync(() -> "hello").thenApply(s -> s + " world").join();
         System.out.println(result);
     }
 
-    /** hello world */
-    public static void thenAccept(){
-        CompletableFuture.supplyAsync(() -> "hello").thenAccept(s -> System.out.println(s+" world"));
+    /**
+     * hello world
+     */
+    private static void thenAccept() {
+        CompletableFuture.supplyAsync(() -> "hello").thenAccept(s -> System.out.println(s + " world"));
     }
 
-    /** hello world */
-    public static void thenRun(){
+    /**
+     * hello world
+     */
+    private static void thenRun() {
         CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(2000);
@@ -209,10 +538,11 @@ public class CompletableFuturesExample {
             }
             return "hello";
         }).thenRun(() -> System.out.println("hello world"));
-        while (true){}
+        while (true) {
+        }
     }
 
-    public static void thenCombine() {
+    private static void thenCombine() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(2000);
@@ -231,27 +561,31 @@ public class CompletableFuturesExample {
         System.out.println(result);
     }
 
-    public static void thenAcceptBoth() {
+    private static void thenAcceptBoth() {
+        LocalDateTime start = LocalDateTime.now();
         CompletableFuture.supplyAsync(() -> {
             try {
-                Thread.sleep(4000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             return "hello";
         }).thenAcceptBoth(CompletableFuture.supplyAsync(() -> {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             return "world";
         }), (s1, s2) -> System.out.println(s1 + " " + s2));
-        while (true){}
+        while (true) {
+        }
     }
 
-    /**谁计算的快就用谁*/
-    public static void applyToEither() {
+    /**
+     * 谁计算的快就用谁
+     */
+    private static void applyToEither() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(3000);
@@ -270,8 +604,10 @@ public class CompletableFuturesExample {
         System.out.println(result);
     }
 
-    /**谁计算的快就用谁*/
-    public void acceptEither() {
+    /**
+     * 谁计算的快就用谁
+     */
+    public static void acceptEither() {
         CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(3000);
@@ -287,11 +623,14 @@ public class CompletableFuturesExample {
             }
             return "hello world";
         }), System.out::println);
-        while (true){}
+        while (true) {
+        }
     }
 
-    /**两个任务 任何一个完成了在执行下一步操作*/
-    public static void runAfterEither() {
+    /**
+     * 两个任务 任何一个完成了在执行下一步操作
+     */
+    private static void runAfterEither() {
         CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("第一个任务");
@@ -313,17 +652,17 @@ public class CompletableFuturesExample {
         }
     }
 
-    /**任务出错可以解决*/
-    public void exceptionally() {
+    /**
+     * 任务出错可以解决
+     */
+    public static void exceptionally() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (1 == 1) {
-                throw new RuntimeException("测试一下异常情况");
-            }
+            if (1 == 1) throw new RuntimeException("测试一下异常情况");
             return "s1";
         }).exceptionally(e -> {
             System.out.println(e.getMessage());
@@ -332,17 +671,17 @@ public class CompletableFuturesExample {
         System.out.println(result);
     }
 
-    /**运行完成对结果的记录*/
-    public void whenComplete() {
+    /**
+     * 运行完成对结果的记录
+     */
+    public static void whenComplete() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (1 == 1) {
-                throw new RuntimeException("测试一下异常情况");
-            }
+            if (1 == 1) throw new RuntimeException("测试一下异常情况");
             return "s1";
         }).whenComplete((s, t) -> {
             System.out.println(s);
@@ -355,29 +694,29 @@ public class CompletableFuturesExample {
     }
 
     /**运行结束后对结果的处理，一种是正常执行，返回值。另外一种是遇到异常抛出造成程序的中断。*/
-    /**出现异常*/
-    public static void handle1() {
+    /**
+     * 出现异常
+     */
+    private static void handle1() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             //出现异常
-            if (1 == 1) {
-                throw new RuntimeException("测试一下异常情况");
-            }
+            if (0 == 1) throw new RuntimeException("测试一下异常情况");
             return "s1";
         }).handle((s, t) -> {
-            if (t != null) {
-                return "hello world";
-            }
+            if (t != null) return "hello world";
             return s;
         }).join();
         System.out.println(result);
     }
 
-    /**未出现异常*/
+    /**
+     * 未出现异常
+     */
     public static void handle2() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
@@ -387,30 +726,28 @@ public class CompletableFuturesExample {
             }
             return "s1";
         }).handle((s, t) -> {
-            if (t != null) {
-                return "hello world";
-            }
+            if (t != null) return "hello world";
             return s;
         }).join();
         System.out.println(result);
     }
 
-    public static void anyOf() throws InterruptedException {
+    private static void anyOf() throws InterruptedException {
         // 两个CompletableFuture执行异步查询:
         CompletableFuture<String> cfQueryFromSina = CompletableFuture.supplyAsync(() -> {
-            return queryCode("中国石油", "https://finance.sina.com.cn/code/");
+            return CompletableFuturesExample.queryCode("中国石油", "https://finance.sina.com.cn/code/");
         });
         CompletableFuture<String> cfQueryFrom163 = CompletableFuture.supplyAsync(() -> {
-            return queryCode("中国石油", "https://money.163.com/code/");
+            return CompletableFuturesExample.queryCode("中国石油", "https://money.163.com/code/");
         });
         // 用anyOf合并为一个新的CompletableFuture:
         CompletableFuture<Object> cfQuery = CompletableFuture.anyOf(cfQueryFromSina, cfQueryFrom163);
         // 两个CompletableFuture执行异步查询:
         CompletableFuture<Double> cfFetchFromSina = cfQuery.thenApplyAsync((code) -> {
-            return fetchPrice((String) code, "https://finance.sina.com.cn/price/");
+            return CompletableFuturesExample.fetchPrice((String) code, "https://finance.sina.com.cn/price/");
         });
         CompletableFuture<Double> cfFetchFrom163 = cfQuery.thenApplyAsync((code) -> {
-            return fetchPrice((String) code, "https://money.163.com/price/");
+            return CompletableFuturesExample.fetchPrice((String) code, "https://money.163.com/price/");
         });
         // 用anyOf合并为一个新的CompletableFuture:
         CompletableFuture<Object> cfFetch = CompletableFuture.anyOf(cfFetchFromSina, cfFetchFrom163);
@@ -424,7 +761,7 @@ public class CompletableFuturesExample {
         Thread.sleep(200);
     }
 
-    static String queryCode(String name, String url) {
+    private static String queryCode(String name, String url) {
         System.out.println("query code from " + url + "...");
         try {
             Thread.sleep((long) (Math.random() * 100));
@@ -433,7 +770,7 @@ public class CompletableFuturesExample {
         return "601857";
     }
 
-    static Double fetchPrice(String code, String url) {
+    private static Double fetchPrice(String code, String url) {
         System.out.println("query price from " + url + "...");
         try {
             Thread.sleep((long) (Math.random() * 100));

@@ -1,8 +1,8 @@
 spring:
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      username: admin
-#      password: zzzzzz
-      database: first_db
+      uri: mongodb://wlf:123@localhost:27017/admin
+
+  elasticsearch:
+    rest:
+      uris: localhost:9200

@@ -3,7 +3,6 @@ package com.example.webflux.route;
 import com.example.webflux.controller.domain.User;
 import com.example.webflux.handler.CalculatorHandler;
 import com.example.webflux.handler.QuoteHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
