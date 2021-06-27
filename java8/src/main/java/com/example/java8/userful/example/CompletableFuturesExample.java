@@ -1,5 +1,6 @@
 package com.example.java8.userful.example;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.*;
@@ -29,6 +30,8 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  * 8.thenRun 方法，跟 thenAccept 方法不一样的是，不关心任务的处理结果。只要上面的任务执行完成，就开始执行 thenAccept 。
  * 9.thenCombine 合并任务，thenCombine 会把 两个 CompletionStage 的任务都执行完成后，把两个任务的结果一块交给 thenCombine 来处理。
  * 10.thenCompose 方法，thenCompose 方法允许你对两个 CompletionStage 进行流水线操作，第一个操作完成时，将其结果作为参数传递给第二个操作。
+ * 11.whenComplete用的是主线程 thenApply和thenAccept用的是fork-join线程  所以当complete回调函数sleep 2s 时候 回调函数可能不会执行
+ * 12.
  */
 public class CompletableFuturesExample {
 
@@ -50,7 +53,199 @@ public class CompletableFuturesExample {
 //        threadSafe();
 //        threadUnSafe();
 //        allExample();
-        CompletableFuturesExample.complete();
+//        complete();
+//        failAfter();
+//        method();
+        CompletableFuturesExample.orderBy();
+    }
+
+    private static void orderBy() throws ExecutionException, InterruptedException {
+        ThreadPoolExecutor executorServe = new ThreadPoolExecutor(3,
+                Runtime.getRuntime().availableProcessors() * 3,
+                5,
+                TimeUnit.MINUTES,
+                new ArrayBlockingQueue<>(1000));
+
+        CompletableFuture<String> cf1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "第1个耗时的任务执行完毕！【有参数】";
+        }, executorServe);
+
+        CompletableFuture<String> cf2 = cf1.thenApplyAsync(s -> {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return s + "；第2个耗时的任务执行完毕！【有参数】";
+        }, executorServe);
+
+        CompletableFuture<String> cf3 = cf2.thenApplyAsync(s -> {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return s + "；第3个耗时的任务执行完毕！【有参数】";
+        }, executorServe);
+
+        //链式调用先后顺序结束
+        System.out.println(cf3.get());
+
+        //不要写前面的返回值
+        cf3.thenRun(() -> {
+            System.out.println("第3个耗时的任务执行完毕！【无参数】");
+        });
+    }
+
+    //    public static void s() {
+//        ExecutorService pool = Executors.newFixedThreadPool(1000);
+//        CompletableFuture[] futureList = list.parallelStream().map(item -> CompletableFuture.supplyAsync(() -> {
+//                    for (int i = 0; i < 24; i++) {
+//                        for (int j = 0; j < count; j++) {
+//                            List<ElectricModel> device_info = new ArrayList<>();
+//
+//                            Timestamp upload_time = new Timestamp(item + i * 3600000 + (long) (Math.random() * 57 * 60 * 1000));
+//                            Timestamp gather_time = upload_time;
+//                            DeviceProtocol deviceProtocol = new DeviceProtocol();
+//                            deviceProtocol.setTenant_id(tenant_id);
+//                            deviceProtocol.setServer_id(server_id);
+//                            deviceProtocol.setUpload_time(upload_time);
+//                            deviceProtocol.setPrj_id(prj_id);
+//                            for (String device_id : getDevices()) {
+//                                ElectricModel model = new ElectricModel();
+//                                model.setDevice_id(device_id);
+//                                model.setGather_time(gather_time);
+//                                model.setDevice_path(device_path);
+//                                model.setState(0);
+//                                model.setElectric_meter(createElectricMeter(device_id, gather_time.getTime()));
+//
+//                                if (getDuanluqiDevices().contains(device_id)) {
+//                                    model.setEpt_stat(createDeviceStateParam(device_id));
+//                                }
+//
+//                                device_info.add(model);
+//                            }
+//
+//                            deviceProtocol.setDevice_info(device_info);
+//
+//                            //todo kafka send msg
+//                            sendMsg(deviceProtocol);
+//                        }
+//                    }
+//                    System.out.println(new Timestamp(item) + "任务完成");
+//                    return item;
+//                }, pool)
+//                        .whenComplete((s, e) -> {
+//
+//                        })
+//        ).toArray(CompletableFuture[]::new);
+//        //所有任务执行完才放行
+//        CompletableFuture.allOf(futureList).join();
+//        //关闭线程池
+//        pool.shutdown();
+//    }
+
+    private static void method() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> f1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return "f1";
+        });
+
+        f1.whenCompleteAsync(new BiConsumer<String, Throwable>() {
+            @Override
+            public void accept(String s, Throwable throwable) {
+                System.out.println(System.currentTimeMillis() + ":" + s);
+            }
+        });
+
+        CompletableFuture<String> f2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return "f2";
+        });
+
+        f2.whenCompleteAsync(new BiConsumer<String, Throwable>() {
+            @Override
+            public void accept(String s, Throwable throwable) {
+//              在这里sleep 2s 后发现回调函数不会被执行
+//                try {
+//                    Thread.sleep(2000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+                System.out.println(System.currentTimeMillis() + ":" + s);
+            }
+        });
+
+        CompletableFuture<Void> all = CompletableFuture.allOf(f1, f2);
+        //阻塞，直到所有任务结束。
+        System.out.println(System.currentTimeMillis() + ":阻塞");
+        all.join();
+        System.out.println(System.currentTimeMillis() + ":阻塞结束");
+
+        //一个需要耗时2秒，一个需要耗时3秒，只有当最长的耗时3秒的完成后，才会结束。
+        System.out.println("任务均已完成。");
+    }
+
+    public static void getAllResult() {
+        List<Long> list = new ArrayList<>(3);
+        list.add(1000l);
+        list.add(2000l);
+        list.add(3000l);
+        FutureTaskWorker<Long, String> futureTaskWorker = new FutureTaskWorker<>(list, (Long e) -> CompletableFuturesExample.getThreadName(e));
+        long begin = System.currentTimeMillis();
+        List<String> allResult = futureTaskWorker.getAllResult();
+        long end = System.currentTimeMillis();
+        System.out.println(allResult);
+        System.out.println("结束耗时:" + (end - begin));
+    }
+
+
+    private static CompletableFuture<String> getThreadName(long sleepTime) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(sleepTime);
+                System.out.println(Thread.currentThread().getName() + "已经睡眠" + sleepTime + "毫秒");
+                return Thread.currentThread().getName();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
+    }
+
+    public static void getThreadName() {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+                    //使用ForkJoinPool线程  F1  ForkJoinPool.commonPool-worker-1
+                    System.out.println("F1  " + Thread.currentThread().getName());
+                    return "F1";
+                }
+        );
+
+        CompletableFuture<String> future2 = future.whenComplete((s, throwable) -> {
+            System.out.println(s);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //使用主线程  F2  main
+            System.out.println("F2  " + Thread.currentThread().getName());
+        });
     }
 
     public static void completableOnTimeOut() throws ExecutionException, InterruptedException {
@@ -63,7 +258,7 @@ public class CompletableFuturesExample {
             return 10;
         });
 
-        CompletableFuture<Integer> within = CompletableFutureHandleTimeout.completeOnTimeout(1, future, 1, TimeUnit.SECONDS);
+        CompletableFuture<Integer> within = com.company.CompletableFutureHandleTimeout.completeOnTimeout(1, future, 1, TimeUnit.SECONDS);
         System.out.println(within.get());
 
         CompletableFuture<String> futureStr = CompletableFuture.supplyAsync(() -> {
@@ -75,7 +270,7 @@ public class CompletableFuturesExample {
             return "正常执行";
         });
 
-        CompletableFuture<String> withinStr = CompletableFutureHandleTimeout.completeOnTimeout("异常执行", futureStr, 2, TimeUnit.SECONDS);
+        CompletableFuture<String> withinStr = com.company.CompletableFutureHandleTimeout.completeOnTimeout("异常执行", futureStr, 2, TimeUnit.SECONDS);
         System.out.println(withinStr.get());
 
     }
@@ -149,7 +344,7 @@ public class CompletableFuturesExample {
      * complete、completeExceptionally、obtrudeValue（即使已经完成了，这个也会设置它）
      * 一下线程会返回b而不是a
      */
-    private static void complete() {
+    public static void complete() {
         CompletableFuture<String> cf = CompletableFuture.supplyAsync(() -> {
             System.out.println("started work");
             LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(5));
@@ -161,6 +356,19 @@ public class CompletableFuturesExample {
         cf.obtrudeValue("c");
         cf.complete("b");
         System.out.println(cf.join());
+    }
+
+    public static void failAfter() {
+        CompletableFuture<Object> oneSecondTimeout = com.company.CompletableFutureHandleTimeout.failAfter(Duration.ofSeconds(2))
+                .exceptionally(xxx -> "超时");
+        List<Object> collect = Stream.of("1", "2", "3", "4", "5", "6", "7")
+                .map(x -> CompletableFuture.anyOf(CompletableFuturesExample.createTaskSupplier(x)
+                        , oneSecondTimeout))
+                .collect(Collectors.toList())
+                .stream()
+                .map(CompletableFuture::join)
+                .collect(Collectors.toList());
+        System.out.println("-------结束------");
     }
 
     public static void allOf() throws InterruptedException, ExecutionException, TimeoutException {

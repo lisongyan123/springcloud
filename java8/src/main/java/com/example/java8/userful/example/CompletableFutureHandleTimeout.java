@@ -1,4 +1,4 @@
-package com.example.java8.userful.example;
+package com.company;
 
 import java.time.Duration;
 import java.util.concurrent.*;
@@ -16,8 +16,6 @@ import java.util.function.Function;
  * public CompletableFuture orTimeout(long timeout, TimeUnit unit) : completes the CompletableFuture with a TimeoutException after the specified timeout has elapsed.
  * public CompletableFuture completeOnTimeout(T value, long timeout, TimeUnit unit) : provides a default value in the case that the CompletableFuture pipeline times out.
  * 内部实现上跟我们上面的实现方案是一模一样的，只是现在不需要自己实现了。
- * <p>
- * 实际上hystrix等熔断的框架，其实现线程Timeout之后就关闭线程，也是基于同样的道理，所以我们可以看到hystrix中会有一个Timer Thread
  *
  * @author luliang
  * @date 2021-02-24 9:48
@@ -47,15 +45,15 @@ public class CompletableFutureHandleTimeout {
         // 注意，这里使用一个线程就可以搞定 因为这个线程并不真的执行请求 而是仅仅抛出一个异常
         static {
             (delayer = new ScheduledThreadPoolExecutor(
-                    1, new CompletableFutureHandleTimeout.Delayer.DaemonThreadFactory())).
-                    setRemoveOnCancelPolicy(true);
+                    1,
+                    new Delayer.DaemonThreadFactory())).setRemoveOnCancelPolicy(true);
         }
     }
 
     private static <T> CompletableFuture<T> timeoutAfter(long timeout, TimeUnit unit) {
         CompletableFuture<T> result = new CompletableFuture<>();
         // timeout 时间后 抛出TimeoutException 类似于sentinel / watcher
-        CompletableFutureHandleTimeout.Delayer.delayer.schedule(() -> result.completeExceptionally(new TimeoutException()), timeout, unit);
+        Delayer.delayer.schedule(() -> result.completeExceptionally(new TimeoutException()), timeout, unit);
         return result;
     }
 
